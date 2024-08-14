@@ -1,31 +1,35 @@
 {
   "name": "cbs-research-group-server",
-  "version": "1.0.0",
-  "description": "This is a express js server for cbs-research-group, it will use for cbs-research-lab. cbs research lab is a chemistry lab it is located in howrah_shibpur_kolkata_westbengal, india.",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.ts",
-    "start": "node index.ts"
-  },
-  "author": "Kunal Chandra Das",
   "owner": "Chinmoy Bhattacharya",
+  "version": "1.0.0",
+  "description": "This is the server of cbs-research-group(chemistry-research-lab). It is located in Howrah, Shibpur, Kolkata(West-Bengal, India)",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kunal-Ch-Das-Official/cbs-research-group.git"
+  },
+  "keywords": [
+    "Electrochemistry-lab"
+  ],
+  "author": "Kunal Chandra Das",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kunal-Ch-Das-Official/cbs-research-group/issues"
+  },
+  "homepage": "https://github.com/Kunal-Ch-Das-Official/cbs-research-group#readme",
   "devDependencies": {
     "@eslint/js": "^9.9.0",
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.3.0",
     "eslint": "^9.9.0",
-    "globals": "^15.9.0",
-    "mongoose": "^8.5.3",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.1.0"
+    "globals": "^15.9.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongoose": "^8.5.3"
   }
 }
