@@ -2,7 +2,8 @@
   "name": "cbs-research-group-server",
   "version": "1.0.0",
   "description": "This is a express js server for cbs-research-group, it will use for cbs-research-lab. cbs research lab is a chemistry lab it is located in howrah_shibpur_kolkata_westbengal, india.",
-  "main": "index.ts",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.ts",
@@ -12,8 +13,12 @@
   "owner": "Chinmoy Bhattacharya",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.9.0",
     "@types/node": "^22.3.0",
+    "eslint": "^9.9.0",
+    "globals": "^15.9.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.1.0"
   }
 }
