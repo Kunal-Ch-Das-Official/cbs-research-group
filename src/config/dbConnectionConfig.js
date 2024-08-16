@@ -2,6 +2,7 @@
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
 // Date: 15/08/2024
+// Details: Role of this config file is to establish connection between server and database.
 
 const mongoose = require("mongoose");
 const envConfig = require("./envConfig");
