@@ -4,9 +4,9 @@
 // Date: 16/08/2024
 // Details: Role of this controller is to update existing doctorate alumni data to the data base.
 
-const fs = require("fs");
 const cloudinaryConfig = require("../../../config/cloudinaryConfig");
 const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
+const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const updateDoctorateAlumniCtrl = async (req, res) => {
   const id = req.params.id;
@@ -86,17 +86,6 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
       details: error.message,
     });
   }
-};
-
-// Helper function for file cleanup
-const cleanupFile = (filePath) => {
-  fs.unlink(filePath, (err) => {
-    if (err) {
-      console.error("Unable to delete file from local directory:", err);
-    } else {
-      console.log("File successfully deleted from local directory!");
-    }
-  });
 };
 
 module.exports = updateDoctorateAlumniCtrl;

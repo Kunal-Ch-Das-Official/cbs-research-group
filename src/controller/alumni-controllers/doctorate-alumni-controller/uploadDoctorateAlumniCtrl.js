@@ -4,9 +4,9 @@
 // Date: 15/08/2024
 // Details: Role of this controller is to upload individual doctorate alumni data to the data base.
 
-const fs = require("fs");
 const cloudinaryConfig = require("../../../config/cloudinaryConfig");
 const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
+const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const uploadDoctorateAlumniCtrl = async (req, res) => {
   let filePath;
@@ -46,13 +46,7 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
       });
 
       // Remove the profile image from the local directory
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting the file from local folder:", err);
-        } else {
-          console.log("File successfully deleted from local directory!");
-        }
-      });
+      cleanupFile(filePath);
     } else {
       res
         .status(400)
@@ -63,14 +57,7 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
         console.log("Cloudinary image has been destroyed!");
       }
 
-      filePath &&
-        fs.unlink(filePath, (err) => {
-          if (err) {
-            console.error("Error deleting the file from local folder:", err);
-          } else {
-            console.log("File successfully deleted from local directory!");
-          }
-        });
+      filePath && cleanupFile(filePath);
     }
   } catch (error) {
     if (alumniProfilePic && alumniProfilePic.public_id) {
@@ -78,14 +65,7 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
       console.log("Cloudinary image has been destroyed!");
     }
 
-    filePath &&
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting the file from local folder:", err);
-        } else {
-          console.log("File successfully deleted from local directory!");
-        }
-      });
+    filePath && cleanupFile(filePath);
 
     console.error("Error occurred during alumni upload:", error);
     res.status(500).json({

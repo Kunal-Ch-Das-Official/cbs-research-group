@@ -6,7 +6,7 @@
 
 const cloudinaryConfig = require("../../../config/cloudinaryConfig");
 const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
-const fs = require("fs");
+const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const updateMastersAlumniCtrl = async (req, res) => {
   const id = req.params.id;
@@ -83,17 +83,6 @@ const updateMastersAlumniCtrl = async (req, res) => {
       details: error.message,
     });
   }
-};
-
-// Helper function for file cleanup
-const cleanupFile = (filePath) => {
-  fs.unlink(filePath, (err) => {
-    if (err) {
-      console.error("Unable to delete file from local directory:", err);
-    } else {
-      console.log("File successfully deleted from local directory!");
-    }
-  });
 };
 
 module.exports = updateMastersAlumniCtrl;

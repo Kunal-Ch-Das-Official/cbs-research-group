@@ -7,6 +7,7 @@
 const fs = require("fs");
 const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
 const cloudinaryConfig = require("../../../config/cloudinaryConfig");
+const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const uploadMastersAlumniCtrl = async (req, res) => {
   let filePath;
@@ -45,13 +46,7 @@ const uploadMastersAlumniCtrl = async (req, res) => {
       });
 
       // Remove the profile image from the local directory
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting the file from local folder:", err);
-        } else {
-          console.log("File successfully deleted from local directory!");
-        }
-      });
+      cleanupFile(filePath);
     } else {
       res
         .status(400)
@@ -62,14 +57,7 @@ const uploadMastersAlumniCtrl = async (req, res) => {
         console.log("Cloudinary image has been destroyed!");
       }
 
-      filePath &&
-        fs.unlink(filePath, (err) => {
-          if (err) {
-            console.error("Error deleting the file from local folder:", err);
-          } else {
-            console.log("File successfully deleted from local directory!");
-          }
-        });
+      filePath && cleanupFile(filePath);
     }
   } catch (error) {
     if (alumniProfilePic && alumniProfilePic.public_id) {
@@ -77,14 +65,7 @@ const uploadMastersAlumniCtrl = async (req, res) => {
       console.log("Cloudinary image has been destroyed!");
     }
 
-    filePath &&
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting the file from local folder:", err);
-        } else {
-          console.log("File successfully deleted from local directory!");
-        }
-      });
+    filePath && cleanupFile(filePath);
 
     console.error("Error occurred during alumni upload:", error);
     res.status(500).json({
