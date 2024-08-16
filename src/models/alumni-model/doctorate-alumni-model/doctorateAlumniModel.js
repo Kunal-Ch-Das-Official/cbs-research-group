@@ -1,13 +1,13 @@
-// Content: Master Alumni Database model.
+// Content: Doctorate Alumni Database model.
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
-// Date: 15/08/2024
-// Details: Role of this model is to create a document object model for masters alumni to the database.
+// Date: 16/08/2024
+// Details: Role of this model is to create a document object model for doctorate alumni to the database.
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 
-const MatersAlumniShema = new Schema(
+const DoctorateAlumniShema = new Schema(
   {
     alumniName: {
       type: String,
@@ -35,14 +35,18 @@ const MatersAlumniShema = new Schema(
       unique: true,
       maxlength: 10,
     },
+    mscDoneFrom: {
+      type: String,
+      required: true,
+    },
     bscDoneFrom: {
       type: String,
       required: true,
     },
-    // yearOfPassout: {
-    //   type: String,
-    //   required: true,
-    // }
+    yearOfPassout: {
+      type: String,
+      required: true,
+    },
     details: {
       type: String,
     },
@@ -54,8 +58,8 @@ const MatersAlumniShema = new Schema(
   { timestamps: true }
 );
 
-const mastersAlumniModel = mongoose.model(
-  "masters-alumni-info",
-  MatersAlumniShema
+const doctorateAlumniModel = mongoose.model(
+  "doctorate-alumni-info",
+  DoctorateAlumniShema
 );
-module.exports = mastersAlumniModel;
+module.exports = doctorateAlumniModel;

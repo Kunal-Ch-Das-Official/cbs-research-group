@@ -9,6 +9,7 @@ const { json } = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mastersAlumniRouter = require("./routes/masters-alumni-route/mastersAlumniRouter");
+const doctorateAlumniRouter = require("./routes/doctorate-alumni-route/doctorateAlumniRouter");
 
 // Create App //
 const app = express();
@@ -34,5 +35,8 @@ app.get("/", (req, res) => {
 
 // Handle Masters Alumni Routes
 app.use("/cbs-research-groups/v1/masters", mastersAlumniRouter);
+
+// Handle Doctorate Alumni Routes
+app.use("/cbs-research-groups/v1/doctorate", doctorateAlumniRouter);
 
 module.exports = app;
