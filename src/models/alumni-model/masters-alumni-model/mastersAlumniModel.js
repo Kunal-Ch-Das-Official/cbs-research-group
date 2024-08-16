@@ -39,10 +39,10 @@ const MatersAlumniShema = new Schema(
       type: String,
       required: true,
     },
-    // yearOfPassout: {
-    //   type: String,
-    //   required: true,
-    // }
+    yearOfPassout: {
+      type: String,
+      required: true,
+    },
     details: {
       type: String,
     },

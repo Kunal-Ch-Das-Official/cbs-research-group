@@ -7,87 +7,48 @@
 const cloudinaryConfig = require("../../../config/cloudinaryConfig");
 const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
 const fs = require("fs");
+
 const updateMastersAlumniCtrl = async (req, res) => {
   const id = req.params.id;
-  let filePath = req.file.path;
-  let newAlumniName;
-  let newAlumniImage;
-  let newCloudPublicId;
-  let newEmailId;
-  let newPhoneNumber;
-  let newBseDoneFrom;
-  let newAlumniDetails;
+  const filePath = req.file ? req.file.path : null;
+  let newAlumniImage, newCloudPublicId;
+
   try {
     const getPreviousAlumniInfo = await mastersAlumniModel.findById(id);
-    if (!req.body.alumniName) {
-      newAlumniName = getPreviousAlumniInfo.alumniName;
-    } else {
-      newAlumniName = req.body.alumniName;
+    if (!getPreviousAlumniInfo) {
+      filePath && cleanupFile(filePath);
+      return res.status(404).json({ error: "Requested resources not found" });
     }
-    if (!req.file) {
-      newAlumniImage = getPreviousAlumniInfo.profilePicture;
-      newCloudPublicId = getPreviousAlumniInfo.profilePicturePublicId;
-    } else {
+
+    const newAlumniName =
+      req.body.alumniName || getPreviousAlumniInfo.alumniName;
+    const newEmailId = req.body.emailId || getPreviousAlumniInfo.emailId;
+    const newPhoneNumber =
+      req.body.phoneNumber || getPreviousAlumniInfo.phoneNumber;
+    const newBscDoneFrom =
+      req.body.bscDoneFrom || getPreviousAlumniInfo.bscDoneFrom;
+    const newYearOfPassout =
+      req.body.yearOfPassout || getPreviousAlumniInfo.yearOfPassout;
+    const newAlumniDetails = req.body.details || getPreviousAlumniInfo.details;
+
+    if (req.file) {
       const newAlumniImageUpload = await cloudinaryConfig.uploader.upload(
         filePath,
         {
           folder: "masters_alumni_image",
         }
       );
+
       newAlumniImage = newAlumniImageUpload.secure_url;
       newCloudPublicId = newAlumniImageUpload.public_id;
 
-      if (newAlumniImageUpload) {
-        const getPreviousPublicId =
-          getPreviousAlumniInfo.profilePicturePublicId;
-        await cloudinaryConfig.uploader
-          .destroy(getPreviousPublicId)
-          .then(() => {
-            console.log({
-              message: "Image successfully deleted from cloudinary!",
-              status: 200,
-              operation: "Destroy cloud image if file available.",
-            });
-          });
-        fs.unlink(filePath, (err) => {
-          if (err) {
-            console.log(
-              "Unable to delete image path from local directory due to:",
-              err
-            );
-          } else {
-            console.log(
-              "image has been successfully deleted from local directory!!"
-            );
-          }
-        });
-      } else {
-        console.log({
-          message: "Unable to delete image from cloudinary",
-          status: 500,
-          operation: "show message if there is an error.",
-        });
-      }
-    }
-    if (!req.body.emailId) {
-      newEmailId = getPreviousAlumniInfo.emailId;
+      await cloudinaryConfig.uploader.destroy(
+        getPreviousAlumniInfo.profilePicturePublicId
+      );
+      cleanupFile(filePath);
     } else {
-      newEmailId = req.body.emailId;
-    }
-    if (!req.body.phoneNumber) {
-      newPhoneNumber = getPreviousAlumniInfo.phoneNumber;
-    } else {
-      newPhoneNumber = req.body.phoneNumber;
-    }
-    if (!req.body.bscDoneFrom) {
-      newBseDoneFrom = getPreviousAlumniInfo.bscDoneFrom;
-    } else {
-      newBseDoneFrom = req.body.bscDoneFrom;
-    }
-    if (!req.body.details) {
-      newAlumniDetails = getPreviousAlumniInfo.details;
-    } else {
-      newAlumniDetails = req.body.details;
+      newAlumniImage = getPreviousAlumniInfo.profilePicture;
+      newCloudPublicId = getPreviousAlumniInfo.profilePicturePublicId;
     }
 
     const updatedAlumniInfo = {
@@ -96,7 +57,8 @@ const updateMastersAlumniCtrl = async (req, res) => {
       profilePicturePublicId: newCloudPublicId,
       emailId: newEmailId,
       phoneNumber: newPhoneNumber,
-      bscDoneFrom: newBseDoneFrom,
+      bscDoneFrom: newBscDoneFrom,
+      yearOfPassout: newYearOfPassout,
       details: newAlumniDetails,
     };
 
@@ -105,48 +67,33 @@ const updateMastersAlumniCtrl = async (req, res) => {
       updatedAlumniInfo,
       { new: true }
     );
-    if (!updateAlumniInfo) {
-      filePath &&
-        fs.unlink(filePath, (err) => {
-          if (err) {
-            console.log(
-              "Unable to delete image path from local directory due to:",
-              err
-            );
-          } else {
-            console.log(
-              "image has been successfully deleted from local directory!!"
-            );
-          }
-        });
-      res.status(404).json({
-        error: "Requested resources are not found",
-      });
-    } else {
-      res.status(200).json({
-        message: "Document has been successfully updated!!",
-      });
-    }
-  } catch (error) {
-    filePath &&
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.log(
-            "Unable to delete image path from local directory due to:",
-            err
-          );
-        } else {
-          console.log(
-            "image has been successfully deleted from local directory!!"
-          );
-        }
-      });
 
-    console.log("Unable to update due to some technical error");
+    if (!updateAlumniInfo) {
+      return res.status(404).json({ error: "Requested resources not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Document has been successfully updated!" });
+  } catch (error) {
+    filePath && cleanupFile(filePath);
+    console.error("Unable to update due to some technical error:", error);
     res.status(500).json({
-      Error: "unable to update due to some technical error",
+      error: "Unable to update due to some technical error",
       details: error.message,
     });
   }
 };
+
+// Helper function for file cleanup
+const cleanupFile = (filePath) => {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error("Unable to delete file from local directory:", err);
+    } else {
+      console.log("File successfully deleted from local directory!");
+    }
+  });
+};
+
 module.exports = updateMastersAlumniCtrl;
