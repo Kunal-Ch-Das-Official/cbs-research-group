@@ -1,15 +1,15 @@
-// Content: Master Alumni Database model.
+// Content: PHD Member Database model.
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
-// Date: 15/08/2024
-// Details: Role of this model is to create a document object model for masters alumni to the database.
+// Date: 16/08/2024
+// Details: Role of this model is to create a document object model for phd member to the database.
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 
-const MatersAlumniShema = new Schema(
+const PhdMemberSchema = new Schema(
   {
-    alumniName: {
+    memberName: {
       type: String,
       required: true,
       maxlength: 25,
@@ -34,13 +34,16 @@ const MatersAlumniShema = new Schema(
       unique: true,
       maxlength: 10,
     },
+    mscDoneFrom: {
+      type: String,
+      required: true,
+    },
     bscDoneFrom: {
       type: String,
       required: true,
     },
-    yearOfPassout: {
+    currentYear: {
       type: String,
-      required: true,
     },
     details: {
       type: String,
@@ -53,8 +56,6 @@ const MatersAlumniShema = new Schema(
   { timestamps: true }
 );
 
-const mastersAlumniModel = mongoose.model(
-  "masters-alumni-info",
-  MatersAlumniShema
-);
-module.exports = mastersAlumniModel;
+const phdMemberModel = mongoose.model("phd-member-info", PhdMemberSchema);
+
+module.exports = phdMemberModel;

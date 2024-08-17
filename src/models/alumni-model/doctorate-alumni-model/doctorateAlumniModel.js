@@ -12,7 +12,6 @@ const DoctorateAlumniShema = new Schema(
     alumniName: {
       type: String,
       required: true,
-      unique: true,
       maxlength: 25,
     },
     profilePicture: {
