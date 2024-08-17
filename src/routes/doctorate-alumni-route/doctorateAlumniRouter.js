@@ -5,7 +5,7 @@
 // Details: This is the router file for handle all routes of doctorate alumni of cbs research groups.
 
 const express = require("express");
-const doctorateAlumniImageUpload = require("../../middlewares/multer-alumni-storage/doctorate-alumni-storage/multerDoctorateAlumniStorage");
+const multerSingleUploader = require("../../middlewares/multer-single-file-handler/multerSingleFileHandler");
 const uploadDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/uploadDoctorateAlumniCtrl");
 const updateDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/updateDoctorateAlumniCtrl");
 const getDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/getDoctorateAlumniCtrl");
@@ -18,14 +18,14 @@ const doctorateAlumniRouter = express.Router();
 // Declaration Of Upload Route Segment:
 doctorateAlumniRouter.post(
   "/alumni-data",
-  doctorateAlumniImageUpload.single("profilePicture"),
+  multerSingleUploader.single("profilePicture"),
   uploadDoctorateAlumniCtrl
 );
 
 // Declaration Of Update Route Segment:
 doctorateAlumniRouter.patch(
   "/alumni-data/:id",
-  doctorateAlumniImageUpload.single("profilePicture"),
+  multerSingleUploader.single("profilePicture"),
   updateDoctorateAlumniCtrl
 );
 

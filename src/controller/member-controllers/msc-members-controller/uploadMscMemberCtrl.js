@@ -1,15 +1,15 @@
-// Content: PHD Member Upload Operations Handler.
+// Content: MSC Member Upload Operations Handler.
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to upload individual phd members data to the data base.
+// Date: 17/08/2024
+// Details: Role of this controller is to upload individual msc members data to the data base.
 
-const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
+const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
 const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
-const uploadPhdMemberCtrl = async (req, res) => {
+const uploadMscMemberCtrl = async (req, res) => {
   let profileImageUrl;
   let profileImgPublicId;
   let filePath;
@@ -23,24 +23,24 @@ const uploadPhdMemberCtrl = async (req, res) => {
     try {
       if (req.file) {
         filePath = req.file.path;
+        // Reusable Image Uploader
         const { storedDataAccessUrl, storedDataAccessId } =
-          await customSingleUploader(filePath, "phd_members_image");
+          await customSingleUploader(filePath, "msc_members_image");
         profileImageUrl = storedDataAccessUrl;
         profileImgPublicId = storedDataAccessId;
       }
-      const phdMembersInfo = new phdMemberModel({
+      const mscMembersInfo = new mscMemberModel({
         memberName: req.body.memberName,
         profilePicture: profileImageUrl,
         profilePicturePublicId: profileImgPublicId,
         emailId: req.body.emailId,
         phoneNumber: req.body.phoneNumber,
-        mscDoneFrom: req.body.mscDoneFrom,
         bscDoneFrom: req.body.bscDoneFrom,
         currentYear: req.body.currentYear,
         details: req.body.details,
       });
 
-      const uploadedData = await phdMembersInfo.save();
+      const uploadedData = await mscMembersInfo.save();
       if (!uploadedData) {
         filePath && cleanupFile(filePath);
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
@@ -51,7 +51,7 @@ const uploadPhdMemberCtrl = async (req, res) => {
         });
       } else {
         res.status(201).json({
-          message: "Phd members information has been successfully uploaded",
+          message: "Msc members information has been successfully uploaded",
         });
         filePath && cleanupFile(filePath);
       }
@@ -67,4 +67,4 @@ const uploadPhdMemberCtrl = async (req, res) => {
     }
   }
 };
-module.exports = uploadPhdMemberCtrl;
+module.exports = uploadMscMemberCtrl;

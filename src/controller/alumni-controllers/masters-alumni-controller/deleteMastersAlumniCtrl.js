@@ -4,8 +4,8 @@
 // Date: 16/08/2024
 // Details: Role of this controller is to delete single masters alumni data by client request .
 
-const cloudinaryConfig = require("../../../config/cloudinaryConfig");
 const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
+const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
 const deleteMastersAlumniCtrl = async (req, res) => {
   let id = req.params.id;
@@ -19,16 +19,9 @@ const deleteMastersAlumniCtrl = async (req, res) => {
     } else {
       const currentAlumniImgsCloudId =
         currentMastersAlumni.profilePicturePublicId;
-      await cloudinaryConfig.uploader
-        .destroy(currentAlumniImgsCloudId)
-        .then(() => {
-          console.log({
-            status: 200,
-            message:
-              "Current alumni images has been successfully removed from cloudinary!!",
-          });
-        });
 
+      currentAlumniImgsCloudId &&
+        (await customSingleDestroyer(currentAlumniImgsCloudId));
       const removeAlumniFromDb = await mastersAlumniModel.findByIdAndDelete(id);
       if (!removeAlumniFromDb) {
         res.status(406).json({

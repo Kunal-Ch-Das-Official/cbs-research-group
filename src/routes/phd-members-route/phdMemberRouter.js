@@ -1,11 +1,11 @@
 // Content: PHD Members Router.
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
-// Date: 15/08/2024
+// Date: 16/08/2024
 // Details: This is the router file for handle all routes of phd members of cbs research groups.
 
 const express = require("express");
-const phdMembersImageUpload = require("../../middlewares/multer-members-storage/phd-members-storage/multerPhdMembersStorage");
+const multerSingleUploader = require("../../middlewares/multer-single-file-handler/multerSingleFileHandler");
 const uploadPhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/uploadPhdMemberCtrl");
 const updatePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/updatePhdMemberCtrl");
 const getPhdMembersCtrl = require("../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl");
@@ -17,14 +17,14 @@ const phdMembersRouter = express.Router();
 // Declaration Of Upload Route Segment:
 phdMembersRouter.post(
   "/members",
-  phdMembersImageUpload.single("profilePicture"),
+  multerSingleUploader.single("profilePicture"),
   uploadPhdMemberCtrl
 );
 
 // Declaration Of Update Route Segment:
 phdMembersRouter.patch(
   "/members/:id",
-  phdMembersImageUpload.single("profilePicture"),
+  multerSingleUploader.single("profilePicture"),
   updatePhdMemberCtrl
 );
 

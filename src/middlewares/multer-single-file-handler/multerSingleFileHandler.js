@@ -1,8 +1,9 @@
 /* 
+Content: Single Image Upload Receiver.
  Project Name: CBS-Research-Group-Backend,
  Author: Kunal Chandra Das,
- details : This is multer config file for phd members image upload.
- Date : 16/08/2024
+ details : This is multer config file for single image upload handler.
+ Date : 17/08/2024
  */
 
 const multer = require("multer");
@@ -40,8 +41,8 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const phdMembersImageUpload = multer({
+const multerSingleUploader = multer({
   storage: storage,
   fileFilter: fileFilter,
 });
-module.exports = phdMembersImageUpload;
+module.exports = multerSingleUploader;

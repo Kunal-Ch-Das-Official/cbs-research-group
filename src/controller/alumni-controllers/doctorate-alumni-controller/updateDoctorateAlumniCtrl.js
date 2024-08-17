@@ -4,8 +4,9 @@
 // Date: 16/08/2024
 // Details: Role of this controller is to update existing doctorate alumni data to the data base.
 
-const cloudinaryConfig = require("../../../config/cloudinaryConfig");
 const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
+const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
+const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
 const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const updateDoctorateAlumniCtrl = async (req, res) => {
@@ -34,19 +35,17 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
     const newAlumniDetails = req.body.details || getPreviousAlumniInfo.details;
 
     if (req.file) {
-      const newAlumniImageUpload = await cloudinaryConfig.uploader.upload(
-        filePath,
-        {
-          folder: "doctorate_alumni_image",
-        }
-      );
+      const { storedDataAccessUrl, storedDataAccessId } =
+        await customSingleUploader(filePath, "doctorate_alumni_image");
 
-      newAlumniImage = newAlumniImageUpload.secure_url;
-      newCloudPublicId = newAlumniImageUpload.public_id;
+      newAlumniImage = storedDataAccessUrl;
+      newCloudPublicId = storedDataAccessId;
 
-      await cloudinaryConfig.uploader.destroy(
-        getPreviousAlumniInfo.profilePicturePublicId
-      );
+      getPreviousAlumniInfo.profilePicturePublicId &&
+        (await customSingleDestroyer(
+          getPreviousAlumniInfo.profilePicturePublicId
+        ));
+
       cleanupFile(filePath);
     } else {
       newAlumniImage = getPreviousAlumniInfo.profilePicture;
@@ -72,12 +71,15 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
     );
 
     if (!updateAlumniInfo) {
-      return res.status(404).json({ error: "Requested resources not found" });
+      return res.status(405).json({
+        error: "This operations are not allowed!",
+        message: "Please check the details and try again later!",
+      });
     }
 
-    res
-      .status(200)
-      .json({ message: "Document has been successfully updated!" });
+    res.status(200).json({
+      message: "Doctorate alumni info's has been successfully updated!",
+    });
   } catch (error) {
     filePath && cleanupFile(filePath);
     console.error("Unable to update due to some technical error:", error);

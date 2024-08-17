@@ -1,21 +1,21 @@
-// Content: PHD Member Update Operations Handler.
+// Content: MSC Member Update Operations Handler.
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to update existing phd member info to the data base.
+// Date: 17/08/2024
+// Details: Role of this controller is to update existing msc member info to the data base.
 
-const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
+const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
 const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
-const updatePhdMemberCtrl = async (req, res) => {
+const updateMscMemberCtrl = async (req, res) => {
   const id = req.params.id;
   const filePath = req.file ? req.file.path : null;
   let newMemberImage, newCloudPublicId;
 
   try {
-    const getPreviousMemberInfo = await phdMemberModel.findById(id);
+    const getPreviousMemberInfo = await mscMemberModel.findById(id);
     if (!getPreviousMemberInfo) {
       filePath && cleanupFile(filePath);
       return res.status(404).json({ error: "Requested resources not found" });
@@ -26,8 +26,6 @@ const updatePhdMemberCtrl = async (req, res) => {
     const newEmailId = req.body.emailId || getPreviousMemberInfo.emailId;
     const newPhoneNumber =
       req.body.phoneNumber || getPreviousMemberInfo.phoneNumber;
-    const newMscDoneFrom =
-      req.body.mscDoneFrom || getPreviousMemberInfo.mscDoneFrom;
     const newBscDoneFrom =
       req.body.bscDoneFrom || getPreviousMemberInfo.bscDoneFrom;
     const newCurrentYear =
@@ -36,7 +34,7 @@ const updatePhdMemberCtrl = async (req, res) => {
 
     if (req.file) {
       const { storedDataAccessUrl, storedDataAccessId } =
-        await customSingleUploader(filePath, "phd_members_image");
+        await customSingleUploader(filePath, "msc_members_image");
       newMemberImage = storedDataAccessUrl;
       newCloudPublicId = storedDataAccessId;
 
@@ -56,13 +54,12 @@ const updatePhdMemberCtrl = async (req, res) => {
       profilePicturePublicId: newCloudPublicId,
       emailId: newEmailId,
       phoneNumber: newPhoneNumber,
-      mscDoneFrom: newMscDoneFrom,
       bscDoneFrom: newBscDoneFrom,
       currentYear: newCurrentYear,
       details: newMemberDetails,
     };
 
-    const updateMemberInfo = await phdMemberModel.findByIdAndUpdate(
+    const updateMemberInfo = await mscMemberModel.findByIdAndUpdate(
       id,
       updatedMemberInfo,
       { new: true }
@@ -77,7 +74,7 @@ const updatePhdMemberCtrl = async (req, res) => {
 
     res
       .status(200)
-      .json({ message: "Phd members info has been successfully updated!" });
+      .json({ message: "Msc members Info has been successfully updated!" });
   } catch (error) {
     filePath && cleanupFile(filePath);
     console.error("Unable to update due to some technical error:", error);
@@ -87,5 +84,4 @@ const updatePhdMemberCtrl = async (req, res) => {
     });
   }
 };
-
-module.exports = updatePhdMemberCtrl;
+module.exports = updateMscMemberCtrl;
