@@ -25,16 +25,22 @@ const MscMemberSchema = new Schema(
     emailId: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
     },
     phoneNumber: {
       type: Number,
       required: true,
-      unique: true,
       maxlength: 10,
     },
     bscDoneFrom: {
+      type: String,
+      required: true,
+    },
+    researchGateId: {
+      type: String,
+      required: true,
+    },
+    googleScholarId: {
       type: String,
       required: true,
     },

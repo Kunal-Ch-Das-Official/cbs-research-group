@@ -28,6 +28,10 @@ const updateMastersAlumniCtrl = async (req, res) => {
       req.body.phoneNumber || getPreviousAlumniInfo.phoneNumber;
     const newBscDoneFrom =
       req.body.bscDoneFrom || getPreviousAlumniInfo.bscDoneFrom;
+    const newResearchGateId =
+      req.body.researchGateId || getPreviousAlumniInfo.researchGateId;
+    const newGoogleScholarId =
+      req.body.googleScholarId || getPreviousAlumniInfo.googleScholarId;
     const newYearOfPassout =
       req.body.yearOfPassout || getPreviousAlumniInfo.yearOfPassout;
     const newAlumniDetails = req.body.details || getPreviousAlumniInfo.details;
@@ -56,6 +60,8 @@ const updateMastersAlumniCtrl = async (req, res) => {
       emailId: newEmailId,
       phoneNumber: newPhoneNumber,
       bscDoneFrom: newBscDoneFrom,
+      researchGateId: newResearchGateId,
+      googleScholarId: newGoogleScholarId,
       yearOfPassout: newYearOfPassout,
       details: newAlumniDetails,
     };

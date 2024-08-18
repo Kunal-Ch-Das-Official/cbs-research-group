@@ -36,6 +36,8 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         mscDoneFrom: req.body.mscDoneFrom,
         bscDoneFrom: req.body.bscDoneFrom,
+        researchGateId: req.body.researchGateId,
+        googleScholarId: req.body.googleScholarId,
         yearOfPassout: req.body.yearOfPassout,
         details: req.body.details,
       });

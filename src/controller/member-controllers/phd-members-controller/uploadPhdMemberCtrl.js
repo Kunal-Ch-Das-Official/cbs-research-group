@@ -36,6 +36,8 @@ const uploadPhdMemberCtrl = async (req, res) => {
         phoneNumber: req.body.phoneNumber,
         mscDoneFrom: req.body.mscDoneFrom,
         bscDoneFrom: req.body.bscDoneFrom,
+        researchGateId: req.body.researchGateId,
+        googleScholarId: req.body.googleScholarId,
         currentYear: req.body.currentYear,
         details: req.body.details,
       });

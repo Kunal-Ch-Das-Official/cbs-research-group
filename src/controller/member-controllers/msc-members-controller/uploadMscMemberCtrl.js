@@ -36,6 +36,8 @@ const uploadMscMemberCtrl = async (req, res) => {
         emailId: req.body.emailId,
         phoneNumber: req.body.phoneNumber,
         bscDoneFrom: req.body.bscDoneFrom,
+        researchGateId: req.body.researchGateId,
+        googleScholarId: req.body.googleScholarId,
         currentYear: req.body.currentYear,
         details: req.body.details,
       });

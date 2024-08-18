@@ -28,6 +28,10 @@ const updateMscMemberCtrl = async (req, res) => {
       req.body.phoneNumber || getPreviousMemberInfo.phoneNumber;
     const newBscDoneFrom =
       req.body.bscDoneFrom || getPreviousMemberInfo.bscDoneFrom;
+    const newResearchGateId =
+      req.body.researchGateId || getPreviousMemberInfo.researchGateId;
+    const newGoogleScholarId =
+      req.body.googleScholarId || getPreviousMemberInfo.googleScholarId;
     const newCurrentYear =
       req.body.currentYear || getPreviousMemberInfo.currentYear;
     const newMemberDetails = req.body.details || getPreviousMemberInfo.details;
@@ -55,6 +59,8 @@ const updateMscMemberCtrl = async (req, res) => {
       emailId: newEmailId,
       phoneNumber: newPhoneNumber,
       bscDoneFrom: newBscDoneFrom,
+      researchGateId: newResearchGateId,
+      googleScholarId: newGoogleScholarId,
       currentYear: newCurrentYear,
       details: newMemberDetails,
     };
