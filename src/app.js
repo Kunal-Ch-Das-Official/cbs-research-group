@@ -12,6 +12,7 @@ const mastersAlumniRouter = require("./routes/masters-alumni-route/mastersAlumni
 const doctorateAlumniRouter = require("./routes/doctorate-alumni-route/doctorateAlumniRouter");
 const phdMembersRouter = require("./routes/phd-members-route/phdMemberRouter");
 const mscMembersRouter = require("./routes/msc-members-route/mscMembersRouter");
+const groupNewsRouter = require("./routes/group-news-route/groupNewsRouter");
 
 // Create App //
 const app = express();
@@ -47,4 +48,6 @@ app.use("/cbs-research-groups/v1/phd", phdMembersRouter);
 // Handle MSC Members Routes
 app.use("/cbs-research-groups/v1/msc", mscMembersRouter);
 
+// Handle Group News Routes
+app.use("/cbs-research-groups/v1/latest-news", groupNewsRouter);
 module.exports = app;
