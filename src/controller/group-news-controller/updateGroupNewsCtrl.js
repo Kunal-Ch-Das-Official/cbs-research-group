@@ -12,7 +12,7 @@ const updateGroupNewsCtrl = async (req, res) => {
   try {
     const getPreviousGroupNews = await groupNewsModel.findById(id);
     if (!getPreviousGroupNews) {
-      res.status(404).json({
+      return res.status(404).json({
         error: "Requested group news are not exist!",
         message: "Please fill up all required fields",
       });
@@ -33,12 +33,12 @@ const updateGroupNewsCtrl = async (req, res) => {
       );
 
       if (!updateGroupNews) {
-        res.status(406).json({
+        return res.status(406).json({
           error: "Request are not acceptable!",
           message: "Please try after some time",
         });
       } else {
-        res.status(200).json({
+        return res.status(200).json({
           message: "Requested group news has been successfully updated!",
         });
       }
@@ -48,7 +48,7 @@ const updateGroupNewsCtrl = async (req, res) => {
       "Unable to update group news due to some internal server error!",
       error
     );
-    res.status(500).json({
+    return res.status(500).json({
       Error: error.message,
       Message: "Unable to update group news due to some technical error",
     });

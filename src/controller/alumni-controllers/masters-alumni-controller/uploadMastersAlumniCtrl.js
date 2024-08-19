@@ -15,7 +15,7 @@ const uploadMastersAlumniCtrl = async (req, res) => {
   let filePath;
 
   if (!req.body || !req.file) {
-    res.status(400).json({
+    return res.status(400).json({
       error: "Bad request!",
       message: "Fill up all the fields carefully!!",
     });
@@ -46,21 +46,21 @@ const uploadMastersAlumniCtrl = async (req, res) => {
         filePath && cleanupFile(filePath);
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
 
-        res.status(405).json({
+        return res.status(405).json({
           error: "This operations are not allowed!",
           message: "Please check the details and try again later!",
         });
       } else {
-        res.status(201).json({
+        filePath && cleanupFile(filePath);
+        return res.status(201).json({
           message: "Masters alumni information has been successfully uploaded!",
         });
-        filePath && cleanupFile(filePath);
       }
     } catch (error) {
       filePath && cleanupFile(filePath);
       profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
       console.log("Unable to upload requested resources due to:", error);
-      res.status(500).json({
+      return res.status(500).json({
         Error: error.message,
         Details:
           "Unable to upload requested resources due to some technical error!",

@@ -13,6 +13,7 @@ const doctorateAlumniRouter = require("./routes/doctorate-alumni-route/doctorate
 const phdMembersRouter = require("./routes/phd-members-route/phdMemberRouter");
 const mscMembersRouter = require("./routes/msc-members-route/mscMembersRouter");
 const groupNewsRouter = require("./routes/group-news-route/groupNewsRouter");
+const personalAwardsRouter = require("./routes/personal-awards-route/personalAwardsRouter");
 
 // Create App //
 const app = express();
@@ -50,4 +51,7 @@ app.use("/cbs-research-groups/v1/msc", mscMembersRouter);
 
 // Handle Group News Routes
 app.use("/cbs-research-groups/v1/latest-news", groupNewsRouter);
+
+// Handle Personal Awards Routes
+app.use("/cbs-research-groups/v1/personal", personalAwardsRouter);
 module.exports = app;

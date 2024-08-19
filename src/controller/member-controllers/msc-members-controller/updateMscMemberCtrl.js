@@ -76,15 +76,15 @@ const updateMscMemberCtrl = async (req, res) => {
         error: "This operations are not allowed!",
         message: "Please check the details and try again later!",
       });
+    } else {
+      return res
+        .status(200)
+        .json({ message: "Msc members Info has been successfully updated!" });
     }
-
-    res
-      .status(200)
-      .json({ message: "Msc members Info has been successfully updated!" });
   } catch (error) {
     filePath && cleanupFile(filePath);
     console.error("Unable to update due to some technical error:", error);
-    res.status(500).json({
+    return res.status(500).json({
       error: "Unable to update due to some technical error",
       details: error.message,
     });

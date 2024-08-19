@@ -7,21 +7,41 @@
 const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 
 const getMscMembersCtrl = async (req, res) => {
-  try {
-    const getAllMscMembersInfo = await mscMemberModel.find();
-    if (!getAllMscMembersInfo) {
-      res.status(404).json({
-        message: "Msc members are not available!",
+  const id = req.params.id;
+  if (id) {
+    try {
+      const getSingleMscMemberInfo = await mscMemberModel.findById(id);
+      if (!getSingleMscMemberInfo) {
+        return res.status(404).json({
+          message: "Msc member are not available!",
+        });
+      } else {
+        return res.status(200).json(getSingleMscMemberInfo);
+      }
+    } catch (error) {
+      console.log("There is some technical error occared!", error);
+      return res.status(500).json({
+        Error: error,
+        Message: `Unable to find phd member info due to:${error.message}`,
       });
-    } else {
-      res.status(200).json(getAllMscMembersInfo);
     }
-  } catch (error) {
-    console.log("There is some technical error occared!", error);
-    res.status(500).json({
-      Error: error,
-      Message: `Unable to find phd members info due to:${error.message}`,
-    });
+  } else {
+    try {
+      const getAllMscMembersInfo = await mscMemberModel.find();
+      if (!getAllMscMembersInfo) {
+        return res.status(404).json({
+          message: "Msc members are not available!",
+        });
+      } else {
+        return res.status(200).json(getAllMscMembersInfo);
+      }
+    } catch (error) {
+      console.log("There is some technical error occared!", error);
+      return res.status(500).json({
+        Error: error,
+        Message: `Unable to find phd members info due to:${error.message}`,
+      });
+    }
   }
 };
 module.exports = getMscMembersCtrl;

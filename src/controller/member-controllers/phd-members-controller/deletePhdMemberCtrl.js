@@ -14,7 +14,7 @@ const deletePhdMemberCtrl = async (req, res) => {
     const phdMembersImgPublicId =
       getRequestedMembersInfo.profilePicturePublicId;
     if (!getRequestedMembersInfo) {
-      res.status(404).json({
+      return res.status(404).json({
         error: "Requested resources are not found!",
         message: "Please check the given details.",
       });
@@ -25,18 +25,18 @@ const deletePhdMemberCtrl = async (req, res) => {
         id
       );
       if (!deleteRequestedMembersInfo) {
-        res.status(406).json({
+        return res.status(406).json({
           message: "Your applications are not acceptable, try again later!",
         });
       } else {
-        res.status(200).json({
+        return res.status(200).json({
           message: "Requested resources has been successfully deleted!",
         });
       }
     }
   } catch (error) {
     console.log("There is some technical error occared!", error);
-    res.status(500).json({
+    return res.status(500).json({
       Error: error,
       Message: `Unable to remove phd members info due to:${error.message}`,
     });

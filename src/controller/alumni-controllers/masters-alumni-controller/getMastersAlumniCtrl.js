@@ -7,24 +7,49 @@
 const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
 
 const getMastersAlumniCtrl = async (req, res) => {
-  try {
-    const getAllMastersAlumniInfo = await mastersAlumniModel.find();
-    if (!getAllMastersAlumniInfo) {
-      res.status(404).json({
-        error: "Masters alumni are not available!",
+  const id = req.params.id;
+  if (id) {
+    try {
+      const getSingleMastersAlumniInfo = await mastersAlumniModel.findById(id);
+      if (!getSingleMastersAlumniInfo) {
+        return res.status(404).json({
+          error: "Masters alumni are not found please check the details!",
+        });
+      } else {
+        return res.status(200).json(getSingleMastersAlumniInfo);
+      }
+    } catch (error) {
+      console.log(
+        "Unable to find masters alumni info due to some technical error:",
+        error
+      );
+      return res.status(500).json({
+        message:
+          "Unable to find masters alumni info due to some technical error",
+        reason: error.message,
       });
-    } else {
-      res.status(200).json(getAllMastersAlumniInfo);
     }
-  } catch (error) {
-    console.log(
-      "Unable to find masters alumni info due to some technical error:",
-      error
-    );
-    res.status(500).json({
-      message: "Unable to find masters alumni info due to some technical error",
-      reason: error.message,
-    });
+  } else {
+    try {
+      const getAllMastersAlumniInfo = await mastersAlumniModel.find();
+      if (!getAllMastersAlumniInfo) {
+        return res.status(404).json({
+          error: "Masters alumni are not available!",
+        });
+      } else {
+        return res.status(200).json(getAllMastersAlumniInfo);
+      }
+    } catch (error) {
+      console.log(
+        "Unable to find masters alumni info due to some technical error:",
+        error
+      );
+      return res.status(500).json({
+        message:
+          "Unable to find masters alumni info due to some technical error",
+        reason: error.message,
+      });
+    }
   }
 };
 

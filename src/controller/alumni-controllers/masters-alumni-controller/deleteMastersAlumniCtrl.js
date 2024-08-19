@@ -12,7 +12,7 @@ const deleteMastersAlumniCtrl = async (req, res) => {
   try {
     const currentMastersAlumni = await mastersAlumniModel.findById(id);
     if (!currentMastersAlumni) {
-      res.status(404).json({
+      return res.status(404).json({
         error: "Requested resources are not found!!",
         message: "Please check the details and try again.",
       });
@@ -24,11 +24,11 @@ const deleteMastersAlumniCtrl = async (req, res) => {
         (await customSingleDestroyer(currentAlumniImgsCloudId));
       const removeAlumniFromDb = await mastersAlumniModel.findByIdAndDelete(id);
       if (!removeAlumniFromDb) {
-        res.status(406).json({
+        return res.status(406).json({
           message: "Your applications are not acceptable, try again later!",
         });
       } else {
-        res.status(200).json({
+        return res.status(200).json({
           message:
             "The requested alumni resources has been successfully removed!",
         });
@@ -36,7 +36,7 @@ const deleteMastersAlumniCtrl = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+    return res.status(500).json({
       message:
         "Unable to remove requested resources due to some technical error!",
       Error: error.message,

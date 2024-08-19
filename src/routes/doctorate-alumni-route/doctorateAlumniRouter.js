@@ -9,7 +9,6 @@ const multerSingleUploader = require("../../middlewares/multer-single-file-handl
 const uploadDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/uploadDoctorateAlumniCtrl");
 const updateDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/updateDoctorateAlumniCtrl");
 const getDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/getDoctorateAlumniCtrl");
-const getSingleDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/getSingleDoctorateAlumniCtrl");
 const deleteDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/deleteDoctorateAlumniCtrl");
 
 // Use Express As Router //
@@ -33,7 +32,7 @@ doctorateAlumniRouter.patch(
 doctorateAlumniRouter.get("/alumni-data", getDoctorateAlumniCtrl);
 
 // Declaration Of Get Single Data Route Segment:
-doctorateAlumniRouter.get("/alumni-data/:id", getSingleDoctorateAlumniCtrl);
+doctorateAlumniRouter.get("/alumni-data/:id", getDoctorateAlumniCtrl);
 
 // Declaration Of Delete Route Segment:
 doctorateAlumniRouter.delete("/alumni-data/:id", deleteDoctorateAlumniCtrl);

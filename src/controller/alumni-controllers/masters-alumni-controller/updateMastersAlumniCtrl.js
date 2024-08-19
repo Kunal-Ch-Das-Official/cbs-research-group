@@ -79,13 +79,13 @@ const updateMastersAlumniCtrl = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Masters alumni info's has been successfully updated!",
     });
   } catch (error) {
     filePath && cleanupFile(filePath);
     console.error("Unable to update due to some technical error:", error);
-    res.status(500).json({
+    return res.status(500).json({
       error: "Unable to update due to some technical error",
       details: error.message,
     });

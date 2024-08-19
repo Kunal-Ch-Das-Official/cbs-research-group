@@ -12,7 +12,7 @@ const deleteDoctorateAlumniCtrl = async (req, res) => {
   try {
     const currentDoctorateAlumni = await doctorateAlumniModel.findById(id);
     if (!currentDoctorateAlumni) {
-      res.status(404).json({
+      return res.status(404).json({
         error: "Requested resources are not found!!",
         message: "Please check the details and try again.",
       });
@@ -26,18 +26,18 @@ const deleteDoctorateAlumniCtrl = async (req, res) => {
         id
       );
       if (!removeAlumniFromDb) {
-        res.status(406).json({
+        return res.status(406).json({
           message: "Your applications are not acceptable, try again later!",
         });
       } else {
-        res.status(200).json({
+        return res.status(200).json({
           message: "The requested resources has been successfully removed!",
         });
       }
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+    return res.status(500).json({
       message:
         "Unable to remove requested resources due to some technical error!",
       Error: error.message,

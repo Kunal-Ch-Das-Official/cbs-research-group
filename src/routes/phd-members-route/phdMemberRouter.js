@@ -9,7 +9,6 @@ const multerSingleUploader = require("../../middlewares/multer-single-file-handl
 const uploadPhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/uploadPhdMemberCtrl");
 const updatePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/updatePhdMemberCtrl");
 const getPhdMembersCtrl = require("../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl");
-const getSinglePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/getSinglePhdMemberCtrl");
 const deletePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/deletePhdMemberCtrl");
 
 const phdMembersRouter = express.Router();
@@ -32,7 +31,7 @@ phdMembersRouter.patch(
 phdMembersRouter.get("/members", getPhdMembersCtrl);
 
 // Declaration Of Get Single Route Segment:
-phdMembersRouter.get("/members/:id", getSinglePhdMemberCtrl);
+phdMembersRouter.get("/members/:id", getPhdMembersCtrl);
 
 // Declaration Of Delete Route Segment:
 phdMembersRouter.delete("/members/:id", deletePhdMemberCtrl);

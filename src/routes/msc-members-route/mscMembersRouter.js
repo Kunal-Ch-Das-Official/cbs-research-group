@@ -10,7 +10,6 @@ const uploadMscMemberCtrl = require("../../controller/member-controllers/msc-mem
 const updateMscMemberCtrl = require("../../controller/member-controllers/msc-members-controller/updateMscMemberCtrl");
 const getMscMembersCtrl = require("../../controller/member-controllers/msc-members-controller/getMscMembersCtrl");
 const deleteMscMemberCtrl = require("../../controller/member-controllers/msc-members-controller/deleteMscMemberCtrl");
-const getSingleMscMemberCtrl = require("../../controller/member-controllers/msc-members-controller/getSingleMscMemberCtrl");
 
 const mscMembersRouter = express.Router();
 
@@ -31,7 +30,7 @@ mscMembersRouter.patch(
 mscMembersRouter.get("/members", getMscMembersCtrl);
 
 // Declaration Of Get Single Route Segment:
-mscMembersRouter.get("/members/:id", getSingleMscMemberCtrl);
+mscMembersRouter.get("/members/:id", getMscMembersCtrl);
 
 // Declaration Of Delete Route Segment:
 mscMembersRouter.delete("/members/:id", deleteMscMemberCtrl);
