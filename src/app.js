@@ -15,6 +15,7 @@ const mscMembersRouter = require("./routes/msc-members-route/mscMembersRouter");
 const groupNewsRouter = require("./routes/group-news-route/groupNewsRouter");
 const personalAwardsRouter = require("./routes/personal-awards-route/personalAwardsRouter");
 const teamAwardsRouter = require("./routes/team-awards-route/teamAwardsRouters");
+const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrumentsRouter");
 
 // Create App //
 const app = express();
@@ -39,23 +40,50 @@ app.get("/", (req, res) => {
 });
 
 // Handle Masters Alumni Routes
-app.use("/cbs-research-groups/v1/masters", mastersAlumniRouter);
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters",
+  mastersAlumniRouter
+);
 
 // Handle Doctorate Alumni Routes
-app.use("/cbs-research-groups/v1/doctorate", doctorateAlumniRouter);
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate",
+  doctorateAlumniRouter
+);
 
 // Handle PHD Members Routes
-app.use("/cbs-research-groups/v1/phd", phdMembersRouter);
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd",
+  phdMembersRouter
+);
 
 // Handle MSC Members Routes
-app.use("/cbs-research-groups/v1/msc", mscMembersRouter);
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc",
+  mscMembersRouter
+);
 
 // Handle Group News Routes
-app.use("/cbs-research-groups/v1/latest-news", groupNewsRouter);
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news",
+  groupNewsRouter
+);
 
 // Handle Personal Awards Routes
-app.use("/cbs-research-groups/v1/personal", personalAwardsRouter);
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal",
+  personalAwardsRouter
+);
 
 // Handle Team Awards Routes
-app.use("/cbs-research-groups/v1/team", teamAwardsRouter);
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team",
+  teamAwardsRouter
+);
+
+// Handle Lab Instruments Routes
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities",
+  labInstrumentsRouter
+);
 module.exports = app;
