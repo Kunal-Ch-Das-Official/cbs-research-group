@@ -7,6 +7,10 @@
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 
+// Custom validator function to check for exactly 10 digits
+const validatePhoneNumber = function (phone) {
+  return /^\d{10}$/.test(phone); // Ensures the phone number is exactly 10 digits
+};
 const MatersAlumniShema = new Schema(
   {
     alumniName: {
@@ -28,9 +32,12 @@ const MatersAlumniShema = new Schema(
       lowercase: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: true,
-      maxlength: 10,
+      validate: {
+        validator: validatePhoneNumber,
+        message: "Phone number must be exactly 10 digits.",
+      },
     },
     bscDoneFrom: {
       type: String,

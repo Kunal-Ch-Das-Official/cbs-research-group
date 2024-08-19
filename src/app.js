@@ -16,6 +16,7 @@ const groupNewsRouter = require("./routes/group-news-route/groupNewsRouter");
 const personalAwardsRouter = require("./routes/personal-awards-route/personalAwardsRouter");
 const teamAwardsRouter = require("./routes/team-awards-route/teamAwardsRouters");
 const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrumentsRouter");
+const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
 
 // Create App //
 const app = express();
@@ -85,5 +86,11 @@ app.use(
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities",
   labInstrumentsRouter
+);
+
+// Handle Contact Form Routes
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us",
+  contactFormRouter
 );
 module.exports = app;

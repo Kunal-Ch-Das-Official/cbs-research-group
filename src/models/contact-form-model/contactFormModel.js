@@ -1,8 +1,8 @@
-// Content: Doctorate Alumni Database model.
+// Content: Contact Form Database model.
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this model is to create a document object model for doctorate alumni to the database.
+// Date: 19/08/2024
+// Details: Role of this model is to create a document object model for contact user to the database.
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
@@ -11,20 +11,13 @@ const { Schema } = require("mongoose");
 const validatePhoneNumber = function (phone) {
   return /^\d{10}$/.test(phone); // Ensures the phone number is exactly 10 digits
 };
-const DoctorateAlumniShema = new Schema(
+
+const ContactUserSchema = new Schema(
   {
-    alumniName: {
+    userName: {
       type: String,
       required: true,
-      maxlength: 25,
-    },
-    profilePicture: {
-      type: String,
-      required: true,
-    },
-    profilePicturePublicId: {
-      type: String,
-      required: true,
+      maxlength: 30,
     },
     emailId: {
       type: String,
@@ -39,27 +32,11 @@ const DoctorateAlumniShema = new Schema(
         message: "Phone number must be exactly 10 digits.",
       },
     },
-    mscDoneFrom: {
+    desireCourse: {
       type: String,
       required: true,
     },
-    bscDoneFrom: {
-      type: String,
-      required: true,
-    },
-    researchGateId: {
-      type: String,
-      required: true,
-    },
-    googleScholarId: {
-      type: String,
-      required: true,
-    },
-    yearOfPassout: {
-      type: String,
-      required: true,
-    },
-    details: {
+    message: {
       type: String,
     },
     status: {
@@ -70,8 +47,8 @@ const DoctorateAlumniShema = new Schema(
   { timestamps: true }
 );
 
-const doctorateAlumniModel = mongoose.model(
-  "doctorate-alumni-info",
-  DoctorateAlumniShema
+const contactFormModel = mongoose.model(
+  "received-contact-info",
+  ContactUserSchema
 );
-module.exports = doctorateAlumniModel;
+module.exports = contactFormModel;
