@@ -18,6 +18,7 @@ const teamAwardsRouter = require("./routes/team-awards-route/teamAwardsRouters")
 const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrumentsRouter");
 const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
 const projectsRouter = require("./routes/projects-route/projectsRouter");
+const adminRegistrationRouter = require("./routes/authentication-route/admin-auth-route/adminRegisterRouter");
 
 // Create App //
 const app = express();
@@ -41,61 +42,67 @@ app.get("/", (req, res) => {
   });
 });
 
-// Handle Masters Alumni Routes
+// Regiaster Admin Sign-up authentication routes
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin",
+  adminRegistrationRouter
+);
+
+// Regiaster Masters Alumni Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters",
   mastersAlumniRouter
 );
 
-// Handle Doctorate Alumni Routes
+// Regiaster Doctorate Alumni Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate",
   doctorateAlumniRouter
 );
 
-// Handle PHD Members Routes
+// Regiaster PHD Members Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd",
   phdMembersRouter
 );
 
-// Handle MSC Members Routes
+// Regiaster MSC Members Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc",
   mscMembersRouter
 );
 
-// Handle Group News Routes
+// Regiaster Group News Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news",
   groupNewsRouter
 );
 
-// Handle Personal Awards Routes
+// Regiaster Personal Awards Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal",
   personalAwardsRouter
 );
 
-// Handle Team Awards Routes
+// Regiaster Team Awards Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team",
   teamAwardsRouter
 );
 
-// Handle Lab Instruments Routes
+// Regiaster Lab Instruments Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities",
   labInstrumentsRouter
 );
 
-// Handle Contact Form Routes
+// Regiaster Contact Form Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us",
   contactFormRouter
 );
 
-// Handle Projects Routes
+// Regiaster Projects Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs",
   projectsRouter
