@@ -5,7 +5,7 @@
 // Details: Role of this controller is to handle sign up process of admin user of cbs research groups.
 
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
 class registerAsAdminCtrl {
   static adminRegistration = async (req, res) => {
@@ -25,7 +25,7 @@ class registerAsAdminCtrl {
       });
       // If user exist the run this block of code
       if (adminUser) {
-        res.status(409).json({
+        return res.status(409).json({
           error: "Confilct!",
           message: "The requested user with that email id already exists.",
         });
@@ -56,13 +56,13 @@ class registerAsAdminCtrl {
             const saveAsNewAdmin = await authPassUser.save();
             // If not been saved send this response
             if (!saveAsNewAdmin) {
-              res.status(500).json({
+              return res.status(500).json({
                 error: "Unable to let in due to some technical error!",
                 message: "Please try some time later!",
               });
               // If been saved send this response
             } else {
-              res.status(201).json({
+              return res.status(201).json({
                 message: "Operation successful!",
                 details:
                   "Congratulations now you become admin user of cbs research lab !",
@@ -71,14 +71,14 @@ class registerAsAdminCtrl {
 
             //If Password and confirmation password dose not match then send this response
           } else {
-            res.status(400).json({
+            return res.status(400).json({
               error: "Bad Request!",
               message: "Password and confirmation password dose not match.",
             });
           }
           // If user did'nt fiiled all the required fields then send this response
         } else {
-          res.status(400).json({
+          return res.status(400).json({
             error: "Bad Request!",
             message: "All fields are require.",
           });
@@ -87,7 +87,7 @@ class registerAsAdminCtrl {
       // If there are any problem to execute this code then run this block
     } catch (error) {
       console.log(`Internal server error cause: ${error}`);
-      res.status(500).json({
+      return res.status(500).json({
         Error: error.message,
         Message: "Unable to process due to some technical error!",
       });

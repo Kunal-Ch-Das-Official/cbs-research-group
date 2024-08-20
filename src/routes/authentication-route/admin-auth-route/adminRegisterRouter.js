@@ -6,14 +6,16 @@
 
 const express = require("express");
 const registerAsAdminCtrl = require("../../../controller/authentication-controllers/admin-auth-controllers/registerAsAdminCtrl");
+const loginAsAdminCtrl = require("../../../controller/authentication-controllers/admin-auth-controllers/loginAsAdminCtrl");
 
 const adminRegistrationRouter = express.Router();
-// Public Routes
+// Protected Routes
 adminRegistrationRouter.post(
   "/register",
   registerAsAdminCtrl.adminRegistration
 );
 
-// Protected Routes
+// Public Routes
+adminRegistrationRouter.post("/login", loginAsAdminCtrl.adminLogin);
 
 module.exports = adminRegistrationRouter;
