@@ -5,8 +5,9 @@
 // Details: Role of this controller is to handle sign up process of admin user of cbs research groups.
 
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
+const envConfig = require("../../../config/envConfig");
 class registerAsAdminCtrl {
   static adminRegistration = async (req, res) => {
     try {
@@ -62,10 +63,20 @@ class registerAsAdminCtrl {
               });
               // If been saved send this response
             } else {
+              const savedAdmin = await authAdminUserModel.findOne({
+                adminUserEmail: adminUserEmail,
+              });
+              // Generate json web token
+              const token = jwt.sign(
+                { adminId: savedAdmin._id },
+                envConfig.jwtSecretKey,
+                { expiresIn: "365d" }
+              );
               return res.status(201).json({
-                message: "Operation successful!",
+                message: "Registration successful!",
                 details:
                   "Congratulations now you become admin user of cbs research lab !",
+                authenticated_admin_token: token,
               });
             }
 

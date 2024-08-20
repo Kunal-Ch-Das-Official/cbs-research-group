@@ -6,6 +6,8 @@
 
 const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const envConfig = require("../../../config/envConfig");
 class loginAsAdminCtrl {
   static adminLogin = async (req, res) => {
     // Collect authenticated emails and password from request body
@@ -41,9 +43,19 @@ class loginAsAdminCtrl {
             isAdmin.adminUserEmail === adminUserEmail &&
             isPasswordMatch === true
           ) {
+            const authenticateAdmin = await authAdminUserModel.findOne({
+              adminUserEmail: adminUserEmail,
+            });
+            // Generate json web token
+            const token = jwt.sign(
+              { adminId: authenticateAdmin._id },
+              envConfig.jwtSecretKey,
+              { expiresIn: "10d" }
+            );
             return res.status(200).json({
               message: "Login successfull!",
               details: "Welcome to CBS Research Group admin portal",
+              authentication_sign: token,
             });
             // Check if email and password are not match then run this block of code
           } else {

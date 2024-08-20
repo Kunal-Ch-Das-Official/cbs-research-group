@@ -14,6 +14,7 @@ const environment = {
   cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME,
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinaryCloudSecret: process.env.CLOUDINARY_CLOUD_SECRET,
+  jwtSecretKey: process.env.JWT_SECRET_KEY,
 };
 
 const envConfig = Object.freeze(environment);
