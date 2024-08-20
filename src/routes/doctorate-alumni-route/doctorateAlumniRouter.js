@@ -5,11 +5,11 @@
 // Details: This is the router file for handle all routes of doctorate alumni of cbs research groups.
 
 const express = require("express");
-const multerSingleUploader = require("../../middlewares/multer-single-file-handler/multerSingleFileHandler");
 const uploadDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/uploadDoctorateAlumniCtrl");
 const updateDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/updateDoctorateAlumniCtrl");
 const getDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/getDoctorateAlumniCtrl");
 const deleteDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/deleteDoctorateAlumniCtrl");
+const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
 
 // Use Express As Router //
 const doctorateAlumniRouter = express.Router();
@@ -17,14 +17,14 @@ const doctorateAlumniRouter = express.Router();
 // Declaration Of Upload Route Segment:
 doctorateAlumniRouter.post(
   "/alumni-data",
-  multerSingleUploader.single("profilePicture"),
+  multerLocalFileUploader.single("profilePicture"),
   uploadDoctorateAlumniCtrl
 );
 
 // Declaration Of Update Route Segment:
 doctorateAlumniRouter.patch(
   "/alumni-data/:id",
-  multerSingleUploader.single("profilePicture"),
+  multerLocalFileUploader.single("profilePicture"),
   updateDoctorateAlumniCtrl
 );
 

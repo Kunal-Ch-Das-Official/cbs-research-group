@@ -5,25 +5,25 @@
 // Details: This is the router file for handle all routes of phd members of cbs research groups.
 
 const express = require("express");
-const multerSingleUploader = require("../../middlewares/multer-single-file-handler/multerSingleFileHandler");
 const uploadPhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/uploadPhdMemberCtrl");
 const updatePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/updatePhdMemberCtrl");
 const getPhdMembersCtrl = require("../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl");
 const deletePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/deletePhdMemberCtrl");
+const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
 
 const phdMembersRouter = express.Router();
 
 // Declaration Of Upload Route Segment:
 phdMembersRouter.post(
   "/members",
-  multerSingleUploader.single("profilePicture"),
+  multerLocalFileUploader.single("profilePicture"),
   uploadPhdMemberCtrl
 );
 
 // Declaration Of Update Route Segment:
 phdMembersRouter.patch(
   "/members/:id",
-  multerSingleUploader.single("profilePicture"),
+  multerLocalFileUploader.single("profilePicture"),
   updatePhdMemberCtrl
 );
 

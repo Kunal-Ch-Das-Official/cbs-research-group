@@ -28,21 +28,22 @@ const fileFilter = (req, file, cb) => {
     file.mimetype === "image/gif" ||
     file.mimetype === "image/webp" ||
     file.mimetype === "image/svg+xml" ||
-    file.mimetype === "image/jpg"
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "application/pdf"
   ) {
     cb(null, true);
   } else {
     cb(
       new Error(
-        "Invalid file type. Only JPEG, PNG, WEBP, SVG, JPG, and GIF files are allowed."
+        "Invalid file type. Only JPEG, PNG, WEBP, SVG, JPG, PDF, and GIF files are allowed."
       ),
       false
     );
   }
 };
 
-const multerSingleUploader = multer({
+const multerLocalFileUploader = multer({
   storage: storage,
   fileFilter: fileFilter,
 });
-module.exports = multerSingleUploader;
+module.exports = multerLocalFileUploader;
