@@ -7,7 +7,7 @@
 const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const envConfig = require("../../../config/envConfig");
+const { jwtSecretKey } = require("../../../config/envConfig");
 class loginAsAdminCtrl {
   static adminLogin = async (req, res) => {
     // Collect authenticated emails and password from request body
@@ -49,7 +49,7 @@ class loginAsAdminCtrl {
             // Generate json web token
             const token = jwt.sign(
               { adminId: authenticateAdmin._id },
-              envConfig.jwtSecretKey,
+              jwtSecretKey,
               { expiresIn: "10d" }
             );
             return res.status(200).json({

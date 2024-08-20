@@ -7,7 +7,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
-const envConfig = require("../../../config/envConfig");
+const { jwtSecretKey } = require("../../../config/envConfig");
 class registerAsAdminCtrl {
   static adminRegistration = async (req, res) => {
     try {
@@ -69,7 +69,7 @@ class registerAsAdminCtrl {
               // Generate json web token
               const token = jwt.sign(
                 { adminId: savedAdmin._id },
-                envConfig.jwtSecretKey,
+                jwtSecretKey,
                 { expiresIn: "365d" }
               );
               return res.status(201).json({
