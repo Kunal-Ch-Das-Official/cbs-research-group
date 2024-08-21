@@ -6,9 +6,9 @@
 
 const { jwtSecretKey, clientSideUrl } = require("../../../config/envConfig");
 
-const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
 const jwt = require("jsonwebtoken");
 const sendPasswordResetEmail = require("../../../utils/nodemailer-mail-sender/resetMailSendingHandler");
+const authAdminUserModel = require("../../../models/auth-user-model/admin-user-model/authAdminUserModel");
 
 class sendResetPasswordEmailCtrl {
   static sendResetPasswordLink = async (req, res) => {

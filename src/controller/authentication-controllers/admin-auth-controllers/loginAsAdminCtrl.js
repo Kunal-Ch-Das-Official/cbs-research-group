@@ -4,10 +4,10 @@
 // Date: 20/08/2024
 // Details: Role of this controller is to handle login process of admin user of cbs research groups.
 
-const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { jwtSecretKey } = require("../../../config/envConfig");
+const authAdminUserModel = require("../../../models/auth-user-model/admin-user-model/authAdminUserModel");
 class loginAsAdminCtrl {
   static adminLogin = async (req, res) => {
     // Collect authenticated emails and password from request body

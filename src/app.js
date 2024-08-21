@@ -19,6 +19,7 @@ const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrume
 const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
 const projectsRouter = require("./routes/projects-route/projectsRouter");
 const admiAuthenticationRouter = require("./routes/authentication-route/admin-auth-route/admiAuthenticationRouter");
+const clientAuthenticationRouter = require("./routes/authentication-route/client-auth-route/clientAuthRouter");
 
 // Create App //
 const app = express();
@@ -42,12 +43,17 @@ app.get("/", (req, res) => {
   });
 });
 
-// Regiaster Admin Sign-up authentication routes
+// Regiaster Admin authentication routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin",
   admiAuthenticationRouter
 );
 
+// Regiaster client authentication routes
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-users",
+  clientAuthenticationRouter
+);
 // Regiaster Masters Alumni Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters",

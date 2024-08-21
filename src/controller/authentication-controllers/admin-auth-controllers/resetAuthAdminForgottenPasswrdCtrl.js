@@ -6,8 +6,8 @@
 
 const { jwtSecretKey } = require("../../../config/envConfig");
 const bcrypt = require("bcrypt");
-const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
 const jwt = require("jsonwebtoken");
+const authAdminUserModel = require("../../../models/auth-user-model/admin-user-model/authAdminUserModel");
 
 const resetForgottenPassword = async (req, res) => {
   const { adminUserPassword, adminUserPassword_confirmation } = req.body;

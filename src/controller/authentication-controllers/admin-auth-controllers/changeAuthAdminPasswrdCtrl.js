@@ -4,7 +4,8 @@
 // Date: 20/08/2024
 // Details: Role of this controller is to handle password update process of authenticated admin user of cbs research groups.
 const bcrypt = require("bcrypt");
-const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
+const authAdminUserModel = require("../../../models/auth-user-model/admin-user-model/authAdminUserModel");
+
 class changeAuthAdminPasswordCtrl {
   static changePassword = async (req, res) => {
     const { adminUserPassword, adminUserPassword_confirmation } = req.body;

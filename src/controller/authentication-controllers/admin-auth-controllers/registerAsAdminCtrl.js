@@ -6,8 +6,8 @@
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authAdminUserModel = require("../../../models/auth-admin-user-model/authAdminUserModel");
 const { jwtSecretKey } = require("../../../config/envConfig");
+const authAdminUserModel = require("../../../models/auth-user-model/admin-user-model/authAdminUserModel");
 class registerAsAdminCtrl {
   static adminRegistration = async (req, res) => {
     try {
