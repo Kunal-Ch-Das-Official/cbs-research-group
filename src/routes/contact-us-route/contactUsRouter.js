@@ -8,11 +8,15 @@ const express = require("express");
 const uploadContactInfoCtrl = require("../../controller/contact-form-controllers/uploadContactInfoCtrl");
 const deleteContactInfoCtrl = require("../../controller/contact-form-controllers/deleteContactInfoCtrl");
 const getContactInfoCtrl = require("../../controller/contact-form-controllers/getContactInfoCtrl");
+const sendContactPersonResponseCtrl = require("../../controller/contact-form-controllers/sendContactPersonResponseCtrl");
 
 const contactFormRouter = express.Router();
 
 // Declaration Of Upload Route Segment:
 contactFormRouter.post("/information", uploadContactInfoCtrl);
+
+// Declaration Of Send Resopnse To Contact User Route Segment:
+contactFormRouter.post("/response-mail/:id", sendContactPersonResponseCtrl);
 
 // Declaration Of Get All Route Segment:
 contactFormRouter.get("/information", getContactInfoCtrl);
