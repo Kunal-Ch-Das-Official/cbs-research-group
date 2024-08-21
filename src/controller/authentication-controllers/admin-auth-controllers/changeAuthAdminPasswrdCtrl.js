@@ -9,12 +9,7 @@ class changeAuthAdminPasswordCtrl {
   static changePassword = async (req, res) => {
     const { adminUserPassword, adminUserPassword_confirmation } = req.body;
     try {
-      if (!adminUserPassword && !adminUserPassword_confirmation) {
-        return res.status(400).json({
-          error: "Bad Request!",
-          message: "All fields are required.",
-        });
-      } else {
+      if (adminUserPassword && adminUserPassword_confirmation) {
         if (adminUserPassword !== adminUserPassword_confirmation) {
           return res.status(400).json({
             error: "Bad Request!",
@@ -22,16 +17,16 @@ class changeAuthAdminPasswordCtrl {
           });
         } else {
           const salt = await bcrypt.genSalt(15);
-          const ctrateHashPassword = await bcrypt.hash(adminUserPassword, salt);
-          const newPasswordd = await authAdminUserModel.findByIdAndUpdate(
+          const hashPassword = await bcrypt.hash(adminUserPassword, salt);
+          const newPassword = await authAdminUserModel.findByIdAndUpdate(
             req.adminUserName._id,
             {
               $set: {
-                adminUserPassword: ctrateHashPassword,
+                adminUserPassword: hashPassword,
               },
             }
           );
-          if (!newPasswordd) {
+          if (!newPassword) {
             return res.status(500).json({
               error:
                 "Unable to store the new password due to some technical error",
@@ -43,6 +38,11 @@ class changeAuthAdminPasswordCtrl {
             });
           }
         }
+      } else {
+        return res.status(400).json({
+          error: "Bad Request!",
+          message: "All fields are required.",
+        });
       }
     } catch (error) {
       console.log(

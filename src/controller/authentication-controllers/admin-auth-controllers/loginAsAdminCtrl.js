@@ -14,14 +14,7 @@ class loginAsAdminCtrl {
     const { adminUserEmail, adminUserPassword } = req.body;
     try {
       // Check if not email or password filled then block of code
-      if (!adminUserEmail && !adminUserPassword) {
-        return res.status(400).json({
-          error: "Bad Request!",
-          message: "Email and password require",
-        });
-        // Check if all fields are not empty then block of code
-      } else {
-        // Check is the email exist on database or not
+      if (adminUserEmail && adminUserPassword) {
         const isAdmin = await authAdminUserModel.findOne({
           adminUserEmail: adminUserEmail,
         });
@@ -65,6 +58,13 @@ class loginAsAdminCtrl {
             });
           }
         }
+        // Check if all fields are not empty then block of code
+      } else {
+        // Check is the email exist on database or not
+        return res.status(400).json({
+          error: "Bad Request!",
+          message: "Email and password require",
+        });
       }
       // If there are any error in this code then this will executed
     } catch (error) {

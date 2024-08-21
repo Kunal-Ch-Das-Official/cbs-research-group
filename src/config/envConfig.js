@@ -15,6 +15,12 @@ const environment = {
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinaryCloudSecret: process.env.CLOUDINARY_CLOUD_SECRET,
   jwtSecretKey: process.env.JWT_SECRET_KEY,
+  clientSideUrl: process.env.CLIENT_SIDE_URL,
+
+  emailHostProtocol: process.env.EMAIL_HOST_PROTOCOL,
+  emailPort: process.env.EMAIL_PORT,
+  emailHostUser: process.env.EMAIL_HOST_USER,
+  emailHostPassword: process.env.EMAIL_HOST_PASSWORD,
 };
 
 const envConfig = Object.freeze(environment);

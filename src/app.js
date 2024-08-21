@@ -18,7 +18,7 @@ const teamAwardsRouter = require("./routes/team-awards-route/teamAwardsRouters")
 const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrumentsRouter");
 const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
 const projectsRouter = require("./routes/projects-route/projectsRouter");
-const adminRegistrationRouter = require("./routes/authentication-route/admin-auth-route/adminRegisterRouter");
+const admiAuthenticationRouter = require("./routes/authentication-route/admin-auth-route/admiAuthenticationRouter");
 
 // Create App //
 const app = express();
@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 // Regiaster Admin Sign-up authentication routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin",
-  adminRegistrationRouter
+  admiAuthenticationRouter
 );
 
 // Regiaster Masters Alumni Routes
