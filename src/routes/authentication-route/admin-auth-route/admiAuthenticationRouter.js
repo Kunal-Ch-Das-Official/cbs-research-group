@@ -14,7 +14,7 @@ const {
 const {
   changePassword,
 } = require("../../../controller/authentication-controllers/admin-auth-controllers/changeAuthAdminPasswrdCtrl");
-const checkAdminAuth = require("../../../middlewares/auth-middleware/authMiddleware");
+
 const {
   currentLogginUser,
 } = require("../../../controller/authentication-controllers/admin-auth-controllers/currentLoggedInAdminUserCtrl");
@@ -22,6 +22,7 @@ const {
   sendResetPasswordLink,
 } = require("../../../controller/authentication-controllers/admin-auth-controllers/sendResetPaswordEmailCtrl");
 const resetForgottenPassword = require("../../../controller/authentication-controllers/admin-auth-controllers/resetAuthAdminForgottenPasswrdCtrl");
+const checkAdminAuth = require("../../../middlewares/auth-middleware/authAdminMiddleware");
 
 const admiAuthenticationRouter = express.Router();
 
@@ -35,8 +36,9 @@ admiAuthenticationRouter.get("/logged-in-admin", currentLogginUser);
 
 // Public Routes
 admiAuthenticationRouter.post("/login", adminLogin);
+
 admiAuthenticationRouter.post(
-  "/send-reset-password-email",
+  "/send-reset-password-link",
   sendResetPasswordLink
 );
 admiAuthenticationRouter.post(

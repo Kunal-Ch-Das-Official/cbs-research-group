@@ -6,7 +6,7 @@
 
 const { Schema, default: mongoose } = require("mongoose");
 
-const AuthClientUserSchema = new Schema(
+const AuthMemberSchema = new Schema(
   {
     userName: {
       type: String,
@@ -32,8 +32,5 @@ const AuthClientUserSchema = new Schema(
   { timestamps: true }
 );
 
-const authClientUserModel = mongoose.model(
-  "authenticate-user",
-  AuthClientUserSchema
-);
-module.exports = authClientUserModel;
+const authMemberModel = mongoose.model("authenticate-member", AuthMemberSchema);
+module.exports = authMemberModel;

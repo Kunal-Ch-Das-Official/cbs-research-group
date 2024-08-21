@@ -20,8 +20,8 @@ class loginAsAdminCtrl {
         });
         // If email not exist then run this block of code
         if (!isAdmin) {
-          return res.status(415).json({
-            error: "Unsupported Admin!",
+          return res.status(404).json({
+            error: "Admin dose'nt exist!",
             message: "You are not authenticated admin!",
           });
           // If email exist then run this block of code
@@ -36,6 +36,7 @@ class loginAsAdminCtrl {
             isAdmin.adminUserEmail === adminUserEmail &&
             isPasswordMatch === true
           ) {
+            // Get the email admin email id for sign new login token
             const authenticateAdmin = await authAdminUserModel.findOne({
               adminUserEmail: adminUserEmail,
             });

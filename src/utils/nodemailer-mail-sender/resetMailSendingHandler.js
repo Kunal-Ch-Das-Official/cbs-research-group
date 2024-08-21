@@ -31,7 +31,7 @@ const sendPasswordResetEmail = async (sendTo, userName, corespondingLink) => {
     <h2 align="center" >Dear ${userName},</h2>
     <h3 align="center">We received a request to reset the password for your account associated with this email address. If you made this request, please click the link below to reset your password:</h3>
     <div align="center">
-     <a href=${corespondingLink}>Reset password from here</a>
+     <font color="green">Reset password from here: </font><a href=${corespondingLink}>reset link</a>
      </div>
    
     <p align="center" >If you did not request a password reset, please ignore this email. Your password will remain unchanged, and no further action is required.

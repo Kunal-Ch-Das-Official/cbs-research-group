@@ -1,3 +1,9 @@
+// Content: JWT Validation Middleware.
+// Project: CBS-Research-Group-Backend
+// Author: Kunal Chandra Das.
+// Date: 20/08/2024
+// Details: Role of this middleware is to validate jwt token of cbs-research-group admin user.
+
 const jwt = require("jsonwebtoken");
 
 const { jwtSecretKey } = require("../../config/envConfig");

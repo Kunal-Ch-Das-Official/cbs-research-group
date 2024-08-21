@@ -19,7 +19,7 @@ const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrume
 const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
 const projectsRouter = require("./routes/projects-route/projectsRouter");
 const admiAuthenticationRouter = require("./routes/authentication-route/admin-auth-route/admiAuthenticationRouter");
-const clientAuthenticationRouter = require("./routes/authentication-route/client-auth-route/clientAuthRouter");
+const authMemberRouter = require("./routes/authentication-route/auth-member-route/authMemeberRouter");
 
 // Create App //
 const app = express();
@@ -51,8 +51,8 @@ app.use(
 
 // Regiaster client authentication routes
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-users",
-  clientAuthenticationRouter
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-auth-member",
+  authMemberRouter
 );
 // Regiaster Masters Alumni Routes
 app.use(

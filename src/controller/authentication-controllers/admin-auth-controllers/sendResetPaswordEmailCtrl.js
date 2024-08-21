@@ -17,7 +17,7 @@ class sendResetPasswordEmailCtrl {
       if (!adminUserEmail) {
         return res.status(400).json({
           error: "Bad Request!",
-          message: "All fields are require",
+          message: "Email adress is require",
         });
       } else {
         const requestedEmail = await authAdminUserModel.findOne({
@@ -38,12 +38,11 @@ class sendResetPasswordEmailCtrl {
           // Send password reset url to admin user's email id
           let link = `${clientSideUrl}/reset-password/${requestedEmail._id}/${token}`;
 
-          sendPasswordResetEmail(
+          await sendPasswordResetEmail(
             requestedEmail.adminUserEmail,
             requestedEmail.adminUserName,
             link
           );
-          console.log(link);
           return res.status(200).json({
             message:
               "Your password reset link has been send to your provided email id go and check it out",
