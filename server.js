@@ -6,15 +6,16 @@
 
 const app = require("./src/app");
 const dbConnectionConfig = require("./src/config/dbConnectionConfig");
-const envConfig = require("./src/config/envConfig");
+const { port, runningEnvironment } = require("./src/config/envConfig");
 
 const startServer = async () => {
   // Requesting For Database Connection //
   await dbConnectionConfig();
 
   // Allocate Port Number For Listening //
-  app.listen(envConfig.port, () => {
-    console.log(`Server is running on port:${envConfig.port}`);
+  app.listen(port, () => {
+    console.log(`Server is running on port: ${port}`);
+    console.log(`Server environment: ${runningEnvironment}`);
   });
 };
 // Call Start Server Function //

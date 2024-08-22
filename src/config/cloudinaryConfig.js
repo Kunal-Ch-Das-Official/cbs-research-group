@@ -5,13 +5,17 @@
  Details: This is cloudinary(assets-management-tool) configuration file.
  */
 
-const envConfig = require("./envConfig");
+const {
+  cloudinaryCloudName,
+  cloudinaryApiKey,
+  cloudinaryCloudSecret,
+} = require("./envConfig");
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-  cloud_name: envConfig.cloudinaryCloudName,
-  api_key: envConfig.cloudinaryApiKey,
-  api_secret: envConfig.cloudinaryCloudSecret,
+  cloud_name: cloudinaryCloudName,
+  api_key: cloudinaryApiKey,
+  api_secret: cloudinaryCloudSecret,
 });
 
 const cloudinaryConfig = cloudinary;

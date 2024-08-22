@@ -7,7 +7,7 @@
 const contactFormModel = require("../../models/contact-form-model/contactFormModel");
 
 const deleteContactInfoCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getRequiredContactInfo = await contactFormModel.findById(id);
     if (!getRequiredContactInfo) {

@@ -8,7 +8,7 @@ const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alu
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
 const deleteDoctorateAlumniCtrl = async (req, res) => {
-  let id = req.params.id;
+  let { id } = req.params;
   try {
     const currentDoctorateAlumni = await doctorateAlumniModel.findById(id);
     if (!currentDoctorateAlumni) {

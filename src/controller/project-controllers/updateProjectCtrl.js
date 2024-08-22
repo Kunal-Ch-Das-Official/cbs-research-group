@@ -7,7 +7,8 @@
 const projectModel = require("../../models/projects-model/projectModel");
 
 const updateProjectCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
+  const { projectName, description, projectStatus } = req.body;
 
   try {
     const getPreviousProject = await projectModel.findById(id);
@@ -17,12 +18,11 @@ const updateProjectCtrl = async (req, res) => {
         message: "Please fill up all required fields",
       });
     } else {
-      const newProjectName =
-        req.body.projectName || getPreviousProject.projectName;
+      const newProjectName = projectName || getPreviousProject.projectName;
       const newProjectDescription =
-        req.body.description || getPreviousProject.description;
+        description || getPreviousProject.description;
       const newProjectStatus =
-        req.body.projectStatus || getPreviousProject.projectStatus;
+        projectStatus || getPreviousProject.projectStatus;
 
       const updatedProject = {
         projectName: newProjectName,

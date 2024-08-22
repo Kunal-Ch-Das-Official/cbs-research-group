@@ -13,7 +13,16 @@ const uploadMscMemberCtrl = async (req, res) => {
   let profileImageUrl;
   let profileImgPublicId;
   let filePath;
-
+  const {
+    memberName,
+    emailId,
+    phoneNumber,
+    bscDoneFrom,
+    researchGateId,
+    googleScholarId,
+    currentYear,
+    details,
+  } = req.body;
   if (!req.body || !req.file) {
     return res.status(400).json({
       error: "Bad request!",
@@ -30,16 +39,16 @@ const uploadMscMemberCtrl = async (req, res) => {
         profileImgPublicId = storedDataAccessId;
       }
       const mscMembersInfo = new mscMemberModel({
-        memberName: req.body.memberName,
+        memberName,
         profilePicture: profileImageUrl,
         profilePicturePublicId: profileImgPublicId,
-        emailId: req.body.emailId,
-        phoneNumber: req.body.phoneNumber,
-        bscDoneFrom: req.body.bscDoneFrom,
-        researchGateId: req.body.researchGateId,
-        googleScholarId: req.body.googleScholarId,
-        currentYear: req.body.currentYear,
-        details: req.body.details,
+        emailId,
+        phoneNumber,
+        bscDoneFrom,
+        researchGateId,
+        googleScholarId,
+        currentYear,
+        details,
       });
 
       const uploadedData = await mscMembersInfo.save();

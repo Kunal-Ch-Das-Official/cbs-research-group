@@ -7,7 +7,8 @@
 const groupNewsModel = require("../../models/group-news-model/groupNewsModel");
 
 const updateGroupNewsCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
+  const { newsTitle, content } = req.body;
 
   try {
     const getPreviousGroupNews = await groupNewsModel.findById(id);
@@ -17,9 +18,8 @@ const updateGroupNewsCtrl = async (req, res) => {
         message: "Please fill up all required fields",
       });
     } else {
-      const newNewsTitle = req.body.newsTitle || getPreviousGroupNews.newsTitle;
-      const newCorespondingContent =
-        req.body.content || getPreviousGroupNews.content;
+      const newNewsTitle = newsTitle || getPreviousGroupNews.newsTitle;
+      const newCorespondingContent = content || getPreviousGroupNews.content;
 
       const updatedNews = {
         newsTitle: newNewsTitle,

@@ -10,6 +10,7 @@ const cleanupFile = require("../../utils/custom-file-cleaner/localFileCleaner");
 
 // Details: Role of this controller is to upload single lab instrument info to the data base.
 const uploadLabInstrumentCtrl = async (req, res) => {
+  const { instrumentName, description } = req.body;
   let labInstrumentImageUrl;
   let labInstrumentImgPublicId;
   let filePath;
@@ -29,10 +30,10 @@ const uploadLabInstrumentCtrl = async (req, res) => {
         labInstrumentImgPublicId = storedDataAccessId;
       }
       const labInstrumentsInfo = new labInstrumentModel({
-        instrumentName: req.body.instrumentName,
+        instrumentName: instrumentName,
         instrumentImage: labInstrumentImageUrl,
         instrumentImagePublicId: labInstrumentImgPublicId,
-        description: req.body.description,
+        description: description,
       });
 
       const uploadedData = await labInstrumentsInfo.save();

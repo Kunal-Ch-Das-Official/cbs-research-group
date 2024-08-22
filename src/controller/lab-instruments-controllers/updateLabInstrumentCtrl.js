@@ -10,7 +10,8 @@ const customSingleUploader = require("../../utils/cloudinary-single-uploader/cus
 const cleanupFile = require("../../utils/custom-file-cleaner/localFileCleaner");
 
 const updateLabInstrumentCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
+  const { instrumentName, description } = req.body;
   const filePath = req.file ? req.file.path : null;
   let newInstrumentImage, newInstrumentImgCloudId;
 
@@ -22,10 +23,10 @@ const updateLabInstrumentCtrl = async (req, res) => {
     }
 
     const newInstrumentName =
-      req.body.instrumentName || getPreviousInstrumentInfo.instrumentName;
+      instrumentName || getPreviousInstrumentInfo.instrumentName;
 
     const newInstrumentDescription =
-      req.body.description || getPreviousInstrumentInfo.description;
+      description || getPreviousInstrumentInfo.description;
 
     if (req.file) {
       const { storedDataAccessUrl, storedDataAccessId } =
@@ -33,10 +34,9 @@ const updateLabInstrumentCtrl = async (req, res) => {
       newInstrumentImage = storedDataAccessUrl;
       newInstrumentImgCloudId = storedDataAccessId;
 
-      getPreviousInstrumentInfo.instrumentImagePublicId &&
-        (await customSingleDestroyer(
-          getPreviousInstrumentInfo.instrumentImagePublicId
-        ));
+      const { instrumentImagePublicId } = getPreviousInstrumentInfo;
+      instrumentImagePublicId &&
+        (await customSingleDestroyer(instrumentImagePublicId));
       filePath && cleanupFile(filePath);
     } else {
       newInstrumentImage = getPreviousInstrumentInfo.instrumentImage;

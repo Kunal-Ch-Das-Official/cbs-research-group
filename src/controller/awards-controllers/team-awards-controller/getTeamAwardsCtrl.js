@@ -7,7 +7,7 @@
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 
 const getTeamAwardsCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getRequestedTeamAward = await teamAwardsModel.findById(id);

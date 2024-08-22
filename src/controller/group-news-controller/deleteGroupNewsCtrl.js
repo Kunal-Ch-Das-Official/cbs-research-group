@@ -7,7 +7,7 @@
 const groupNewsModel = require("../../models/group-news-model/groupNewsModel");
 
 const deleteGroupNewsCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getPrevGroupNews = await groupNewsModel.findById(id);
     if (!getPrevGroupNews) {

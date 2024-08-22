@@ -7,7 +7,7 @@
 const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
 
 const getDoctorateAlumniCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getSingleAlumniInfo = await doctorateAlumniModel.findById(id);

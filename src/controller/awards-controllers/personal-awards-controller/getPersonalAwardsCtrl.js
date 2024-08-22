@@ -7,7 +7,7 @@
 const personalAwardsModel = require("../../../models/awards-model/personal-awards-model/personalAwardsModel");
 
 const getPersonalAwardsCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getRequestedPersonalAward = await personalAwardsModel.findById(id);

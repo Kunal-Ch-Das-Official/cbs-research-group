@@ -7,7 +7,7 @@
 const contactFormModel = require("../../models/contact-form-model/contactFormModel");
 
 const getContactInfoCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getRequestedContactInfo = await contactFormModel.findById(id);

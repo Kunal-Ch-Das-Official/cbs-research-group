@@ -4,11 +4,11 @@
  Date : 16/08/2024
  Details: This is custom file cleaner. it's a reuseable file unlink module. for delete local image from directory.
  */
-const fs = require("fs");
+const { unlink } = require("fs");
 
 // Helper function for file cleanup
 const cleanupFile = (filePath) => {
-  fs.unlink(filePath, (err) => {
+  unlink(filePath, (err) => {
     if (err) {
       console.log("Unable to remove file, due to:", err);
     } else {

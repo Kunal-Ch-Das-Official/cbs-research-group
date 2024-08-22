@@ -7,6 +7,7 @@
 const groupNewsModel = require("../../models/group-news-model/groupNewsModel");
 
 const uploadGroupNewsCtrl = async (req, res) => {
+  const { newsTitle, content } = req.body;
   if (!req.body) {
     return res.status(400).json({
       error: "Bad Request!",
@@ -14,10 +15,7 @@ const uploadGroupNewsCtrl = async (req, res) => {
     });
   } else {
     try {
-      const latestGroupNews = new groupNewsModel({
-        newsTitle: req.body.newsTitle,
-        content: req.body.content,
-      });
+      const latestGroupNews = new groupNewsModel({ newsTitle, content });
       const uploadData = await latestGroupNews.save();
       if (!uploadData) {
         return res.status(406).json({

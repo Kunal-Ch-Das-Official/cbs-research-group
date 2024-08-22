@@ -8,11 +8,11 @@ const labInstrumentModel = require("../../models/lab-instruments-model/labInstru
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
 const deleteLabInstrumentCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getRequestedLabInstrumentInfo = await labInstrumentModel.findById(id);
-    const instrumentImagePublicId =
-      getRequestedLabInstrumentInfo.instrumentImagePublicId;
+    const { instrumentImagePublicId } = getRequestedLabInstrumentInfo;
+
     if (!getRequestedLabInstrumentInfo) {
       return res.status(404).json({
         error: "Requested resources are not found!",

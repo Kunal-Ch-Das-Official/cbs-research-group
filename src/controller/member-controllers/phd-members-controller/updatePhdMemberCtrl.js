@@ -10,7 +10,18 @@ const customSingleUploader = require("../../../utils/cloudinary-single-uploader/
 const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const updatePhdMemberCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
+  const {
+    memberName,
+    emailId,
+    phoneNumber,
+    mscDoneFrom,
+    bscDoneFrom,
+    researchGateId,
+    googleScholarId,
+    currentYear,
+    details,
+  } = req.body;
   const filePath = req.file ? req.file.path : null;
   let newMemberImage, newCloudPublicId;
 
@@ -21,33 +32,26 @@ const updatePhdMemberCtrl = async (req, res) => {
       return res.status(404).json({ error: "Requested resources not found" });
     }
 
-    const newMemberName =
-      req.body.memberName || getPreviousMemberInfo.memberName;
-    const newEmailId = req.body.emailId || getPreviousMemberInfo.emailId;
-    const newPhoneNumber =
-      req.body.phoneNumber || getPreviousMemberInfo.phoneNumber;
-    const newMscDoneFrom =
-      req.body.mscDoneFrom || getPreviousMemberInfo.mscDoneFrom;
-    const newBscDoneFrom =
-      req.body.bscDoneFrom || getPreviousMemberInfo.bscDoneFrom;
+    const newMemberName = memberName || getPreviousMemberInfo.memberName;
+    const newEmailId = emailId || getPreviousMemberInfo.emailId;
+    const newPhoneNumber = phoneNumber || getPreviousMemberInfo.phoneNumber;
+    const newMscDoneFrom = mscDoneFrom || getPreviousMemberInfo.mscDoneFrom;
+    const newBscDoneFrom = bscDoneFrom || getPreviousMemberInfo.bscDoneFrom;
     const newResearchGateId =
-      req.body.researchGateId || getPreviousMemberInfo.researchGateId;
+      researchGateId || getPreviousMemberInfo.researchGateId;
     const newGoogleScholarId =
-      req.body.googleScholarId || getPreviousMemberInfo.googleScholarId;
-    const newCurrentYear =
-      req.body.currentYear || getPreviousMemberInfo.currentYear;
-    const newMemberDetails = req.body.details || getPreviousMemberInfo.details;
+      googleScholarId || getPreviousMemberInfo.googleScholarId;
+    const newCurrentYear = currentYear || getPreviousMemberInfo.currentYear;
+    const newMemberDetails = details || getPreviousMemberInfo.details;
 
     if (req.file) {
       const { storedDataAccessUrl, storedDataAccessId } =
         await customSingleUploader(filePath, "phd_members_image");
       newMemberImage = storedDataAccessUrl;
       newCloudPublicId = storedDataAccessId;
-
-      getPreviousMemberInfo.profilePicturePublicId &&
-        (await customSingleDestroyer(
-          getPreviousMemberInfo.profilePicturePublicId
-        ));
+      const { profilePicturePublicId } = getPreviousMemberInfo;
+      profilePicturePublicId &&
+        (await customSingleDestroyer(profilePicturePublicId));
       filePath && cleanupFile(filePath);
     } else {
       newMemberImage = getPreviousMemberInfo.profilePicture;

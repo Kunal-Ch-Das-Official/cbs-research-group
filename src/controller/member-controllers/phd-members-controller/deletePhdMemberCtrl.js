@@ -8,19 +8,19 @@ const phdMemberModel = require("../../../models/members-model/phd-member-model/p
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
 const deletePhdMemberCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getRequestedMembersInfo = await phdMemberModel.findById(id);
-    const phdMembersImgPublicId =
-      getRequestedMembersInfo.profilePicturePublicId;
+    const { profilePicturePublicId } = getRequestedMembersInfo;
+
     if (!getRequestedMembersInfo) {
       return res.status(404).json({
         error: "Requested resources are not found!",
         message: "Please check the given details.",
       });
     } else {
-      phdMembersImgPublicId &&
-        (await customSingleDestroyer(phdMembersImgPublicId));
+      profilePicturePublicId &&
+        (await customSingleDestroyer(profilePicturePublicId));
       const deleteRequestedMembersInfo = await phdMemberModel.findByIdAndDelete(
         id
       );

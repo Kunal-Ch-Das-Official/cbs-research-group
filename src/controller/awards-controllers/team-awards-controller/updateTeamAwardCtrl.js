@@ -7,7 +7,8 @@
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 
 const updateTeamAwardCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
+  const { awardTitle, recivedFor, recivedDate } = req.body;
   try {
     const getPreviousTeamAward = await teamAwardsModel.findById(id);
     if (!getPreviousTeamAward) {
@@ -16,12 +17,10 @@ const updateTeamAwardCtrl = async (req, res) => {
         message: "Please check the details",
       });
     } else {
-      const newAwardTitle =
-        req.body.awardTitle || getPreviousTeamAward.awardTitle;
-      const newAwardRecivedFor =
-        req.body.recivedFor || getPreviousTeamAward.recivedFor;
+      const newAwardTitle = awardTitle || getPreviousTeamAward.awardTitle;
+      const newAwardRecivedFor = recivedFor || getPreviousTeamAward.recivedFor;
       const newAwardRecivedDate =
-        req.body.recivedDate || getPreviousTeamAward.recivedDate;
+        recivedDate || getPreviousTeamAward.recivedDate;
 
       const updatedTeamAwards = {
         awardTitle: newAwardTitle,

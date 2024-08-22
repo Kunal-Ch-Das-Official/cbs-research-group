@@ -7,7 +7,7 @@
 const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 
 const getMscMembersCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getSingleMscMemberInfo = await mscMemberModel.findById(id);

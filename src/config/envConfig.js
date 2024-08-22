@@ -9,6 +9,7 @@ require("dotenv").config();
 // Creting Custom Environment For Server //
 const environment = {
   port: process.env.PORT,
+  runningEnvironment: process.env.NODE_ENV,
   dataBaseConnectionString: process.env.DATABASE_CONNECTION_STRING,
   cloudinaryConnectionString: process.env.CLOUDINARY_URL,
   cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME,

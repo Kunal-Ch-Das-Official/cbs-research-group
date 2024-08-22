@@ -5,7 +5,7 @@
 // Details: Role of this config file is to establish connection between server and database.
 
 const mongoose = require("mongoose");
-const envConfig = require("./envConfig");
+const { dataBaseConnectionString } = require("./envConfig");
 
 // Data Base Connection Controller //
 const dbConnectionConfig = async () => {
@@ -16,7 +16,7 @@ const dbConnectionConfig = async () => {
     mongoose.connection.on("error", (err) => {
       console.log("Error occured in database system", err);
     });
-    await mongoose.connect(envConfig.dataBaseConnectionString, {});
+    await mongoose.connect(dataBaseConnectionString, {});
   } catch (error) {
     console.log("Sorry we are unable to connecet to database", error);
     process.exit(1);

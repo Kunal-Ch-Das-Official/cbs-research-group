@@ -8,18 +8,17 @@ const mscMemberModel = require("../../../models/members-model/msc-member-model/m
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
 const deleteMscMemberCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getRequestedMembersInfo = await mscMemberModel.findById(id);
-    const mscMembersImgPublicId =
-      getRequestedMembersInfo.profilePicturePublicId;
-    if (!mscMembersImgPublicId) {
+    const { profilePicturePublicId } = getRequestedMembersInfo;
+    if (!profilePicturePublicId) {
       return res.status(404).json({
         message: "Msc members images are not available!",
       });
     } else {
-      mscMembersImgPublicId &&
-        (await customSingleDestroyer(mscMembersImgPublicId));
+      profilePicturePublicId &&
+        (await customSingleDestroyer(profilePicturePublicId));
       const deleteRequestedMembersInfo = await mscMemberModel.findByIdAndDelete(
         id
       );

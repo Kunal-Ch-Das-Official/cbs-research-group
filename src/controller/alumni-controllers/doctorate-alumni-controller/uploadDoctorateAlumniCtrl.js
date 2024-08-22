@@ -14,6 +14,18 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
   let profileImgPublicId;
   let filePath;
 
+  const {
+    alumniName,
+    emailId,
+    phoneNumber,
+    mscDoneFrom,
+    bscDoneFrom,
+    researchGateId,
+    googleScholarId,
+    yearOfPassout,
+    details,
+  } = req.body;
+
   if (!req.body || !req.file) {
     return res.status(400).json({
       error: "Bad request!",
@@ -29,17 +41,17 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
         profileImgPublicId = storedDataAccessId;
       }
       const doctorateAlumniInfo = new doctorateAlumniModel({
-        alumniName: req.body.alumniName,
+        alumniName,
         profilePicture: profileImageUrl,
         profilePicturePublicId: profileImgPublicId,
-        emailId: req.body.emailId,
-        phoneNumber: req.body.phoneNumber,
-        mscDoneFrom: req.body.mscDoneFrom,
-        bscDoneFrom: req.body.bscDoneFrom,
-        researchGateId: req.body.researchGateId,
-        googleScholarId: req.body.googleScholarId,
-        yearOfPassout: req.body.yearOfPassout,
-        details: req.body.details,
+        emailId,
+        phoneNumber,
+        mscDoneFrom,
+        bscDoneFrom,
+        researchGateId,
+        googleScholarId,
+        yearOfPassout,
+        details,
       });
 
       const uploadedData = await doctorateAlumniInfo.save();

@@ -7,7 +7,7 @@
 const projectModel = require("../../models/projects-model/projectModel");
 
 const deleteProjectCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getPrevProject = await projectModel.findById(id);
     if (!getPrevProject) {

@@ -8,7 +8,7 @@ const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
 const deleteMastersAlumniCtrl = async (req, res) => {
-  let id = req.params.id;
+  let { id } = req.params;
   try {
     const currentMastersAlumni = await mastersAlumniModel.findById(id);
     if (!currentMastersAlumni) {
@@ -17,11 +17,10 @@ const deleteMastersAlumniCtrl = async (req, res) => {
         message: "Please check the details and try again.",
       });
     } else {
-      const currentAlumniImgsCloudId =
-        currentMastersAlumni.profilePicturePublicId;
+      const { profilePicturePublicId } = currentMastersAlumni;
 
-      currentAlumniImgsCloudId &&
-        (await customSingleDestroyer(currentAlumniImgsCloudId));
+      profilePicturePublicId &&
+        (await customSingleDestroyer(profilePicturePublicId));
       const removeAlumniFromDb = await mastersAlumniModel.findByIdAndDelete(id);
       if (!removeAlumniFromDb) {
         return res.status(406).json({

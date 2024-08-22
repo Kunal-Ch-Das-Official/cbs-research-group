@@ -7,6 +7,7 @@
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 
 const uploadTeamAwardCtrl = async (req, res) => {
+  const { awardTitle, recivedFor, recivedDate } = req.body;
   if (!req.body) {
     return res.status(400).json({
       error: "Bad Request!",
@@ -15,9 +16,9 @@ const uploadTeamAwardCtrl = async (req, res) => {
   } else {
     try {
       const teamAward = new teamAwardsModel({
-        awardTitle: req.body.awardTitle,
-        recivedFor: req.body.recivedFor,
-        recivedDate: req.body.recivedDate,
+        awardTitle,
+        recivedFor,
+        recivedDate,
       });
       const uploadDetails = teamAward.save();
       if (!uploadDetails) {

@@ -7,7 +7,7 @@
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 
 const deleteTeamAwardCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getPreviousTeamAward = teamAwardsModel.findById(id);
     if (!getPreviousTeamAward) {

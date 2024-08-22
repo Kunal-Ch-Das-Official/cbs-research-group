@@ -7,6 +7,7 @@
 const personalAwardsModel = require("../../../models/awards-model/personal-awards-model/personalAwardsModel");
 
 const uploadPersonalAwardsCtrl = async (req, res) => {
+  const { awardTitle, recivedFor, recivedDate } = req.body;
   if (!req.body) {
     return res.status(400).json({
       error: "Bad Request!",
@@ -15,9 +16,9 @@ const uploadPersonalAwardsCtrl = async (req, res) => {
   } else {
     try {
       const personalAward = new personalAwardsModel({
-        awardTitle: req.body.awardTitle,
-        recivedFor: req.body.recivedFor,
-        recivedDate: req.body.recivedDate,
+        awardTitle,
+        recivedFor,
+        recivedDate,
       });
       const uploadDetails = personalAward.save();
       if (!uploadDetails) {

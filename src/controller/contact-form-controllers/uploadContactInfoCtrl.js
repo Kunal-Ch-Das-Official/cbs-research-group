@@ -7,7 +7,8 @@
 const contactFormModel = require("../../models/contact-form-model/contactFormModel");
 
 const uploadContactInfoCtrl = async (req, res) => {
-  if (!req.body.userName || !req.body.emailId || !req.body.phoneNumber) {
+  const { userName, emailId, phoneNumber, desireCourse, message } = req.body;
+  if (!userName || !emailId || !phoneNumber) {
     return res.status(400).json({
       error: "Bad Request!",
       message: "Please fill up all the fields carefully!",
@@ -15,11 +16,11 @@ const uploadContactInfoCtrl = async (req, res) => {
   } else {
     try {
       const contactUserDetails = new contactFormModel({
-        userName: req.body.userName,
-        emailId: req.body.emailId,
-        phoneNumber: req.body.phoneNumber,
-        desireCourse: req.body.desireCourse,
-        message: req.body.message,
+        userName,
+        emailId,
+        phoneNumber,
+        desireCourse,
+        message,
       });
       const uploadData = await contactUserDetails.save();
       if (!uploadData) {

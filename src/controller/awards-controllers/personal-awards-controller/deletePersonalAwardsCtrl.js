@@ -7,7 +7,7 @@
 const personalAwardsModel = require("../../../models/awards-model/personal-awards-model/personalAwardsModel");
 
 const deletePersonalAwardsCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const getPreviousPersonalAward = personalAwardsModel.findById(id);
     if (!getPreviousPersonalAward) {

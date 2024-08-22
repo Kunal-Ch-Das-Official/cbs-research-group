@@ -7,7 +7,7 @@
 const projectModel = require("../../models/projects-model/projectModel");
 
 const getProjectsCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getRequestedProject = await projectModel.findById(id);

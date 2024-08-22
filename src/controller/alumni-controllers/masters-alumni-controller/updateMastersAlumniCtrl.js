@@ -10,7 +10,17 @@ const customSingleUploader = require("../../../utils/cloudinary-single-uploader/
 const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const updateMastersAlumniCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
+  const {
+    alumniName,
+    emailId,
+    phoneNumber,
+    bscDoneFrom,
+    researchGateId,
+    googleScholarId,
+    yearOfPassout,
+    details,
+  } = req.body;
   const filePath = req.file ? req.file.path : null;
   let newAlumniImage, newCloudPublicId;
 
@@ -21,20 +31,17 @@ const updateMastersAlumniCtrl = async (req, res) => {
       return res.status(404).json({ error: "Requested resources not found" });
     }
 
-    const newAlumniName =
-      req.body.alumniName || getPreviousAlumniInfo.alumniName;
-    const newEmailId = req.body.emailId || getPreviousAlumniInfo.emailId;
-    const newPhoneNumber =
-      req.body.phoneNumber || getPreviousAlumniInfo.phoneNumber;
-    const newBscDoneFrom =
-      req.body.bscDoneFrom || getPreviousAlumniInfo.bscDoneFrom;
+    const newAlumniName = alumniName || getPreviousAlumniInfo.alumniName;
+    const newEmailId = emailId || getPreviousAlumniInfo.emailId;
+    const newPhoneNumber = phoneNumber || getPreviousAlumniInfo.phoneNumber;
+    const newBscDoneFrom = bscDoneFrom || getPreviousAlumniInfo.bscDoneFrom;
     const newResearchGateId =
-      req.body.researchGateId || getPreviousAlumniInfo.researchGateId;
+      researchGateId || getPreviousAlumniInfo.researchGateId;
     const newGoogleScholarId =
-      req.body.googleScholarId || getPreviousAlumniInfo.googleScholarId;
+      googleScholarId || getPreviousAlumniInfo.googleScholarId;
     const newYearOfPassout =
-      req.body.yearOfPassout || getPreviousAlumniInfo.yearOfPassout;
-    const newAlumniDetails = req.body.details || getPreviousAlumniInfo.details;
+      yearOfPassout || getPreviousAlumniInfo.yearOfPassout;
+    const newAlumniDetails = details || getPreviousAlumniInfo.details;
 
     if (req.file) {
       const { storedDataAccessUrl, storedDataAccessId } =

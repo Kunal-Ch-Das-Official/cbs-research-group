@@ -7,7 +7,7 @@
 const groupNewsModel = require("../../models/group-news-model/groupNewsModel");
 
 const getGroupNewsCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getRequestedGroupNews = await groupNewsModel.findById(id);

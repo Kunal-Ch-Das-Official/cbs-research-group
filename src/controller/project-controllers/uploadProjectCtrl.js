@@ -7,6 +7,7 @@
 const projectModel = require("../../models/projects-model/projectModel");
 
 const uploadProjectCtrl = async (req, res) => {
+  const { projectName, description, projectStatus } = req.body;
   if (!req.body) {
     return res.status(400).json({
       error: "Bad Request!",
@@ -15,9 +16,9 @@ const uploadProjectCtrl = async (req, res) => {
   } else {
     try {
       const projectDetails = new projectModel({
-        projectName: req.body.projectName,
-        description: req.body.description,
-        projectStatus: req.body.projectStatus,
+        projectName,
+        description,
+        projectStatus,
       });
       const uploadData = await projectDetails.save();
       if (!uploadData) {

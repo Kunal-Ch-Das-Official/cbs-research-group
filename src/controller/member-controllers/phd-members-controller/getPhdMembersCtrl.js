@@ -7,7 +7,7 @@
 const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
 
 const getPhdMembersCtrl = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   if (id) {
     try {
       const getSinglePhdMemberInfo = await phdMemberModel.findById(id);
