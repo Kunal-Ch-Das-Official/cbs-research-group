@@ -14,19 +14,16 @@ const sendContactPersonResponseCtrl = async (req, res) => {
   try {
     const getContactPerson = await contactFormModel.findById(id);
     if (!getContactPerson) {
-      res.status(404).json({
+      return res.status(404).json({
         error: "Requested user not found",
         message: "Please check the details carefully.",
       });
     } else {
       const { emailId, userName } = getContactPerson;
-      await contactResponseSendCtrl(emailId, userName, subject, emailBody);
-      res.status(200).json({
-        message: "Email has been send successfully!",
-      });
+      await contactResponseSendCtrl(emailId, userName, subject, emailBody, res);
     }
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       Error: error.message,
       Message: "Unable to send email due to some technical error.",
     });

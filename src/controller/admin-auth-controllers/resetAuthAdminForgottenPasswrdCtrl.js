@@ -4,10 +4,10 @@
 // Date: 20/08/2024
 // Details: Role of this controller is for password reset of admin user.
 
-const { jwtSecretKey } = require("../../../config/envConfig");
+const { jwtSecretKey } = require("../../config/envConfig");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authAdminUserModel = require("../../../models/auth-user-model/admin-user-model/authAdminUserModel");
+const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
 
 const resetForgottenPassword = async (req, res) => {
   const { adminUserPassword, adminUserPassword_confirmation } = req.body;

@@ -6,23 +6,21 @@
 
 const { Schema, default: mongoose } = require("mongoose");
 
-const AuthMemberSchema = new Schema(
+const AdminRegisterMessageSchema = new Schema(
   {
-    userName: {
+    reqUserName: {
       type: String,
       required: true,
       trim: true,
     },
-    userEmail: {
+    reqUserEmail: {
       type: String,
       required: true,
       unique: true,
       trim: true,
     },
-    userPassword: {
+    message: {
       type: String,
-      required: true,
-      trim: true,
     },
     termsAndConditions: {
       type: Boolean,
@@ -32,5 +30,8 @@ const AuthMemberSchema = new Schema(
   { timestamps: true }
 );
 
-const authMemberModel = mongoose.model("authenticate-member", AuthMemberSchema);
-module.exports = authMemberModel;
+const adminRegistrationRequestMessageModel = mongoose.model(
+  "admin-registration-request",
+  AdminRegisterMessageSchema
+);
+module.exports = adminRegistrationRequestMessageModel;

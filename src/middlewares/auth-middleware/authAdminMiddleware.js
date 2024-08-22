@@ -7,7 +7,7 @@
 const jwt = require("jsonwebtoken");
 
 const { jwtSecretKey } = require("../../config/envConfig");
-const authAdminUserModel = require("../../models/auth-user-model/admin-user-model/authAdminUserModel");
+const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
 
 const checkAdminAuth = async (req, res, next) => {
   let token;

@@ -1,7 +1,7 @@
 // Content: Nodemailer configuration.
 // Project: CBS-Research-Group-Backend
 // Author: Kunal Chandra Das.
-// Date: 20/08/2024
+// Date: 22/08/2024
 // Details:
 
 const nodemailer = require("nodemailer");
@@ -12,11 +12,10 @@ const {
   emailHostPassword,
 } = require("../../config/envConfig");
 
-const contactResponseSendCtrl = async (
+const sendAdminRegistrationDeniedMail = async (
   sendTo,
   userName,
-  subject,
-  mailBody,
+  reasonToDenied,
   response
 ) => {
   try {
@@ -32,23 +31,33 @@ const contactResponseSendCtrl = async (
     const mailOptions = {
       from: emailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: subject,
+      subject: " CBS Research Group - Requested Response Denied",
       html: `
-      <div>
-      <h2 align="left" >Dear, ${userName}</h2>
-      <h3 align="center">We received your email and we are happy to let you know!</h3>
-      
-      <p align="center" >${mailBody}</p>
-      <footer>
-      <b>Thank you for contact us,</b>
+    <div>
+    <h2 align="center" >Dear, ${userName}</h2>
+    <h3 align="center">We received a request for become admin user of cbs-research group here is our response email of your request</h3>
+
+   
+    <p align="center" >If you did not request a password reset, please ignore this email. Your password will remain unchanged, and no further action is required.
+    For security reasons, this password reset link will expire in [Expiration Time: 5 minutes]. If you need further assistance, please don't hesitate to contact our support team.</p>
+
+    <div align="center">
+      We denied Your request because: 
       <br/>
-      <b>CBS-Research-Group,</b>
-          <br/>
-      <b>${emailHostUser},</b>
-      </footer>
-      
-      <p>This email was sent to ${sendTo}. If you received this email by mistake, please disregard it.,</p>
-      </div>`,
+      ${reasonToDenied}
+     </div>
+
+
+    <footer>
+    <b>Thank you,</b>
+    <br/>
+    <b>CBS-Research-Group,</b>
+        <br/>
+    <b>${emailHostUser},</b>
+    </footer>
+    
+    <p>This email was sent to ${sendTo}. If you received this email by mistake, please disregard it.,</p>
+    </div>`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -78,4 +87,4 @@ const contactResponseSendCtrl = async (
     });
   }
 };
-module.exports = contactResponseSendCtrl;
+module.exports = sendAdminRegistrationDeniedMail;

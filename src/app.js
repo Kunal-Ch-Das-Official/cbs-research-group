@@ -18,8 +18,8 @@ const teamAwardsRouter = require("./routes/team-awards-route/teamAwardsRouters")
 const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrumentsRouter");
 const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
 const projectsRouter = require("./routes/projects-route/projectsRouter");
-const admiAuthenticationRouter = require("./routes/authentication-route/admin-auth-route/admiAuthenticationRouter");
-const authMemberRouter = require("./routes/authentication-route/auth-member-route/authMemeberRouter");
+const admiAuthenticationRouter = require("./routes/admin-auth-route/admiAuthenticationRouter");
+const adminRegistrationReqRouter = require("./routes/admin-registration-request-route/asAdminRegisterReqRouter");
 
 // Create App //
 const app = express();
@@ -49,11 +49,6 @@ app.use(
   admiAuthenticationRouter
 );
 
-// Regiaster client authentication routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-auth-member",
-  authMemberRouter
-);
 // Regiaster Masters Alumni Routes
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters",
@@ -113,4 +108,11 @@ app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs",
   projectsRouter
 );
+
+// Regiaster be admin request Routes
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request",
+  adminRegistrationReqRouter
+);
+
 module.exports = app;
