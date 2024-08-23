@@ -9,7 +9,7 @@ const sendAdminRegistrationDeniedMail = require("../../utils/nodemailer-mail-sen
 
 const sendDeniedResponseOfAdminRequestUserCtrl = async (req, res) => {
   const { id } = req.params;
-  const { reason } = req.body;
+  // const { reason } = req.body;
 
   try {
     const getRequestedUser =
@@ -21,12 +21,7 @@ const sendDeniedResponseOfAdminRequestUserCtrl = async (req, res) => {
       });
     } else {
       const { reqUserName, reqUserEmail } = getRequestedUser;
-      await sendAdminRegistrationDeniedMail(
-        reqUserEmail,
-        reqUserName,
-        reason,
-        res
-      );
+      await sendAdminRegistrationDeniedMail(reqUserEmail, reqUserName, res);
     }
   } catch (error) {
     return res.status(500).json({
