@@ -10,12 +10,14 @@ const updatePhdMemberCtrl = require("../../controller/member-controllers/phd-mem
 const getPhdMembersCtrl = require("../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl");
 const deletePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/deletePhdMemberCtrl");
 const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
+const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
 
 const phdMembersRouter = express.Router();
 
 // Declaration Of Upload Route Segment:
 phdMembersRouter.post(
   "/members",
+  checkAdminAuth,
   multerLocalFileUploader.single("profilePicture"),
   uploadPhdMemberCtrl
 );
@@ -23,6 +25,7 @@ phdMembersRouter.post(
 // Declaration Of Update Route Segment:
 phdMembersRouter.patch(
   "/members/:id",
+  checkAdminAuth,
   multerLocalFileUploader.single("profilePicture"),
   updatePhdMemberCtrl
 );
@@ -34,6 +37,6 @@ phdMembersRouter.get("/members", getPhdMembersCtrl);
 phdMembersRouter.get("/members/:id", getPhdMembersCtrl);
 
 // Declaration Of Delete Route Segment:
-phdMembersRouter.delete("/members/:id", deletePhdMemberCtrl);
+phdMembersRouter.delete("/members/:id", checkAdminAuth, deletePhdMemberCtrl);
 
 module.exports = phdMembersRouter;

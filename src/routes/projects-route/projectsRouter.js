@@ -9,14 +9,15 @@ const uploadProjectCtrl = require("../../controller/project-controllers/uploadPr
 const updateProjectCtrl = require("../../controller/project-controllers/updateProjectCtrl");
 const deleteProjectCtrl = require("../../controller/project-controllers/deleteProjectCtrl");
 const getProjectsCtrl = require("../../controller/project-controllers/getProjectsCtrl");
+const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
 
 const projectsRouter = express.Router();
 
 // Declaration Of Upload Route Segment:
-projectsRouter.post("/projects", uploadProjectCtrl);
+projectsRouter.post("/projects", checkAdminAuth, uploadProjectCtrl);
 
 // Declaration Of Update Route Segment:
-projectsRouter.patch("/projects/:id", updateProjectCtrl);
+projectsRouter.patch("/projects/:id", checkAdminAuth, updateProjectCtrl);
 
 // Declaration Of Get All Route Segment:
 projectsRouter.get("/projects", getProjectsCtrl);
@@ -25,6 +26,6 @@ projectsRouter.get("/projects", getProjectsCtrl);
 projectsRouter.get("/projects/:id", getProjectsCtrl);
 
 // Declaration Of Delete Route Segment:
-projectsRouter.delete("/projects/:id", deleteProjectCtrl);
+projectsRouter.delete("/projects/:id", checkAdminAuth, deleteProjectCtrl);
 
 module.exports = projectsRouter;

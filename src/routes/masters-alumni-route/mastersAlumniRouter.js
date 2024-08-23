@@ -10,6 +10,7 @@ const updateMastersAlumniCtrl = require("../../controller/alumni-controllers/mas
 const getMastersAlumniCtrl = require("../../controller/alumni-controllers/masters-alumni-controller/getMastersAlumniCtrl");
 const deleteMastersAlumniCtrl = require("../../controller/alumni-controllers/masters-alumni-controller/deleteMastersAlumniCtrl");
 const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
+const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
 
 // Use Express As Router //
 const mastersAlumniRouter = express.Router();
@@ -17,6 +18,7 @@ const mastersAlumniRouter = express.Router();
 // Declaration Of Upload Route Segment:
 mastersAlumniRouter.post(
   "/alumni-data",
+  checkAdminAuth,
   multerLocalFileUploader.single("profilePicture"),
   uploadMastersAlumniCtrl
 );
@@ -24,6 +26,7 @@ mastersAlumniRouter.post(
 // Declaration Of Update Route Segment:
 mastersAlumniRouter.patch(
   "/alumni-data/:id",
+  checkAdminAuth,
   multerLocalFileUploader.single("profilePicture"),
   updateMastersAlumniCtrl
 );
@@ -35,6 +38,10 @@ mastersAlumniRouter.get("/alumni-data", getMastersAlumniCtrl);
 mastersAlumniRouter.get("/alumni-data/:id", getMastersAlumniCtrl);
 
 // Declaration Of Delete Route Segment:
-mastersAlumniRouter.delete("/alumni-data/:id", deleteMastersAlumniCtrl);
+mastersAlumniRouter.delete(
+  "/alumni-data/:id",
+  checkAdminAuth,
+  deleteMastersAlumniCtrl
+);
 
 module.exports = mastersAlumniRouter;

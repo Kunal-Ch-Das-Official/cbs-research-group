@@ -10,6 +10,7 @@ const sendAcceptedResponseOfAdminRequestUserCtrl = require("../../controller/adm
 const sendDeniedResponseOfAdminRequestUserCtrl = require("../../controller/admin-registration-request-controller/sendDeniedResponseOfAdminRequestUserCtrl");
 const deleteAdminRegisterRequestMessage = require("../../controller/admin-registration-request-controller/deleteAdminRegisterRequestCtrl");
 const getAdminRegisterRequestCtrl = require("../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl");
+const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
 
 const adminRegistrationReqRouter = express.Router();
 
@@ -17,21 +18,33 @@ adminRegistrationReqRouter.post("/admin", postRegisterAsAdminRequestCtrl);
 
 adminRegistrationReqRouter.post(
   "/admin-accept/:id",
+  checkAdminAuth,
   sendAcceptedResponseOfAdminRequestUserCtrl
 );
 
 adminRegistrationReqRouter.post(
   "/admin-denied/:id",
+
+  checkAdminAuth,
   sendDeniedResponseOfAdminRequestUserCtrl
 );
 
 adminRegistrationReqRouter.delete(
   "/admin/:id",
+  checkAdminAuth,
   deleteAdminRegisterRequestMessage
 );
 
-adminRegistrationReqRouter.get("/admin/:id", getAdminRegisterRequestCtrl);
+adminRegistrationReqRouter.get(
+  "/admin/:id",
+  checkAdminAuth,
+  getAdminRegisterRequestCtrl
+);
 
-adminRegistrationReqRouter.get("/admin", getAdminRegisterRequestCtrl);
+adminRegistrationReqRouter.get(
+  "/admin",
+  checkAdminAuth,
+  getAdminRegisterRequestCtrl
+);
 
 module.exports = adminRegistrationReqRouter;

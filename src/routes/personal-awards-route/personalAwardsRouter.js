@@ -9,14 +9,19 @@ const uploadPersonalAwardsCtrl = require("../../controller/awards-controllers/pe
 const updatePersonalAwardCtrl = require("../../controller/awards-controllers/personal-awards-controller/updatePersonalAwardCtrl");
 const deletePersonalAwardsCtrl = require("../../controller/awards-controllers/personal-awards-controller/deletePersonalAwardsCtrl");
 const getPersonalAwardsCtrl = require("../../controller/awards-controllers/personal-awards-controller/getPersonalAwardsCtrl");
+const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
 
 const personalAwardsRouter = express.Router();
 
 // Declaration Of Upload Route Segment:
-personalAwardsRouter.post("/awards", uploadPersonalAwardsCtrl);
+personalAwardsRouter.post("/awards", checkAdminAuth, uploadPersonalAwardsCtrl);
 
 // Declaration Of Update Route Segment:
-personalAwardsRouter.patch("/awards/:id", updatePersonalAwardCtrl);
+personalAwardsRouter.patch(
+  "/awards/:id",
+  checkAdminAuth,
+  updatePersonalAwardCtrl
+);
 
 // Declaration Of Get All Route Segment:
 personalAwardsRouter.get("/awards", getPersonalAwardsCtrl);
@@ -25,6 +30,10 @@ personalAwardsRouter.get("/awards", getPersonalAwardsCtrl);
 personalAwardsRouter.get("/awards/:id", getPersonalAwardsCtrl);
 
 // Declaration Of Delete Route Segment:
-personalAwardsRouter.delete("/awards/:id", deletePersonalAwardsCtrl);
+personalAwardsRouter.delete(
+  "/awards/:id",
+  checkAdminAuth,
+  deletePersonalAwardsCtrl
+);
 
 module.exports = personalAwardsRouter;

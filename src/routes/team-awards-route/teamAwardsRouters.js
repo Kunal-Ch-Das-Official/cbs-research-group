@@ -9,14 +9,15 @@ const uploadTeamAwardCtrl = require("../../controller/awards-controllers/team-aw
 const updateTeamAwardCtrl = require("../../controller/awards-controllers/team-awards-controller/updateTeamAwardCtrl");
 const deleteTeamAwardCtrl = require("../../controller/awards-controllers/team-awards-controller/deleteTeamAwardCtrl");
 const getTeamAwardsCtrl = require("../../controller/awards-controllers/team-awards-controller/getTeamAwardsCtrl");
+const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
 
 const teamAwardsRouter = express.Router();
 
 // Declaration Of Upload Route Segment:
-teamAwardsRouter.post("/awards", uploadTeamAwardCtrl);
+teamAwardsRouter.post("/awards", checkAdminAuth, uploadTeamAwardCtrl);
 
 // Declaration Of Update Route Segment:
-teamAwardsRouter.patch("/awards/:id", updateTeamAwardCtrl);
+teamAwardsRouter.patch("/awards/:id", checkAdminAuth, updateTeamAwardCtrl);
 
 // Declaration Of Get All Route Segment:
 teamAwardsRouter.get("/awards", getTeamAwardsCtrl);
@@ -25,6 +26,6 @@ teamAwardsRouter.get("/awards", getTeamAwardsCtrl);
 teamAwardsRouter.get("/awards/:id", getTeamAwardsCtrl);
 
 // Declaration Of Delete Route Segment:
-teamAwardsRouter.delete("/awards/:id", deleteTeamAwardCtrl);
+teamAwardsRouter.delete("/awards/:id", checkAdminAuth, deleteTeamAwardCtrl);
 
 module.exports = teamAwardsRouter;

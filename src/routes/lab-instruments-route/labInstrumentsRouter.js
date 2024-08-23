@@ -10,12 +10,14 @@ const updateLabInstrumentCtrl = require("../../controller/lab-instruments-contro
 const deleteLabInstrumentCtrl = require("../../controller/lab-instruments-controllers/deleteLabInstrumentCtrl");
 const getLabInstrumentsCtrl = require("../../controller/lab-instruments-controllers/getLabInstrumentsCtrl");
 const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
+const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
 
 const labInstrumentsRouter = express.Router();
 
 // Declaration Of Upload Route Segment:
 labInstrumentsRouter.post(
   "/lab-instruments",
+  checkAdminAuth,
   multerLocalFileUploader.single("instrumentImage"),
   uploadLabInstrumentCtrl
 );
@@ -23,6 +25,7 @@ labInstrumentsRouter.post(
 // Declaration Of Update Route Segment:
 labInstrumentsRouter.patch(
   "/lab-instruments/:id",
+  checkAdminAuth,
   multerLocalFileUploader.single("instrumentImage"),
   updateLabInstrumentCtrl
 );
@@ -34,6 +37,10 @@ labInstrumentsRouter.get("/lab-instruments", getLabInstrumentsCtrl);
 labInstrumentsRouter.get("/lab-instruments/:id", getLabInstrumentsCtrl);
 
 // Declaration Of Delete Route Segment:
-labInstrumentsRouter.delete("/lab-instruments/:id", deleteLabInstrumentCtrl);
+labInstrumentsRouter.delete(
+  "/lab-instruments/:id",
+  checkAdminAuth,
+  deleteLabInstrumentCtrl
+);
 
 module.exports = labInstrumentsRouter;
