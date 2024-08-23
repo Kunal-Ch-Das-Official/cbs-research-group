@@ -20,6 +20,7 @@ const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
 const projectsRouter = require("./routes/projects-route/projectsRouter");
 const admiAuthenticationRouter = require("./routes/admin-auth-route/admiAuthenticationRouter");
 const adminRegistrationReqRouter = require("./routes/admin-registration-request-route/asAdminRegisterReqRouter");
+const publicationRouter = require("./routes/publication-route/publicationRouter");
 
 // Create App //
 const app = express();
@@ -113,6 +114,12 @@ app.use(
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request",
   adminRegistrationReqRouter
+);
+
+// Regiaster  Publication Routes
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication",
+  publicationRouter
 );
 
 module.exports = app;

@@ -18,6 +18,7 @@ const customSingleDestroyer = async (destroyerPublicId) => {
     });
   } catch (error) {
     console.log({
+      Issue: error.message,
       message: "Unable to destroy requested resources!",
       messageOrigin: "custom single destroyer.",
     });

@@ -26,6 +26,7 @@ const customSingleUploader = async (requireFilePath, folderName) => {
       origin: "Custom single uploader.",
       errorOrigin: "Second block/Catch block",
       errorId: "#-02",
+      message: error.message,
     });
     return null;
   }
