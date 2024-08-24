@@ -8,6 +8,7 @@ const teamAwardsModel = require("../../../models/awards-model/team-awards-model/
 
 const getTeamAwardsCtrl = async (req, res) => {
   const { id } = req.params;
+
   if (id) {
     try {
       const getRequestedTeamAward = await teamAwardsModel.findById(id);
@@ -17,7 +18,7 @@ const getTeamAwardsCtrl = async (req, res) => {
           message: "Please check the details!",
         });
       } else {
-        res.status(200).json(getRequestedTeamAward);
+        res.status(200).sendCachedData(getRequestedTeamAward);
       }
     } catch (error) {
       console.log(
@@ -38,7 +39,7 @@ const getTeamAwardsCtrl = async (req, res) => {
           message: "Upload a award details first!",
         });
       } else {
-        return res.status(200).json(getAllTeamAwards);
+        return res.status(200).sendCachedData(getAllTeamAwards);
       }
     } catch (error) {
       console.log(

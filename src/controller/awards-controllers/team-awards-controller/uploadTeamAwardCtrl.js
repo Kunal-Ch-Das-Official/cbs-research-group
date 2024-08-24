@@ -4,6 +4,9 @@
 // Date: 19/08/2024
 // Details: Role of this controller is to upload personal awards to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 
 const uploadTeamAwardCtrl = async (req, res) => {
@@ -26,6 +29,9 @@ const uploadTeamAwardCtrl = async (req, res) => {
           .status(422)
           .json({ error: "Failed to save award due to validation errors." });
       } else {
+        clearCache(
+          "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards"
+        );
         return res.status(201).json({
           message: "Award information has been successfully uploaded!",
         });

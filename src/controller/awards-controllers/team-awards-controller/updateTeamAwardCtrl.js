@@ -4,6 +4,9 @@
 // Date: 19/08/2024
 // Details: Role of this controller is to update existing team awards to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 
 const updateTeamAwardCtrl = async (req, res) => {
@@ -39,6 +42,12 @@ const updateTeamAwardCtrl = async (req, res) => {
           .status(422)
           .json({ error: "Failed to save award due to validation errors." });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards/${id}`
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards`
+        );
         return res.status(200).json({
           message: "Requested teams awards has been successfully updated!",
         });

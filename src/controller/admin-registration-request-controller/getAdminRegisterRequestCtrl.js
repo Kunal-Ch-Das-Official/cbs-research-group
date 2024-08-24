@@ -5,7 +5,6 @@
 // Details: Role of this controller is to get message of willing user of become admin
 
 const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
-
 const getAdminRegisterRequestCtrl = async (req, res) => {
   const { id } = req.params;
 

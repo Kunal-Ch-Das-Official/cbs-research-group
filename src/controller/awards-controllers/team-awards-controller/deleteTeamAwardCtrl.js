@@ -4,6 +4,9 @@
 // Date: 19/08/2024
 // Details: Role of this controller is to delete team awards news by client request .
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 
 const deleteTeamAwardCtrl = async (req, res) => {
@@ -22,6 +25,12 @@ const deleteTeamAwardCtrl = async (req, res) => {
           .status(422)
           .json({ error: "Failed to save award due to validation errors." });
       } else {
+        clearCache(
+          "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards"
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards/${id}`
+        );
         return res.status(200).json({
           message: "Requested team awards has been successfully removed!",
         });

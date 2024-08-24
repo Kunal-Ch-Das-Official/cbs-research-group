@@ -10,6 +10,9 @@ const updateTeamAwardCtrl = require("../../controller/awards-controllers/team-aw
 const deleteTeamAwardCtrl = require("../../controller/awards-controllers/team-awards-controller/deleteTeamAwardCtrl");
 const getTeamAwardsCtrl = require("../../controller/awards-controllers/team-awards-controller/getTeamAwardsCtrl");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 const teamAwardsRouter = express.Router();
 
@@ -20,10 +23,10 @@ teamAwardsRouter.post("/awards", checkAdminAuth, uploadTeamAwardCtrl);
 teamAwardsRouter.patch("/awards/:id", checkAdminAuth, updateTeamAwardCtrl);
 
 // Declaration Of Get All Route Segment:
-teamAwardsRouter.get("/awards", getTeamAwardsCtrl);
+teamAwardsRouter.get("/awards", cacheMiddleware, getTeamAwardsCtrl);
 
 // Declaration Of Get Single Route Segment:
-teamAwardsRouter.get("/awards/:id", getTeamAwardsCtrl);
+teamAwardsRouter.get("/awards/:id", cacheMiddleware, getTeamAwardsCtrl);
 
 // Declaration Of Delete Route Segment:
 teamAwardsRouter.delete("/awards/:id", checkAdminAuth, deleteTeamAwardCtrl);
