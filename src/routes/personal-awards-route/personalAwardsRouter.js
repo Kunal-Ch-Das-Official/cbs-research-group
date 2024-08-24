@@ -10,6 +10,9 @@ const updatePersonalAwardCtrl = require("../../controller/awards-controllers/per
 const deletePersonalAwardsCtrl = require("../../controller/awards-controllers/personal-awards-controller/deletePersonalAwardsCtrl");
 const getPersonalAwardsCtrl = require("../../controller/awards-controllers/personal-awards-controller/getPersonalAwardsCtrl");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 const personalAwardsRouter = express.Router();
 
@@ -24,10 +27,10 @@ personalAwardsRouter.patch(
 );
 
 // Declaration Of Get All Route Segment:
-personalAwardsRouter.get("/awards", getPersonalAwardsCtrl);
+personalAwardsRouter.get("/awards", cacheMiddleware, getPersonalAwardsCtrl);
 
 // Declaration Of Get Single Route Segment:
-personalAwardsRouter.get("/awards/:id", getPersonalAwardsCtrl);
+personalAwardsRouter.get("/awards/:id", cacheMiddleware, getPersonalAwardsCtrl);
 
 // Declaration Of Delete Route Segment:
 personalAwardsRouter.delete(

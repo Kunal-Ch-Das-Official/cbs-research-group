@@ -4,6 +4,9 @@
 // Date: 19/08/2024
 // Details: Role of this controller is to update existing personal awards to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const personalAwardsModel = require("../../../models/awards-model/personal-awards-model/personalAwardsModel");
 
 const updatePersonalAwardCtrl = async (req, res) => {
@@ -40,6 +43,12 @@ const updatePersonalAwardCtrl = async (req, res) => {
           .status(422)
           .json({ error: "Failed to save award due to validation errors." });
       } else {
+        clearCache(
+          "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal/awards"
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal/awards/${id}`
+        );
         return res.status(200).json({
           message: "Requested personal awards has been successfully updated!",
         });

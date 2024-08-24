@@ -17,7 +17,7 @@ const getPersonalAwardsCtrl = async (req, res) => {
           message: "Please check the details!",
         });
       } else {
-        res.status(200).json(getRequestedPersonalAward);
+        res.status(200).sendCachedData(getRequestedPersonalAward);
       }
     } catch (error) {
       console.log(
@@ -39,7 +39,7 @@ const getPersonalAwardsCtrl = async (req, res) => {
           message: "Upload a award details first!",
         });
       } else {
-        return res.status(200).json(getAllPersonalAwards);
+        return res.status(200).sendCachedData(getAllPersonalAwards);
       }
     } catch (error) {
       console.log(
