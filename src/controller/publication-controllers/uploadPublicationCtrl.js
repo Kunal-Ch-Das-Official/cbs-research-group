@@ -1,8 +1,24 @@
-// Content: Project Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 23/08/2024
-// Details: Role of this controller is to upload project details to the data base.
+/**
+ * Publication Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 23/08/2024
+ *
+ * Description:
+ * This controller handles the upload of publication details to the database.
+ * It manages requests to insert new publication records into the system, ensuring
+ * that all necessary information is provided and correctly formatted.
+ *
+ * Functionality:
+ * - Receives requests to upload new publication details to the database.
+ * - Validates the input data to ensure completeness and correctness.
+ * - Performs the upload operation and saves the new publication record to the database.
+ * - Handles any errors during the upload process and provides appropriate responses.
+ *
+ * Usage:
+ * Use this controller to upload new publication details into the database. It ensures that
+ * publication information is accurately stored and available for retrieval.
+ */
 
 const {
   clearCache,

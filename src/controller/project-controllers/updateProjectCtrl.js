@@ -1,8 +1,25 @@
-// Content: Project Update Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 18/08/2024
-// Details: Role of this controller is to update existing projects to the data base.
+/**
+ * Project Update Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 18/08/2024
+ *
+ * Description:
+ * This controller is responsible for updating existing project information in the
+ * database. It processes requests to modify project details, ensuring that the
+ * database reflects the most current data.
+ *
+ * Functionality:
+ * - Receives update requests for specific projects from the client.
+ * - Validates and processes the provided project data.
+ * - Updates the corresponding project records in the database.
+ * - Handles any errors or issues during the update process and returns appropriate
+ *   responses.
+ *
+ * Usage:
+ * Use this controller to update project details in response to client requests.
+ * It ensures that project data remains accurate and up-to-date within the system.
+ */
 
 const {
   clearCache,

@@ -1,8 +1,25 @@
-// Content: Admin Login Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this controller is to handle login process of admin user of cbs research groups.
+/**
+ * Admin Login Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This controller manages the login process for admin users of CBS
+ * Research Group. It handles authentication requests, verifies user
+ * credentials, and manages login sessions.
+ *
+ * Functionality:
+ * - Receives and processes login requests from admin users.
+ * - Validates user credentials, including username and password.
+ * - Manages the creation of authentication tokens or sessions upon successful
+ *   login.
+ * - Handles authentication errors and provides appropriate responses.
+ *
+ * Usage:
+ * Use this controller to handle login operations for admin users. It ensures
+ * secure authentication and session management as part of the login process.
+ */
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

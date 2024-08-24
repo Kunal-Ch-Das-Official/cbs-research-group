@@ -1,8 +1,20 @@
-// Content: JWT Validation Middleware.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this middleware is to validate jwt token of cbs-research-group admin user.
+/**
+ * JWT Validation Middleware
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This middleware is responsible for validating the JWT token
+ * of the CBS Research Group admin user. It ensures that only
+ * authenticated users with a valid token can access protected routes.
+ *
+ * Usage:
+ * Include this middleware in any route that requires authentication.
+ * The middleware will check the JWT token provided in the request headers
+ * and verify its validity. If the token is valid, the request is allowed
+ * to proceed; otherwise, an error response is returned.
+ */
 
 const jwt = require("jsonwebtoken");
 

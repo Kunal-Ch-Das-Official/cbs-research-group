@@ -1,8 +1,24 @@
-// Content: Delete Specific Group News By Client Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 18/08/2024
-// Details: Role of this controller is to delete single group news by client request .
+/**
+ * Delete Specific Group News By Client Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 18/08/2024
+ *
+ * Description:
+ * This controller handles the process of deleting a specific group news entry
+ * based on a request from a client.
+ *
+ * Functionality:
+ * - Receives requests to delete group news entries.
+ * - Validates the request to ensure it includes necessary information (e.g., news ID).
+ * - Deletes the specified group news entry from the database.
+ * - Handles errors and ensures the integrity of the database after the deletion.
+ *
+ * Usage:
+ * Use this controller to manage the removal of specific group news items
+ * as requested by clients. It ensures that the group's news content can
+ * be updated or removed as needed.
+ */
 
 const {
   clearCache,

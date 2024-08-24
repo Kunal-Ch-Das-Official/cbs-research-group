@@ -1,8 +1,20 @@
-// Content: Projects Database model.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this model is to create a document object model for projects of cbs research group to the database.
+/**
+ * Projects Database Model
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This model defines the schema and structure for project documents
+ * in the CBS Research Group's database. It is responsible for managing
+ * records of research projects, including project details, objectives,
+ * timelines, and associated researchers.
+ *
+ * Usage:
+ * Use this model to interact with project data in the database.
+ * It supports operations such as creating, reading, updating, and
+ * deleting project records, ensuring effective management of project information.
+ */
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");

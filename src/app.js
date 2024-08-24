@@ -1,8 +1,19 @@
-// Content: Server Route Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 15/08/2024
-// Details: This is the entry point of all route, and this the mother/root of all route segments.
+/**
+ * Server Route Handler (app.js)
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 15/08/2024
+ *
+ * Description:
+ * This file serves as the entry point for all routes in the application.
+ * It acts as the main router or root router, coordinating and directing
+ * requests to the appropriate route segments or handlers.
+ *
+ * Usage:
+ * This file should be used to define and configure the primary routes
+ * for the application. It ensures that incoming requests are properly
+ * routed to the corresponding route handlers or modules.
+ */
 
 const express = require("express");
 const { json } = require("express");

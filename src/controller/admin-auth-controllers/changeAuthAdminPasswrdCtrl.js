@@ -1,8 +1,28 @@
-// Content: Change Admin Login Password Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this controller is to handle password update process of authenticated admin user of cbs research groups.
+/**
+ * Change Admin Login Password Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This controller handles the process of updating the login password for
+ * authenticated admin users of CBS Research Group. It manages password
+ * change requests, ensuring that only authenticated and authorized users
+ * can update their passwords.
+ *
+ * Functionality:
+ * - Validates the request to ensure the user is authenticated.
+ * - Processes the password update request, including validation and
+ *   hashing of the new password.
+ * - Updates the user's password in the database and handles any errors
+ *   that may occur during the process.
+ *
+ * Usage:
+ * Use this controller to manage password change operations for admin users.
+ * It ensures secure and efficient handling of password updates, maintaining
+ * the integrity of the authentication system.
+ */
+
 const bcrypt = require("bcrypt");
 const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
 

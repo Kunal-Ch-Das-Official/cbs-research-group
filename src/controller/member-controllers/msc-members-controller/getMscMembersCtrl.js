@@ -1,8 +1,25 @@
-// Content: Get All MSC Members Info From Client Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 17/08/2024
-// Details: Role of this controller is to send all msc members data to the client by request of users.
+/**
+ * Get MSC Members Info From Client Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 17/08/2024
+ *
+ * Description:
+ * This controller handles the retrieval and sending of all MSC members' data
+ * to the client based on a user request. It ensures that comprehensive and up-to-date
+ * information about MSC members is provided as needed.
+ *
+ * Functionality:
+ * - Receives a request from the client to get all MSC members' data.
+ * - Retrieves the complete list of MSC members from the database.
+ * - Formats the data and sends it back to the client in response to the request.
+ * - Handles any errors that may occur during the data retrieval process.
+ *
+ * Usage:
+ * Use this controller to provide a complete dataset of MSC members to the client.
+ * This is useful for generating reports, displaying comprehensive member lists,
+ * or any other functionality that requires full MSC members' information.
+ */
 
 const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 

@@ -1,8 +1,23 @@
-// Content: Group News Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 18/08/2024
-// Details: Role of this controller is to upload group news to the data base.
+/**
+ * Group News Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 18/08/2024
+ *
+ * Description:
+ * This controller handles the upload of group news to the database.
+ *
+ * Functionality:
+ * - Receives requests to upload new group news.
+ * - Validates and processes the upload request.
+ * - Inserts the new group news entry into the database.
+ * - Handles any errors that may occur during the upload process.
+ *
+ * Usage:
+ * Use this controller to add new group news records to the database.
+ * It ensures that the latest group news information is properly stored
+ * and available for retrieval and display.
+ */
 
 const {
   clearCache,

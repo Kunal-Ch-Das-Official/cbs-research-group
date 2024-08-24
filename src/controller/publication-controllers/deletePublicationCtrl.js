@@ -1,8 +1,25 @@
-// Content:  Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 23/08/2024
-// Details: Role of this controller is to upload project details to the data base.
+/**
+ * Delete Specific Publication Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 23/08/2024
+ *
+ * Description:
+ * This controller handles the deletion of specific publication details from
+ * the database. It is responsible for processing requests to remove a publication
+ * record based on client input, ensuring that outdated or incorrect publication
+ * information is accurately removed.
+ *
+ * Functionality:
+ * - Receives deletion requests for specific publication details from the client.
+ * - Validates the request to ensure the specified publication exists in the database.
+ * - Removes the publication record from the database.
+ * - Handles any errors during the deletion process and provides appropriate responses.
+ *
+ * Usage:
+ * Use this controller to delete a specific publication record from the database.
+ * It ensures that only the targeted publication is removed based on client requests.
+ */
 
 const {
   clearCache,

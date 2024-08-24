@@ -1,8 +1,28 @@
-// Content: Delete Specific  Masters Alumni Info By Client Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to delete single masters alumni data by client request .
+/**
+ * Delete Specific Masters Alumni Info By Admin Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles the deletion of specific records of masters
+ * alumni based on admin requests. It manages the removal of individual
+ * alumni data from the database as per admin instructions.
+ *
+ * Functionality:
+ * - Receives and processes admin requests for deleting specific masters
+ *   alumni information.
+ * - Validates the request to ensure proper identification of the record
+ *   to be deleted.
+ * - Deletes the specified alumni data from the database.
+ * - Provides appropriate responses for successful and failed deletion
+ *   operations.
+ *
+ * Usage:
+ * Use this controller to handle admin requests for deleting specific
+ * records of masters alumni. It ensures that individual alumni data can
+ * be accurately removed from the system as requested by admins.
+ */
 
 const {
   clearCache,

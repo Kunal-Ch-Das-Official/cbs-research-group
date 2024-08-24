@@ -1,8 +1,19 @@
-// Content: Nodemailer configuration.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details:
+/**
+ * Reset Password Email Sender
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This function handles sending reset password emails to users who have
+ * requested to reset their passwords. It manages the process of composing
+ * and sending an email with a password reset link or instructions.
+ *
+ * Usage:
+ * Use this function to send reset password emails as part of the password
+ * recovery process. It ensures that users receive a secure and timely
+ * email with the necessary information to reset their passwords.
+ */
 
 const nodemailer = require("nodemailer");
 const {

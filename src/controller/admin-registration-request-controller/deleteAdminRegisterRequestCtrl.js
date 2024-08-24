@@ -1,8 +1,27 @@
-// Content: Delete Register As Admin Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 22/08/2024
-// Details: Role of this controller is to get message of willing user of become admin
+/**
+ * Delete Register As Admin Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 22/08/2024
+ *
+ * Description:
+ * This controller handles the process of deleting or rejecting requests
+ * from users who wish to become admin users of CBS Research Group. It
+ * manages the removal of such requests from the system.
+ *
+ * Functionality:
+ * - Processes requests to delete or reject admin registration requests.
+ * - Validates the request to ensure proper identification of the user or
+ *   request.
+ * - Handles the removal of the request from the database or system.
+ * - Provides appropriate responses for successful and failed request
+ *   deletions.
+ *
+ * Usage:
+ * Use this controller to manage the deletion or rejection of admin
+ * registration requests. It ensures that the system properly handles
+ * requests to become an admin user.
+ */
 
 const {
   clearCache,

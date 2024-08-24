@@ -1,8 +1,26 @@
-// Content: Get Current Loggedin Admin User Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this controller is for handle get request of current logged in admin user of cbs research groups.
+/**
+ * Get Current Logged-in Admin User Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This controller handles the process of retrieving information about
+ * the currently logged-in admin user of CBS Research Group. It processes
+ * GET requests to provide details about the authenticated admin user.
+ *
+ * Functionality:
+ * - Validates the request to ensure the user is authenticated.
+ * - Retrieves the details of the currently logged-in admin user from the
+ *   database.
+ * - Returns the user information in the response, ensuring that sensitive
+ *   data is handled securely.
+ *
+ * Usage:
+ * Use this controller to handle requests for retrieving information about
+ * the currently logged-in admin user. It provides a secure way to access
+ * user details as part of the authentication and user management processes.
+ */
 
 const getCurrentLoggedInAdminUserCtrl = async (req, res) => {
   try {

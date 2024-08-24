@@ -1,8 +1,24 @@
-// Content:  Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 23/08/2024
-// Details: Role of this controller is to upload project details to the data base.
+/**
+ * Get Publication Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 23/08/2024
+ *
+ * Description:
+ * This controller handles the retrieval of publication details from the database.
+ * It is responsible for processing requests to fetch specific publication records
+ * based on client input, allowing users to view publication information.
+ *
+ * Functionality:
+ * - Receives requests to retrieve publication details from the database.
+ * - Validates the request to ensure the specified publication exists.
+ * - Retrieves the publication record and returns it to the client.
+ * - Handles any errors during the retrieval process and provides appropriate responses.
+ *
+ * Usage:
+ * Use this controller to fetch and return details of specific publications based on
+ * client requests. It ensures that users can access up-to-date publication information.
+ */
 
 const publicationModel = require("../../models/publication-model/publicationModel");
 

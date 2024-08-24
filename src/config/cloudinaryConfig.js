@@ -1,8 +1,10 @@
-/* 
- Project Name: CBS-Research-Groups-Backend,
- Author: Kunal Chandra Das,
- Date : 15/08/2024
- Details: This is cloudinary(assets-management-tool) configuration file.
+/**
+ * Project Name: CBS-Research-Groups-Backend
+ * Author      : Kunal Chandra Das
+ * Date        : 15/08/2024
+ *
+ * Details     : This file contains the configuration settings for Cloudinary,
+ *               an assets management tool.
  */
 
 const {

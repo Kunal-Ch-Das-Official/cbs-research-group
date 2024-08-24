@@ -1,8 +1,28 @@
-// Content: MSC Member Update Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 17/08/2024
-// Details: Role of this controller is to update existing msc member info to the data base.
+/**
+ * MSC Member Update Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 17/08/2024
+ *
+ * Description:
+ * This controller handles the updating of existing MSC member information in the
+ * database. It processes update requests to ensure that the MSC members' data is
+ * kept accurate and up-to-date.
+ *
+ * Functionality:
+ * - Receives an update request for an MSC member.
+ * - Validates and processes the input data to ensure it meets required formats and
+ *   constraints.
+ * - Retrieves the specific MSC member's record from the database.
+ * - Updates the member's information with the new data provided.
+ * - Saves the updated information back to the database.
+ * - Returns a success response or handles any errors that occur during the update process.
+ *
+ * Usage:
+ * Use this controller to update the details of MSC members in the database.
+ * This is essential for maintaining accurate records and ensuring that the data
+ * reflects any changes or updates made by the members.
+ */
 
 const {
   clearCache,

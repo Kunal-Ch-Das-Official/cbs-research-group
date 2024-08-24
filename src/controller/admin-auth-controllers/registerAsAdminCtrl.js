@@ -1,8 +1,27 @@
-// Content: Admin Signup Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this controller is to handle sign up process of admin user of cbs research groups.
+/**
+ * Admin Signup Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This controller manages the signup process for admin users of CBS
+ * Research Group. It handles registration requests, validates user
+ * input, and creates new admin user accounts.
+ *
+ * Functionality:
+ * - Receives and processes signup requests from prospective admin users.
+ * - Validates the provided information, including username, email, and
+ *   password.
+ * - Handles the creation of new admin user accounts, including password
+ *   hashing and data storage.
+ * - Provides appropriate responses for successful and failed signup attempts.
+ *
+ * Usage:
+ * Use this controller to handle the signup operations for new admin users.
+ * It ensures secure and efficient registration of admin accounts in the
+ * system.
+ */
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

@@ -1,8 +1,25 @@
-// Content: Personal Awards Update Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to update existing personal awards to the data base.
+/**
+ * Personal Awards Update Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller manages the process of updating existing personal awards
+ * records in the database. It handles requests to modify or amend the details
+ * of personal awards as needed.
+ *
+ * Functionality:
+ * - Receives and processes update requests for personal awards.
+ * - Validates and verifies the provided data to ensure correctness.
+ * - Updates the specified personal awards records in the database.
+ * - Provides appropriate responses for successful and failed update operations.
+ *
+ * Usage:
+ * Use this controller to handle requests for updating personal awards data.
+ * It ensures that modifications to personal awards records are accurately
+ * reflected in the database.
+ */
 
 const {
   clearCache,

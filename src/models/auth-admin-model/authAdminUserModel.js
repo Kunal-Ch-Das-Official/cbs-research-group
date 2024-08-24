@@ -1,8 +1,20 @@
-// Content:  Authenticate Admin Users Database model.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this model is to create a document object model for admin user of cbs research group to the database.
+/**
+ * Authenticate Admin Users Database Model
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This model defines the schema and structure for the admin user document
+ * in the CBS Research Group's database. It is responsible for creating
+ * and managing records for admin users, including fields for authentication
+ * such as username, password, and roles.
+ *
+ * Usage:
+ * Use this model to interact with admin user data in the database.
+ * It supports operations like creating, reading, updating, and deleting
+ * admin user records, and includes methods for authentication and role management.
+ */
 
 const { Schema, default: mongoose } = require("mongoose");
 

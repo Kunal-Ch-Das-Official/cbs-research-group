@@ -1,8 +1,25 @@
-// Content: Personal Awards Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to upload personal awards to the data base.
+/**
+ * Personal Awards Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller handles the process of uploading new personal awards records
+ * to the database. It manages the addition of personal awards data as submitted
+ * by users or administrators.
+ *
+ * Functionality:
+ * - Receives and processes upload requests for personal awards.
+ * - Validates and verifies the provided data for correctness and completeness.
+ * - Inserts new personal awards records into the database.
+ * - Provides appropriate responses for successful and failed upload operations.
+ *
+ * Usage:
+ * Use this controller to manage the uploading of personal awards data into
+ * the database. It ensures that new personal awards records are accurately
+ * added to the system.
+ */
 
 const {
   clearCache,

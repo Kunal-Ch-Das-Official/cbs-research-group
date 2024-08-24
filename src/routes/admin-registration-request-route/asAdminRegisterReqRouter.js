@@ -1,8 +1,20 @@
-// Content: Admin Registration Request Router.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: This is the router file for handle all request of admin register request to the authority of cbs research groups.
+/**
+ * Admin Registration Request Router
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This router handles all requests related to admin registration
+ * within the CBS Research Group. It manages the endpoints for processing
+ * admin registration requests, including validation and forwarding
+ * requests to the appropriate authority for review and approval.
+ *
+ * Usage:
+ * Use this router to manage routes associated with admin registration
+ * requests. It ensures that registration requests are properly handled
+ * and directed to the appropriate administrative authority for processing.
+ */
 
 const express = require("express");
 const postRegisterAsAdminRequestCtrl = require("../../controller/admin-registration-request-controller/postRegisterAsAdminRequestCtrl");

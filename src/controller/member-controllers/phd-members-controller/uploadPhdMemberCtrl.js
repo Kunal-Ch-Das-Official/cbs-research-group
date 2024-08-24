@@ -1,8 +1,26 @@
-// Content: PHD Member Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to upload individual phd members data to the data base.
+/**
+ * PHD Member Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles the upload of individual PhD member data to the database.
+ * It processes requests to add new PhD member records or update existing ones with
+ * the provided data.
+ *
+ * Functionality:
+ * - Receives a request with data for a PhD member to be uploaded.
+ * - Validates the incoming data to ensure it meets the required format and criteria.
+ * - Inserts or updates the PhD member record in the database based on the provided data.
+ * - Handles any errors or issues that occur during the upload process and returns
+ *   appropriate responses to the client.
+ *
+ * Usage:
+ * Use this controller to upload or update the details of a PhD member in the database.
+ * This operation is essential for adding new PhD members or modifying existing records
+ * within the system.
+ */
 
 const {
   clearCache,

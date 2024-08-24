@@ -1,8 +1,25 @@
-// Content: Lab Instruments Update Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to update existing Lab Instrument info to the data base.
+/**
+ * Lab Instruments Update Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller is responsible for updating existing lab instrument information in
+ * the database. It handles requests to modify data related to lab instruments, ensuring
+ * that the database remains current with the latest information.
+ *
+ * Functionality:
+ * - Receives update requests for lab instrument data from the client.
+ * - Validates the incoming data to ensure it meets required criteria.
+ * - Updates the relevant lab instrument records in the database with the new information.
+ * - Handles errors and provides appropriate feedback if the update process fails.
+ *
+ * Usage:
+ * Utilize this controller to modify or correct details of lab instruments as needed.
+ * It is essential for maintaining the accuracy and relevance of lab instrument data
+ * in the database, which supports effective data management and reporting.
+ */
 
 const {
   clearCache,

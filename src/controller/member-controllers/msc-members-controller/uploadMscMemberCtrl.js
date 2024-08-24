@@ -1,8 +1,28 @@
-// Content: MSC Member Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 17/08/2024
-// Details: Role of this controller is to upload individual msc members data to the data base.
+/**
+ * MSC Member Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 17/08/2024
+ *
+ * Description:
+ * This controller handles the upload of individual MSC member data to the database.
+ * It processes requests to add new MSC members or update existing ones with data provided
+ * in the request.
+ *
+ * Functionality:
+ * - Receives an upload request containing MSC member data.
+ * - Validates the input data to ensure it adheres to required formats and constraints.
+ * - Checks if the MSC member already exists in the database. If so, updates the existing
+ *   record; otherwise, creates a new record.
+ * - Saves the MSC member's data to the database.
+ * - Handles any errors that may occur during the upload process and returns appropriate
+ *   responses to the client.
+ *
+ * Usage:
+ * Use this controller to upload or update MSC member data in the database. This operation
+ * is crucial for maintaining and managing the list of MSC members, ensuring that all data
+ * is up-to-date and accurate.
+ */
 
 const {
   clearCache,

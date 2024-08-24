@@ -1,8 +1,25 @@
-// Content: Delete Specific Personal Awards By Client Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to delete personal awards news by client request .
+/**
+ * Delete Specific Personal Awards By Client Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller handles the process of deleting specific personal awards
+ * records from the database based on client requests. It manages the removal
+ * of award data as requested by clients or administrators.
+ *
+ * Functionality:
+ * - Receives and processes requests to delete specific personal awards.
+ * - Validates the request to ensure that the specified award exists.
+ * - Deletes the targeted personal awards record from the database.
+ * - Provides appropriate responses for successful and failed delete operations.
+ *
+ * Usage:
+ * Use this controller to handle client requests for deleting individual
+ * personal awards records. It ensures that personal awards data can be
+ * accurately removed from the system as needed.
+ */
 
 const {
   clearCache,

@@ -1,8 +1,28 @@
-// Content: Doctorate Alumni Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 15/08/2024
-// Details: Role of this controller is to upload individual doctorate alumni data to the data base.
+/**
+ * Doctorate Alumni Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 15/08/2024
+ *
+ * Description:
+ * This controller handles the process of uploading individual records of
+ * doctorate alumni to the database. It manages the insertion of new alumni
+ * data based on client or admin submissions.
+ *
+ * Functionality:
+ * - Receives and processes requests to upload new doctorate alumni
+ *   information.
+ * - Validates the incoming data to ensure it meets required formats and
+ *   criteria.
+ * - Inserts the new alumni records into the database.
+ * - Provides appropriate responses for successful and failed upload
+ *   operations.
+ *
+ * Usage:
+ * Use this controller to manage the uploading of individual doctorate
+ * alumni records to the database. It ensures that new data can be accurately
+ * added to the system as required.
+ */
 
 const {
   clearCache,

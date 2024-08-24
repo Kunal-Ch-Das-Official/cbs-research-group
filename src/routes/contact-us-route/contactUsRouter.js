@@ -1,8 +1,20 @@
-// Content: Contact Form Router.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: This is the router file for handle contact form of cbs research groups.
+/**
+ * Contact Form Router
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This router manages the endpoints for handling contact form submissions
+ * for the CBS Research Group. It processes incoming contact form data,
+ * including user inquiries, and routes them to the appropriate handlers
+ * or services for further action.
+ *
+ * Usage:
+ * Use this router to manage routes associated with contact form submissions.
+ * It ensures that contact data is processed and forwarded correctly, facilitating
+ * effective communication with users.
+ */
 
 const express = require("express");
 const uploadContactInfoCtrl = require("../../controller/contact-form-controllers/uploadContactInfoCtrl");

@@ -1,8 +1,25 @@
-// Content: Get All Team Awards Info From Client Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to send all team awards info to the client by request of users.
+/**
+ * Get Team Awards Info From Client Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles requests to retrieve all team awards information
+ * from the database and sends it to the client. It provides a complete list
+ * of team awards as requested by users or administrators.
+ *
+ * Functionality:
+ * - Receives and processes requests to retrieve all team awards data.
+ * - Fetches the complete list of team awards records from the database.
+ * - Sends the retrieved team awards information to the client.
+ * - Provides appropriate responses for successful data retrieval or errors.
+ *
+ * Usage:
+ * Use this controller to manage requests for retrieving all team awards data
+ * from the database. It ensures that users receive the complete set of
+ * team awards information as requested.
+ */
 
 const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
 

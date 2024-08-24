@@ -1,9 +1,18 @@
-/* 
-Content: Single Image Upload Receiver.
- Project Name: CBS-Research-Group-Backend,
- Author: Kunal Chandra Das,
- details : This is multer config file for single image upload handler.
- Date : 17/08/2024
+/**
+ * Multer File Upload Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 17/08/2024
+ *
+ * Description:
+ * This configuration file sets up Multer for handling image uploads
+ * within the CBS Research Group backend. It defines the storage
+ * destination, filename formatting, and file filter for image uploads.
+ *
+ * Usage:
+ * Use this configuration in routes that require image upload functionality.
+ * It handles the file storage and validation processes, ensuring that only
+ * valid image files are uploaded and stored in the specified directory.
  */
 
 const multer = require("multer");

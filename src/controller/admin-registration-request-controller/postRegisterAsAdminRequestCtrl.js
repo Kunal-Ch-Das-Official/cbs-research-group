@@ -1,8 +1,27 @@
-// Content: Register As Admin Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 21/08/2024
-// Details: Role of this controller is to handle message of willing user of become admin
+/**
+ * Post Register As Admin Request Form Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 21/08/2024
+ *
+ * Description:
+ * This controller handles the process of submitting a registration request
+ * for users who wish to become admin users of CBS Research Group. It
+ * manages the creation and submission of these requests.
+ *
+ * Functionality:
+ * - Receives and processes registration requests from users who want to
+ *   become admin users.
+ * - Validates the submitted information to ensure it meets required
+ *   criteria.
+ * - Saves the registration request to the system or database.
+ * - Provides appropriate responses for successful and failed submissions.
+ *
+ * Usage:
+ * Use this controller to handle the submission of admin registration
+ * requests. It ensures that user requests to become admins are properly
+ * processed and stored in the system.
+ */
 
 const {
   clearCache,

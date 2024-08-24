@@ -1,8 +1,20 @@
-// Content: Doctorate Alumni Router.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: This is the router file for handle all routes of doctorate alumni of cbs research groups.
+/**
+ * Doctorate Alumni Router
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This router handles all routes related to doctorate alumni within the
+ * CBS Research Group. It defines the endpoints for managing doctorate alumni
+ * data, including CRUD operations such as creating, reading, updating, and
+ * deleting alumni records.
+ *
+ * Usage:
+ * Use this router to manage routes for interacting with doctorate alumni
+ * data. It ensures that requests related to doctorate alumni are properly
+ * processed and routed to the appropriate handlers or services.
+ */
 
 const express = require("express");
 const uploadDoctorateAlumniCtrl = require("../../controller/alumni-controllers/doctorate-alumni-controller/uploadDoctorateAlumniCtrl");

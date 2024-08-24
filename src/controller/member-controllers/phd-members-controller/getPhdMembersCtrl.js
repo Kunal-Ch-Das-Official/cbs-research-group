@@ -1,8 +1,26 @@
-// Content: Get All PHD Members Info From Client Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 17/08/2024
-// Details: Role of this controller is to send all phd members data to the client by request of users.
+/**
+ * Get PHD Members Info From Client Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 17/08/2024
+ *
+ * Description:
+ * This controller handles requests to retrieve all PhD members' data from the database
+ * and sends it to the client. It processes the request to fetch a comprehensive list of
+ * PhD members' information as requested by users.
+ *
+ * Functionality:
+ * - Receives a request to retrieve all PhD members' data from the client.
+ * - Queries the database to retrieve the complete list of PhD members.
+ * - Formats the data as needed and sends it to the client in the response.
+ * - Handles any errors that may occur during the data retrieval process and returns
+ *   appropriate responses to the client.
+ *
+ * Usage:
+ * Use this controller to get and return all PhD members' information to the client. This
+ * operation is useful for providing a full list of PhD members for display or processing
+ * purposes as requested by users.
+ */
 
 const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
 

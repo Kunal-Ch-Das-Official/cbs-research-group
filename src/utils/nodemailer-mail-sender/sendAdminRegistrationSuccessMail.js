@@ -1,8 +1,21 @@
-// Content: Nodemailer configuration.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 22/08/2024
-// Details:
+/**
+ * Request Accepted Response
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 22/08/2024
+ *
+ * Description:
+ * This function handles sending a response email to individuals whose
+ * requests to become users of the CBS Research Group have been accepted.
+ * It manages the process of composing and sending an acceptance email
+ * with relevant information or instructions.
+ *
+ * Usage:
+ * Use this function to send acceptance emails to individuals whose
+ * applications or requests have been approved. It ensures that new
+ * users are welcomed and provided with the necessary information to
+ * proceed.
+ */
 
 const nodemailer = require("nodemailer");
 const {

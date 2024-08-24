@@ -1,8 +1,25 @@
-// Content: Delete Specific Team Awards By Client Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to delete team awards news by client request .
+/**
+ * Delete Specific Team Awards By Client Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller handles the process of deleting specific team awards records
+ * from the database based on client requests. It manages the removal of team
+ * awards data as requested by users or administrators.
+ *
+ * Functionality:
+ * - Receives and processes delete requests for specific team awards.
+ * - Validates the request to ensure the specified team awards record exists.
+ * - Deletes the specified team awards record from the database.
+ * - Provides appropriate responses for successful and failed delete operations.
+ *
+ * Usage:
+ * Use this controller to manage the deletion of specific team awards data
+ * from the database. It ensures that team awards records are removed as
+ * requested by clients.
+ */
 
 const {
   clearCache,

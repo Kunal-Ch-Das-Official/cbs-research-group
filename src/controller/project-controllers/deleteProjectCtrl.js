@@ -1,8 +1,26 @@
-// Content: Delete Specific Project By Client Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 18/08/2024
-// Details: Role of this controller is to delete single project by client request .
+/**
+ * Delete Specific Project By Client Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 18/08/2024
+ *
+ * Description:
+ * This controller handles the deletion of a specific project from the database
+ * based on a client's request. It processes the request to remove a project
+ * record identified by a unique identifier.
+ *
+ * Functionality:
+ * - Receives a request with an identifier for the project to be deleted.
+ * - Validates the identifier to ensure it corresponds to an existing project.
+ * - Deletes the specified project record from the database.
+ * - Handles any errors or issues that occur during the deletion process and returns
+ *   appropriate responses to the client.
+ *
+ * Usage:
+ * Use this controller to delete a specific project record from the database
+ * when a client requests its removal. This operation is crucial for maintaining
+ * accurate project records and responding to client needs.
+ */
 
 const {
   clearCache,

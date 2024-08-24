@@ -1,8 +1,22 @@
-// Content: Personal Awards Router.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: This is the router file for handle all routes of all personal awards of prof. chinmoy bhattacharya.
+/**
+ * Personal Awards Router
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This router manages all routes related to personal awards for
+ * Professor Chinmoy Bhattacharya within the CBS Research Group.
+ * It defines endpoints for handling personal awards data, including
+ * operations such as creating, reading, updating, and deleting award
+ * records.
+ *
+ * Usage:
+ * Use this router to manage routes for interacting with personal awards
+ * data. It ensures that requests related to Professor Bhattacharya's
+ * awards are properly processed and routed to the appropriate handlers
+ * or services.
+ */
 
 const express = require("express");
 const uploadPersonalAwardsCtrl = require("../../controller/awards-controllers/personal-awards-controller/uploadPersonalAwardCtrl");

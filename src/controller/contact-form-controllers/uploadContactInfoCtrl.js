@@ -1,8 +1,22 @@
-// Content: Contact Form Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to upload contact form details to the data base.
+/**
+ * Contact Form Post Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller handles the process of posting contact form details to the database.
+ *
+ * Functionality:
+ * - Receives contact form submissions from clients.
+ * - Validates the received data for completeness and correctness.
+ * - Uploads the validated contact form details to the database.
+ * - Ensures data integrity and handles any errors during the upload process.
+ *
+ * Usage:
+ * Utilize this controller to manage the submission and storage of contact form data
+ * provided by clients. This facilitates the collection and tracking of contact inquiries.
+ */
 
 const {
   clearCache,

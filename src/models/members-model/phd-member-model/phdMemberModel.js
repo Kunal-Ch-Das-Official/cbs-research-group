@@ -1,8 +1,21 @@
-// Content: PHD Member Database model.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this model is to create a document object model for phd member to the database.
+/**
+ * PhD Member Database Model
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This model defines the schema and structure for the PhD member
+ * documents in the CBS Research Group's database. It manages records
+ * of PhD members, including personal details, research interests, and
+ * academic achievements.
+ *
+ * Usage:
+ * Use this model to interact with PhD member data in the database.
+ * It supports operations such as creating, reading, updating, and
+ * deleting records, facilitating efficient management of PhD member
+ * information.
+ */
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");

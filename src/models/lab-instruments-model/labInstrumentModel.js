@@ -1,8 +1,20 @@
-// Content: Lab Instruments Database model.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this model is to create a document object model for lab instrumnets to the database.
+/**
+ * Lab Instruments Database Model
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This model defines the schema and structure for the lab instruments
+ * documents in the CBS Research Group's database. It is responsible
+ * for creating and managing records of lab instruments, including fields
+ * for instrument details, specifications, and usage information.
+ *
+ * Usage:
+ * Use this model to interact with lab instruments data in the database.
+ * It supports operations like creating, reading, updating, and deleting
+ * instrument records, facilitating effective management of lab equipment information.
+ */
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");

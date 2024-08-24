@@ -1,8 +1,30 @@
-// Content: Send Accepted Response To Admin Requested User Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 22/08/2024
-// Details: Role of this controller is to send the response who willing user of become admin
+/**
+ * Send Accepted Response To Admin Requested User Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 22/08/2024
+ *
+ * Description:
+ * This controller handles the process of sending an acceptance response
+ * to users who have requested to become admin users of CBS Research Group.
+ * It manages the communication to inform users that their request has been
+ * approved.
+ *
+ * Functionality:
+ * - Receives and processes acceptance requests for admin user applications.
+ * - Composes and sends an acceptance response to the user’s email or
+ *   preferred communication channel.
+ * - Ensures that the user is informed about the approval of their request
+ *   and any next steps.
+ * - Handles errors related to sending responses and provides appropriate
+ *   feedback.
+ *
+ * Usage:
+ * Use this controller to manage the sending of acceptance responses to
+ * users whose requests to become admins have been approved. It ensures
+ * that users are properly notified and informed about their application
+ * status.
+ */
 
 const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
 const sendAdminRegistrationSuccessMail = require("../../utils/nodemailer-mail-sender/sendAdminRegistrationSuccessMail");

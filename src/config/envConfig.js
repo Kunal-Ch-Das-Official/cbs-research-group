@@ -1,12 +1,19 @@
-// Content: Server environment configuration.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 15/08/2024
-// Details: Role of this config file is to get all env variable from dotenv file and store it to an object, then send the object for use as a environment.
+/**********************************************************************
+ * Project: CBS-Research-Group-Backend
+ * File: server-config.js
+ * Author: Kunal Chandra Das
+ * Date: 15/08/2024
+ *
+ * Description:
+ * This configuration file is responsible for loading environment
+ * variables from the `.env` file using the `dotenv` package and
+ * storing them in an object. This object is then exported for use
+ * throughout the application to access environment-specific variables.
+ **********************************************************************/
 
 require("dotenv").config();
 
-// Creting Custom Environment For Server //
+// Creting custom environment for server //
 const environment = {
   port: process.env.PORT,
   runningEnvironment: process.env.NODE_ENV,
@@ -26,3 +33,14 @@ const environment = {
 
 const envConfig = Object.freeze(environment);
 module.exports = envConfig;
+
+/**********************************************************************
+ * Usage:
+ * This configuration file can be required in any part of the application
+ * to access the environment variables, ensuring that the application
+ * behaves according to the specified environment settings.
+ *
+ * Example:
+ * const config = require('./envConfig');
+ * console.log(`Running in ${envConfig.NODE_ENV} mode on port ${envConfig.PORT}`);
+ **********************************************************************/

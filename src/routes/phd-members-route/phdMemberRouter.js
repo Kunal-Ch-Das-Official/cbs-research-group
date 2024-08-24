@@ -1,8 +1,20 @@
-// Content: PHD Members Router.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: This is the router file for handle all routes of phd members of cbs research groups.
+/**
+ * PhD Members Router
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This router manages all routes related to PhD members for the
+ * CBS Research Group. It defines endpoints for handling PhD member
+ * data, including operations such as creating, reading, updating, and
+ * deleting member records.
+ *
+ * Usage:
+ * Use this router to manage routes for interacting with PhD members'
+ * data. It ensures that requests related to PhD members are properly
+ * processed and routed to the appropriate handlers or services.
+ */
 
 const express = require("express");
 const uploadPhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/uploadPhdMemberCtrl");

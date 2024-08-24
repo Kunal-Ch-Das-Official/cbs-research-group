@@ -1,8 +1,27 @@
-// Content: PHD Member Update Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to update existing phd member info to the data base.
+/**
+ * PHD Member Update Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles the updating of existing PhD member information in the database.
+ * It processes requests to modify details of a specific PhD member based on the provided
+ * data and updates the corresponding record in the database.
+ *
+ * Functionality:
+ * - Receives a request with updated information for a PhD member.
+ * - Validates and processes the incoming data.
+ * - Queries the database to find and update the relevant PhD member's record.
+ * - Saves the updated information to the database.
+ * - Handles any errors that may occur during the update process and returns appropriate
+ *   responses to the client.
+ *
+ * Usage:
+ * Use this controller to update details of an existing PhD member in the database. This
+ * operation is useful for maintaining current and accurate records of PhD members in
+ * the system.
+ */
 
 const {
   clearCache,

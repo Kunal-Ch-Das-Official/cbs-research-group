@@ -1,8 +1,26 @@
-// Content: Team Awards Update Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to update existing team awards to the data base.
+/**
+ * Team Awards Update Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller handles the process of updating existing team awards
+ * records in the database. It allows for modifications to be made to
+ * team awards information based on client requests or administrative
+ * updates.
+ *
+ * Functionality:
+ * - Receives and processes update requests for team awards.
+ * - Validates the provided data to ensure it meets the required format.
+ * - Updates the specified team awards record(s) in the database.
+ * - Provides appropriate responses for successful updates or errors.
+ *
+ * Usage:
+ * Use this controller to manage the updating of team awards records
+ * in the database. It ensures that team awards information is kept
+ * current and accurate based on client or administrative updates.
+ */
 
 const {
   clearCache,

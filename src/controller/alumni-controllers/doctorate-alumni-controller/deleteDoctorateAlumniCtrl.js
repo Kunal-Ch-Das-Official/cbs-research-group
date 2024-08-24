@@ -1,8 +1,28 @@
-// Content: Delete Specific  Doctorate Alumni Info By Client Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to delete single doctorate alumni data by client request .
+/**
+ * Delete Specific Doctorate Alumni Info By admin Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles the process of deleting specific records of
+ * doctorate alumni based on admin requests. It manages the deletion of
+ * individual alumni data as requested by the admin.
+ *
+ * Functionality:
+ * - Receives and processes admin requests for deleting specific doctorate
+ *   alumni information.
+ * - Validates the request to ensure proper identification of the record
+ *   to be deleted.
+ * - Performs the deletion of the specified alumni data from the database.
+ * - Provides appropriate responses for successful and failed deletion
+ *   operations.
+ *
+ * Usage:
+ * Use this controller to handle admin requests for deleting specific
+ * records of doctorate alumni. It ensures that individual alumni data can
+ * be accurately removed from the system as per admin instructions.
+ */
 
 const {
   clearCache,

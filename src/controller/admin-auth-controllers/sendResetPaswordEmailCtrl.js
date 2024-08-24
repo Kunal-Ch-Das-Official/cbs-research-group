@@ -1,8 +1,27 @@
-// Content: Send Reset Password Mail Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this controller is for send email to the admin user's given email id for password reset of cbs research groups.
+/**
+ * Send Reset Password Mail Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This controller manages the process of sending a password reset email
+ * to admin users of CBS Research Group. It handles requests to send
+ * reset password instructions or links to the user's registered email
+ * address.
+ *
+ * Functionality:
+ * - Receives and processes requests for sending password reset emails.
+ * - Validates the request, including user identification and email address.
+ * - Composes and sends an email with reset instructions or a reset link.
+ * - Handles any errors related to email sending and provides appropriate
+ *   responses.
+ *
+ * Usage:
+ * Use this controller to handle the sending of password reset emails to
+ * admin users. It ensures that users receive the necessary instructions
+ * to reset their passwords securely.
+ */
 
 const { jwtSecretKey, clientSideUrl } = require("../../config/envConfig");
 

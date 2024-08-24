@@ -1,8 +1,23 @@
-// Content: Get All Group News Info From Client Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to send all group news data to the client by request of users.
+/**
+ * Get Group News Info From Client Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles requests to retrieve all group news data
+ * and send it to the client.
+ *
+ * Functionality:
+ * - Receives requests to fetch group news information.
+ * - Retrieves all relevant group news data from the database.
+ * - Sends the retrieved data to the client.
+ * - Handles any errors that may occur during data retrieval.
+ *
+ * Usage:
+ * Use this controller to provide clients with complete group news information
+ * as requested. It ensures that users can access up-to-date news about the group.
+ */
 
 const groupNewsModel = require("../../models/group-news-model/groupNewsModel");
 

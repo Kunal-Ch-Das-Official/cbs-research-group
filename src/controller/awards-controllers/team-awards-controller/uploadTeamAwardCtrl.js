@@ -1,8 +1,25 @@
-// Content: Team Awards Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
-// Details: Role of this controller is to upload personal awards to the data base.
+/**
+ * Team Awards Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller handles the uploading of new team awards records
+ * to the database. It is responsible for adding new entries for
+ * team awards based on client or administrative input.
+ *
+ * Functionality:
+ * - Receives and processes requests to upload team awards information.
+ * - Validates and sanitizes the data provided to ensure correctness.
+ * - Inserts new team awards records into the database.
+ * - Provides appropriate responses for successful uploads or errors.
+ *
+ * Usage:
+ * Use this controller to add new team awards records to the database.
+ * It ensures that team awards information is properly uploaded and
+ * stored for future reference and use.
+ */
 
 const {
   clearCache,

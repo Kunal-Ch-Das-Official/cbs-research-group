@@ -1,8 +1,20 @@
-// Content: Nodemailer configuration.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 22/08/2024
-// Details:
+/**
+ * Send Request Rejected Response
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 22/08/2024
+ *
+ * Description:
+ * This function handles sending a response email to individuals whose
+ * requests to become users of the CBS Research Group have been rejected.
+ * It manages the process of composing and sending a polite and informative
+ * rejection email.
+ *
+ * Usage:
+ * Use this function to send rejection emails to individuals whose
+ * applications or requests have not been approved. It ensures that
+ * applicants are informed of the decision in a professional manner.
+ */
 
 const nodemailer = require("nodemailer");
 const {

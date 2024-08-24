@@ -1,8 +1,28 @@
-// Content: Master Alumni Update Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to update existing masters alumni data to the data base.
+/**
+ * Master Alumni Update Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles the process of updating existing records of
+ * master alumni in the database. It manages modifications to alumni data
+ * based on client or admin requests.
+ *
+ * Functionality:
+ * - Receives and processes requests to update existing master alumni
+ *   information.
+ * - Validates the incoming data to ensure it meets required formats and
+ *   criteria.
+ * - Updates the specified alumni records in the database with the new data.
+ * - Provides appropriate responses for successful and failed update
+ *   operations.
+ *
+ * Usage:
+ * Use this controller to manage the updating of master alumni records
+ * in the database. It ensures that existing alumni data can be accurately
+ * modified as needed.
+ */
 
 const {
   clearCache,

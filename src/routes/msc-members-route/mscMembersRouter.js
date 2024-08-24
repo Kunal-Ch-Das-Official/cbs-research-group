@@ -1,8 +1,20 @@
-// Content: MSC Members Router.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 17/08/2024
-// Details: This is the router file for handle all routes of msc members of cbs research groups.
+/**
+ * MSC Members Router
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 17/08/2024
+ *
+ * Description:
+ * This router manages all routes related to MSC members for the
+ * CBS Research Group. It defines endpoints for handling MSC member
+ * data, including operations such as creating, reading, updating, and
+ * deleting member records.
+ *
+ * Usage:
+ * Use this router to manage routes for interacting with MSC members'
+ * data. It ensures that requests related to MSC members are properly
+ * processed and routed to the appropriate handlers or services.
+ */
 
 const express = require("express");
 const uploadMscMemberCtrl = require("../../controller/member-controllers/msc-members-controller/uploadMscMemberCtrl");

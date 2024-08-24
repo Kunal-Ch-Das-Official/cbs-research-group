@@ -1,8 +1,19 @@
-// Content: Group News Router.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 18/08/2024
-// Details: This is the router file for handle all routes of latest group news of cbs research groups.
+/**
+ * Group News Router
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 18/08/2024
+ *
+ * Description:
+ * This router manages all routes related to the latest group news for
+ * the CBS Research Group. It defines endpoints for handling news updates,
+ * including creating, reading, updating, and deleting news articles.
+ *
+ * Usage:
+ * Use this router to manage routes for interacting with group news data.
+ * It ensures that requests related to news updates are properly processed
+ * and routed to the appropriate handlers or services.
+ */
 
 const express = require("express");
 const uploadGroupNewsCtrl = require("../../controller/group-news-controller/uploadGroupNewsCtrl");

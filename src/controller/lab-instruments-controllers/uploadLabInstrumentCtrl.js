@@ -1,7 +1,26 @@
-// Content: Lab Instruments Upload Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 19/08/2024
+/**
+ * Lab Instruments Upload Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 19/08/2024
+ *
+ * Description:
+ * This controller handles the process of uploading new lab instrument data to
+ * the database. It is responsible for receiving and processing requests to
+ * add new lab instruments, ensuring that the provided information is correctly
+ * inserted into the database.
+ *
+ * Functionality:
+ * - Receives upload requests containing new lab instrument data from the client.
+ * - Validates the incoming data to ensure it meets required criteria and format.
+ * - Inserts the new lab instrument records into the database.
+ * - Handles any errors that occur during the upload process and provides feedback.
+ *
+ * Usage:
+ * Use this controller to add new lab instruments to the database. It is essential
+ * for expanding and updating the inventory of lab instruments, allowing for accurate
+ * and up-to-date records in the system.
+ */
 
 const {
   clearCache,

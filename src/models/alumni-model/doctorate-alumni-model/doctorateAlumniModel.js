@@ -1,8 +1,20 @@
-// Content: Doctorate Alumni Database model.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this model is to create a document object model for doctorate alumni to the database.
+/**
+ * Doctorate Alumni Database Model
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This model defines the schema and structure for the doctorate alumni
+ * document in the CBS Research Group's database. It is responsible for
+ * creating and managing records of doctorate alumni, including fields
+ * for their academic achievements, research contributions, and contact information.
+ *
+ * Usage:
+ * Use this model to interact with the doctorate alumni data in the database.
+ * It supports operations like creating, reading, updating, and deleting
+ * alumni records, facilitating efficient management of alumni information.
+ */
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");

@@ -1,8 +1,25 @@
-// Content: See Register As Admin Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 22/08/2024
-// Details: Role of this controller is to get message of willing user of become admin
+/**
+ * See Register As Admin Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 22/08/2024
+ *
+ * Description:
+ * This controller handles the process of retrieving and viewing requests
+ * from users who wish to become admin users of CBS Research Group. It
+ * manages the retrieval of these registration requests from the system.
+ *
+ * Functionality:
+ * - Processes requests to view admin registration requests.
+ * - Retrieves details of users who have applied to become admin users.
+ * - Provides the necessary information for further review or action.
+ * - Handles errors and provides appropriate responses.
+ *
+ * Usage:
+ * Use this controller to manage the viewing and retrieval of admin
+ * registration requests. It ensures that the system can effectively
+ * review and process user requests to become admins.
+ */
 
 const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
 const getAdminRegisterRequestCtrl = async (req, res) => {

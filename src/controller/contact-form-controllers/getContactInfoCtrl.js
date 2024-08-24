@@ -1,8 +1,23 @@
-// Content: Get Contact Info From Admin Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 16/08/2024
-// Details: Role of this controller is to send all contact form info by request of admin.
+/**
+ * Get Contact Info From Admin Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 16/08/2024
+ *
+ * Description:
+ * This controller handles requests to retrieve all contact form information.
+ * It provides the requested contact info to the admin who has made the request.
+ *
+ * Functionality:
+ * - Processes requests from admins to fetch contact form information.
+ * - Retrieves all relevant contact form data from the database.
+ * - Ensures that the admin requesting the information has the appropriate permissions.
+ * - Returns the contact info data to the admin in response to their request.
+ *
+ * Usage:
+ * Use this controller to provide admins with access to all contact form submissions
+ * when they request it. It ensures that only authorized admins can access the contact info.
+ */
 
 const contactFormModel = require("../../models/contact-form-model/contactFormModel");
 

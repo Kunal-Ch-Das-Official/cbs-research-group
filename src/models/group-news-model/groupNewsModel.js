@@ -1,8 +1,20 @@
-// Content: Group News Database model.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 18/08/2024
-// Details: Role of this model is to create a document object model for group news to the database.
+/**
+ * Group News Database Model
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 18/08/2024
+ *
+ * Description:
+ * This model defines the schema and structure for the group news
+ * documents in the CBS Research Group's database. It is responsible
+ * for creating and managing records of group news, including fields for
+ * news content, publication date, and related information.
+ *
+ * Usage:
+ * Use this model to interact with group news data in the database.
+ * It supports operations like creating, reading, updating, and deleting
+ * news records, ensuring efficient management of group news information.
+ */
 
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");

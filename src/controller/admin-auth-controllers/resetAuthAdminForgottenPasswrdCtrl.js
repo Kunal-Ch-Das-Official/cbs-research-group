@@ -1,8 +1,26 @@
-// Content: Reset Admin User Password Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details: Role of this controller is for password reset of admin user.
+/**
+ * Reset Admin User Password Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This controller handles the process of resetting passwords for admin
+ * users of CBS Research Group. It manages password reset requests and
+ * updates the user's password securely.
+ *
+ * Functionality:
+ * - Processes password reset requests for admin users.
+ * - Validates the reset request, including user identification and
+ *   reset token.
+ * - Handles the secure updating of the user's password.
+ * - Provides appropriate responses for successful and failed password
+ *   reset attempts.
+ *
+ * Usage:
+ * Use this controller to manage password reset operations for admin users.
+ * It ensures that password resets are handled securely and efficiently.
+ */
 
 const { jwtSecretKey } = require("../../config/envConfig");
 const bcrypt = require("bcrypt");

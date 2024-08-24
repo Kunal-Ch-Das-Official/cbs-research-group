@@ -1,8 +1,26 @@
-// Content: Delete Specific MSC Members Info By Client Request Operations Handler.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 17/08/2024
-// Details: Role of this controller is to delete single msc members data from database by client request .
+/**
+ * Delete Specific MSC Members Info By Client Request Operations Handler
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 17/08/2024
+ *
+ * Description:
+ * This controller handles the deletion of a specific MSC member's data from the
+ * database based on a client request. It ensures that the correct record is
+ * removed in response to a valid deletion request.
+ *
+ * Functionality:
+ * - Receives a delete request for a specific MSC member from the client.
+ * - Validates the request to ensure it contains the necessary identification
+ *   information for the MSC member.
+ * - Removes the specified MSC member's record from the database.
+ * - Handles any errors that occur during the deletion process and provides feedback.
+ *
+ * Usage:
+ * Use this controller to delete individual MSC members' records from the database.
+ * This is essential for maintaining accurate and up-to-date information in response
+ * to client requests for data removal.
+ */
 
 const {
   clearCache,

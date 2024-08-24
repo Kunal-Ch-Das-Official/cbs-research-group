@@ -1,8 +1,19 @@
-// Content: Nodemailer configuration.
-// Project: CBS-Research-Group-Backend
-// Author: Kunal Chandra Das.
-// Date: 20/08/2024
-// Details:
+/**
+ * Send Response to Contact User
+ * Project: CBS-Research-Group-Backend
+ * Author: Kunal Chandra Das
+ * Date: 20/08/2024
+ *
+ * Description:
+ * This function handles sending a response to individuals who have
+ * submitted inquiries through the contact form. It manages the process
+ * of composing and sending an appropriate reply to the contact us person.
+ *
+ * Usage:
+ * Use this function to respond to contact form submissions. It ensures
+ * that inquiries are addressed promptly and efficiently, providing
+ * necessary information or acknowledgments to the inquirer.
+ */
 
 const nodemailer = require("nodemailer");
 const {
