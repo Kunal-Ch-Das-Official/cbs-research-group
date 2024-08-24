@@ -81,7 +81,6 @@ const uploadLabInstrumentCtrl = async (req, res) => {
       filePath && cleanupFile(filePath);
       labInstrumentImgPublicId &&
         (await customSingleDestroyer(labInstrumentImgPublicId));
-      console.log("Unable to upload requested resources due to:", error);
       return res.status(500).json({
         Error: error.message,
         Details:

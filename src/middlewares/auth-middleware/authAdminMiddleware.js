@@ -36,9 +36,6 @@ const checkAdminAuth = async (req, res, next) => {
         .select("-adminUserPassword");
       next();
     } catch (error) {
-      console.log(
-        `Unable to execute checkAdminAuth middleware due to:${error}`
-      );
       return res.status(500).json({
         Error: error.message,
         Message: "Authorization failed.",

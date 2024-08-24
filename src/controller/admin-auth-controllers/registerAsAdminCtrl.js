@@ -114,7 +114,6 @@ const registerAsAdminCtrl = async (req, res) => {
     }
     // If there are any problem to execute this code then run this block
   } catch (error) {
-    console.log(`Internal server error cause: ${error}`);
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to process due to some technical error!",

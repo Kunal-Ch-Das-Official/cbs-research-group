@@ -68,10 +68,6 @@ const updateGroupNewsCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(
-      "Unable to update group news due to some internal server error!",
-      error
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to update group news due to some technical error",

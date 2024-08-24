@@ -86,9 +86,6 @@ const loginAsAdminCtrl = async (req, res) => {
     }
     // If there are any error in this code then this will executed
   } catch (error) {
-    console.log(
-      `Unable to login due to some internal server error. cause:${error}`
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to proceed login process due to some technical error!",

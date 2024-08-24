@@ -65,9 +65,6 @@ const changeAuthAdminPasswordCtrl = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(
-      `Unable to change password due to internal server error. Cause:${error}`
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to change the password due to some technical error.",

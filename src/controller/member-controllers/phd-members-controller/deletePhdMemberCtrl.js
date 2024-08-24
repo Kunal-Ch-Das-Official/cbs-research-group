@@ -64,7 +64,6 @@ const deletePhdMemberCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log("There is some technical error occared!", error);
     return res.status(500).json({
       Error: error,
       Message: `Unable to remove phd members info due to:${error.message}`,

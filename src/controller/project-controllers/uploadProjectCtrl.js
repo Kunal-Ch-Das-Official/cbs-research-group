@@ -57,7 +57,6 @@ const uploadProjectCtrl = async (req, res) => {
         });
       }
     } catch (error) {
-      console.log(`Unable to upload this data due to:${error}`);
       return res.status(500).json({
         Error: error.message,
         Message:

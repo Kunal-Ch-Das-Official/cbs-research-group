@@ -74,10 +74,6 @@ const updateProjectCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(
-      "Unable to update project due to some internal server error!",
-      error
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to update project due to some technical error",

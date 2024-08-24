@@ -56,10 +56,6 @@ const deletePersonalAwardsCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(
-      "Unable to delete personal awards due to some internal server error",
-      error
-    );
     return res.status(500).json({
       Error: error.message,
       Message:

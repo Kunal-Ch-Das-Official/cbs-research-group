@@ -38,10 +38,6 @@ const getMastersAlumniCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getSingleMastersAlumniInfo);
       }
     } catch (error) {
-      console.log(
-        "Unable to find masters alumni info due to some technical error:",
-        error
-      );
       return res.status(500).sendCachedData({
         message:
           "Unable to find masters alumni info due to some technical error",
@@ -59,10 +55,6 @@ const getMastersAlumniCtrl = async (req, res) => {
         return res.status(200).json(getAllMastersAlumniInfo);
       }
     } catch (error) {
-      console.log(
-        "Unable to find masters alumni info due to some technical error:",
-        error
-      );
       return res.status(500).json({
         message:
           "Unable to find masters alumni info due to some technical error",

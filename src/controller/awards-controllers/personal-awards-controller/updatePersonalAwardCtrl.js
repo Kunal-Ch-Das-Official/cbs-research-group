@@ -72,10 +72,6 @@ const updatePersonalAwardCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(
-      "Unable to update personal award due to some internal server error!",
-      error
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to update personal awards due to some technical error!",

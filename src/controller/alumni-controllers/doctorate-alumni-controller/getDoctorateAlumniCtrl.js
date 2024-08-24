@@ -39,7 +39,6 @@ const getDoctorateAlumniCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getSingleAlumniInfo);
       }
     } catch (error) {
-      console.log(`Unable to get the resources due to:${error}`);
       return res.status(500).json({
         Message: "Unable to find the resources due to some technical error",
         Error: error.message,
@@ -57,7 +56,6 @@ const getDoctorateAlumniCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getAllDoctorateAlumniInfo);
       }
     } catch (error) {
-      console.log(`Unable to get the resources due to:${error}`);
       return res.status(500).json({
         Message: "Unable to find the resources due to some technical error",
         Error: error.message,

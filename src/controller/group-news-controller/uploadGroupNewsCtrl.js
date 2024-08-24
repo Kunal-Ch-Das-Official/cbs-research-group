@@ -49,7 +49,6 @@ const uploadGroupNewsCtrl = async (req, res) => {
         });
       }
     } catch (error) {
-      console.log(`Unable to upload this data due to:${error}`);
       return res.status(500).json({
         Error: error.message,
         Message: "Unable to upload group news due to some technical error!",

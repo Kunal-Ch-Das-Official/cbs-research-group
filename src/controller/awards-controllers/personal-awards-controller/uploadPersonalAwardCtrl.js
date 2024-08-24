@@ -54,7 +54,6 @@ const uploadPersonalAwardsCtrl = async (req, res) => {
         });
       }
     } catch (error) {
-      console.log("Unable to upload due to internal server error!", error);
       return res.status(500).json({
         Error: error.message,
         Message:

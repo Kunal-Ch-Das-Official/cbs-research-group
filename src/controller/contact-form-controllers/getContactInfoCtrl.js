@@ -35,10 +35,6 @@ const getContactInfoCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getRequestedContactInfo);
       }
     } catch (error) {
-      console.log(
-        "Unable to get requested resources due to internal server error",
-        error
-      );
       return res.status(500).json({
         Error: error.message,
         Message: "Unable to get requested resources to some technical error",
@@ -55,10 +51,6 @@ const getContactInfoCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getAllRequestedContactInfo);
       }
     } catch (error) {
-      console.log(
-        "Unable to get requested resources to some internal server error",
-        error
-      );
       return res.status(500).json({
         Error: error.message,
         Message: "Unable to get requested resources to some technical error!",

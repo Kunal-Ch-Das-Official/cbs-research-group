@@ -56,10 +56,6 @@ const deleteProjectCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(
-      "Unable to delete project due to internal server error.",
-      error
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to delete project due to some technical error.",

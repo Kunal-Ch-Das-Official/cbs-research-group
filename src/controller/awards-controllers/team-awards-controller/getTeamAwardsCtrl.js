@@ -38,10 +38,6 @@ const getTeamAwardsCtrl = async (req, res) => {
         res.status(200).sendCachedData(getRequestedTeamAward);
       }
     } catch (error) {
-      console.log(
-        "Unable to get requested team awards due to internal server error",
-        error
-      );
       res.status(500).json({
         Error: error.message,
         Message: "Unable to get team awards news due to some technical error",
@@ -59,10 +55,6 @@ const getTeamAwardsCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getAllTeamAwards);
       }
     } catch (error) {
-      console.log(
-        "Unable to get team awards due to internal server error",
-        error
-      );
       return res.status(500).json({
         Error: error.message,
         Message: "Unable to get the team awards due to some technical error!",

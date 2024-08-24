@@ -63,7 +63,6 @@ const deleteMastersAlumniCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       message:
         "Unable to remove requested resources due to some technical error!",

@@ -55,10 +55,6 @@ const deleteContactInfoCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(
-      "Unable to delete group news due to internal server error.",
-      error
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to delete group news due to some technical error.",

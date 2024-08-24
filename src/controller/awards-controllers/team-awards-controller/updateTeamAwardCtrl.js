@@ -72,10 +72,6 @@ const updateTeamAwardCtrl = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(
-      "Unable to update teams award due to some internal server error!",
-      error
-    );
     return res.status(500).json({
       Error: error.message,
       Message: "Unable to update teams awards due to some technical error!",

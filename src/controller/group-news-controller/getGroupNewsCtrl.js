@@ -35,10 +35,6 @@ const getGroupNewsCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getRequestedGroupNews);
       }
     } catch (error) {
-      console.log(
-        "Unable to get requested group news due to internal server error",
-        error
-      );
       return res.status(500).json({
         Error: error.message,
         Message: "Unable to get single group news due to some technical error",
@@ -56,10 +52,6 @@ const getGroupNewsCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getAllGroupNews);
       }
     } catch (error) {
-      console.log(
-        "Unable to get group news due to internal server error",
-        error
-      );
       return res.status(500).json({
         Error: error.message,
         Message: "Unable to get the group news due to some technical error!",

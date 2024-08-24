@@ -95,7 +95,6 @@ const uploadMscMemberCtrl = async (req, res) => {
     } catch (error) {
       filePath && cleanupFile(filePath);
       profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
-      console.log("Unable to upload requested resources due to:", error);
       return res.status(500).json({
         Error: error.message,
         Details:

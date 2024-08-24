@@ -37,10 +37,6 @@ const getPersonalAwardsCtrl = async (req, res) => {
         res.status(200).sendCachedData(getRequestedPersonalAward);
       }
     } catch (error) {
-      console.log(
-        "Unable to get requested personal awards due to internal server error",
-        error
-      );
       res.status(500).json({
         Error: error.message,
         Message:
@@ -59,10 +55,6 @@ const getPersonalAwardsCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getAllPersonalAwards);
       }
     } catch (error) {
-      console.log(
-        "Unable to get personal awards due to internal server error",
-        error
-      );
       return res.status(500).json({
         Error: error.message,
         Message:

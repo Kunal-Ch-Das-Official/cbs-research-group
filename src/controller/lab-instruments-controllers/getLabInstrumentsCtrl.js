@@ -38,7 +38,6 @@ const getLabInstrumentsCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getSingleInstrumentInfo);
       }
     } catch (error) {
-      console.log("There is some technical error occared!", error);
       return res.status(500).json({
         Error: error.message,
         Message: `Unable to find phd member info due to:${error.message}`,
@@ -55,7 +54,6 @@ const getLabInstrumentsCtrl = async (req, res) => {
         return res.status(200).sendCachedData(getAllInstrumentsInfo);
       }
     } catch (error) {
-      console.log("There is some technical error occared!", error);
       return res.status(500).json({
         Error: error.message,
         Message: `Unable to find phd members info due to:${error.message}`,
