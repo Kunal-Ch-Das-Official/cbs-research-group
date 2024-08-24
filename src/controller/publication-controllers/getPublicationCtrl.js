@@ -17,7 +17,7 @@ const getPublicationCtrl = async (req, res) => {
           message: "Please check the details before you search",
         });
       } else {
-        return res.status(200).json(getSinglePublication);
+        return res.status(200).sendCachedData(getSinglePublication);
       }
     } else {
       const getAllPublication = await publicationModel.find();
@@ -27,7 +27,7 @@ const getPublicationCtrl = async (req, res) => {
           message: "Need to upload publication.",
         });
       } else {
-        return res.status(200).json(getAllPublication);
+        return res.status(200).sendCachedData(getAllPublication);
       }
     }
   } catch (error) {

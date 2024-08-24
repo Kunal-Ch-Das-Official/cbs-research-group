@@ -4,6 +4,9 @@
 // Date: 23/08/2024
 // Details: Role of this controller is to upload project details to the data base.
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const publicationModel = require("../../models/publication-model/publicationModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -84,6 +87,9 @@ const uploadPublicationCtrl = async (req, res) => {
           publicationImages.forEach((file) => {
             cleanupFile(file);
           });
+          clearCache(
+            "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
+          );
           return res.status(201).json({
             message: "Publication has been successfully uploaded.",
           });

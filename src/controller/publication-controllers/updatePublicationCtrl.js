@@ -4,6 +4,9 @@
 // Date: 23/08/2024
 // Details: Role of this controller is to upload project details to the database.
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const publicationModel = require("../../models/publication-model/publicationModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -60,14 +63,20 @@ const updatePublicationCtrl = async (req, res) => {
 
     if (!updatedPublication) {
       return res.status(404).send("Publication not found");
+    } else {
+      clearCache(
+        "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
+      );
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info/${req.params.id}`
+      );
+      return res.status(200).json({
+        status: 200,
+        message: "Publication has been updated successfully!",
+      });
     }
-
-    res.status(200).json({
-      status: 200,
-      message: "Publication has been updated successfully!",
-    });
   } catch (error) {
-    res.status(500).send(`Technical error: ${error.message}`);
+    return res.status(500).send(`Technical error: ${error.message}`);
   }
 };
 

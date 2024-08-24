@@ -4,6 +4,9 @@
 // Date: 23/08/2024
 // Details: Role of this controller is to upload project details to the data base.
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const publicationModel = require("../../models/publication-model/publicationModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
@@ -39,6 +42,12 @@ const deletePublicationCtrl = async (req, res) => {
           message: "Please try again later.",
         });
       } else {
+        clearCache(
+          "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info/${req.params.id}`
+        );
         return res.status(200).json({
           message: "Publication has been successfully removed.",
         });
