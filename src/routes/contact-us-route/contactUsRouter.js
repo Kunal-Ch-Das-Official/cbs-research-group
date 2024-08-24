@@ -28,17 +28,17 @@ const {
 
 const contactFormRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post contact form router
 contactFormRouter.post("/information", uploadContactInfoCtrl);
 
-// Declaration Of Send Resopnse To Contact User Route Segment:
+// Send coresponding email response of contact query router
 contactFormRouter.post(
   "/response-mail/:id",
   checkAdminAuth,
   sendContactPersonResponseCtrl
 );
 
-// Declaration Of Get All Route Segment:
+// Get all contact information router
 contactFormRouter.get(
   "/information",
   checkAdminAuth,
@@ -46,7 +46,7 @@ contactFormRouter.get(
   getContactInfoCtrl
 );
 
-// Declaration Of Get Single Route Segment:
+// Get single contact information router
 contactFormRouter.get(
   "/information/:id",
   checkAdminAuth,
@@ -54,7 +54,7 @@ contactFormRouter.get(
   getContactInfoCtrl
 );
 
-// Declaration Of Delete Route Segment:
+// Delete specific contact message router
 contactFormRouter.delete(
   "/information/:id",
   checkAdminAuth,

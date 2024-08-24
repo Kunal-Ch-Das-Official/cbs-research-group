@@ -27,24 +27,29 @@ const resetForgottenPassword = require("../../controller/admin-auth-controllers/
 
 const admiAuthenticationRouter = express.Router();
 
-// Auth middleware register
-admiAuthenticationRouter.use("/change-password", checkAdminAuth);
-admiAuthenticationRouter.use("/logged-in-admin", checkAdminAuth);
-// Protected Routes
-admiAuthenticationRouter.post("/register", registerAsAdminCtrl);
-admiAuthenticationRouter.post("/change-password", changeAuthAdminPasswordCtrl);
+// Declaration of Auth middleware //
+admiAuthenticationRouter.use("/change-password", checkAdminAuth); // Change password auth check
+admiAuthenticationRouter.use("/logged-in-admin", checkAdminAuth); // logged in admin auth check
+// Protected Routers//
+admiAuthenticationRouter.post("/register", registerAsAdminCtrl); // Admin registration router
+admiAuthenticationRouter.post("/change-password", changeAuthAdminPasswordCtrl); // Chandge password router
+
+// Current Logged in admin router
 admiAuthenticationRouter.get(
   "/logged-in-admin",
   getCurrentLoggedInAdminUserCtrl
 );
 
-// Public Routes
-admiAuthenticationRouter.post("/login", loginAsAdminCtrl);
+// Public Routers //
+admiAuthenticationRouter.post("/login", loginAsAdminCtrl); // Login as admin router
 
+// Send forget password link router
 admiAuthenticationRouter.post(
   "/send-reset-password-link",
   sendResetPasswordEmailCtrl
 );
+
+// Reset forgotten password router
 admiAuthenticationRouter.post(
   "/reset-password/:id/:token",
   resetForgottenPassword

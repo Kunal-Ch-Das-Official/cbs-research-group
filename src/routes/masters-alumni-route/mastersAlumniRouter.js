@@ -30,7 +30,7 @@ const {
 // Use Express As Router //
 const mastersAlumniRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post new master alumni data router
 mastersAlumniRouter.post(
   "/alumni-data",
   checkAdminAuth,
@@ -38,7 +38,7 @@ mastersAlumniRouter.post(
   uploadMastersAlumniCtrl
 );
 
-// Declaration Of Update Route Segment:
+// Update master alumni data router
 mastersAlumniRouter.patch(
   "/alumni-data/:id",
   checkAdminAuth,
@@ -46,17 +46,17 @@ mastersAlumniRouter.patch(
   updateMastersAlumniCtrl
 );
 
-// Declaration Of Get All Alumni Data Route Segment:
+// Get all master alumni data router
 mastersAlumniRouter.get("/alumni-data", cacheMiddleware, getMastersAlumniCtrl);
 
-// Declaration Of Get Single Data Route Segment:
+// Get single master alumni data router
 mastersAlumniRouter.get(
   "/alumni-data/:id",
   cacheMiddleware,
   getMastersAlumniCtrl
 );
 
-// Declaration Of Delete Route Segment:
+// Delete specific master alumni data router
 mastersAlumniRouter.delete(
   "/alumni-data/:id",
   checkAdminAuth,

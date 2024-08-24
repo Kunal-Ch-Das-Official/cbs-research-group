@@ -28,19 +28,19 @@ const {
 
 const projectsRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post project router
 projectsRouter.post("/projects", checkAdminAuth, uploadProjectCtrl);
 
-// Declaration Of Update Route Segment:
+// Update project router
 projectsRouter.patch("/projects/:id", checkAdminAuth, updateProjectCtrl);
 
-// Declaration Of Get All Route Segment:
+// Get all project router
 projectsRouter.get("/projects", cacheMiddleware, getProjectsCtrl);
 
-// Declaration Of Get Single Route Segment:
+// Get single project router
 projectsRouter.get("/projects/:id", cacheMiddleware, getProjectsCtrl);
 
-// Declaration Of Delete Route Segment:
+// Delete specific project router
 projectsRouter.delete("/projects/:id", checkAdminAuth, deleteProjectCtrl);
 
 module.exports = projectsRouter;

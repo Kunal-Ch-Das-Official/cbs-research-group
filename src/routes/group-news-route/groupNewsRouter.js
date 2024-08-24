@@ -27,19 +27,19 @@ const {
 
 const groupNewsRouter = express.Router();
 
-// Declaration Of Post Group News Data Route Segment:
+// Post new group news router
 groupNewsRouter.post("/groups", checkAdminAuth, uploadGroupNewsCtrl);
 
-// Declaration Of Update Existing Group News Data Route Segment:
+//  Update group news router
 groupNewsRouter.patch("/groups/:id", checkAdminAuth, updateGroupNewsCtrl);
 
-// Declaration Of Get All Group News Data Route Segment:
+// Get all  group news router
 groupNewsRouter.get("/groups", cacheMiddleware, getGroupNewsCtrl);
 
-// Declaration Of Get Single Group News Data Route Segment:
+// Get single  group news router
 groupNewsRouter.get("/groups/:id", cacheMiddleware, getGroupNewsCtrl);
 
-// Declaration Of Delete Existing Group News Data Route Segment:
+// Delete group news router
 groupNewsRouter.delete("/groups/:id", checkAdminAuth, deleteGroupNewsCtrl);
 
 module.exports = groupNewsRouter;

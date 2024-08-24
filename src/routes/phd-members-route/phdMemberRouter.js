@@ -29,7 +29,7 @@ const {
 
 const phdMembersRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post phd members info router
 phdMembersRouter.post(
   "/members",
   checkAdminAuth,
@@ -37,7 +37,7 @@ phdMembersRouter.post(
   uploadPhdMemberCtrl
 );
 
-// Declaration Of Update Route Segment:
+// Update phd members info router
 phdMembersRouter.patch(
   "/members/:id",
   checkAdminAuth,
@@ -45,13 +45,13 @@ phdMembersRouter.patch(
   updatePhdMemberCtrl
 );
 
-// Declaration Of Get All Route Segment:
+// Get all phd members info router
 phdMembersRouter.get("/members", cacheMiddleware, getPhdMembersCtrl);
 
-// Declaration Of Get Single Route Segment:
+// Get individual phd members info router
 phdMembersRouter.get("/members/:id", cacheMiddleware, getPhdMembersCtrl);
 
-// Declaration Of Delete Route Segment:
+// Delete specific phd members info router
 phdMembersRouter.delete("/members/:id", checkAdminAuth, deletePhdMemberCtrl);
 
 module.exports = phdMembersRouter;

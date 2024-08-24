@@ -36,8 +36,8 @@ const postRegisterAsAdminRequestCtrl = async (req, res) => {
       const getCurrentAdminInfo = await authAdminUserModel.findOne({
         adminUserEmail: reqUserEmail,
       });
-      if (getCurrentAdminInfo) {
-        res.status(400).json({
+      if (!getCurrentAdminInfo) {
+        return res.status(400).json({
           error: "Bad Request!",
           message: "Admin user already exist.",
         });
@@ -64,13 +64,13 @@ const postRegisterAsAdminRequestCtrl = async (req, res) => {
         }
       }
     } else {
-      res.status(400).json({
+      return res.status(400).json({
         error: "Bad Request!",
         message: "All fields are require.",
       });
     }
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       Error: error.message,
       Message: "Unable to send the request due to some technical error",
     });

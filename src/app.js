@@ -42,7 +42,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Handle base Routes //
+// Handle base routes //
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "Welcome to (CBS-Research-Group) Server",
@@ -55,79 +55,79 @@ app.get("/", (req, res) => {
   });
 });
 
-// Regiaster Admin authentication routes
+// Register Admin Authentication Endpoint
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin",
   admiAuthenticationRouter
 );
 
-// Regiaster Masters Alumni Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters",
-  mastersAlumniRouter
-);
-
-// Regiaster Doctorate Alumni Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate",
-  doctorateAlumniRouter
-);
-
-// Regiaster PHD Members Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd",
-  phdMembersRouter
-);
-
-// Regiaster MSC Members Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc",
-  mscMembersRouter
-);
-
-// Regiaster Group News Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news",
-  groupNewsRouter
-);
-
-// Regiaster Personal Awards Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal",
-  personalAwardsRouter
-);
-
-// Regiaster Team Awards Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team",
-  teamAwardsRouter
-);
-
-// Regiaster Lab Instruments Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities",
-  labInstrumentsRouter
-);
-
-// Regiaster Contact Form Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us",
-  contactFormRouter
-);
-
-// Regiaster Projects Routes
-app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs",
-  projectsRouter
-);
-
-// Regiaster be admin request Routes
+// Register be admin request Endpoints
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request",
   adminRegistrationReqRouter
 );
 
-// Regiaster  Publication Routes
+// Register Contact Form Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us",
+  contactFormRouter
+);
+
+// Register Doctorate Alumni Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate",
+  doctorateAlumniRouter
+);
+
+// Register Group News Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news",
+  groupNewsRouter
+);
+
+// Register Lab Instruments Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities",
+  labInstrumentsRouter
+);
+
+// Register Masters Alumni Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters",
+  mastersAlumniRouter
+);
+
+// Register MSC Members Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc",
+  mscMembersRouter
+);
+
+Endpoints;
+// Register PHD Members Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd",
+  phdMembersRouter
+);
+
+// Register Personal Awards Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal",
+  personalAwardsRouter
+);
+
+// Register Projects Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs",
+  projectsRouter
+);
+// Register Team Awards Endpoints
+app.use(
+  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team",
+  teamAwardsRouter
+);
+
+// Register Publication Endpoints
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication",
   publicationRouter

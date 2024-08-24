@@ -29,27 +29,30 @@ const {
 
 const adminRegistrationReqRouter = express.Router();
 
-adminRegistrationReqRouter.post("/admin", postRegisterAsAdminRequestCtrl);
+adminRegistrationReqRouter.post("/admin", postRegisterAsAdminRequestCtrl); // Post desire to be admin form router
 
+// Admin request accept email router
 adminRegistrationReqRouter.post(
   "/admin-accept/:id",
   checkAdminAuth,
   sendAcceptedResponseOfAdminRequestUserCtrl
 );
 
+// Admin request rejected router
 adminRegistrationReqRouter.post(
   "/admin-denied/:id",
-
   checkAdminAuth,
   sendDeniedResponseOfAdminRequestUserCtrl
 );
 
+// Delete request to be admin message router
 adminRegistrationReqRouter.delete(
   "/admin/:id",
   checkAdminAuth,
   deleteAdminRegisterRequestMessage
 );
 
+// Get single desire to be admin request message router
 adminRegistrationReqRouter.get(
   "/admin/:id",
   checkAdminAuth,
@@ -57,6 +60,7 @@ adminRegistrationReqRouter.get(
   getAdminRegisterRequestCtrl
 );
 
+// Get all desire to be admin request message router
 adminRegistrationReqRouter.get(
   "/admin",
   checkAdminAuth,

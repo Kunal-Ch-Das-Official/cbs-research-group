@@ -30,23 +30,23 @@ const {
 
 const personalAwardsRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post chinmoy bhattacharya' s personal awards info router
 personalAwardsRouter.post("/awards", checkAdminAuth, uploadPersonalAwardsCtrl);
 
-// Declaration Of Update Route Segment:
+// Update chinmoy bhattacharya' s personal awards info router
 personalAwardsRouter.patch(
   "/awards/:id",
   checkAdminAuth,
   updatePersonalAwardCtrl
 );
 
-// Declaration Of Get All Route Segment:
+// Get all chinmoy bhattacharya' s personal awards info router
 personalAwardsRouter.get("/awards", cacheMiddleware, getPersonalAwardsCtrl);
 
-// Declaration Of Get Single Route Segment:
+// Get one by one chinmoy bhattacharya' s personal awards info router
 personalAwardsRouter.get("/awards/:id", cacheMiddleware, getPersonalAwardsCtrl);
 
-// Declaration Of Delete Route Segment:
+// Delete specific chinmoy bhattacharya' s personal awards info router
 personalAwardsRouter.delete(
   "/awards/:id",
   checkAdminAuth,

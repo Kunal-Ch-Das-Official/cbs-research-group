@@ -29,14 +29,14 @@ const {
 
 const mscMembersRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post new msc members information router
 mscMembersRouter.post(
   "/members",
   checkAdminAuth,
   multerLocalFileUploader.single("profilePicture"),
   uploadMscMemberCtrl
 );
-// Declaration Of Update Route Segment:
+//Update msc members information router
 mscMembersRouter.patch(
   "/members/:id",
   checkAdminAuth,
@@ -44,13 +44,13 @@ mscMembersRouter.patch(
   updateMscMemberCtrl
 );
 
-// Declaration Of Get All Route Segment:
+// Get all msc members information router
 mscMembersRouter.get("/members", cacheMiddleware, getMscMembersCtrl);
 
-// Declaration Of Get Single Route Segment:
+// Get single msc members information router
 mscMembersRouter.get("/members/:id", cacheMiddleware, getMscMembersCtrl);
 
-// Declaration Of Delete Route Segment:
+// Delete specific msc members information router
 mscMembersRouter.delete("/members/:id", checkAdminAuth, deleteMscMemberCtrl);
 
 module.exports = mscMembersRouter;

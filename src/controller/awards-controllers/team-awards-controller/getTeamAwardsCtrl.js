@@ -30,15 +30,15 @@ const getTeamAwardsCtrl = async (req, res) => {
     try {
       const getRequestedTeamAward = await teamAwardsModel.findById(id);
       if (!getRequestedTeamAward) {
-        res.status(404).json({
+        return res.status(404).json({
           error: "Requested team awards are not found!",
           message: "Please check the details!",
         });
       } else {
-        res.status(200).sendCachedData(getRequestedTeamAward);
+        return res.status(200).sendCachedData(getRequestedTeamAward);
       }
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         Error: error.message,
         Message: "Unable to get team awards news due to some technical error",
       });

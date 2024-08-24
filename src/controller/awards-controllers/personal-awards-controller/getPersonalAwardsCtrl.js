@@ -29,15 +29,15 @@ const getPersonalAwardsCtrl = async (req, res) => {
     try {
       const getRequestedPersonalAward = await personalAwardsModel.findById(id);
       if (!getRequestedPersonalAward) {
-        res.status(404).json({
+        return res.status(404).json({
           error: "Requested personal awards are not found!",
           message: "Please check the details!",
         });
       } else {
-        res.status(200).sendCachedData(getRequestedPersonalAward);
+        return res.status(200).sendCachedData(getRequestedPersonalAward);
       }
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         Error: error.message,
         Message:
           "Unable to get personal awards news due to some technical error",

@@ -28,19 +28,19 @@ const {
 
 const teamAwardsRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post team award information router
 teamAwardsRouter.post("/awards", checkAdminAuth, uploadTeamAwardCtrl);
 
-// Declaration Of Update Route Segment:
+// Update team award information router
 teamAwardsRouter.patch("/awards/:id", checkAdminAuth, updateTeamAwardCtrl);
 
-// Declaration Of Get All Route Segment:
+// Get all team award information router
 teamAwardsRouter.get("/awards", cacheMiddleware, getTeamAwardsCtrl);
 
-// Declaration Of Get Single Route Segment:
+// Get single team award information router
 teamAwardsRouter.get("/awards/:id", cacheMiddleware, getTeamAwardsCtrl);
 
-// Declaration Of Delete Route Segment:
+// Delete specific team award information router
 teamAwardsRouter.delete("/awards/:id", checkAdminAuth, deleteTeamAwardCtrl);
 
 module.exports = teamAwardsRouter;

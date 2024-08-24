@@ -30,12 +30,14 @@ const {
 
 const publicationRouter = express.Router();
 
+// Gather all file which are going to be uploaded on cloud
 const publicationCorsImage = multerLocalFileUploader.fields([
   { name: "publicationThumbnail", maxCount: 1 },
   { name: "firstOverview", maxCount: 1 },
   { name: "secondOverview", maxCount: 1 },
 ]);
 
+// Post publication router
 publicationRouter.post(
   "/about-info",
   checkAdminAuth,
@@ -43,15 +45,19 @@ publicationRouter.post(
   uploadPublicationCtrl
 );
 
+// Update publication router
 publicationRouter.patch(
   "/about-info/:id",
   checkAdminAuth,
   publicationCorsImage,
   updatePublicationCtrl
 );
+// Get all publication router
 publicationRouter.get("/about-info", cacheMiddleware, getPublicationCtrl);
+// Get single publication router
 publicationRouter.get("/about-info/:id", cacheMiddleware, getPublicationCtrl);
 
+// Delete specific publication router
 publicationRouter.delete(
   "/about-info/:id",
   checkAdminAuth,

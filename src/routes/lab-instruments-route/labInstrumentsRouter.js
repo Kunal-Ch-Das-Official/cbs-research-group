@@ -29,7 +29,7 @@ const {
 
 const labInstrumentsRouter = express.Router();
 
-// Declaration Of Upload Route Segment:
+// Post lab instrument router
 labInstrumentsRouter.post(
   "/lab-instruments",
   checkAdminAuth,
@@ -37,7 +37,7 @@ labInstrumentsRouter.post(
   uploadLabInstrumentCtrl
 );
 
-// Declaration Of Update Route Segment:
+// Update lab instrument router
 labInstrumentsRouter.patch(
   "/lab-instruments/:id",
   checkAdminAuth,
@@ -45,21 +45,21 @@ labInstrumentsRouter.patch(
   updateLabInstrumentCtrl
 );
 
-// Declaration Of Get All Route Segment:
+// Get all lab instrument router
 labInstrumentsRouter.get(
   "/lab-instruments",
   cacheMiddleware,
   getLabInstrumentsCtrl
 );
 
-// Declaration Of Get Single Route Segment:
+// Get single lab instrument router
 labInstrumentsRouter.get(
   "/lab-instruments/:id",
   cacheMiddleware,
   getLabInstrumentsCtrl
 );
 
-// Declaration Of Delete Route Segment:
+// Delete specific lab instrument router
 labInstrumentsRouter.delete(
   "/lab-instruments/:id",
   checkAdminAuth,
