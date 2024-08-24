@@ -4,6 +4,9 @@
 // Date: 18/08/2024
 // Details: Role of this controller is to delete single project by client request .
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const projectModel = require("../../models/projects-model/projectModel");
 
 const deleteProjectCtrl = async (req, res) => {
@@ -23,6 +26,12 @@ const deleteProjectCtrl = async (req, res) => {
           message: "Please try after some time.",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs/projects`
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs/projects/${id}`
+        );
         return res.status(200).json({
           message: "Requested project has been successfully removed!",
         });

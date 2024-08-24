@@ -4,6 +4,9 @@
 // Date: 21/08/2024
 // Details: Role of this controller is to handle message of willing user of become admin
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
 const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
 
@@ -33,6 +36,9 @@ const postRegisterAsAdminRequestCtrl = async (req, res) => {
               "Unable to send request due to some technical error. Try again later",
           });
         } else {
+          clearCache(
+            `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request/admin`
+          );
           return res.status(201).json({
             message: "Request has been successfully send",
           });

@@ -27,9 +27,4 @@ function clearCache(key) {
   cache.del(key);
 }
 
-// Function to clear the entire cache
-function clearAllCache() {
-  cache.flushAll();
-}
-
-module.exports = { cacheMiddleware, clearCache, clearAllCache };
+module.exports = { cacheMiddleware, clearCache };

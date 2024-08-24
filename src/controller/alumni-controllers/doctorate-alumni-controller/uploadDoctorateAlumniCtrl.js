@@ -4,6 +4,9 @@
 // Date: 15/08/2024
 // Details: Role of this controller is to upload individual doctorate alumni data to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -65,6 +68,9 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
         });
       } else {
         filePath && cleanupFile(filePath);
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate/alumni-data`
+        );
         return res.status(201).json({
           message:
             "Doctorate alumni informations has been successfully uploaded!",

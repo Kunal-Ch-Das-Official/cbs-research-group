@@ -16,14 +16,14 @@ const getMastersAlumniCtrl = async (req, res) => {
           error: "Masters alumni are not found please check the details!",
         });
       } else {
-        return res.status(200).json(getSingleMastersAlumniInfo);
+        return res.status(200).sendCachedData(getSingleMastersAlumniInfo);
       }
     } catch (error) {
       console.log(
         "Unable to find masters alumni info due to some technical error:",
         error
       );
-      return res.status(500).json({
+      return res.status(500).sendCachedData({
         message:
           "Unable to find masters alumni info due to some technical error",
         reason: error.message,

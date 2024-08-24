@@ -8,6 +8,9 @@ const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-
 const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 
 const uploadMastersAlumniCtrl = async (req, res) => {
   let profileImageUrl;
@@ -62,6 +65,9 @@ const uploadMastersAlumniCtrl = async (req, res) => {
         });
       } else {
         filePath && cleanupFile(filePath);
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters/alumni-data`
+        );
         return res.status(201).json({
           message: "Masters alumni information has been successfully uploaded!",
         });

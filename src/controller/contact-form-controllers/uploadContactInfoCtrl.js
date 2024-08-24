@@ -4,6 +4,9 @@
 // Date: 19/08/2024
 // Details: Role of this controller is to upload contact form details to the data base.
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const contactFormModel = require("../../models/contact-form-model/contactFormModel");
 
 const uploadContactInfoCtrl = async (req, res) => {
@@ -29,6 +32,9 @@ const uploadContactInfoCtrl = async (req, res) => {
           message: "Please try it after some time",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us/information`
+        );
         return res.status(201).json({
           message: "Contact form has been successfully uploaded!",
         });

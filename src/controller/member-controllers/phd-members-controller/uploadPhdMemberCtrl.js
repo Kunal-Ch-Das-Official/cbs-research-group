@@ -4,6 +4,9 @@
 // Date: 16/08/2024
 // Details: Role of this controller is to upload individual phd members data to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -63,6 +66,10 @@ const uploadPhdMemberCtrl = async (req, res) => {
         });
       } else {
         filePath && cleanupFile(filePath);
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members`
+        );
+
         return res.status(201).json({
           message: "Phd members information has been successfully uploaded",
         });

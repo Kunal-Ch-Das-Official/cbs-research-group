@@ -4,6 +4,9 @@
 // Date: 17/08/2024
 // Details: Role of this controller is to update existing msc member info to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -82,6 +85,12 @@ const updateMscMemberCtrl = async (req, res) => {
         message: "Please check the details and try again later!",
       });
     } else {
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc/members`
+      );
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc/members/${id}`
+      );
       return res
         .status(200)
         .json({ message: "Msc members Info has been successfully updated!" });

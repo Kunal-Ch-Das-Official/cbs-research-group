@@ -17,7 +17,7 @@ const getDoctorateAlumniCtrl = async (req, res) => {
           message: "Please check the detail once again.",
         });
       } else {
-        return res.status(200).json(getSingleAlumniInfo);
+        return res.status(200).sendCachedData(getSingleAlumniInfo);
       }
     } catch (error) {
       console.log(`Unable to get the resources due to:${error}`);
@@ -35,7 +35,7 @@ const getDoctorateAlumniCtrl = async (req, res) => {
           message: "Please check the url and try it again",
         });
       } else {
-        return res.status(200).json(getAllDoctorateAlumniInfo);
+        return res.status(200).sendCachedData(getAllDoctorateAlumniInfo);
       }
     } catch (error) {
       console.log(`Unable to get the resources due to:${error}`);

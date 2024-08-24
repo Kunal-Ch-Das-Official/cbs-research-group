@@ -4,6 +4,9 @@
 // Date: 17/08/2024
 // Details: Role of this controller is to upload individual msc members data to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -62,6 +65,9 @@ const uploadMscMemberCtrl = async (req, res) => {
         });
       } else {
         filePath && cleanupFile(filePath);
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc/members`
+        );
         return res.status(201).json({
           message: "Msc members information has been successfully uploaded",
         });

@@ -4,6 +4,9 @@
 // Date: 17/08/2024
 // Details: Role of this controller is to delete single phd members data from database by client request .
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
@@ -29,6 +32,12 @@ const deletePhdMemberCtrl = async (req, res) => {
           message: "Your applications are not acceptable, try again later!",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members`
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members/${id}`
+        );
         return res.status(200).json({
           message: "Requested resources has been successfully deleted!",
         });

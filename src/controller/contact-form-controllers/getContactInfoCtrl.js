@@ -17,7 +17,7 @@ const getContactInfoCtrl = async (req, res) => {
           message: "Please check the details!",
         });
       } else {
-        return res.status(200).json(getRequestedContactInfo);
+        return res.status(200).sendCachedData(getRequestedContactInfo);
       }
     } catch (error) {
       console.log(
@@ -37,7 +37,7 @@ const getContactInfoCtrl = async (req, res) => {
           error: "Requested resources are not available!",
         });
       } else {
-        return res.status(200).json(getAllRequestedContactInfo);
+        return res.status(200).sendCachedData(getAllRequestedContactInfo);
       }
     } catch (error) {
       console.log(

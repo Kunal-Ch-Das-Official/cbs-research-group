@@ -4,6 +4,9 @@
 // Date: 16/08/2024
 // Details: Role of this controller is to update existing phd member info to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -84,6 +87,12 @@ const updatePhdMemberCtrl = async (req, res) => {
         message: "Please check the details and try again later!",
       });
     } else {
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members`
+      );
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members/${id}`
+      );
       return res
         .status(200)
         .json({ message: "Phd members info has been successfully updated!" });

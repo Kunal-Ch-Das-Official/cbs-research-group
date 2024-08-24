@@ -11,6 +11,9 @@ const getMastersAlumniCtrl = require("../../controller/alumni-controllers/master
 const deleteMastersAlumniCtrl = require("../../controller/alumni-controllers/masters-alumni-controller/deleteMastersAlumniCtrl");
 const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 // Use Express As Router //
 const mastersAlumniRouter = express.Router();
@@ -32,10 +35,14 @@ mastersAlumniRouter.patch(
 );
 
 // Declaration Of Get All Alumni Data Route Segment:
-mastersAlumniRouter.get("/alumni-data", getMastersAlumniCtrl);
+mastersAlumniRouter.get("/alumni-data", cacheMiddleware, getMastersAlumniCtrl);
 
 // Declaration Of Get Single Data Route Segment:
-mastersAlumniRouter.get("/alumni-data/:id", getMastersAlumniCtrl);
+mastersAlumniRouter.get(
+  "/alumni-data/:id",
+  cacheMiddleware,
+  getMastersAlumniCtrl
+);
 
 // Declaration Of Delete Route Segment:
 mastersAlumniRouter.delete(

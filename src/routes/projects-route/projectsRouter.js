@@ -10,6 +10,9 @@ const updateProjectCtrl = require("../../controller/project-controllers/updatePr
 const deleteProjectCtrl = require("../../controller/project-controllers/deleteProjectCtrl");
 const getProjectsCtrl = require("../../controller/project-controllers/getProjectsCtrl");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 const projectsRouter = express.Router();
 
@@ -20,10 +23,10 @@ projectsRouter.post("/projects", checkAdminAuth, uploadProjectCtrl);
 projectsRouter.patch("/projects/:id", checkAdminAuth, updateProjectCtrl);
 
 // Declaration Of Get All Route Segment:
-projectsRouter.get("/projects", getProjectsCtrl);
+projectsRouter.get("/projects", cacheMiddleware, getProjectsCtrl);
 
 // Declaration Of Get Single Route Segment:
-projectsRouter.get("/projects/:id", getProjectsCtrl);
+projectsRouter.get("/projects/:id", cacheMiddleware, getProjectsCtrl);
 
 // Declaration Of Delete Route Segment:
 projectsRouter.delete("/projects/:id", checkAdminAuth, deleteProjectCtrl);

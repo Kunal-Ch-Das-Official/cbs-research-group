@@ -4,6 +4,9 @@
 // Date: 16/08/2024
 // Details: Role of this controller is to delete single masters alumni data by client request .
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
@@ -27,6 +30,12 @@ const deleteMastersAlumniCtrl = async (req, res) => {
           message: "Your applications are not acceptable, try again later!",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters/alumni-data/${id}`
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters/alumni-data`
+        );
         return res.status(200).json({
           message:
             "The requested alumni resources has been successfully removed!",

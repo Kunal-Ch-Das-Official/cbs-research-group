@@ -10,6 +10,9 @@ const deleteContactInfoCtrl = require("../../controller/contact-form-controllers
 const getContactInfoCtrl = require("../../controller/contact-form-controllers/getContactInfoCtrl");
 const sendContactPersonResponseCtrl = require("../../controller/contact-form-controllers/sendContactPersonResponseCtrl");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 const contactFormRouter = express.Router();
 
@@ -24,10 +27,20 @@ contactFormRouter.post(
 );
 
 // Declaration Of Get All Route Segment:
-contactFormRouter.get("/information", checkAdminAuth, getContactInfoCtrl);
+contactFormRouter.get(
+  "/information",
+  checkAdminAuth,
+  cacheMiddleware,
+  getContactInfoCtrl
+);
 
 // Declaration Of Get Single Route Segment:
-contactFormRouter.get("/information/:id", checkAdminAuth, getContactInfoCtrl);
+contactFormRouter.get(
+  "/information/:id",
+  checkAdminAuth,
+  cacheMiddleware,
+  getContactInfoCtrl
+);
 
 // Declaration Of Delete Route Segment:
 contactFormRouter.delete(

@@ -4,6 +4,9 @@
 // Date: 22/08/2024
 // Details: Role of this controller is to get message of willing user of become admin
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
 
 const deleteAdminRegisterRequestMessage = async (req, res) => {
@@ -26,6 +29,12 @@ const deleteAdminRegisterRequestMessage = async (req, res) => {
           error: "Unable to delete message due to some technical error!",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request/admin/${id}`
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request/admin`
+        );
         return res.status(200).json({
           message: "Requested message has been successfully removed",
         });

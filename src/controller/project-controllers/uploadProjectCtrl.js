@@ -4,6 +4,9 @@
 // Date: 19/08/2024
 // Details: Role of this controller is to upload project details to the data base.
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const projectModel = require("../../models/projects-model/projectModel");
 
 const uploadProjectCtrl = async (req, res) => {
@@ -27,6 +30,10 @@ const uploadProjectCtrl = async (req, res) => {
           message: "Please try it after some time",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs/projects`
+        );
+
         return res.status(201).json({
           message: "Project details has been successfully uploaded!",
         });

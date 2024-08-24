@@ -17,7 +17,7 @@ const getProjectsCtrl = async (req, res) => {
           message: "Please check the details!",
         });
       } else {
-        return res.status(200).json(getRequestedProject);
+        return res.status(200).sendCachedData(getRequestedProject);
       }
     } catch (error) {
       console.log(
@@ -38,7 +38,7 @@ const getProjectsCtrl = async (req, res) => {
           message: "Upload a project info first!",
         });
       } else {
-        return res.status(200).json(getAllProjects);
+        return res.status(200).sendCachedData(getAllProjects);
       }
     } catch (error) {
       console.log("Unable to get projects due to internal server error", error);

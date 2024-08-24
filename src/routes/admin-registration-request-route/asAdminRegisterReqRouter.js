@@ -11,6 +11,9 @@ const sendDeniedResponseOfAdminRequestUserCtrl = require("../../controller/admin
 const deleteAdminRegisterRequestMessage = require("../../controller/admin-registration-request-controller/deleteAdminRegisterRequestCtrl");
 const getAdminRegisterRequestCtrl = require("../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 const adminRegistrationReqRouter = express.Router();
 
@@ -38,12 +41,14 @@ adminRegistrationReqRouter.delete(
 adminRegistrationReqRouter.get(
   "/admin/:id",
   checkAdminAuth,
+  cacheMiddleware,
   getAdminRegisterRequestCtrl
 );
 
 adminRegistrationReqRouter.get(
   "/admin",
   checkAdminAuth,
+  cacheMiddleware,
   getAdminRegisterRequestCtrl
 );
 

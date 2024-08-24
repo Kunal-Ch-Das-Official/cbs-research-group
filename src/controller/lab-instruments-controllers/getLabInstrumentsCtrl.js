@@ -17,7 +17,7 @@ const getLabInstrumentsCtrl = async (req, res) => {
           message: "Please check the given details.",
         });
       } else {
-        return res.status(200).json(getSingleInstrumentInfo);
+        return res.status(200).sendCachedData(getSingleInstrumentInfo);
       }
     } catch (error) {
       console.log("There is some technical error occared!", error);
@@ -34,7 +34,7 @@ const getLabInstrumentsCtrl = async (req, res) => {
           message: "Requested resources are not available!",
         });
       } else {
-        return res.status(200).json(getAllInstrumentsInfo);
+        return res.status(200).sendCachedData(getAllInstrumentsInfo);
       }
     } catch (error) {
       console.log("There is some technical error occared!", error);

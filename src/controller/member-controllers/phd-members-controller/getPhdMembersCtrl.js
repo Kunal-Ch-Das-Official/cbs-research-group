@@ -17,7 +17,7 @@ const getPhdMembersCtrl = async (req, res) => {
           message: "Please check the given details.",
         });
       } else {
-        return res.status(200).json(getSinglePhdMemberInfo);
+        return res.status(200).sendCachedData(getSinglePhdMemberInfo);
       }
     } catch (error) {
       console.log("There is some technical error occared!", error);
@@ -34,7 +34,7 @@ const getPhdMembersCtrl = async (req, res) => {
           message: "Phd members are not available!",
         });
       } else {
-        return res.status(200).json(getAllPhdMembersInfo);
+        return res.status(200).sendCachedData(getAllPhdMembersInfo);
       }
     } catch (error) {
       console.log("There is some technical error occared!", error);

@@ -16,7 +16,7 @@ const getMscMembersCtrl = async (req, res) => {
           message: "Msc member are not available!",
         });
       } else {
-        return res.status(200).json(getSingleMscMemberInfo);
+        return res.status(200).sendCachedData(getSingleMscMemberInfo);
       }
     } catch (error) {
       console.log("There is some technical error occared!", error);
@@ -33,7 +33,7 @@ const getMscMembersCtrl = async (req, res) => {
           message: "Msc members are not available!",
         });
       } else {
-        return res.status(200).json(getAllMscMembersInfo);
+        return res.status(200).sendCachedData(getAllMscMembersInfo);
       }
     } catch (error) {
       console.log("There is some technical error occared!", error);

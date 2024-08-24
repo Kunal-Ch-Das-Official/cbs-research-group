@@ -4,6 +4,9 @@
 // Date: 19/08/2024
 // Details: Role of this controller is to update existing Lab Instrument info to the data base.
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -63,6 +66,12 @@ const updateLabInstrumentCtrl = async (req, res) => {
         message: "Please check the details and try again later!",
       });
     } else {
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments`
+      );
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments/${id}`
+      );
       return res.status(200).json({
         message: "Lab instrument info has been successfully updated!",
       });

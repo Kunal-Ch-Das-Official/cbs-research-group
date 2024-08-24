@@ -4,6 +4,9 @@
 // Date: 16/08/2024
 // Details: Role of this controller is to update existing masters alumni data to the data base.
 
+const {
+  clearCache,
+} = require("../../../middlewares/cache-middleware/cacheMiddleware");
 const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -84,11 +87,18 @@ const updateMastersAlumniCtrl = async (req, res) => {
         error: "This operations are not allowed!",
         message: "Please check the details and try again later!",
       });
-    }
+    } else {
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters/alumni-data/${id}`
+      );
+      clearCache(
+        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters/alumni-data`
+      );
 
-    return res.status(200).json({
-      message: "Masters alumni info's has been successfully updated!",
-    });
+      return res.status(200).json({
+        message: "Masters alumni info's has been successfully updated!",
+      });
+    }
   } catch (error) {
     filePath && cleanupFile(filePath);
     console.error("Unable to update due to some technical error:", error);

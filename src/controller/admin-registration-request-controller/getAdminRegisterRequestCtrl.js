@@ -18,7 +18,7 @@ const getAdminRegisterRequestCtrl = async (req, res) => {
           message: "Please check the details before search",
         });
       } else {
-        return res.status(200).json(getSingleRequestInfo);
+        return res.status(200).sendCachedData(getSingleRequestInfo);
       }
     } else {
       const getAllRequestInfo =
@@ -28,7 +28,7 @@ const getAdminRegisterRequestCtrl = async (req, res) => {
           error: "No requested available!",
         });
       } else {
-        return res.status(200).json(getAllRequestInfo);
+        return res.status(200).sendCachedData(getAllRequestInfo);
       }
     }
   } catch (error) {

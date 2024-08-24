@@ -4,6 +4,9 @@
 // Date: 18/08/2024
 // Details: Role of this controller is to update existing group news to the data base.
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const groupNewsModel = require("../../models/group-news-model/groupNewsModel");
 
 const updateGroupNewsCtrl = async (req, res) => {
@@ -38,6 +41,12 @@ const updateGroupNewsCtrl = async (req, res) => {
           message: "Please try after some time",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news/groups`
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news/groups/${id}`
+        );
         return res.status(200).json({
           message: "Requested group news has been successfully updated!",
         });

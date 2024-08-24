@@ -10,6 +10,9 @@ const updateGroupNewsCtrl = require("../../controller/group-news-controller/upda
 const deleteGroupNewsCtrl = require("../../controller/group-news-controller/deleteGroupNewsCtrl");
 const getGroupNewsCtrl = require("../../controller/group-news-controller/getGroupNewsCtrl");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 const groupNewsRouter = express.Router();
 
@@ -20,10 +23,10 @@ groupNewsRouter.post("/groups", checkAdminAuth, uploadGroupNewsCtrl);
 groupNewsRouter.patch("/groups/:id", checkAdminAuth, updateGroupNewsCtrl);
 
 // Declaration Of Get All Group News Data Route Segment:
-groupNewsRouter.get("/groups", getGroupNewsCtrl);
+groupNewsRouter.get("/groups", cacheMiddleware, getGroupNewsCtrl);
 
 // Declaration Of Get Single Group News Data Route Segment:
-groupNewsRouter.get("/groups/:id", getGroupNewsCtrl);
+groupNewsRouter.get("/groups/:id", cacheMiddleware, getGroupNewsCtrl);
 
 // Declaration Of Delete Existing Group News Data Route Segment:
 groupNewsRouter.delete("/groups/:id", checkAdminAuth, deleteGroupNewsCtrl);

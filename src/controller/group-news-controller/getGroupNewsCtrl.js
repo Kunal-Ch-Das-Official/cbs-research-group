@@ -17,7 +17,7 @@ const getGroupNewsCtrl = async (req, res) => {
           message: "Please check the details!",
         });
       } else {
-        return res.status(200).json(getRequestedGroupNews);
+        return res.status(200).sendCachedData(getRequestedGroupNews);
       }
     } catch (error) {
       console.log(
@@ -38,7 +38,7 @@ const getGroupNewsCtrl = async (req, res) => {
           message: "Upload a group news info first!",
         });
       } else {
-        return res.status(200).json(getAllGroupNews);
+        return res.status(200).sendCachedData(getAllGroupNews);
       }
     } catch (error) {
       console.log(

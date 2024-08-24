@@ -11,6 +11,9 @@ const getPhdMembersCtrl = require("../../controller/member-controllers/phd-membe
 const deletePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/deletePhdMemberCtrl");
 const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
 const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
+const {
+  cacheMiddleware,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 
 const phdMembersRouter = express.Router();
 
@@ -31,10 +34,10 @@ phdMembersRouter.patch(
 );
 
 // Declaration Of Get All Route Segment:
-phdMembersRouter.get("/members", getPhdMembersCtrl);
+phdMembersRouter.get("/members", cacheMiddleware, getPhdMembersCtrl);
 
 // Declaration Of Get Single Route Segment:
-phdMembersRouter.get("/members/:id", getPhdMembersCtrl);
+phdMembersRouter.get("/members/:id", cacheMiddleware, getPhdMembersCtrl);
 
 // Declaration Of Delete Route Segment:
 phdMembersRouter.delete("/members/:id", checkAdminAuth, deletePhdMemberCtrl);

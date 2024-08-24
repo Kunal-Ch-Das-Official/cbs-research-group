@@ -4,6 +4,9 @@
 // Date: 17/08/2024
 // Details: Role of this controller is to delete single lab instrument data from database by client request .
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 
@@ -28,6 +31,12 @@ const deleteLabInstrumentCtrl = async (req, res) => {
           message: "Your applications are not acceptable, try again later!",
         });
       } else {
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments`
+        );
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments/${id}`
+        );
         return res.status(200).json({
           message: "Requested resources has been successfully deleted!",
         });

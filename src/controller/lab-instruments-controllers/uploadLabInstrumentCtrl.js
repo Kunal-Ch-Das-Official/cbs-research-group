@@ -3,6 +3,9 @@
 // Author: Kunal Chandra Das.
 // Date: 19/08/2024
 
+const {
+  clearCache,
+} = require("../../middlewares/cache-middleware/cacheMiddleware");
 const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
@@ -48,6 +51,9 @@ const uploadLabInstrumentCtrl = async (req, res) => {
         });
       } else {
         filePath && cleanupFile(filePath);
+        clearCache(
+          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments`
+        );
         return res.status(201).json({
           message: "Lab instrument information has been successfully uploaded",
         });
