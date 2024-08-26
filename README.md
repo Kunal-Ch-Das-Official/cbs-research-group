@@ -57,7 +57,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Base URLs
 ```
 |---------------------------------------------------------------------------------------------------------|
-| Route Name	             |  Base URL                                                                  |
+| Route Name	             |  Base URL                                                                    |
 |---------------------------------------------------------------------------------------------------------|
 | Admin Authentication       | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin       |
 |---------------------------------------------------------------------------------------------------------|
@@ -92,7 +92,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Single Endpoints
 ```
 |-----------------------------------------|
-| Entity 	           | Endpoint         |
+| Entity 	           | Endpoint           |
 |-----------------------------------------| 
 | Doctorate Alumni     | /alumni-data     |
 |-----------------------------------------|
@@ -121,7 +121,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Admin Authentication:
 ```
 |--------------------------------------------------------|
-| Action 	               | Endpoint                    |
+| Action 	               | Endpoint                      |
 |--------------------------------------------------------| 
 | Admin Registration       | /register                   |
 |--------------------------------------------------------|
@@ -148,7 +148,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Admin Registration Request
 ```
 |------------------------------------|	
-| Action 	     | Endpoint          |
+| Action 	     | Endpoint            |
 |------------------------------------| 
 | Create Request | /admin            |
 |------------------------------------|
@@ -166,7 +166,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Contact Us
 ```
 |-----------------------------------------|
-| Action 	         | Endpoint           |
+| Action 	         | Endpoint             |
 |-----------------------------------------| 
 | Post Information   | /information       |
 |-----------------------------------------|
@@ -208,7 +208,7 @@ Run the Server In Production:
 #3 Usage
 * Use tools like Postman to interact with the API endpoints.
 * Implement the routes according to the base URLs and endpoints provided.
-# Contributing
+## Contributing
 * Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
 ## License
