@@ -34,8 +34,8 @@ const deleteLabInstrumentCtrl = async (req, res) => {
 
     if (!getRequestedLabInstrumentInfo) {
       return res.status(404).json({
-        error: "Requested resources are not found!",
-        message: "Please check the given details.",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       instrumentImagePublicId &&
@@ -43,8 +43,9 @@ const deleteLabInstrumentCtrl = async (req, res) => {
       const deleteRequestedInstrumentInfo =
         await labInstrumentModel.findByIdAndDelete(id);
       if (!deleteRequestedInstrumentInfo) {
-        return res.status(406).json({
-          message: "Your applications are not acceptable, try again later!",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -54,14 +55,15 @@ const deleteLabInstrumentCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments/${id}`
         );
         return res.status(200).json({
-          message: "Requested resources has been successfully deleted!",
+          details: "Requested resources has been successfully removed!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error,
-      Message: `Unable to remove phd members info due to:${error.message}`,
+      issue: error.message,
+      details:
+        "Unable to delete requested resources due to some technical problem.",
     });
   }
 };

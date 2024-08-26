@@ -103,7 +103,6 @@ app.use(
   mscMembersRouter
 );
 
-Endpoints;
 // Register PHD Members Endpoints
 app.use(
   "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd",

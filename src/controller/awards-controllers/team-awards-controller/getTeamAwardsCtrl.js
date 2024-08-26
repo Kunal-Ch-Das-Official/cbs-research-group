@@ -31,16 +31,17 @@ const getTeamAwardsCtrl = async (req, res) => {
       const getRequestedTeamAward = await teamAwardsModel.findById(id);
       if (!getRequestedTeamAward) {
         return res.status(404).json({
-          error: "Requested team awards are not found!",
-          message: "Please check the details!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getRequestedTeamAward);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get team awards news due to some technical error",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -48,16 +49,17 @@ const getTeamAwardsCtrl = async (req, res) => {
       const getAllTeamAwards = await teamAwardsModel.find();
       if (!getAllTeamAwards) {
         return res.status(404).json({
-          error: "Requested team awards are not available!",
-          message: "Upload a award details first!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllTeamAwards);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get the team awards due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

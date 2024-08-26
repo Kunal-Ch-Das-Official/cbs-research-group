@@ -46,8 +46,8 @@ const registerAsAdminCtrl = async (req, res) => {
     // If user exist the run this block of code
     if (adminUser) {
       return res.status(409).json({
-        error: "Confilct!",
-        message: "The requested user with that email id already exists.",
+        issue: "Confilct!",
+        details: "Requested user with this email id already exists.",
       });
       // If not exist run this block of code
     } else {
@@ -76,9 +76,9 @@ const registerAsAdminCtrl = async (req, res) => {
           const saveAsNewAdmin = await authPassUser.save();
           // If not been saved send this response
           if (!saveAsNewAdmin) {
-            return res.status(500).json({
-              error: "Unable to let in due to some technical error!",
-              message: "Please try some time later!",
+            return res.status(501).json({
+              issue: "Not implemented!",
+              details: "Something went wrong, please try again later.",
             });
             // If been saved send this response
           } else {
@@ -92,7 +92,7 @@ const registerAsAdminCtrl = async (req, res) => {
             return res.status(201).json({
               message: "Registration successful!",
               details:
-                "Congratulations now you become admin user of cbs research lab !",
+                "Congratulations now you become admin user of CBS Research Group !",
               authenticated_admin_token: token,
             });
           }
@@ -100,23 +100,23 @@ const registerAsAdminCtrl = async (req, res) => {
           //If Password and confirmation password dose not match then send this response
         } else {
           return res.status(400).json({
-            error: "Bad Request!",
-            message: "Password and confirmation password dose not match.",
+            issue: "Bad Request!",
+            details: "Password and confirmation password dosen't match.",
           });
         }
         // If user did'nt fiiled all the required fields then send this response
       } else {
         return res.status(400).json({
-          error: "Bad Request!",
-          message: "All fields are require.",
+          issue: "Bad Request!",
+          details: "All fields are required.",
         });
       }
     }
     // If there are any problem to execute this code then run this block
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to process due to some technical error!",
+      issue: error.message,
+      details: "Unable to process due to some technical problem.",
     });
   }
 };

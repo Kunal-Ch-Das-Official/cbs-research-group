@@ -36,10 +36,10 @@ const postRegisterAsAdminRequestCtrl = async (req, res) => {
       const getCurrentAdminInfo = await authAdminUserModel.findOne({
         adminUserEmail: reqUserEmail,
       });
-      if (!getCurrentAdminInfo) {
+      if (getCurrentAdminInfo) {
         return res.status(400).json({
-          error: "Bad Request!",
-          message: "Admin user already exist.",
+          issue: "Bad Request!",
+          details: "Admin user already exist with this email id.",
         });
       } else {
         const storeRequest = new adminRegistrationRequestMessageModel({
@@ -50,29 +50,29 @@ const postRegisterAsAdminRequestCtrl = async (req, res) => {
         });
         const saveDetails = await storeRequest.save();
         if (!saveDetails) {
-          return res.status(500).json({
-            error:
-              "Unable to send request due to some technical error. Try again later",
+          return res.status(501).json({
+            issue: "Not implemented!",
+            details: "Something went wrong, please try again later.",
           });
         } else {
           clearCache(
             `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request/admin`
           );
           return res.status(201).json({
-            message: "Request has been successfully send",
+            details: "Request has been send successfully.",
           });
         }
       }
     } else {
       return res.status(400).json({
-        error: "Bad Request!",
+        issue: "Bad Request!",
         message: "All fields are require.",
       });
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to send the request due to some technical error",
+      issue: error.message,
+      details: "Unable to send the request due to some technical problem.",
     });
   }
 };

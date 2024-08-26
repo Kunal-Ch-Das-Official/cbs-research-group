@@ -37,15 +37,15 @@ const checkAdminAuth = async (req, res, next) => {
       next();
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Authorization failed.",
+        issue: error.message,
+        details: "Authorization failed.",
       });
     }
   }
   if (!token) {
     return res.status(401).json({
-      error: "Unauthoraized user",
-      message: "Token failed",
+      issue: "Unauthoraized admin user!",
+      details: "Admin authorization token invalid.",
     });
   }
 };

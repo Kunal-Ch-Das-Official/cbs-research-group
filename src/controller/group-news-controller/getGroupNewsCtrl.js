@@ -28,16 +28,17 @@ const getGroupNewsCtrl = async (req, res) => {
       const getRequestedGroupNews = await groupNewsModel.findById(id);
       if (!getRequestedGroupNews) {
         return res.status(404).json({
-          error: "Requested group news are not found!",
-          message: "Please check the details!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getRequestedGroupNews);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get single group news due to some technical error",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -45,16 +46,17 @@ const getGroupNewsCtrl = async (req, res) => {
       const getAllGroupNews = await groupNewsModel.find();
       if (!getAllGroupNews) {
         return res.status(404).json({
-          error: "Requested group news are not available!",
-          message: "Upload a group news info first!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllGroupNews);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get the group news due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

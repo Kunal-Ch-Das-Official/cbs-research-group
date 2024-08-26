@@ -37,7 +37,10 @@ const updatePublicationCtrl = async (req, res) => {
       if (req.files && req.files[field] === undefined) {
         const findField = await publicationModel.findById(req.params.id);
         if (!findField) {
-          return res.status(404).send("Publication not found");
+          return res.status(404).json({
+            issue: "Not found!",
+            details: "Requested resources are not found.",
+          });
         }
         updateFields[field] = findField[field];
         updateFields[`${field}PublicId`] = findField[`${field}PublicId`];
@@ -62,7 +65,10 @@ const updatePublicationCtrl = async (req, res) => {
     // Update the rest of the fields from req.body if not empty
     const findPublication = await publicationModel.findById(req.params.id);
     if (!findPublication) {
-      return res.status(404).send("Publication not found");
+      return res.status(404).json({
+        issue: "Not found!",
+        details: "Requested resources are not found.",
+      });
     }
 
     Object.keys(req.body).forEach((key) => {
@@ -78,7 +84,10 @@ const updatePublicationCtrl = async (req, res) => {
     );
 
     if (!updatedPublication) {
-      return res.status(404).send("Publication not found");
+      return res.status(501).json({
+        issue: "Not implemented!",
+        details: "Something went wrong, please try again later.",
+      });
     } else {
       clearCache(
         "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
@@ -87,12 +96,15 @@ const updatePublicationCtrl = async (req, res) => {
         `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info/${req.params.id}`
       );
       return res.status(200).json({
-        status: 200,
-        message: "Publication has been updated successfully!",
+        details: "Requested resources has been updated successfully!",
       });
     }
   } catch (error) {
-    return res.status(500).send(`Technical error: ${error.message}`);
+    return res.status(500).json({
+      issue: error.message,
+      details:
+        "Unable to update requested resources due to some technical problem.",
+    });
   }
 };
 

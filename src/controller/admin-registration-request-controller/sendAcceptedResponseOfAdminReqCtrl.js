@@ -36,8 +36,8 @@ const sendAcceptedResponseOfAdminRequestUserCtrl = async (req, res) => {
     const getUserInfo = await adminRegistrationRequestMessageModel.findById(id);
     if (!getUserInfo) {
       return res.status(404).json({
-        error: "Requested resources are not found!",
-        message: "Please check the info",
+        issue: "Not found!",
+        details: "Requested resources are not found..",
       });
     } else {
       const { reqUserName, reqUserEmail } = getUserInfo;
@@ -51,8 +51,8 @@ const sendAcceptedResponseOfAdminRequestUserCtrl = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to perform this task due to some technical error",
+      issue: error.message,
+      details: "Unable to perform this task due to some technical problem.",
     });
   }
 };

@@ -34,7 +34,9 @@ const resetForgottenPassword = async (req, res) => {
     const corespondingAdmin = await authAdminUserModel.findById(id);
     if (!corespondingAdmin) {
       return res.status(404).json({
-        error: "Requested admin are not found",
+        issue: "Invalid Admin!",
+        details:
+          "Requested email id dose'nt exist, please provide a correct email.",
       });
     } else {
       const new_secret = corespondingAdmin._id + jwtSecretKey;
@@ -42,8 +44,8 @@ const resetForgottenPassword = async (req, res) => {
       if (adminUserPassword && adminUserPassword_confirmation) {
         if (adminUserPassword !== adminUserPassword_confirmation) {
           return res.status(400).json({
-            error: "Bad Request!",
-            message: "Password and confirm password are not same",
+            issue: "Bad Request!",
+            details: "Password and confirm password are not same.",
           });
         } else {
           // Encrypt given password
@@ -58,27 +60,27 @@ const resetForgottenPassword = async (req, res) => {
             }
           );
           if (!updatePassword) {
-            return res.status(500).json({
-              error: "Technical error occured!",
-              message: "Unable to perform the task due to some technical error",
+            return res.status(501).json({
+              issue: "Not implemented!",
+              details: "Something went wrong, please try again later.",
             });
           } else {
             return res.status(200).json({
-              message: "Password has been updated successfully!",
+              details: "Password has been updated successfully!",
             });
           }
         }
       } else {
         return res.status(400).json({
-          error: "Bad Request!",
-          message: "All fields are require",
+          issue: "Bad Request!",
+          details: "All fields are required.",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to perform the task due to some technical error",
+      issue: error.message,
+      details: "Unable to perform the task due to some technical problem.",
     });
   }
 };

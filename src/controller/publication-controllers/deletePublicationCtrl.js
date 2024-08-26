@@ -33,8 +33,8 @@ const deletePublicationCtrl = async (req, res) => {
     const getRequiredPublication = await publicationModel.findById(id);
     if (!getRequiredPublication) {
       return res.status(404).json({
-        error: "Requested publication are not found.",
-        message: "Please try again later.",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       const {
@@ -53,10 +53,9 @@ const deletePublicationCtrl = async (req, res) => {
       const deleteRequestedPublication =
         await publicationModel.findByIdAndDelete(id);
       if (!deleteRequestedPublication) {
-        return res.status(500).json({
-          error:
-            "Unable to delete this publication due to some technical problem.",
-          message: "Please try again later.",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -66,15 +65,15 @@ const deletePublicationCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info/${req.params.id}`
         );
         return res.status(200).json({
-          message: "Publication has been successfully removed.",
+          details: "Requested resources has been successfully removed.",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      message:
-        "Unable to delete this publication due to some technical problem",
+      issue: error.message,
+      details:
+        "Unable to removed requested resources due to some technical problem.",
     });
   }
 };

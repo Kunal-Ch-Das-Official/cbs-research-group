@@ -19,10 +19,10 @@
 
 const nodemailer = require("nodemailer");
 const {
-  emailHostProtocol,
-  emailPort,
-  emailHostUser,
-  emailHostPassword,
+  mainEmailHostProtocol,
+  mainEmailPort,
+  mainEmailHostUser,
+  mainEmailHostPassword,
 } = require("../../config/envConfig");
 
 const sendAdminRegistrationSuccessMail = async (
@@ -39,16 +39,16 @@ const sendAdminRegistrationSuccessMail = async (
   const loginLink = "https://www.kunalchandradas.tech";
   try {
     const transporter = nodemailer.createTransport({
-      host: emailHostProtocol,
-      port: emailPort,
+      host: mainEmailHostProtocol,
+      port: mainEmailPort,
       secure: true, // Use `true` for port 465, `false` for all other ports
       auth: {
-        user: emailHostUser,
-        pass: emailHostPassword,
+        user: mainEmailHostUser,
+        pass: mainEmailHostPassword,
       },
     });
     const mailOptions = {
-      from: emailHostUser, // Sender address
+      from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
       subject: "Welcome to CBS Research Group - Your Admin Login Details",
       html: `
@@ -564,7 +564,7 @@ const sendAdminRegistrationSuccessMail = async (
                                       <br />
                                       CBS Research Group
                                       <br />
-                                      ${emailHostUser}
+                                      ${mainEmailHostUser}
                                     </p>
                                   </div>
                                 </td>
@@ -746,24 +746,23 @@ const sendAdminRegistrationSuccessMail = async (
         return response.status(500).json({
           issue: error.message,
           details:
-            "Unable to drop this mail due to some technical problem. Please try again later.",
+            "Unable to send this mail due to some technical problem. Please try again later.",
           alert:
             "If the issue not resolve autometically then contact to your tech support team.",
         });
       } else {
         transporter.close();
         return response.status(200).json({
-          message: "Email has been dropped successfully.",
+          message: "Email has been sended successfully.",
           sending_id: info.messageId,
-          notification: `The mail has been successfully droppet to this:${sendTo} account.`,
+          notification: `The mail has been successfully send to this:${sendTo} account.`,
         });
       }
     });
   } catch (error) {
     return response.status(500).json({
       issue: error.message,
-      details:
-        "Unable to perform this task due to some internal server problem.",
+      details: "Unable to perform this task due to some technical problem.",
       message:
         "Please try again later, or if the issue not resolve autometically then contact with your tech support team.",
     });

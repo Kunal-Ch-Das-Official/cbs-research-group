@@ -31,16 +31,17 @@ const getProjectsCtrl = async (req, res) => {
       const getRequestedProject = await projectModel.findById(id);
       if (!getRequestedProject) {
         return res.status(404).json({
-          error: "Requested project are not found!",
-          message: "Please check the details!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getRequestedProject);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get single project due to some technical error",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -48,16 +49,17 @@ const getProjectsCtrl = async (req, res) => {
       const getAllProjects = await projectModel.find();
       if (!getAllProjects) {
         return res.status(404).json({
-          error: "Requested projects are not available!",
-          message: "Upload a project info first!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllProjects);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get the projects due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

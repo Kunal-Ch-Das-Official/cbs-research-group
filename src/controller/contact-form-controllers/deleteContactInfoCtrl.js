@@ -32,15 +32,15 @@ const deleteContactInfoCtrl = async (req, res) => {
     const getRequiredContactInfo = await contactFormModel.findById(id);
     if (!getRequiredContactInfo) {
       return res.status(404).json({
-        error: "Requested group news are not found!",
-        message: "Please check the details.",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       const deleteReqContactInfo = await contactFormModel.findByIdAndDelete(id);
       if (!deleteReqContactInfo) {
-        return res.status(406).json({
-          error: "Request are not acceptable!",
-          message: "Please try after some time.",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -50,14 +50,15 @@ const deleteContactInfoCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us/information/${id}`
         );
         return res.status(200).json({
-          message: "Requested resources has been successfully removed!",
+          details: "Requested resources has been successfully removed!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to delete group news due to some technical error.",
+      issue: error.message,
+      details:
+        "Unable to delete requested resources due to some technical problem.",
     });
   }
 };

@@ -30,15 +30,17 @@ const getMscMembersCtrl = async (req, res) => {
       const getSingleMscMemberInfo = await mscMemberModel.findById(id);
       if (!getSingleMscMemberInfo) {
         return res.status(404).json({
-          message: "Msc member are not available!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getSingleMscMemberInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error,
-        Message: `Unable to find phd member info due to:${error.message}`,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -46,15 +48,17 @@ const getMscMembersCtrl = async (req, res) => {
       const getAllMscMembersInfo = await mscMemberModel.find();
       if (!getAllMscMembersInfo) {
         return res.status(404).json({
-          message: "Msc members are not available!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllMscMembersInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error,
-        Message: `Unable to find phd members info due to:${error.message}`,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

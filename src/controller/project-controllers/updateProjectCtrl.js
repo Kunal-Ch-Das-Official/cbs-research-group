@@ -34,8 +34,8 @@ const updateProjectCtrl = async (req, res) => {
     const getPreviousProject = await projectModel.findById(id);
     if (!getPreviousProject) {
       return res.status(404).json({
-        error: "Requested project are not exist!",
-        message: "Please fill up all required fields",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       const newProjectName = projectName || getPreviousProject.projectName;
@@ -57,9 +57,9 @@ const updateProjectCtrl = async (req, res) => {
       );
 
       if (!updateProject) {
-        return res.status(406).json({
-          error: "Request are not acceptable!",
-          message: "Please try after some time",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -69,14 +69,15 @@ const updateProjectCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs/projects/${id}`
         );
         return res.status(200).json({
-          message: "Requested project has been successfully updated!",
+          details: "Requested resources has been successfully updated!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to update project due to some technical error",
+      issue: error.message,
+      details:
+        "Unable to update requested resources due to some technical problem.",
     });
   }
 };

@@ -18,10 +18,10 @@
 
 const nodemailer = require("nodemailer");
 const {
-  emailHostProtocol,
-  emailPort,
-  emailHostUser,
-  emailHostPassword,
+  mainEmailHostProtocol,
+  mainEmailPort,
+  mainEmailHostUser,
+  mainEmailHostPassword,
 } = require("../../config/envConfig");
 
 const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
@@ -31,16 +31,16 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
     "https://res.cloudinary.com/dmgs52isy/image/upload/v1724435282/email-assets/rhje0fzumnwilzqwjqy7.png";
   try {
     const transporter = nodemailer.createTransport({
-      host: emailHostProtocol,
-      port: emailPort,
+      host: mainEmailHostProtocol,
+      port: mainEmailPort,
       secure: true, // Use `true` for port 465, `false` for all other ports
       auth: {
-        user: emailHostUser,
-        pass: emailHostPassword,
+        user: mainEmailHostUser,
+        pass: mainEmailHostPassword,
       },
     });
     const mailOptions = {
-      from: emailHostUser, // Sender address
+      from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
       subject: "Request to Become Admin - CBS Research Group ",
       html: `
@@ -647,7 +647,7 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
                                       <br />
                                       CBS Research Group.
                                       <br />
-                                      ${emailHostUser}
+                                      ${mainEmailHostUser}
                                     </p>
                                   </div>
                                 </td>
@@ -836,7 +836,7 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
         });
       } else {
         return response.status(200).json({
-          message: "Email has been dropped successfully.",
+          message: "Email has been sended successfully.",
           sending_id: info.messageId,
           notification: `The mail has been successfully droppet to this:${sendTo} account.`,
         });
@@ -845,8 +845,7 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
   } catch (error) {
     return response.status(500).json({
       issue: error.message,
-      details:
-        "Unable to perform this task due to some internal server problem.",
+      details: "Unable to perform this task due to some technical problem.",
       message:
         "Please try again later, or if the issue not resolve autometically then contact with your tech support team.",
     });

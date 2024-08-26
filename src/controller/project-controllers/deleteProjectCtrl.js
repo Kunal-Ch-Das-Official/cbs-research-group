@@ -33,15 +33,15 @@ const deleteProjectCtrl = async (req, res) => {
     const getPrevProject = await projectModel.findById(id);
     if (!getPrevProject) {
       return res.status(404).json({
-        error: "Requested project are not found!",
-        message: "Please check the details.",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       const deleteReqProject = await projectModel.findByIdAndDelete(id);
       if (!deleteReqProject) {
-        return res.status(406).json({
-          error: "Request are not acceptable!",
-          message: "Please try after some time.",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -51,14 +51,15 @@ const deleteProjectCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs/projects/${id}`
         );
         return res.status(200).json({
-          message: "Requested project has been successfully removed!",
+          details: "Requested resources has been successfully removed!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to delete project due to some technical error.",
+      issue: error.message,
+      details:
+        "Unable to delete requested resources due to some technical problem.",
     });
   }
 };

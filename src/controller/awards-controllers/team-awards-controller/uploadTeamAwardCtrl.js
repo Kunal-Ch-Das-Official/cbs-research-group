@@ -30,8 +30,8 @@ const uploadTeamAwardCtrl = async (req, res) => {
   const { awardTitle, recivedFor, recivedDate } = req.body;
   if (!req.body) {
     return res.status(400).json({
-      error: "Bad Request!",
-      message: "Please fill up all the fields carefully",
+      issue: "Bad Request!",
+      details: "All fields are required.",
     });
   } else {
     try {
@@ -42,22 +42,23 @@ const uploadTeamAwardCtrl = async (req, res) => {
       });
       const uploadDetails = teamAward.save();
       if (!uploadDetails) {
-        return res
-          .status(422)
-          .json({ error: "Failed to save award due to validation errors." });
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
+        });
       } else {
         clearCache(
           "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards"
         );
         return res.status(201).json({
-          message: "Award information has been successfully uploaded!",
+          details: "Requested resources has been successfully uploaded!",
         });
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message:
-          "Unable to upload awards information due to some technical error",
+        issue: error.message,
+        details:
+          "Unable to upload requested resources due to some technical problem.",
       });
     }
   }

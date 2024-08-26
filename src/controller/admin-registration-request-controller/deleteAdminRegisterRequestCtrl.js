@@ -37,15 +37,16 @@ const deleteAdminRegisterRequestMessage = async (req, res) => {
 
     if (!getRequestedUserMessage) {
       return res.status(404).json({
-        error: "Requested message not found!",
-        message: "Please check the details ",
+        issue: "Not found!",
+        details: "Requested message are not found please check the details.",
       });
     } else {
       const deleteMessage =
         await adminRegistrationRequestMessageModel.findByIdAndDelete(id);
       if (!deleteMessage) {
-        return res.status(500).json({
-          error: "Unable to delete message due to some technical error!",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -55,14 +56,14 @@ const deleteAdminRegisterRequestMessage = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request/admin`
         );
         return res.status(200).json({
-          message: "Requested message has been successfully removed",
+          details: "Requested message has been successfully removed!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to perform this task due to some technical error",
+      issue: error.message,
+      details: "Unable to perform this task due to some technical problem",
     });
   }
 };

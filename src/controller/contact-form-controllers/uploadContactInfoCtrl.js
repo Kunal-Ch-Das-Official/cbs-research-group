@@ -27,8 +27,8 @@ const uploadContactInfoCtrl = async (req, res) => {
   const { userName, emailId, phoneNumber, desireCourse, message } = req.body;
   if (!userName || !emailId || !phoneNumber) {
     return res.status(400).json({
-      error: "Bad Request!",
-      message: "Please fill up all the fields carefully!",
+      issue: "Bad Request!",
+      details: "All fields are required.",
     });
   } else {
     try {
@@ -41,22 +41,23 @@ const uploadContactInfoCtrl = async (req, res) => {
       });
       const uploadData = await contactUserDetails.save();
       if (!uploadData) {
-        return res.status(406).json({
-          error: "Request are not acceptable!",
-          message: "Please try it after some time",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us/information`
         );
         return res.status(201).json({
-          message: "Contact form has been successfully uploaded!",
+          details: "Requested resources has been successfully uploaded!",
         });
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to upload group news due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to upload requested resources due to some technical problem.",
       });
     }
   }

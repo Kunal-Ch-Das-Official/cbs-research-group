@@ -17,10 +17,10 @@
 
 const nodemailer = require("nodemailer");
 const {
-  emailHostProtocol,
-  emailPort,
-  emailHostUser,
-  emailHostPassword,
+  supportEmailHostProtocol,
+  supportEmailPort,
+  supportEmailHostUser,
+  supportEmailHostPassword,
 } = require("../../config/envConfig");
 const sendPasswordResetEmail = async (
   sendTo,
@@ -39,16 +39,16 @@ const sendPasswordResetEmail = async (
 
   try {
     const transporter = nodemailer.createTransport({
-      host: emailHostProtocol,
-      port: emailPort,
+      host: supportEmailHostProtocol,
+      port: supportEmailPort,
       secure: true, // Use `true` for port 465, `false` for all other ports
       auth: {
-        user: emailHostUser,
-        pass: emailHostPassword,
+        user: supportEmailHostUser,
+        pass: supportEmailHostPassword,
       },
     });
     const mailOptions = {
-      from: emailHostUser, // Sender address
+      from: supportEmailHostUser, // Sender address
       to: sendTo, // List of receivers
       subject: " CBS Research Group - Admin User Password Reset Request",
       html: `
@@ -541,7 +541,7 @@ const sendPasswordResetEmail = async (
                                     >
                                       <span style="word-break: break-word"
                                         >Having trouble?
-                                        ${emailHostUser}</span
+                                        ${supportEmailHostUser}</span
                                       >
                                     </p>
                                   </div>
@@ -809,7 +809,7 @@ const sendPasswordResetEmail = async (
                                     >
                                       This link will expire in the next 5
                                       minutes.<br />Please feel free to contact
-                                      us at ${emailHostUser}.
+                                      us at ${supportEmailHostUser}.
                                     </p>
                                   </div>
                                 </td>
@@ -888,23 +888,20 @@ const sendPasswordResetEmail = async (
         return response.status(500).json({
           issue: error.message,
           details:
-            "Unable to drop this mail due to technical problem. Please try again later",
+            "Unable to send this mail due to technical problem, please try again later",
         });
       } else {
         return response.status(200).json({
-          message: "Email has been dropped successfully",
+          message: "Email has been send successfully",
           sending_id: info.messageId,
-          notification:
-            "Password reset link has been sended to this email account.",
-          alert: "Please use it before five minutes, else it will be expired.",
+          notification: `Password reset link has been sended to this:${sendTo} email account.`,
         });
       }
     });
   } catch (error) {
     return response.status(500).json({
       issue: error.message,
-      details:
-        "Unable to perform this task due to some internal server problem.",
+      details: "Unable to perform this task due to some technical problem.",
       message:
         "Please try again later, or if the issue not resolve autometically then contact with your tech support team.",
     });

@@ -32,15 +32,16 @@ const deleteTeamAwardCtrl = async (req, res) => {
     const getPreviousTeamAward = teamAwardsModel.findById(id);
     if (!getPreviousTeamAward) {
       return res.status(404).json({
-        error: "Requested team awards are not found!",
-        message: "please check the details",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       const deleteTeamAward = await teamAwardsModel.findByIdAndDelete(id);
       if (!deleteTeamAward) {
-        return res
-          .status(422)
-          .json({ error: "Failed to save award due to validation errors." });
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
+        });
       } else {
         clearCache(
           "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards"
@@ -49,15 +50,15 @@ const deleteTeamAwardCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards/${id}`
         );
         return res.status(200).json({
-          message: "Requested team awards has been successfully removed!",
+          details: "Requested resources has been successfully removed!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message:
-        "Unable to delete requested team awards due to some technical error!",
+      issue: error.message,
+      details:
+        "Unable to delete requested resources due to some technical problem.",
     });
   }
 };

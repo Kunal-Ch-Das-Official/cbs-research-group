@@ -35,7 +35,8 @@ const deleteMscMemberCtrl = async (req, res) => {
     const { profilePicturePublicId } = getRequestedMembersInfo;
     if (!profilePicturePublicId) {
       return res.status(404).json({
-        message: "Msc members images are not available!",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       profilePicturePublicId &&
@@ -44,8 +45,9 @@ const deleteMscMemberCtrl = async (req, res) => {
         id
       );
       if (!deleteRequestedMembersInfo) {
-        return res.status(406).json({
-          message: "Your applications are not acceptable, try again later!",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -55,14 +57,15 @@ const deleteMscMemberCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc/members/${id}`
         );
         return res.status(200).json({
-          message: "Requested resources has been successfully deleted!",
+          details: "Requested resources has been successfully deleted!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error,
-      Message: `Unable to remove phd members info due to:${error.message}`,
+      issue: error.message,
+      details:
+        "Unable to delete requested resources due to some technical problem.",
     });
   }
 };

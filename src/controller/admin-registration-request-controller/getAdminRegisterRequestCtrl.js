@@ -31,8 +31,8 @@ const getAdminRegisterRequestCtrl = async (req, res) => {
         await adminRegistrationRequestMessageModel.findById(id);
       if (!getSingleRequestInfo) {
         return res.status(404).json({
-          error: "Requested resources are not found!",
-          message: "Please check the details before search",
+          issue: "Not found!",
+          details: "Please check the details, and try it again.",
         });
       } else {
         return res.status(200).sendCachedData(getSingleRequestInfo);
@@ -42,7 +42,8 @@ const getAdminRegisterRequestCtrl = async (req, res) => {
         await adminRegistrationRequestMessageModel.find();
       if (!getAllRequestInfo) {
         return res.status(404).json({
-          error: "No requested available!",
+          issue: "Not found!",
+          details: "Requested resources are not available.",
         });
       } else {
         return res.status(200).sendCachedData(getAllRequestInfo);
@@ -50,8 +51,8 @@ const getAdminRegisterRequestCtrl = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to perform this task due to some technical error.",
+      issue: error.message,
+      details: "Unable to perform this task due to some technical problem.",
     });
   }
 };

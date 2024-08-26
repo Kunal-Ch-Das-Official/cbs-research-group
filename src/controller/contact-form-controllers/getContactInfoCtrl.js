@@ -28,16 +28,17 @@ const getContactInfoCtrl = async (req, res) => {
       const getRequestedContactInfo = await contactFormModel.findById(id);
       if (!getRequestedContactInfo) {
         return res.status(404).json({
-          error: "Requested resources are not found!",
-          message: "Please check the details!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getRequestedContactInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get requested resources to some technical error",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -45,15 +46,17 @@ const getContactInfoCtrl = async (req, res) => {
       const getAllRequestedContactInfo = await contactFormModel.find();
       if (!getAllRequestedContactInfo) {
         return res.status(404).json({
-          error: "Requested resources are not available!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllRequestedContactInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to get requested resources to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

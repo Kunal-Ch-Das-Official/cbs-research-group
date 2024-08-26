@@ -28,30 +28,31 @@ const uploadGroupNewsCtrl = async (req, res) => {
   const { newsTitle, content } = req.body;
   if (!req.body) {
     return res.status(400).json({
-      error: "Bad Request!",
-      message: "Please fill up all the fields carefully!",
+      issue: "Bad Request!",
+      details: "All fields are required.",
     });
   } else {
     try {
       const latestGroupNews = new groupNewsModel({ newsTitle, content });
       const uploadData = await latestGroupNews.save();
       if (!uploadData) {
-        return res.status(406).json({
-          error: "Request are not acceptable!",
-          message: "Please try it after some time",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news/groups`
         );
         return res.status(201).json({
-          message: "Group news has been successfully uploaded!",
+          details: "Requested resources has been successfully uploaded!",
         });
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: "Unable to upload group news due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to upload requested resources due to some technical problem.",
       });
     }
   }

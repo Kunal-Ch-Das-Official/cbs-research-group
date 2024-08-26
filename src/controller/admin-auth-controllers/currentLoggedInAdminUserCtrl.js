@@ -31,13 +31,13 @@ const getCurrentLoggedInAdminUserCtrl = async (req, res) => {
     } else {
       return res.status(400).json({
         error: "Bad Request!",
-        message: "Request is not valid",
+        details: "Request are not valid.",
       });
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      message: "Unable to perform this operation due to some technical problem",
+      details: "Unable to perform this operation due to some technical problem",
     });
   }
 };

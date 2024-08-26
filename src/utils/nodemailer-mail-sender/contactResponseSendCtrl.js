@@ -17,10 +17,10 @@
 
 const nodemailer = require("nodemailer");
 const {
-  emailHostProtocol,
-  emailPort,
-  emailHostUser,
-  emailHostPassword,
+  mainEmailHostProtocol,
+  mainEmailPort,
+  mainEmailHostUser,
+  mainEmailHostPassword,
 } = require("../../config/envConfig");
 
 const contactResponseSendCtrl = async (
@@ -41,16 +41,16 @@ const contactResponseSendCtrl = async (
 
   try {
     const transporter = nodemailer.createTransport({
-      host: emailHostProtocol,
-      port: emailPort,
+      host: mainEmailHostProtocol,
+      port: mainEmailPort,
       secure: true, // Use `true` for port 465, `false` for all other ports
       auth: {
-        user: emailHostUser,
-        pass: emailHostPassword,
+        user: mainEmailHostUser,
+        pass: mainEmailHostPassword,
       },
     });
     const mailOptions = {
-      from: emailHostUser, // Sender address
+      from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
       subject: subject,
       html: `
@@ -1163,15 +1163,15 @@ const contactResponseSendCtrl = async (
         return response.status(500).json({
           issue: error.message,
           details:
-            "Unable to drop this mail due to some technical problem. Please try again later.",
+            "Unable to send this mail, due to some technical problem. Please try again later.",
           alert:
             "If the issue not resolve autometically then contact to your tech support team.",
         });
       } else {
         return response.status(200).json({
-          message: "Email has been dropped successfully.",
+          message: "Email has been send successfully!",
           sending_id: info.messageId,
-          notification: `The mail has been successfully droppet to this:${sendTo} account.`,
+          notification: `The mail has been successfully send to this:${sendTo} adress.`,
         });
       }
     });
@@ -1179,9 +1179,7 @@ const contactResponseSendCtrl = async (
     return response.status(500).json({
       issue: error.message,
       details:
-        "Unable to perform this task due to some internal server problem.",
-      message:
-        "Please try again later, or if the issue not resolve autometically then contact with your tech support team.",
+        "Unable to perform this task due to some technical problem, please try again later.",
     });
   }
 };

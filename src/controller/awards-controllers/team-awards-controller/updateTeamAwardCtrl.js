@@ -34,8 +34,8 @@ const updateTeamAwardCtrl = async (req, res) => {
     const getPreviousTeamAward = await teamAwardsModel.findById(id);
     if (!getPreviousTeamAward) {
       return res.status(404).json({
-        error: "Requested personal awards are not found!",
-        message: "Please check the details",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       const newAwardTitle = awardTitle || getPreviousTeamAward.awardTitle;
@@ -56,9 +56,10 @@ const updateTeamAwardCtrl = async (req, res) => {
       );
 
       if (!updateDetails) {
-        return res
-          .status(422)
-          .json({ error: "Failed to save award due to validation errors." });
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
+        });
       } else {
         clearCache(
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards/${id}`
@@ -67,14 +68,15 @@ const updateTeamAwardCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team/awards`
         );
         return res.status(200).json({
-          message: "Requested teams awards has been successfully updated!",
+          details: "Requested resources has been successfully updated!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to update teams awards due to some technical error!",
+      issue: error.message,
+      details:
+        "Unable to update requested resources due to some technical problem.",
     });
   }
 };

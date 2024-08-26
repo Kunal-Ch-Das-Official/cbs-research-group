@@ -36,8 +36,8 @@ const deleteDoctorateAlumniCtrl = async (req, res) => {
     const currentDoctorateAlumni = await doctorateAlumniModel.findById(id);
     if (!currentDoctorateAlumni) {
       return res.status(404).json({
-        error: "Requested resources are not found!!",
-        message: "Please check the details and try again.",
+        issue: "Not found!",
+        details: "Requested resources are not found.",
       });
     } else {
       const currentAlumniImgsCloudId =
@@ -49,8 +49,9 @@ const deleteDoctorateAlumniCtrl = async (req, res) => {
         id
       );
       if (!removeAlumniFromDb) {
-        return res.status(406).json({
-          message: "Your applications are not acceptable, try again later!",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -60,15 +61,15 @@ const deleteDoctorateAlumniCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate/alumni-data`
         );
         return res.status(200).json({
-          message: "The requested resources has been successfully removed!",
+          details: "The requested resources has been successfully removed!",
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
-      message:
-        "Unable to remove requested resources due to some technical error!",
-      Error: error.message,
+      issue: error.message,
+      details:
+        "Unable to remove requested resources due to some technical problem.",
     });
   }
 };

@@ -30,10 +30,8 @@ const customSingleUploader = async (requireFilePath, folderName) => {
   } catch (error) {
     console.log({
       status: 500,
-      error: "Internal server error!",
-      origin: "Custom single uploader.",
-      errorOrigin: "Second block/Catch block",
-      errorId: "#-02",
+      issue: "Cloudinary uploader error!",
+      issueOrigin: "Custom single uploader.",
       message: error.message,
     });
     return null;

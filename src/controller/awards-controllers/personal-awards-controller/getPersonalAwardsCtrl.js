@@ -30,17 +30,17 @@ const getPersonalAwardsCtrl = async (req, res) => {
       const getRequestedPersonalAward = await personalAwardsModel.findById(id);
       if (!getRequestedPersonalAward) {
         return res.status(404).json({
-          error: "Requested personal awards are not found!",
-          message: "Please check the details!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getRequestedPersonalAward);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message:
-          "Unable to get personal awards news due to some technical error",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -48,17 +48,17 @@ const getPersonalAwardsCtrl = async (req, res) => {
       const getAllPersonalAwards = await personalAwardsModel.find();
       if (!getAllPersonalAwards) {
         return res.status(404).json({
-          error: "Requested personal awards are not available!",
-          message: "Upload a award details first!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllPersonalAwards);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message:
-          "Unable to get the personal awards due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

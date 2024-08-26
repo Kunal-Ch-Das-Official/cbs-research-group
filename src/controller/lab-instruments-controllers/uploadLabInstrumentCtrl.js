@@ -39,8 +39,8 @@ const uploadLabInstrumentCtrl = async (req, res) => {
 
   if (!req.body || !req.file) {
     return res.status(400).json({
-      error: "Bad request!",
-      message: "Fill up all the fields carefully!!",
+      issue: "Bad Request!",
+      details: "All fields are required.",
     });
   } else {
     try {
@@ -64,9 +64,9 @@ const uploadLabInstrumentCtrl = async (req, res) => {
         labInstrumentImgPublicId &&
           (await customSingleDestroyer(labInstrumentImgPublicId));
 
-        return res.status(405).json({
-          error: "This operations are not allowed!",
-          message: "Please check the details and try again later!",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         filePath && cleanupFile(filePath);
@@ -74,7 +74,7 @@ const uploadLabInstrumentCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments`
         );
         return res.status(201).json({
-          message: "Lab instrument information has been successfully uploaded",
+          details: "Requested resources has been successfully uploaded!",
         });
       }
     } catch (error) {
@@ -82,9 +82,9 @@ const uploadLabInstrumentCtrl = async (req, res) => {
       labInstrumentImgPublicId &&
         (await customSingleDestroyer(labInstrumentImgPublicId));
       return res.status(500).json({
-        Error: error.message,
-        Details:
-          "Unable to upload requested resources due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to upload requested resources due to some technical problem.",
       });
     }
   }

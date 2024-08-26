@@ -31,8 +31,8 @@ const uploadProjectCtrl = async (req, res) => {
   const { projectName, description, projectStatus } = req.body;
   if (!req.body) {
     return res.status(400).json({
-      error: "Bad Request!",
-      message: "Please fill up all the fields carefully!",
+      issue: "Bad Request!",
+      details: "All fields are required.",
     });
   } else {
     try {
@@ -43,9 +43,9 @@ const uploadProjectCtrl = async (req, res) => {
       });
       const uploadData = await projectDetails.save();
       if (!uploadData) {
-        return res.status(406).json({
-          error: "Request are not acceptable!",
-          message: "Please try it after some time",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         clearCache(
@@ -53,14 +53,14 @@ const uploadProjectCtrl = async (req, res) => {
         );
 
         return res.status(201).json({
-          message: "Project details has been successfully uploaded!",
+          details: "Requested resources has been successfully uploaded!",
         });
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message:
-          "Unable to upload project details due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to upload requested resources due to some technical problem.",
       });
     }
   }

@@ -42,8 +42,8 @@ const uploadPublicationCtrl = async (req, res) => {
   try {
     if (!req.body && !req.files) {
       return res.status(400).json({
-        error: "Bad Request!",
-        message: "All fields are required.",
+        issue: "Bad Request!",
+        details: "All fields are required.",
       });
     } else {
       if (
@@ -68,8 +68,8 @@ const uploadPublicationCtrl = async (req, res) => {
             });
           } catch (error) {
             return res.status(500).json({
-              error: error.message,
-              message: "cloudinary error occured.",
+              issue: error.message,
+              details: "cloudinary error occured.",
             });
           }
         }
@@ -95,9 +95,9 @@ const uploadPublicationCtrl = async (req, res) => {
           publicationImages.forEach((file) => {
             cleanupFile(file);
           });
-          return res.status(500).json({
-            error:
-              "Unable to upload publication due to some technical problem.",
+          return res.status(501).json({
+            issue: "Not implemented!",
+            details: "Something went wrong, please try again later.",
           });
         } else {
           publicationImages.forEach((file) => {
@@ -107,12 +107,13 @@ const uploadPublicationCtrl = async (req, res) => {
             "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
           );
           return res.status(201).json({
-            message: "Publication has been successfully uploaded.",
+            details: "Requested resources has been successfully uploaded!",
           });
         }
       } else {
         return res.status(400).json({
-          error: "Bad Request!",
+          issue: "Bad Request!",
+          details: "All fields are required.",
         });
       }
     }
@@ -124,11 +125,9 @@ const uploadPublicationCtrl = async (req, res) => {
       cleanupFile(file);
     });
     return res.status(500).json({
-      error: error.message,
-      message:
-        "Unable to upload publication information due to some technical problem",
-      alert:
-        "If the issue are not resolve autometically then contact with your tech team.",
+      issue: error.message,
+      details:
+        "Unable to upload requested resources due to some technical problem.",
     });
   }
 };

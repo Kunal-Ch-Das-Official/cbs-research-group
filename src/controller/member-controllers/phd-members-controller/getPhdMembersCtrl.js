@@ -31,16 +31,17 @@ const getPhdMembersCtrl = async (req, res) => {
       const getSinglePhdMemberInfo = await phdMemberModel.findById(id);
       if (!getSinglePhdMemberInfo) {
         return res.status(404).json({
-          error: "Requested resources are not found!",
-          message: "Please check the given details.",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getSinglePhdMemberInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error,
-        Message: `Unable to find phd member info due to:${error.message}`,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -48,15 +49,17 @@ const getPhdMembersCtrl = async (req, res) => {
       const getAllPhdMembersInfo = await phdMemberModel.find();
       if (!getAllPhdMembersInfo) {
         return res.status(404).json({
-          message: "Phd members are not available!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllPhdMembersInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error,
-        Message: `Unable to find phd members info due to:${error.message}`,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

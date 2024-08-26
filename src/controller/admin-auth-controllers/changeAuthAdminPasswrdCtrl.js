@@ -32,8 +32,8 @@ const changeAuthAdminPasswordCtrl = async (req, res) => {
     if (adminUserPassword && adminUserPassword_confirmation) {
       if (adminUserPassword !== adminUserPassword_confirmation) {
         return res.status(400).json({
-          error: "Bad Request!",
-          message: "Password and confirm password dose'nt match",
+          issue: "Bad Request!",
+          details: "Password and confirm password dosen't match",
         });
       } else {
         const salt = await bcrypt.genSalt(15);
@@ -47,14 +47,13 @@ const changeAuthAdminPasswordCtrl = async (req, res) => {
           }
         );
         if (!newPassword) {
-          return res.status(500).json({
-            error:
-              "Unable to store the new password due to some technical error",
-            message: "Please try again later.",
+          return res.status(501).json({
+            issue: "Not implemented!",
+            details: "Something went wrong, please try again later.",
           });
         } else {
           return res.status(200).json({
-            message: "Password has been successfully updated.",
+            details: "Password has been successfully updated.",
           });
         }
       }
@@ -66,8 +65,8 @@ const changeAuthAdminPasswordCtrl = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to change the password due to some technical error.",
+      issue: error.message,
+      details: "Unable to change the password due to some technical problem.",
     });
   }
 };

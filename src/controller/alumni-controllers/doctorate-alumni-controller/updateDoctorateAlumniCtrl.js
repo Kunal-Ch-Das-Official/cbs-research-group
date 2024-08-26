@@ -51,7 +51,10 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
     const getPreviousAlumniInfo = await doctorateAlumniModel.findById(id);
     if (!getPreviousAlumniInfo) {
       filePath && cleanupFile(filePath);
-      return res.status(404).json({ error: "Requested resources not found" });
+      return res.status(404).json({
+        issue: "Not found!",
+        details: "Requested resources are not found.",
+      });
     }
 
     const newAlumniName = alumniName || getPreviousAlumniInfo.alumniName;
@@ -106,9 +109,9 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
     );
 
     if (!updateAlumniInfo) {
-      return res.status(405).json({
-        error: "This operations are not allowed!",
-        message: "Please check the details and try again later!",
+      return res.status(501).json({
+        issue: "Not implemented!",
+        details: "Something went wrong, please try again later.",
       });
     } else {
       clearCache(
@@ -118,15 +121,15 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
         `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate/alumni-data`
       );
       return res.status(200).json({
-        message: "Doctorate alumni info's has been successfully updated!",
+        details: "Requested resources has been successfully updated!",
       });
     }
   } catch (error) {
     filePath && cleanupFile(filePath);
-    console.error("Unable to update due to some technical error:", error);
     return res.status(500).json({
-      error: "Unable to update due to some technical error",
-      details: error.message,
+      issue: error.message,
+      details:
+        "Unable to update the requested resources due to some technical problem.",
     });
   }
 };

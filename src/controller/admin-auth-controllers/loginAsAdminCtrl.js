@@ -37,9 +37,9 @@ const loginAsAdminCtrl = async (req, res) => {
       });
       // If email not exist then run this block of code
       if (!isAdmin) {
-        return res.status(404).json({
-          error: "Admin dose'nt exist!",
-          message: "You are not authenticated admin!",
+        return res.status(401).json({
+          issue: " Unauthorized Admin!",
+          details: "You are not authorized admin.",
         });
         // If email exist then run this block of code
       } else {
@@ -64,15 +64,16 @@ const loginAsAdminCtrl = async (req, res) => {
             { expiresIn: "10d" }
           );
           return res.status(200).json({
-            message: "Login successfull!",
-            details: "Welcome to CBS Research Group admin portal",
+            message: "Login successful!",
+            details:
+              "Welcome to CBS Research Group's administrative dashboard.",
             authentication_sign: token,
           });
           // Check if email and password are not match then run this block of code
         } else {
           return res.status(401).json({
-            error: "Unauthorized Admin",
-            message: "Email or password dose not match",
+            issue: "Authentication failed!",
+            details: "Email or password dosen't match",
           });
         }
       }
@@ -80,15 +81,15 @@ const loginAsAdminCtrl = async (req, res) => {
     } else {
       // Check is the email exist on database or not
       return res.status(400).json({
-        error: "Bad Request!",
-        message: "Email and password require",
+        issue: "Bad Request!",
+        details: "Email and password required.",
       });
     }
     // If there are any error in this code then this will executed
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to proceed login process due to some technical error!",
+      issue: error.message,
+      details: "Unable to proceed login process due to some technical problem.",
     });
   }
 };

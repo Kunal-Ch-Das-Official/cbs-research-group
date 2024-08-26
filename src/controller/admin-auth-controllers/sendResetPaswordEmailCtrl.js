@@ -34,8 +34,8 @@ const sendResetPasswordEmailCtrl = async (req, res) => {
   try {
     if (!adminUserEmail) {
       return res.status(400).json({
-        error: "Bad Request!",
-        message: "Email adress is require",
+        issue: "Bad Request!",
+        details: "Email Id is required.",
       });
     } else {
       const requestedEmail = await authAdminUserModel.findOne({
@@ -43,8 +43,8 @@ const sendResetPasswordEmailCtrl = async (req, res) => {
       });
       if (!requestedEmail) {
         return res.status(404).json({
-          error: "Email dose'nt exist",
-          message: "Please check the email adress",
+          issue: "Admin user not exist!",
+          details: "Please provide a valid admin user id.",
         });
       } else {
         const secret = requestedEmail._id + jwtSecretKey;
@@ -66,8 +66,8 @@ const sendResetPasswordEmailCtrl = async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({
-      Error: error.message,
-      Message: "Unable to perform the task due to some technical error",
+      issue: error.message,
+      details: "Unable to perform the task due to some technical problem.",
     });
   }
 };

@@ -51,7 +51,10 @@ const updateMscMemberCtrl = async (req, res) => {
     const getPreviousMemberInfo = await mscMemberModel.findById(id);
     if (!getPreviousMemberInfo) {
       filePath && cleanupFile(filePath);
-      return res.status(404).json({ error: "Requested resources not found" });
+      return res.status(404).json({
+        issue: "Not found!",
+        details: "Requested resources are not found.",
+      });
     }
 
     const newMemberName = memberName || getPreviousMemberInfo.memberName;
@@ -100,9 +103,9 @@ const updateMscMemberCtrl = async (req, res) => {
     );
 
     if (!updateMemberInfo) {
-      return res.status(405).json({
-        error: "This operations are not allowed!",
-        message: "Please check the details and try again later!",
+      return res.status(501).json({
+        issue: "Not implemented!",
+        details: "Something went wrong, please try again later.",
       });
     } else {
       clearCache(
@@ -113,14 +116,16 @@ const updateMscMemberCtrl = async (req, res) => {
       );
       return res
         .status(200)
-        .json({ message: "Msc members Info has been successfully updated!" });
+        .json({
+          details: "Requested resources has been successfully updated!",
+        });
     }
   } catch (error) {
     filePath && cleanupFile(filePath);
-    console.error("Unable to update due to some technical error:", error);
     return res.status(500).json({
-      error: "Unable to update due to some technical error",
-      details: error.message,
+      issue: error.message,
+      details:
+        "Unable to update requested resources due to some technical problem.",
     });
   }
 };

@@ -48,8 +48,8 @@ const uploadMscMemberCtrl = async (req, res) => {
   } = req.body;
   if (!req.body || !req.file) {
     return res.status(400).json({
-      error: "Bad request!",
-      message: "Fill up all the fields carefully!!",
+      issue: "Bad Request!",
+      details: "All fields are required.",
     });
   } else {
     try {
@@ -79,9 +79,9 @@ const uploadMscMemberCtrl = async (req, res) => {
         filePath && cleanupFile(filePath);
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
 
-        return res.status(405).json({
-          error: "This operations are not allowed!",
-          message: "Please check the details and try again later!",
+        return res.status(501).json({
+          issue: "Not implemented!",
+          details: "Something went wrong, please try again later.",
         });
       } else {
         filePath && cleanupFile(filePath);
@@ -89,16 +89,16 @@ const uploadMscMemberCtrl = async (req, res) => {
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc/members`
         );
         return res.status(201).json({
-          message: "Msc members information has been successfully uploaded",
+          details: "Requested resources has been successfully uploaded",
         });
       }
     } catch (error) {
       filePath && cleanupFile(filePath);
       profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
       return res.status(500).json({
-        Error: error.message,
-        Details:
-          "Unable to upload requested resources due to some technical error!",
+        issue: error.message,
+        details:
+          "Unable to upload requested resources due to some technical problem.",
       });
     }
   }

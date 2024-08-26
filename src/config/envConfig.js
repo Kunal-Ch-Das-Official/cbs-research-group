@@ -25,10 +25,15 @@ const environment = {
   jwtSecretKey: process.env.JWT_SECRET_KEY,
   clientSideUrl: process.env.CLIENT_SIDE_URL,
 
-  emailHostProtocol: process.env.EMAIL_HOST_PROTOCOL,
-  emailPort: process.env.EMAIL_PORT,
-  emailHostUser: process.env.EMAIL_HOST_USER,
-  emailHostPassword: process.env.EMAIL_HOST_PASSWORD,
+  mainEmailHostProtocol: process.env.MAIN_EMAIL_HOST_PROTOCOL,
+  mainEmailPort: process.env.MAIN_EMAIL_PORT,
+  mainEmailHostUser: process.env.MAIN_EMAIL_HOST_USER,
+  mainEmailHostPassword: process.env.MAIN_EMAIL_HOST_PASSWORD,
+
+  supportEmailHostProtocol: process.env.SUPPORT_EMAIL_HOST_PROTOCOL,
+  supportEmailPort: process.env.SUPPORT_EMAIL_PORT,
+  supportEmailHostUser: process.env.SUPPORT_EMAIL_HOST_USER,
+  supportEmailHostPassword: process.env.SUPPORT_EMAIL_HOST_PASSWORD,
 };
 
 const envConfig = Object.freeze(environment);

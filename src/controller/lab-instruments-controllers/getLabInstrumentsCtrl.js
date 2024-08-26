@@ -31,16 +31,17 @@ const getLabInstrumentsCtrl = async (req, res) => {
       const getSingleInstrumentInfo = await labInstrumentModel.findById(id);
       if (!getSingleInstrumentInfo) {
         return res.status(404).json({
-          error: "Requested resources are not found!",
-          message: "Please check the given details.",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getSingleInstrumentInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: `Unable to find phd member info due to:${error.message}`,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -48,15 +49,17 @@ const getLabInstrumentsCtrl = async (req, res) => {
       const getAllInstrumentsInfo = await labInstrumentModel.find();
       if (!getAllInstrumentsInfo) {
         return res.status(404).json({
-          message: "Requested resources are not available!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getAllInstrumentsInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        Error: error.message,
-        Message: `Unable to find phd members info due to:${error.message}`,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   }

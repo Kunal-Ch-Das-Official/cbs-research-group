@@ -23,7 +23,7 @@ const cleanupFile = (filePath) => {
     if (err) {
       console.log("Unable to remove file, due to:", err);
     } else {
-      console.log("File has been successfully removed!!");
+      console.log("File has been successfully removed!");
     }
   });
 };

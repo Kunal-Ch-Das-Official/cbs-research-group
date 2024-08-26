@@ -32,16 +32,17 @@ const getMastersAlumniCtrl = async (req, res) => {
       const getSingleMastersAlumniInfo = await mastersAlumniModel.findById(id);
       if (!getSingleMastersAlumniInfo) {
         return res.status(404).json({
-          error: "Masters alumni are not found please check the details!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
         return res.status(200).sendCachedData(getSingleMastersAlumniInfo);
       }
     } catch (error) {
       return res.status(500).sendCachedData({
-        message:
-          "Unable to find masters alumni info due to some technical error",
-        reason: error.message,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem.",
       });
     }
   } else {
@@ -49,16 +50,17 @@ const getMastersAlumniCtrl = async (req, res) => {
       const getAllMastersAlumniInfo = await mastersAlumniModel.find();
       if (!getAllMastersAlumniInfo) {
         return res.status(404).json({
-          error: "Masters alumni are not available!",
+          issue: "Not found!",
+          details: "Requested resources are not found.",
         });
       } else {
-        return res.status(200).json(getAllMastersAlumniInfo);
+        return res.status(200).sendCachedData(getAllMastersAlumniInfo);
       }
     } catch (error) {
       return res.status(500).json({
-        message:
-          "Unable to find masters alumni info due to some technical error",
-        reason: error.message,
+        issue: error.message,
+        details:
+          "Unable to find requested resources due to some technical problem",
       });
     }
   }
