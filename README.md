@@ -1,10 +1,10 @@
 # CBS Research Group Backend
 
 
-# Overview
+## Overview
 The CBS Research Group Backend is a RESTful API designed to manage the operations of the CBS Research Group. This API is built with Node.js and Express.js, leveraging MongoDB for data storage. The backend supports various functionalities, including user authentication, CRUD operations, and automated email services.
 
-# Table of Contents
+## Table of Contents
 * Project Information
 * Technology Stack
 * Architecture
@@ -19,7 +19,7 @@ The CBS Research Group Backend is a RESTful API designed to manage the operation
 * License
 
 
-# Project Information
+## Project Information
 * Project Name: CBS Research Group Backend
 * Owner: Dr. Chinmoy Bhattachary
 * Organization: CBS Research Group
@@ -30,7 +30,7 @@ The CBS Research Group Backend is a RESTful API designed to manage the operation
 * Position: Web Developer
 
 
-# Technology Stack
+## Technology Stack
 * Backend Framework: Express.js
 * Runtime: Node.js
 * Database: MongoDB
@@ -41,10 +41,10 @@ The CBS Research Group Backend is a RESTful API designed to manage the operation
 
 
 
-# Architecture
+## Architecture
 The backend follows a Multi-Tier Architecture, ensuring separation of concerns and scalability.
 
-# Features
+## Features
 * CRUD Operations: Manage data for various entities such as alumni, members, projects, and more.
 * Authentication: Secure login and registration for admin users.
 * Automatic Email Service: Send emails for registration, password reset, and contact responses.
@@ -52,9 +52,9 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 * And many more.
 
 
-## Routes:
+# Routes:
 
-# Base URLs
+## Base URLs
 ```
 |---------------------------------------------------------------------------------------------------------|
 | Route Name	             |  Base URL                                                                  |
@@ -89,7 +89,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 
 
 
-# Single Endpoints
+## Single Endpoints
 ```
 |-----------------------------------------|
 | Entity 	           | Endpoint         |
@@ -117,9 +117,8 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ```
 
 
-## Multiple Endpoints:
-
-# Admin Authentication:
+# Multiple Endpoints:
+## Admin Authentication:
 ```
 |--------------------------------------------------------|
 | Action 	               | Endpoint                    |
@@ -146,7 +145,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 |--------------------------------------------------------|
 ```	
 
-# Admin Registration Request
+## Admin Registration Request
 ```
 |------------------------------------|	
 | Action 	     | Endpoint          |
@@ -164,7 +163,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ```
 	
 	
-# Contact Us
+## Contact Us
 ```
 |-----------------------------------------|
 | Action 	         | Endpoint           |
@@ -206,11 +205,11 @@ Run the Server In Production:
  npm start
 ```
 
-# Usage
+#3 Usage
 * Use tools like Postman to interact with the API endpoints.
 * Implement the routes according to the base URLs and endpoints provided.
 # Contributing
 * Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
-# License
+## License
 * This project is licensed under the MIT License.
