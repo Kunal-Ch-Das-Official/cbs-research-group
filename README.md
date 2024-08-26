@@ -56,21 +56,35 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 
 # Base URLs
 ```
-| Route Name	              |  Base URL                                                                 |
-| ------------------------------------------------------------------------------------------------------- |
+|---------------------------------------------------------------------------------------------------------|
+| Route Name	             |  Base URL                                                                  |
+|---------------------------------------------------------------------------------------------------------|
 | Admin Authentication       | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin       |
+|---------------------------------------------------------------------------------------------------------|
 | Admin Registration Request | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request|
+|---------------------------------------------------------------------------------------------------------|
 | Contact Us                 | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us      |
+|---------------------------------------------------------------------------------------------------------|
 | Doctorate Alumni           | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate       |
+|---------------------------------------------------------------------------------------------------------|
 | Masters Alumni             | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters         |
+|---------------------------------------------------------------------------------------------------------|
 | PHD Members                | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd             |
+|---------------------------------------------------------------------------------------------------------|
 | MSC Members                | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc             |
+|---------------------------------------------------------------------------------------------------------|
 | Current Group News         | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news     |
-| Lab Instruments            | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities      | 
-| Projects                	  | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs       |
+|---------------------------------------------------------------------------------------------------------|
+| Lab Instruments            | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities      |
+|---------------------------------------------------------------------------------------------------------| 
+| Projects                	 | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs        |
+|---------------------------------------------------------------------------------------------------------|
 | Publication                | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication     |
+|---------------------------------------------------------------------------------------------------------|
 | Personal Awards            | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal        |
+|---------------------------------------------------------------------------------------------------------|
 | Team Awards                | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/team            |
+|---------------------------------------------------------------------------------------------------------|
 ```
 
 
