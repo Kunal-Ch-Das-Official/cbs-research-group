@@ -30,17 +30,10 @@ const admiAuthenticationRouter = express.Router();
 // Declaration of Auth middleware //
 admiAuthenticationRouter.use("/change-password", checkAdminAuth); // Change password auth check
 admiAuthenticationRouter.use("/logged-in-admin", checkAdminAuth); // logged in admin auth check
-// Protected Routers//
-admiAuthenticationRouter.post("/register", registerAsAdminCtrl); // Admin registration router
-admiAuthenticationRouter.post("/change-password", changeAuthAdminPasswordCtrl); // Chandge password router
-
-// Current Logged in admin router
-admiAuthenticationRouter.get(
-  "/logged-in-admin",
-  getCurrentLoggedInAdminUserCtrl
-);
 
 // Public Routers //
+admiAuthenticationRouter.post("/register", registerAsAdminCtrl); // Admin registration router
+
 admiAuthenticationRouter.post("/login", loginAsAdminCtrl); // Login as admin router
 
 // Send forget password link router
@@ -53,6 +46,15 @@ admiAuthenticationRouter.post(
 admiAuthenticationRouter.post(
   "/reset-password/:id/:token",
   resetForgottenPassword
+);
+
+// Protected Routers//
+admiAuthenticationRouter.post("/change-password", changeAuthAdminPasswordCtrl); // Chandge password router
+
+// Current Logged in admin router
+admiAuthenticationRouter.get(
+  "/logged-in-admin",
+  getCurrentLoggedInAdminUserCtrl
 );
 
 module.exports = admiAuthenticationRouter;
