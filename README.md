@@ -90,60 +90,97 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 
 
 # Single Endpoints
-| Entity 	                 | Endpoint   |
+```
+|-----------------------------------------|
+| Entity 	           | Endpoint         |
 |-----------------------------------------| 
 | Doctorate Alumni     | /alumni-data     |
+|-----------------------------------------|
 | Masters Alumni       | /alumni-data     |
-| PHD Members          | /members         | 
+|-----------------------------------------|
+| PHD Members          | /members         |
+|-----------------------------------------| 
 | MSC Members          | /members         |
+|-----------------------------------------|
 | Current Group News   | /groups          |
+|-----------------------------------------|
 | Lab Instruments      | /lab-instruments |
+|-----------------------------------------|
 | Projects             | /projects        |
+|-----------------------------------------|
 | Publication          | /about-info      |
+|-----------------------------------------|
 | Personal Awards      | /awards          | 
+|-----------------------------------------|
 | Team Awards          | /awards          |
-
+|-----------------------------------------|
+```
 
 
 ## Multiple Endpoints:
 
-# Admin Authentication
-| Action 	               | Endpoint                  |
-|----------------------------------------------------- | 
-| Admin Registration       | /register                 |
-| Admin Login              | /login                    |
-| Get Logged-in Admin      | /logged-in-admin          | 
-| Change Password          | /change-password          |
-| Send Password Reset Link | /send-reset-password-link |
-| Reset Password           | /reset-password/:id/:token|
-| Projects                 | /projects                 |
-| Publication              | /about-info               |
-| Personal Awards          | /awards                   | 
-| Team Awards              | /awards                   |
-	
+# Admin Authentication:
+```
+|--------------------------------------------------------|
+| Action 	               | Endpoint                    |
+|--------------------------------------------------------| 
+| Admin Registration       | /register                   |
+|--------------------------------------------------------|
+| Admin Login              | /login                      |
+|--------------------------------------------------------|
+| Get Logged-in Admin      | /logged-in-admin            | 
+|--------------------------------------------------------|
+| Change Password          | /change-password            |
+|--------------------------------------------------------|
+| Send Password Reset Link | /send-reset-password-link   |
+|--------------------------------------------------------|
+| Reset Password           | /reset-password/:id/:token  |
+|--------------------------------------------------------|
+| Projects                 | /projects                   |
+|--------------------------------------------------------|
+| Publication              | /about-info                 |
+|--------------------------------------------------------|
+| Personal Awards          | /awards                     | 
+|--------------------------------------------------------|
+| Team Awards              | /awards                     |
+|--------------------------------------------------------|
+```	
 
-# Admin Registration Request	
+# Admin Registration Request
+```
+|------------------------------------|	
 | Action 	     | Endpoint          |
 |------------------------------------| 
 | Create Request | /admin            |
+|------------------------------------|
 | Get Requests   | /admin            |
+|------------------------------------|
 | Delete Request | /admin            | 
+|------------------------------------|
 | Accept Request | /admin-accept/:id |
+|------------------------------------|
 | Reject Request | /admin-denied/:id |
-
+|------------------------------------|
+```
 	
 	
-# Contact Us	
-| Action 	     | Endpoint               |
+# Contact Us
+```
+|-----------------------------------------|
+| Action 	         | Endpoint           |
 |-----------------------------------------| 
 | Post Information   | /information       |
+|-----------------------------------------|
 | Get Information    | /information       |
+|-----------------------------------------|
 | Delete Information | /information       | 
+|-----------------------------------------|
 | Send Response      | /response-mail/:id |
+|-----------------------------------------|
+```
 
 
-
-# Setup and Installation
+## Setup and Installation
 
 * Clone the Repository:
 ```bash
