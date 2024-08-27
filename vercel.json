@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/upload": {
+      "memory": 256,
+      "maxDuration": 10
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
@@ -16,11 +16,5 @@
       "methods": ["POST"],
       "dest": "server.js"
     }
-  ],
-  "functions": {
-    "api/upload": {
-      "memory": 256,
-      "maxDuration": 10
-    }
-  }
+  ]
 }
