@@ -87,7 +87,7 @@ const registerAsAdminCtrl = async (req, res) => {
             });
             // Generate json web token
             const token = jwt.sign({ adminId: savedAdmin._id }, jwtSecretKey, {
-              expiresIn: "365d",
+              expiresIn: "1d",
             });
             return res.status(201).json({
               message: "Registration successful!",

@@ -61,7 +61,7 @@ const loginAsAdminCtrl = async (req, res) => {
           const token = jwt.sign(
             { adminId: authenticateAdmin._id },
             jwtSecretKey,
-            { expiresIn: "10d" }
+            { expiresIn: "1d" }
           );
           return res.status(200).json({
             message: "Login successful!",

@@ -15,18 +15,27 @@
  */
 
 const cloudinaryConfig = require("../../config/cloudinaryConfig");
+const streamifier = require("streamifier");
 
-const customSingleUploader = async (requireFilePath, folderName) => {
+const customSingleUploader = async (fileBuffer, folderName) => {
   try {
-    const storedDataInfo = await cloudinaryConfig.uploader.upload(
-      requireFilePath,
-      {
-        folder: folderName,
-      }
-    );
-    const storedDataAccessUrl = storedDataInfo.secure_url;
-    const storedDataAccessId = storedDataInfo.public_id;
-    return { storedDataAccessUrl, storedDataAccessId };
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinaryConfig.uploader.upload_stream(
+        { folder: folderName, resource_type: "auto" },
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve({
+              storedDataAccessUrl: result.secure_url,
+              storedDataAccessId: result.public_id,
+            });
+          }
+        }
+      );
+      // Create a readable stream from the buffer
+      streamifier.createReadStream(fileBuffer).pipe(uploadStream);
+    });
   } catch (error) {
     console.log({
       status: 500,
@@ -37,4 +46,5 @@ const customSingleUploader = async (requireFilePath, folderName) => {
     return null;
   }
 };
+
 module.exports = customSingleUploader;

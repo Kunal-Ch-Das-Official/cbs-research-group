@@ -28,7 +28,6 @@ const {
 const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const uploadPhdMemberCtrl = async (req, res) => {
   let profileImageUrl;
@@ -53,7 +52,7 @@ const uploadPhdMemberCtrl = async (req, res) => {
   } else {
     try {
       if (req.file) {
-        filePath = req.file.path;
+        filePath = req.file.buffer;
         const { storedDataAccessUrl, storedDataAccessId } =
           await customSingleUploader(filePath, "phd_members_image");
         profileImageUrl = storedDataAccessUrl;
@@ -75,7 +74,6 @@ const uploadPhdMemberCtrl = async (req, res) => {
 
       const uploadedData = await phdMembersInfo.save();
       if (!uploadedData) {
-        filePath && cleanupFile(filePath);
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
 
         return res.status(501).json({
@@ -83,7 +81,6 @@ const uploadPhdMemberCtrl = async (req, res) => {
           details: "Something went wrong, please try again later.",
         });
       } else {
-        filePath && cleanupFile(filePath);
         clearCache(
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members`
         );
@@ -93,7 +90,6 @@ const uploadPhdMemberCtrl = async (req, res) => {
         });
       }
     } catch (error) {
-      filePath && cleanupFile(filePath);
       profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
       return res.status(500).json({
         issue: error.message,

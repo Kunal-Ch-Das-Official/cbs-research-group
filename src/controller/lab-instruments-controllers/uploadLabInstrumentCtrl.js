@@ -28,7 +28,6 @@ const {
 const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../utils/custom-file-cleaner/localFileCleaner");
 
 // Details: Role of this controller is to upload single lab instrument info to the data base.
 const uploadLabInstrumentCtrl = async (req, res) => {
@@ -45,7 +44,7 @@ const uploadLabInstrumentCtrl = async (req, res) => {
   } else {
     try {
       if (req.file) {
-        filePath = req.file.path;
+        filePath = req.file.buffer;
         const { storedDataAccessUrl, storedDataAccessId } =
           await customSingleUploader(filePath, "lab_instruments_image");
         labInstrumentImageUrl = storedDataAccessUrl;
@@ -60,7 +59,6 @@ const uploadLabInstrumentCtrl = async (req, res) => {
 
       const uploadedData = await labInstrumentsInfo.save();
       if (!uploadedData) {
-        filePath && cleanupFile(filePath);
         labInstrumentImgPublicId &&
           (await customSingleDestroyer(labInstrumentImgPublicId));
 
@@ -69,7 +67,6 @@ const uploadLabInstrumentCtrl = async (req, res) => {
           details: "Something went wrong, please try again later.",
         });
       } else {
-        filePath && cleanupFile(filePath);
         clearCache(
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments`
         );
@@ -78,7 +75,6 @@ const uploadLabInstrumentCtrl = async (req, res) => {
         });
       }
     } catch (error) {
-      filePath && cleanupFile(filePath);
       labInstrumentImgPublicId &&
         (await customSingleDestroyer(labInstrumentImgPublicId));
       return res.status(500).json({

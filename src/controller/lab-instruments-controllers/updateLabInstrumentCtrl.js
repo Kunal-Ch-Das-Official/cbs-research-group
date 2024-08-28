@@ -27,18 +27,16 @@ const {
 const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../utils/custom-file-cleaner/localFileCleaner");
 
 const updateLabInstrumentCtrl = async (req, res) => {
   const { id } = req.params;
   const { instrumentName, description } = req.body;
-  const filePath = req.file ? req.file.path : null;
+  const filePath = req.file ? req.file.buffer : null;
   let newInstrumentImage, newInstrumentImgCloudId;
 
   try {
     const getPreviousInstrumentInfo = await labInstrumentModel.findById(id);
     if (!getPreviousInstrumentInfo) {
-      filePath && cleanupFile(filePath);
       return res.status(404).json({
         issue: "Not found!",
         details: "Requested resources are not found.",
@@ -60,7 +58,6 @@ const updateLabInstrumentCtrl = async (req, res) => {
       const { instrumentImagePublicId } = getPreviousInstrumentInfo;
       instrumentImagePublicId &&
         (await customSingleDestroyer(instrumentImagePublicId));
-      filePath && cleanupFile(filePath);
     } else {
       newInstrumentImage = getPreviousInstrumentInfo.instrumentImage;
       newInstrumentImgCloudId =
@@ -97,7 +94,6 @@ const updateLabInstrumentCtrl = async (req, res) => {
       });
     }
   } catch (error) {
-    filePath && cleanupFile(filePath);
     return res.status(500).json({
       issue: error.message,
       details:

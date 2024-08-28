@@ -26,7 +26,6 @@ const {
 const publicationModel = require("../../models/publication-model/publicationModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../utils/custom-file-cleaner/localFileCleaner");
 
 const updatePublicationCtrl = async (req, res) => {
   try {
@@ -48,12 +47,11 @@ const updatePublicationCtrl = async (req, res) => {
         const getFieldInfo = await publicationModel.findById(req.params.id);
         await customSingleDestroyer(getFieldInfo[`${field}PublicId`]);
         const uploadNewImg = await customSingleUploader(
-          req.files[field][0].path,
+          req.files[field][0].buffer,
           "publication_image"
         );
         updateFields[field] = uploadNewImg.storedDataAccessUrl;
         updateFields[`${field}PublicId`] = uploadNewImg.storedDataAccessId;
-        cleanupFile(req.files[field][0].path);
       }
     };
 

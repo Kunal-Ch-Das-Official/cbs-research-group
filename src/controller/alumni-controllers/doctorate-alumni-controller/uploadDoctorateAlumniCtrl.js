@@ -30,7 +30,6 @@ const {
 const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const uploadDoctorateAlumniCtrl = async (req, res) => {
   let profileImageUrl;
@@ -57,7 +56,7 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
   } else {
     try {
       if (req.file) {
-        filePath = req.file.path;
+        filePath = req.file.buffer;
         const { storedDataAccessUrl, storedDataAccessId } =
           await customSingleUploader(filePath, "doctorate_alumni_image");
         profileImageUrl = storedDataAccessUrl;
@@ -79,7 +78,6 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
 
       const uploadedData = await doctorateAlumniInfo.save();
       if (!uploadedData) {
-        filePath && cleanupFile(filePath);
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
 
         return res.status(501).json({
@@ -87,7 +85,6 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
           details: "Something went wrong, please try again later.",
         });
       } else {
-        filePath && cleanupFile(filePath);
         clearCache(
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate/alumni-data`
         );
@@ -97,7 +94,6 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
         });
       }
     } catch (error) {
-      filePath && cleanupFile(filePath);
       profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
       return res.status(500).json({
         issue: error.message,

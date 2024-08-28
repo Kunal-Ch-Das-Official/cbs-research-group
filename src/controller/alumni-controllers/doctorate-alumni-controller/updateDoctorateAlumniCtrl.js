@@ -29,7 +29,6 @@ const {
 const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const updateDoctorateAlumniCtrl = async (req, res) => {
   const { id } = req.params;
@@ -44,13 +43,12 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
     yearOfPassout,
     details,
   } = req.body;
-  const filePath = req.file ? req.file.path : null;
+  const filePath = req.file ? req.file.buffer : null;
   let newAlumniImage, newCloudPublicId;
 
   try {
     const getPreviousAlumniInfo = await doctorateAlumniModel.findById(id);
     if (!getPreviousAlumniInfo) {
-      filePath && cleanupFile(filePath);
       return res.status(404).json({
         issue: "Not found!",
         details: "Requested resources are not found.",
@@ -81,8 +79,6 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
         (await customSingleDestroyer(
           getPreviousAlumniInfo.profilePicturePublicId
         ));
-
-      cleanupFile(filePath);
     } else {
       newAlumniImage = getPreviousAlumniInfo.profilePicture;
       newCloudPublicId = getPreviousAlumniInfo.profilePicturePublicId;
@@ -125,7 +121,6 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
       });
     }
   } catch (error) {
-    filePath && cleanupFile(filePath);
     return res.status(500).json({
       issue: error.message,
       details:

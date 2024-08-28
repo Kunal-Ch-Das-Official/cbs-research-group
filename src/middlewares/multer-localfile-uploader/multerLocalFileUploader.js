@@ -14,23 +14,15 @@
  * It handles the file storage and validation processes, ensuring that only
  * valid image files are uploaded and stored in the specified directory.
  */
-
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    const random = uuidv4();
-    cb(null, random + "" + file.originalname);
-  },
-});
+// Configure memory storage
+const storage = multer.memoryStorage();
 
 // Define the file filter function
 const fileFilter = (req, file, cb) => {
-  // Accept only image files (jpeg, png, gif)
+  // Accept only image files (jpeg, png, gif) and pdf
   if (
     file.mimetype === "image/jpeg" ||
     file.mimetype === "image/png" ||
@@ -51,8 +43,10 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const multerLocalFileUploader = multer({
+// Create multer instance with memory storage
+const multerMemoryUploader = multer({
   storage: storage,
   fileFilter: fileFilter,
 });
-module.exports = multerLocalFileUploader;
+
+module.exports = multerMemoryUploader;

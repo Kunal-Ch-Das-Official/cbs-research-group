@@ -30,7 +30,6 @@ const {
 const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const uploadMscMemberCtrl = async (req, res) => {
   let profileImageUrl;
@@ -54,7 +53,7 @@ const uploadMscMemberCtrl = async (req, res) => {
   } else {
     try {
       if (req.file) {
-        filePath = req.file.path;
+        filePath = req.file.buffer;
         // Reusable Image Uploader
         const { storedDataAccessUrl, storedDataAccessId } =
           await customSingleUploader(filePath, "msc_members_image");
@@ -76,7 +75,6 @@ const uploadMscMemberCtrl = async (req, res) => {
 
       const uploadedData = await mscMembersInfo.save();
       if (!uploadedData) {
-        filePath && cleanupFile(filePath);
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
 
         return res.status(501).json({
@@ -84,7 +82,6 @@ const uploadMscMemberCtrl = async (req, res) => {
           details: "Something went wrong, please try again later.",
         });
       } else {
-        filePath && cleanupFile(filePath);
         clearCache(
           `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc/members`
         );
@@ -93,7 +90,6 @@ const uploadMscMemberCtrl = async (req, res) => {
         });
       }
     } catch (error) {
-      filePath && cleanupFile(filePath);
       profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
       return res.status(500).json({
         issue: error.message,

@@ -26,7 +26,6 @@ const {
 const publicationModel = require("../../models/publication-model/publicationModel");
 const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../utils/custom-file-cleaner/localFileCleaner");
 
 const uploadPublicationCtrl = async (req, res) => {
   const { title, contributer, aboutPublication, publishedDate, pdfLink } =
@@ -34,9 +33,9 @@ const uploadPublicationCtrl = async (req, res) => {
   const { publicationThumbnail, firstOverview, secondOverview } = req.files;
 
   const publicationImages = [
-    publicationThumbnail[0].path,
-    firstOverview[0].path,
-    secondOverview[0].path,
+    publicationThumbnail[0].buffer,
+    firstOverview[0].buffer,
+    secondOverview[0].buffer,
   ];
 
   try {
@@ -92,17 +91,11 @@ const uploadPublicationCtrl = async (req, res) => {
           allRequiredImage.forEach((pubId) => {
             customSingleDestroyer(pubId.publicId);
           });
-          publicationImages.forEach((file) => {
-            cleanupFile(file);
-          });
           return res.status(501).json({
             issue: "Not implemented!",
             details: "Something went wrong, please try again later.",
           });
         } else {
-          publicationImages.forEach((file) => {
-            cleanupFile(file);
-          });
           clearCache(
             "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
           );
@@ -121,9 +114,7 @@ const uploadPublicationCtrl = async (req, res) => {
     allRequiredImage.forEach((pubId) => {
       customSingleDestroyer(pubId.publicId);
     });
-    publicationImages.forEach((file) => {
-      cleanupFile(file);
-    });
+
     return res.status(500).json({
       issue: error.message,
       details:

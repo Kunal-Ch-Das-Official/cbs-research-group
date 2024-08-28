@@ -29,7 +29,6 @@ const {
 const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
 const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
 const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
-const cleanupFile = require("../../../utils/custom-file-cleaner/localFileCleaner");
 
 const updatePhdMemberCtrl = async (req, res) => {
   const { id } = req.params;
@@ -44,13 +43,12 @@ const updatePhdMemberCtrl = async (req, res) => {
     currentYear,
     details,
   } = req.body;
-  const filePath = req.file ? req.file.path : null;
+  const filePath = req.file ? req.file.buffer : null;
   let newMemberImage, newCloudPublicId;
 
   try {
     const getPreviousMemberInfo = await phdMemberModel.findById(id);
     if (!getPreviousMemberInfo) {
-      filePath && cleanupFile(filePath);
       return res.status(404).json({
         issue: "Not found!",
         details: "Requested resources are not found.",
@@ -77,7 +75,6 @@ const updatePhdMemberCtrl = async (req, res) => {
       const { profilePicturePublicId } = getPreviousMemberInfo;
       profilePicturePublicId &&
         (await customSingleDestroyer(profilePicturePublicId));
-      filePath && cleanupFile(filePath);
     } else {
       newMemberImage = getPreviousMemberInfo.profilePicture;
       newCloudPublicId = getPreviousMemberInfo.profilePicturePublicId;
@@ -115,14 +112,11 @@ const updatePhdMemberCtrl = async (req, res) => {
       clearCache(
         `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members/${id}`
       );
-      return res
-        .status(200)
-        .json({
-          details: "Requested resources has been successfully updated!",
-        });
+      return res.status(200).json({
+        details: "Requested resources has been successfully updated!",
+      });
     }
   } catch (error) {
-    filePath && cleanupFile(filePath);
     return res.status(500).json({
       issue: error.message,
       details:
