@@ -893,7 +893,7 @@ const sendPasswordResetEmail = async (
       } else {
         return response.status(200).json({
           message: "Email has been send successfully",
-          sending_id: info.messageId,
+          resetLink: corespondingLink,
           notification: `Password reset link has been sended to this:${sendTo} email account.`,
         });
       }
