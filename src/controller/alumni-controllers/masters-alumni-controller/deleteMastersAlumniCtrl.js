@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 16/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the deletion of specific records of masters
  * alumni based on admin requests. It manages the removal of individual
@@ -26,6 +26,8 @@
 
 const mastersAlumniModel = require('../../../models/alumni-model/masters-alumni-model/mastersAlumniModel');
 const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const { dashboardCache } = require('../../dashboard-controllers/getAllData');
+const { masterAlumniCache } = require('./getMastersAlumniCtrl');
 
 const deleteMastersAlumniCtrl = async (req, res) => {
   const { id } = req.params;
@@ -48,6 +50,9 @@ const deleteMastersAlumniCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        masterAlumniCache.del('single_master_alumni');
+        masterAlumniCache.del('all_master_alumni');
+        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'The requested resources has been successfully removed!',
         });

@@ -1,7 +1,7 @@
 {
   "name": "cbs-research-group-server",
   "owner": "Chinmoy Bhattacharya",
-  "version": "2.2.2",
+  "version": "2.3.2",
   "description": "This is the server of cbs-research-group(chemistry-research-lab). It is located in Howrah, Shibpur, Kolkata(West-Bengal, India)",
   "main": "server.js",
   "scripts": {

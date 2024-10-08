@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 16/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This router manages all routes related to PhD members for the
  * CBS Research Group. It defines endpoints for handling PhD member
@@ -19,7 +19,9 @@
 const express = require('express');
 const uploadPhdMemberCtrl = require('../../controller/member-controllers/phd-members-controller/uploadPhdMemberCtrl');
 const updatePhdMemberCtrl = require('../../controller/member-controllers/phd-members-controller/updatePhdMemberCtrl');
-const getPhdMembersCtrl = require('../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl');
+const {
+  getPhdMembersCtrl,
+} = require('../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl');
 const deletePhdMemberCtrl = require('../../controller/member-controllers/phd-members-controller/deletePhdMemberCtrl');
 const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');

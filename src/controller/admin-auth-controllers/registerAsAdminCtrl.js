@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 20/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller manages the signup process for admin users of CBS
  * Research Group. It handles registration requests, validates user
@@ -27,6 +27,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { jwtSecretKey } = require('../../config/envConfig');
 const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
+const { allLoggedInUserDataCache } = require('./getAllLoginAdminCtrl');
+const { dashboardCache } = require('../dashboard-controllers/getAllData');
 
 const registerAsAdminCtrl = async (req, res) => {
   try {
@@ -89,6 +91,8 @@ const registerAsAdminCtrl = async (req, res) => {
             const token = jwt.sign({ adminId: savedAdmin._id }, jwtSecretKey, {
               expiresIn: '1d',
             });
+            allLoggedInUserDataCache.del('all_logged_in_admin');
+            dashboardCache.del('aggregated_data');
             return res.status(201).json({
               message: 'Registration successful!',
               details:

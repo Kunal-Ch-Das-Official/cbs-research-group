@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 20/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This router handles the admin sign-up process for the CBS Research Group.
  * It defines the endpoints and middleware for registering new admin users,
@@ -24,7 +24,9 @@ const getCurrentLoggedInAdminUserCtrl = require('../../controller/admin-auth-con
 const loginAsAdminCtrl = require('../../controller/admin-auth-controllers/loginAsAdminCtrl');
 const sendResetPasswordEmailCtrl = require('../../controller/admin-auth-controllers/sendResetPaswordEmailCtrl');
 const resetForgottenPassword = require('../../controller/admin-auth-controllers/resetAuthAdminForgottenPasswrdCtrl');
-const getAllLoginAdminCtrl = require('../../controller/admin-auth-controllers/getAllLoginAdminCtrl');
+const {
+  getAllLoginAdminCtrl,
+} = require('../../controller/admin-auth-controllers/getAllLoginAdminCtrl');
 const removeAdminAccountCtrl = require('../../controller/admin-auth-controllers/removeAdminAccountCtrl');
 
 const admiAuthenticationRouter = express.Router();

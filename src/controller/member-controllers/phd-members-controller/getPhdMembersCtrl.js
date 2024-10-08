@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 17/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles requests to retrieve all PhD members' data from the database
  * and sends it to the client. It processes the request to fetch a comprehensive list of
@@ -23,45 +23,53 @@
  */
 
 const phdMemberModel = require('../../../models/members-model/phd-member-model/phdMemberModel');
+const NodeCache = require('node-cache');
+const phdMemberCache = new NodeCache();
 
 const getPhdMembersCtrl = async (req, res) => {
   const { id } = req.params;
-  if (id) {
-    try {
-      const getSinglePhdMemberInfo = await phdMemberModel.findById(id);
-      if (!getSinglePhdMemberInfo) {
-        return res.status(404).json({
-          issue: 'Not found!',
-          details: 'Requested resources are not found.',
-        });
+  try {
+    if (id) {
+      const cachedSinglePhdMember = phdMemberCache.get('single_phd_member');
+      if (cachedSinglePhdMember) {
+        return res.status(200).json(cachedSinglePhdMember);
       } else {
-        return res.status(200).json(getSinglePhdMemberInfo);
+        const getSinglePhdMemberInfo = await phdMemberModel.findById(id);
+        if (!getSinglePhdMemberInfo) {
+          return res.status(404).json({
+            issue: 'Not found!',
+            details: 'Requested resources are not found.',
+          });
+        } else {
+          // Cache the retrieved PHD Member
+          phdMemberCache.set('single_phd_member', getSinglePhdMemberInfo);
+          return res.status(200).json(getSinglePhdMemberInfo);
+        }
       }
-    } catch (error) {
-      return res.status(500).json({
-        issue: error.message,
-        details:
-          'Unable to find requested resources due to some technical problem.',
-      });
-    }
-  } else {
-    try {
-      const getAllPhdMembersInfo = await phdMemberModel.find();
-      if (!getAllPhdMembersInfo) {
-        return res.status(404).json({
-          issue: 'Not found!',
-          details: 'Requested resources are not found.',
-        });
+    } else {
+      const allCachedPhdMember = phdMemberCache.get('all_phd_member');
+      if (allCachedPhdMember) {
+        return res.status(200).json(allCachedPhdMember);
       } else {
-        return res.status(200).json(getAllPhdMembersInfo);
+        const getAllPhdMembersInfo = await phdMemberModel.find();
+        if (!getAllPhdMembersInfo) {
+          return res.status(404).json({
+            issue: 'Not found!',
+            details: 'Requested resources are not found.',
+          });
+        } else {
+          // Cache the retrieved PHD Member
+          phdMemberCache.set('all_phd_member', getAllPhdMembersInfo);
+          return res.status(200).json(getAllPhdMembersInfo);
+        }
       }
-    } catch (error) {
-      return res.status(500).json({
-        issue: error.message,
-        details:
-          'Unable to find requested resources due to some technical problem.',
-      });
     }
+  } catch (error) {
+    return res.status(500).json({
+      issue: error.message,
+      details:
+        'Unable to find requested resources due to some technical problem.',
+    });
   }
 };
-module.exports = getPhdMembersCtrl;
+module.exports = { getPhdMembersCtrl, phdMemberCache };

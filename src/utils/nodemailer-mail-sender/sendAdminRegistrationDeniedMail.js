@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 22/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This function handles sending a response email to individuals whose
  * requests to become users of the CBS Research Group have been rejected.
@@ -24,6 +24,12 @@ const {
   mainEmailHostPassword,
 } = require('../../config/envConfig');
 const envConfig = require('../../config/envConfig');
+const {
+  adminAccessReqCache,
+} = require('../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl');
+const {
+  dashboardCache,
+} = require('../../controller/dashboard-controllers/getAllData');
 
 // eslint-disable-next-line consistent-return
 const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
@@ -42,7 +48,7 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
     const mailOptions = {
       from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: 'Request to Become Admin - CBS Research Group ',
+      subject: 'Administrative Access Requests Rejected - CBS Research Group ',
       html: `
         <style>
       * {
@@ -625,7 +631,7 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
                                     "
                                   >
                                     <p style="margin: 0; margin-bottom: 16px">
-										Thank you for your interest in becoming an admin on [Your Site Name]. After careful consideration, we regret to inform you that we are unable to approve your request at this time.
+										Thank you for your interest in becoming an admin on CBS Research Group. After careful consideration, we regret to inform you that we are unable to approve your request at this time.
                                     </p>
                                     <p style="margin: 0; margin-bottom: 16px">
 										This decision is based on our current admin selection criteria and policies. We appreciate your understanding and hope that you will continue to engage with our platform in other ways.
@@ -835,6 +841,9 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
             'If the issue not resolve autometically then contact to your tech support team.',
         });
       } else {
+        adminAccessReqCache.del('single_request');
+        adminAccessReqCache.del('all_request');
+        dashboardCache.del('aggregated_data');
         return response.status(200).json({
           message: 'Email has been sended successfully.',
           sending_id: info.messageId,

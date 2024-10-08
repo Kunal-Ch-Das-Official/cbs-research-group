@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 20/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This function handles sending a response to individuals who have
  * submitted inquiries through the contact form. It manages the process
@@ -23,6 +23,12 @@ const {
   mainEmailHostPassword,
 } = require('../../config/envConfig');
 const envConfig = require('../../config/envConfig');
+const {
+  contactApplicationCache,
+} = require('../../controller/contact-form-controllers/getContactInfoCtrl');
+const {
+  dashboardCache,
+} = require('../../controller/dashboard-controllers/getAllData');
 const contactResponseSendCtrl = async (
   sendTo,
   userName,
@@ -1168,6 +1174,9 @@ const contactResponseSendCtrl = async (
             'If the issue not resolve autometically then contact to your tech support team.',
         });
       } else {
+        contactApplicationCache.del('single_contact_application');
+        contactApplicationCache.del('all_contact_application');
+        dashboardCache.del('aggregated_data');
         return response.status(200).json({
           message: 'Email has been send successfully!',
           sending_id: info.messageId,

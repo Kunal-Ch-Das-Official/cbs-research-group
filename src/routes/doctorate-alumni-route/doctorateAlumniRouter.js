@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 16/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This router handles all routes related to doctorate alumni within the
  * CBS Research Group. It defines the endpoints for managing doctorate alumni
@@ -19,7 +19,9 @@
 const express = require('express');
 const uploadDoctorateAlumniCtrl = require('../../controller/alumni-controllers/doctorate-alumni-controller/uploadDoctorateAlumniCtrl');
 const updateDoctorateAlumniCtrl = require('../../controller/alumni-controllers/doctorate-alumni-controller/updateDoctorateAlumniCtrl');
-const getDoctorateAlumniCtrl = require('../../controller/alumni-controllers/doctorate-alumni-controller/getDoctorateAlumniCtrl');
+const {
+  getDoctorateAlumniCtrl,
+} = require('../../controller/alumni-controllers/doctorate-alumni-controller/getDoctorateAlumniCtrl');
 const deleteDoctorateAlumniCtrl = require('../../controller/alumni-controllers/doctorate-alumni-controller/deleteDoctorateAlumniCtrl');
 const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');

@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 18/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the deletion of a specific project from the database
  * based on a client's request. It processes the request to remove a project
@@ -23,6 +23,8 @@
  */
 
 const projectModel = require('../../models/projects-model/projectModel');
+const { dashboardCache } = require('../dashboard-controllers/getAllData');
+const { projectsCache } = require('./getProjectsCtrl');
 
 const deleteProjectCtrl = async (req, res) => {
   const { id } = req.params;
@@ -41,6 +43,9 @@ const deleteProjectCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        projectsCache.del('single_project');
+        projectsCache.del('all_project');
+        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully removed!',
         });

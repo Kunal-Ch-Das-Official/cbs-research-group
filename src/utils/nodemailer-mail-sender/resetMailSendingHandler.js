@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 20/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This function handles sending reset password emails to users who have
  * requested to reset their passwords. It manages the process of composing
@@ -48,7 +48,7 @@ const sendPasswordResetEmail = async (
     const mailOptions = {
       from: supportEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: ' CBS Research Group - Admin User Password Reset Request',
+      subject: ' CBS Research Group - Reset Your Login Credentials.',
       html: `
 
    <style>

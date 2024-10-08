@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 18/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This router manages all routes related to the latest group news for
  * the CBS Research Group. It defines endpoints for handling news updates,
@@ -19,7 +19,9 @@ const express = require('express');
 const uploadGroupNewsCtrl = require('../../controller/group-news-controller/uploadGroupNewsCtrl');
 const updateGroupNewsCtrl = require('../../controller/group-news-controller/updateGroupNewsCtrl');
 const deleteGroupNewsCtrl = require('../../controller/group-news-controller/deleteGroupNewsCtrl');
-const getGroupNewsCtrl = require('../../controller/group-news-controller/getGroupNewsCtrl');
+const {
+  getGroupNewsCtrl,
+} = require('../../controller/group-news-controller/getGroupNewsCtrl');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const groupNewsRouter = express.Router();

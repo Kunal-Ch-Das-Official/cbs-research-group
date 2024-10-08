@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 23/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the retrieval of publication details from the database.
  * It is responsible for processing requests to fetch specific publication records
@@ -21,38 +21,55 @@
  */
 
 const publicationModel = require('../../models/publication-model/publicationModel');
+const NodeCache = require('node-cache');
+const publicationCache = new NodeCache();
 
 const getPublicationCtrl = async (req, res) => {
   const { id } = req.params;
+
   try {
     if (id) {
-      const getSinglePublication = await publicationModel.findById(id);
-      if (!getSinglePublication) {
-        return res.status(404).json({
-          issue: 'Not found!',
-          details: 'Requested resources are not found.',
-        });
+      // Check if publication is in cache
+      const cachedSinglePublication =
+        publicationCache.get('single_publication');
+      if (cachedSinglePublication) {
+        return res.status(200).json(cachedSinglePublication);
       } else {
-        return res.status(200).json(getSinglePublication);
+        const getSinglePublication = await publicationModel.findById(id);
+        if (!getSinglePublication) {
+          return res.status(404).json({
+            issue: 'Not found!',
+            details: 'Requested resource is not found.',
+          });
+        } else {
+          // Cache the retrieved publication
+          publicationCache.set('single_publication', getSinglePublication);
+          return res.status(200).json(getSinglePublication);
+        }
       }
     } else {
-      const getAllPublication = await publicationModel.find();
-      if (!getAllPublication) {
-        return res.status(404).json({
-          issue: 'Not found!',
-          details: 'Requested resources are not found.',
-        });
+      const allCachedPublication = publicationCache.get('all_publication');
+      if (allCachedPublication) {
+        return res.status(200).json(allCachedPublication);
       } else {
-        return res.status(200).json(getAllPublication);
+        const getAllPublication = await publicationModel.find();
+        if (!getAllPublication) {
+          return res.status(404).json({
+            issue: 'Not found!',
+            details: 'Requested resource is not found.',
+          });
+        } else {
+          publicationCache.set('all_publication', getAllPublication);
+          return res.status(200).json(getAllPublication);
+        }
       }
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details:
-        'Unable to find requested resources due to some technical problem.',
+      details: 'Unable to find requested resources due to a technical problem.',
     });
   }
 };
 
-module.exports = getPublicationCtrl;
+module.exports = { getPublicationCtrl, publicationCache };

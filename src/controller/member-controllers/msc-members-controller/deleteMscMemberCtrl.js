@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 17/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the deletion of a specific MSC member's data from the
  * database based on a client request. It ensures that the correct record is
@@ -24,6 +24,8 @@
 
 const mscMemberModel = require('../../../models/members-model/msc-member-model/mscMemberModel');
 const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const { dashboardCache } = require('../../dashboard-controllers/getAllData');
+const { mscMemberCache } = require('./getMscMembersCtrl');
 
 const deleteMscMemberCtrl = async (req, res) => {
   const { id } = req.params;
@@ -47,6 +49,9 @@ const deleteMscMemberCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        mscMemberCache.del('single_msc_member');
+        mscMemberCache.del('all_msc_member');
+        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully deleted!',
         });

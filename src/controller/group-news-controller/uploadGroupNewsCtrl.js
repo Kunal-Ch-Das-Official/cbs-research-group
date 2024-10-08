@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 18/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the upload of group news to the database.
  *
@@ -20,6 +20,8 @@
  */
 
 const groupNewsModel = require('../../models/group-news-model/groupNewsModel');
+const { dashboardCache } = require('../dashboard-controllers/getAllData');
+const { groupNewsCache } = require('./getGroupNewsCtrl');
 
 const uploadGroupNewsCtrl = async (req, res) => {
   const { newsTitle, content } = req.body;
@@ -38,6 +40,9 @@ const uploadGroupNewsCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        groupNewsCache.del('single_group_news');
+        groupNewsCache.del('all_group_news');
+        dashboardCache.del('aggregated_data');
         return res.status(201).json({
           details: 'Requested resources has been successfully uploaded!',
         });

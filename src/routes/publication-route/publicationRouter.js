@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 23/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This router manages all routes related to team awards for the
  * CBS Research Group. It defines endpoints for handling team awards data,
@@ -22,7 +22,9 @@ const multerLocalFileUploader = require('../../middlewares/multer-localfile-uplo
 const uploadPublicationCtrl = require('../../controller/publication-controllers/uploadPublicationCtrl');
 const updatePublicationCtrl = require('../../controller/publication-controllers/updatePublicationCtrl');
 const deletePublicationCtrl = require('../../controller/publication-controllers/deletePublicationCtrl');
-const getPublicationCtrl = require('../../controller/publication-controllers/getPublicationCtrl');
+const {
+  getPublicationCtrl,
+} = require('../../controller/publication-controllers/getPublicationCtrl');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const publicationRouter = express.Router();

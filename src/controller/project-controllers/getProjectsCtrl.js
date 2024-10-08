@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 16/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles requests for retrieving project information from the
  * database. It processes client requests to fetch and send project data,
@@ -23,45 +23,54 @@
  */
 
 const projectModel = require('../../models/projects-model/projectModel');
+const NodeCache = require('node-cache');
+const projectsCache = new NodeCache();
 
 const getProjectsCtrl = async (req, res) => {
   const { id } = req.params;
-  if (id) {
-    try {
-      const getRequestedProject = await projectModel.findById(id);
-      if (!getRequestedProject) {
-        return res.status(404).json({
-          issue: 'Not found!',
-          details: 'Requested resources are not found.',
-        });
+  try {
+    if (id) {
+      const cachedSingleProject = projectsCache.get('single_project');
+      if (cachedSingleProject) {
+        return res.status(200).json(cachedSingleProject);
       } else {
-        return res.status(200).json(getRequestedProject);
+        const getRequestedProject = await projectModel.findById(id);
+        if (!getRequestedProject) {
+          return res.status(404).json({
+            issue: 'Not found!',
+            details: 'Requested resources are not found.',
+          });
+        } else {
+          // Cache the retrieved projects
+          projectsCache.set('single_project', getRequestedProject);
+          return res.status(200).json(getRequestedProject);
+        }
       }
-    } catch (error) {
-      return res.status(500).json({
-        issue: error.message,
-        details:
-          'Unable to find requested resources due to some technical problem.',
-      });
-    }
-  } else {
-    try {
-      const getAllProjects = await projectModel.find();
-      if (!getAllProjects) {
-        return res.status(404).json({
-          issue: 'Not found!',
-          details: 'Requested resources are not found.',
-        });
+    } else {
+      const cachedAllProject = projectsCache.get('all_project');
+      if (cachedAllProject) {
+        return res.status(200).json(cachedAllProject);
       } else {
-        return res.status(200).json(getAllProjects);
+        const getAllProjects = await projectModel.find();
+        if (!getAllProjects) {
+          return res.status(404).json({
+            issue: 'Not found!',
+            details: 'Requested resources are not found.',
+          });
+        } else {
+          // Cache the retrieved projects
+          projectsCache.set('all_project', getAllProjects);
+          return res.status(200).json(getAllProjects);
+        }
       }
-    } catch (error) {
-      return res.status(500).json({
-        issue: error.message,
-        details:
-          'Unable to find requested resources due to some technical problem.',
-      });
     }
+  } catch (error) {
+    return res.status(500).json({
+      issue: error.message,
+      details:
+        'Unable to find requested resources due to some technical problem.',
+    });
   }
 };
-module.exports = getProjectsCtrl;
+
+module.exports = { getProjectsCtrl, projectsCache };

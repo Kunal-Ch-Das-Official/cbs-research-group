@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 23/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the upload of publication details to the database.
  * It manages requests to insert new publication records into the system, ensuring
@@ -23,6 +23,8 @@
 const publicationModel = require('../../models/publication-model/publicationModel');
 const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
 const customSingleUploader = require('../../utils/cloudinary-single-uploader/customSingleUploader');
+const { dashboardCache } = require('../dashboard-controllers/getAllData');
+const { publicationCache } = require('./getPublicationCtrl');
 
 const uploadPublicationCtrl = async (req, res) => {
   const { title, contributer, aboutPublication, publishedDate, pdfLink } =
@@ -93,6 +95,9 @@ const uploadPublicationCtrl = async (req, res) => {
             details: 'Something went wrong, please try again later.',
           });
         } else {
+          publicationCache.del('all_publication');
+          publicationCache.del('single_publication');
+          dashboardCache.del('aggregated_data');
           return res.status(201).json({
             details: 'Requested resources has been successfully uploaded!',
           });

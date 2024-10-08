@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the process of uploading new project details to the
  * database. It is responsible for receiving project data from the client and
@@ -23,6 +23,8 @@
  */
 
 const projectModel = require('../../models/projects-model/projectModel');
+const { dashboardCache } = require('../dashboard-controllers/getAllData');
+const { projectsCache } = require('./getProjectsCtrl');
 
 const uploadProjectCtrl = async (req, res) => {
   const { projectName, description, projectStatus } = req.body;
@@ -45,6 +47,9 @@ const uploadProjectCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        projectsCache.del('single_project');
+        projectsCache.del('all_project');
+        dashboardCache.del('aggregated_data');
         return res.status(201).json({
           details: 'Requested resources has been successfully uploaded!',
         });

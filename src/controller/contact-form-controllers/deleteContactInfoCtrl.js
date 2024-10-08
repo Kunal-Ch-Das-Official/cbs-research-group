@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 18/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the deletion of a specific contact information record
  * based on an admin request. It ensures that the contact info is removed from
@@ -22,6 +22,8 @@
  */
 
 const contactFormModel = require('../../models/contact-form-model/contactFormModel');
+const { dashboardCache } = require('../dashboard-controllers/getAllData');
+const { contactApplicationCache } = require('./getContactInfoCtrl');
 
 const deleteContactInfoCtrl = async (req, res) => {
   const { id } = req.params;
@@ -40,6 +42,9 @@ const deleteContactInfoCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        contactApplicationCache.del('single_contact_application');
+        contactApplicationCache.del('all_contact_application');
+        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully removed!',
         });

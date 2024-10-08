@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This router manages all routes related to personal awards for
  * Professor Chinmoy Bhattacharya within the CBS Research Group.
@@ -22,7 +22,9 @@ const express = require('express');
 const uploadPersonalAwardsCtrl = require('../../controller/awards-controllers/personal-awards-controller/uploadPersonalAwardCtrl');
 const updatePersonalAwardCtrl = require('../../controller/awards-controllers/personal-awards-controller/updatePersonalAwardCtrl');
 const deletePersonalAwardsCtrl = require('../../controller/awards-controllers/personal-awards-controller/deletePersonalAwardsCtrl');
-const getPersonalAwardsCtrl = require('../../controller/awards-controllers/personal-awards-controller/getPersonalAwardsCtrl');
+const {
+  getPersonalAwardsCtrl,
+} = require('../../controller/awards-controllers/personal-awards-controller/getPersonalAwardsCtrl');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const personalAwardsRouter = express.Router();

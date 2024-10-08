@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 16/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the process of updating existing records of
  * master alumni in the database. It manages modifications to alumni data
@@ -27,6 +27,8 @@
 const mastersAlumniModel = require('../../../models/alumni-model/masters-alumni-model/mastersAlumniModel');
 const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
 const customSingleUploader = require('../../../utils/cloudinary-single-uploader/customSingleUploader');
+const { dashboardCache } = require('../../dashboard-controllers/getAllData');
+const { masterAlumniCache } = require('./getMastersAlumniCtrl');
 
 const updateMastersAlumniCtrl = async (req, res) => {
   const { id } = req.params;
@@ -104,6 +106,9 @@ const updateMastersAlumniCtrl = async (req, res) => {
         details: 'Something went wrong, please try again later.',
       });
     } else {
+      masterAlumniCache.del('single_master_alumni');
+      masterAlumniCache.del('all_master_alumni');
+      dashboardCache.del('aggregated_data');
       return res.status(200).json({
         details: 'Requested resources has been successfully updated!',
       });

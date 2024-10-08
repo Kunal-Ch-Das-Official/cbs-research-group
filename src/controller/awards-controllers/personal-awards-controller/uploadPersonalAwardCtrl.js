@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the process of uploading new personal awards records
  * to the database. It manages the addition of personal awards data as submitted
@@ -22,6 +22,8 @@
  */
 
 const personalAwardsModel = require('../../../models/awards-model/personal-awards-model/personalAwardsModel');
+const { dashboardCache } = require('../../dashboard-controllers/getAllData');
+const { personalAwardCache } = require('./getPersonalAwardsCtrl');
 
 const uploadPersonalAwardsCtrl = async (req, res) => {
   const { awardTitle, recivedFor, recivedDate } = req.body;
@@ -44,6 +46,9 @@ const uploadPersonalAwardsCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        personalAwardCache.del('single_personal_award');
+        personalAwardCache.del('all_personal_award');
+        dashboardCache.del('aggregated_data');
         return res.status(201).json({
           details: 'Requested resources has been successfully uploaded!',
         });

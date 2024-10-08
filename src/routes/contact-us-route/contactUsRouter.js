@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This router manages the endpoints for handling contact form submissions
  * for the CBS Research Group. It processes incoming contact form data,
@@ -19,7 +19,9 @@
 const express = require('express');
 const uploadContactInfoCtrl = require('../../controller/contact-form-controllers/uploadContactInfoCtrl');
 const deleteContactInfoCtrl = require('../../controller/contact-form-controllers/deleteContactInfoCtrl');
-const getContactInfoCtrl = require('../../controller/contact-form-controllers/getContactInfoCtrl');
+const {
+  getContactInfoCtrl,
+} = require('../../controller/contact-form-controllers/getContactInfoCtrl');
 const sendContactPersonResponseCtrl = require('../../controller/contact-form-controllers/sendContactPersonResponseCtrl');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 

@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 15/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the process of uploading individual records of
  * master alumni to the database. It manages the insertion of new alumni
@@ -26,6 +26,8 @@
 const mastersAlumniModel = require('../../../models/alumni-model/masters-alumni-model/mastersAlumniModel');
 const customSingleUploader = require('../../../utils/cloudinary-single-uploader/customSingleUploader');
 const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const { masterAlumniCache } = require('./getMastersAlumniCtrl');
+const { dashboardCache } = require('../../dashboard-controllers/getAllData');
 
 const uploadMastersAlumniCtrl = async (req, res) => {
   let profileImageUrl;
@@ -78,6 +80,9 @@ const uploadMastersAlumniCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        masterAlumniCache.del('single_master_alumni');
+        masterAlumniCache.del('all_master_alumni');
+        dashboardCache.del('aggregated_data');
         return res.status(201).json({
           details: 'Requested resources has been successfully uploaded!',
         });

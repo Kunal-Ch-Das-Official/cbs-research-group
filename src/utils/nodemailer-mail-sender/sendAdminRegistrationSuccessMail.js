@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 22/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This function handles sending a response email to individuals whose
  * requests to become users of the CBS Research Group have been accepted.
@@ -25,6 +25,12 @@ const {
   mainEmailHostPassword,
 } = require('../../config/envConfig');
 const envConfig = require('../../config/envConfig');
+const {
+  adminAccessReqCache,
+} = require('../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl');
+const {
+  dashboardCache,
+} = require('../../controller/dashboard-controllers/getAllData');
 
 const sendAdminRegistrationSuccessMail = async (
   sendTo,
@@ -50,7 +56,8 @@ const sendAdminRegistrationSuccessMail = async (
     const mailOptions = {
       from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: 'Welcome to CBS Research Group - Your Admin Login Details',
+      subject:
+        'Welcome to CBS Research Group - Your Login Credentials | CBS Research Group Admin Console.',
       html: `
     <style>
 	* {
@@ -752,6 +759,9 @@ const sendAdminRegistrationSuccessMail = async (
         });
       } else {
         transporter.close();
+        adminAccessReqCache.del('single_request');
+        adminAccessReqCache.del('all_request');
+        dashboardCache.del('aggregated_data');
         return response.status(200).json({
           message: 'Email has been sended successfully.',
           sending_id: info.messageId,

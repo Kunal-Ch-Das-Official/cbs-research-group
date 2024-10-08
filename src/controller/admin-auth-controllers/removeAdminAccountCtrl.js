@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 01/10/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the deletion of a logged-in user's account from the database
  * based on a request from the client.
@@ -21,6 +21,8 @@
  */
 
 const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
+const { dashboardCache } = require('../dashboard-controllers/getAllData');
+const { allLoggedInUserDataCache } = require('./getAllLoginAdminCtrl');
 
 const removeAdminAccountCtrl = async (req, res) => {
   const { id } = req.params;
@@ -42,6 +44,8 @@ const removeAdminAccountCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        allLoggedInUserDataCache.del('all_logged_in_admin');
+        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully removed!',
         });

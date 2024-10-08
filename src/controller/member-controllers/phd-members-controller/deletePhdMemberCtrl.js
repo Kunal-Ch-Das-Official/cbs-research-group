@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 17/08/2024
- *
+ * Last update: 08/10/2024
  * Description:
  * This controller handles the deletion of a specific PhD member's data from the database
  * based on a client's request. It processes the request to remove the PhD member's record
@@ -26,6 +26,8 @@
 
 const phdMemberModel = require('../../../models/members-model/phd-member-model/phdMemberModel');
 const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const { dashboardCache } = require('../../dashboard-controllers/getAllData');
+const { phdMemberCache } = require('./getPhdMembersCtrl');
 
 const deletePhdMemberCtrl = async (req, res) => {
   const { id } = req.params;
@@ -50,6 +52,9 @@ const deletePhdMemberCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
+        phdMemberCache.del('single_phd_member');
+        phdMemberCache.del('all_phd_member');
+        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully removed!',
         });
