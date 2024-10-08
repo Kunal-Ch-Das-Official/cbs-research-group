@@ -16,8 +16,8 @@
  * instrument records, facilitating effective management of lab equipment information.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 const LabInstrumentsSchema = new Schema(
   {
@@ -46,7 +46,7 @@ const LabInstrumentsSchema = new Schema(
 );
 
 const labInstrumentModel = mongoose.model(
-  "lab-instrument",
+  'lab-instrument',
   LabInstrumentsSchema
 );
 

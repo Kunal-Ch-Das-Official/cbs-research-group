@@ -16,31 +16,28 @@
  * and routed to the appropriate handlers or services.
  */
 
-const express = require("express");
-const uploadTeamAwardCtrl = require("../../controller/awards-controllers/team-awards-controller/uploadTeamAwardCtrl");
-const updateTeamAwardCtrl = require("../../controller/awards-controllers/team-awards-controller/updateTeamAwardCtrl");
-const deleteTeamAwardCtrl = require("../../controller/awards-controllers/team-awards-controller/deleteTeamAwardCtrl");
-const getTeamAwardsCtrl = require("../../controller/awards-controllers/team-awards-controller/getTeamAwardsCtrl");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const express = require('express');
+const uploadTeamAwardCtrl = require('../../controller/awards-controllers/team-awards-controller/uploadTeamAwardCtrl');
+const updateTeamAwardCtrl = require('../../controller/awards-controllers/team-awards-controller/updateTeamAwardCtrl');
+const deleteTeamAwardCtrl = require('../../controller/awards-controllers/team-awards-controller/deleteTeamAwardCtrl');
+const getTeamAwardsCtrl = require('../../controller/awards-controllers/team-awards-controller/getTeamAwardsCtrl');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const teamAwardsRouter = express.Router();
 
 // Post team award information router
-teamAwardsRouter.post("/awards", checkAdminAuth, uploadTeamAwardCtrl);
+teamAwardsRouter.post('/awards', checkAdminAuth, uploadTeamAwardCtrl);
 
 // Update team award information router
-teamAwardsRouter.patch("/awards/:id", checkAdminAuth, updateTeamAwardCtrl);
+teamAwardsRouter.patch('/awards/:id', checkAdminAuth, updateTeamAwardCtrl);
 
 // Get all team award information router
-teamAwardsRouter.get("/awards", cacheMiddleware, getTeamAwardsCtrl);
+teamAwardsRouter.get('/awards', getTeamAwardsCtrl);
 
 // Get single team award information router
-teamAwardsRouter.get("/awards/:id", cacheMiddleware, getTeamAwardsCtrl);
+teamAwardsRouter.get('/awards/:id', getTeamAwardsCtrl);
 
 // Delete specific team award information router
-teamAwardsRouter.delete("/awards/:id", checkAdminAuth, deleteTeamAwardCtrl);
+teamAwardsRouter.delete('/awards/:id', checkAdminAuth, deleteTeamAwardCtrl);
 
 module.exports = teamAwardsRouter;

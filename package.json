@@ -1,12 +1,14 @@
 {
   "name": "cbs-research-group-server",
   "owner": "Chinmoy Bhattacharya",
-  "version": "1.0.0",
+  "version": "2.2.2",
   "description": "This is the server of cbs-research-group(chemistry-research-lab). It is located in Howrah, Shibpur, Kolkata(West-Bengal, India)",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -16,14 +18,15 @@
     "Electrochemistry-lab"
   ],
   "author": "Kunal Chandra Das",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Kunal-Ch-Das-Official/cbs-research-group/issues"
   },
   "homepage": "https://github.com/Kunal-Ch-Das-Official/cbs-research-group#readme",
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
-    "globals": "^15.9.0"
+    "@eslint/js": "^9.11.1",
+    "eslint": "^9.11.1",
+    "globals": "^15.10.0"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

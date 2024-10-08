@@ -23,9 +23,9 @@
  * the designated port.
  */
 
-const app = require("./src/app");
-const dbConnectionConfig = require("./src/config/dbConnectionConfig");
-const { port, runningEnvironment } = require("./src/config/envConfig");
+const app = require('./src/app');
+const dbConnectionConfig = require('./src/config/dbConnectionConfig');
+const { port, runningEnvironment } = require('./src/config/envConfig');
 
 const startServer = async () => {
   // Requesting For Database Connection //

@@ -20,7 +20,7 @@
  * client requests. It ensures that users can access up-to-date publication information.
  */
 
-const publicationModel = require("../../models/publication-model/publicationModel");
+const publicationModel = require('../../models/publication-model/publicationModel');
 
 const getPublicationCtrl = async (req, res) => {
   const { id } = req.params;
@@ -29,28 +29,28 @@ const getPublicationCtrl = async (req, res) => {
       const getSinglePublication = await publicationModel.findById(id);
       if (!getSinglePublication) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getSinglePublication);
+        return res.status(200).json(getSinglePublication);
       }
     } else {
       const getAllPublication = await publicationModel.find();
       if (!getAllPublication) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllPublication);
+        return res.status(200).json(getAllPublication);
       }
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to find requested resources due to some technical problem.",
+        'Unable to find requested resources due to some technical problem.',
     });
   }
 };

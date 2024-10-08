@@ -52,12 +52,16 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 * And many more.
 
 
-# Routes:
 
-## Base URLs
+## Routes: 
+* Base Url:
+```bash
+  https://apis.chinmoybhattacharyaelectrochemistry.com
+```
+## Path URLs
 ```
 |---------------------------------------------------------------------------------------------------------|
-| Route Name	             |  Base URL                                                                  |
+| Route Name	             |  Path URL                                                                    |
 |---------------------------------------------------------------------------------------------------------|
 | Admin Authentication       | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin       |
 |---------------------------------------------------------------------------------------------------------|
@@ -85,6 +89,10 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 |---------------------------------------------------------------------------------------------------------|
 | Team Awards                | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/team            |
 |---------------------------------------------------------------------------------------------------------|
+| Dashboard                  | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/admin-portal    |
+|---------------------------------------------------------------------------------------------------------|
+| Get Auth Admin             | /iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin       |
+|---------------------------------------------------------------------------------------------------------|
 ```
 
 
@@ -92,27 +100,31 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Single Endpoints
 ```
 |-----------------------------------------|
-| Entity 	           | Endpoint        |
+| Entity 	         | Endpoint             |
 |-----------------------------------------| 
-| Doctorate Alumni     | /alumni-data     |
+| Doctorate Alumni | /alumni-data         |
 |-----------------------------------------|
-| Masters Alumni       | /alumni-data     |
+| Masters Alumni   | /alumni-data         |
 |-----------------------------------------|
-| PHD Members          | /members         |
+| PHD Members      | /members             |
 |-----------------------------------------| 
-| MSC Members          | /members         |
+| MSC Members      | /members             |
 |-----------------------------------------|
-| Current Group News   | /groups          |
+| Group News       | /groups              |
 |-----------------------------------------|
-| Lab Instruments      | /lab-instruments |
+| Lab Instruments  | /lab-instruments     |
 |-----------------------------------------|
-| Projects             | /projects        |
+| Projects         | /projects            |
 |-----------------------------------------|
-| Publication          | /about-info      |
+| Publication      | /about-info          |
 |-----------------------------------------|
-| Personal Awards      | /awards          | 
+| Personal Awards  | /awards              | 
 |-----------------------------------------|
-| Team Awards          | /awards          |
+| Team Awards      | /awards              |
+|-----------------------------------------|
+| Dashboard        | /dashboard           |   
+|-----------------------------------------|
+| All Admin Info   |/logged-in-admin-users|
 |-----------------------------------------|
 ```
 
@@ -121,7 +133,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Admin Authentication:
 ```
 |--------------------------------------------------------|
-| Action 	               | Endpoint                   |
+| Action 	               | Endpoint                      |
 |--------------------------------------------------------| 
 | Admin Registration       | /register                   |
 |--------------------------------------------------------|
@@ -148,7 +160,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Admin Registration Request
 ```
 |------------------------------------|	
-| Action 	     | Endpoint        |
+| Action 	       | Endpoint          |
 |------------------------------------| 
 | Create Request | /admin            |
 |------------------------------------|
@@ -166,7 +178,7 @@ The backend follows a Multi-Tier Architecture, ensuring separation of concerns a
 ## Contact Us
 ```
 |-----------------------------------------|
-| Action 	           | Endpoint        |
+| Action 	           | Endpoint           |
 |-----------------------------------------| 
 | Post Information   | /information       |
 |-----------------------------------------|

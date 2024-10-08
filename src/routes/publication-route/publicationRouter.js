@@ -16,30 +16,27 @@
  * and routed to the appropriate handlers or services.
  */
 
-const express = require("express");
+const express = require('express');
 
-const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
-const uploadPublicationCtrl = require("../../controller/publication-controllers/uploadPublicationCtrl");
-const updatePublicationCtrl = require("../../controller/publication-controllers/updatePublicationCtrl");
-const deletePublicationCtrl = require("../../controller/publication-controllers/deletePublicationCtrl");
-const getPublicationCtrl = require("../../controller/publication-controllers/getPublicationCtrl");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
+const uploadPublicationCtrl = require('../../controller/publication-controllers/uploadPublicationCtrl');
+const updatePublicationCtrl = require('../../controller/publication-controllers/updatePublicationCtrl');
+const deletePublicationCtrl = require('../../controller/publication-controllers/deletePublicationCtrl');
+const getPublicationCtrl = require('../../controller/publication-controllers/getPublicationCtrl');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const publicationRouter = express.Router();
 
 // Gather all file which are going to be uploaded on cloud
 const publicationCorsImage = multerLocalFileUploader.fields([
-  { name: "publicationThumbnail", maxCount: 1 },
-  { name: "firstOverview", maxCount: 1 },
-  { name: "secondOverview", maxCount: 1 },
+  { name: 'publicationThumbnail', maxCount: 1 },
+  { name: 'firstOverview', maxCount: 1 },
+  { name: 'secondOverview', maxCount: 1 },
 ]);
 
 // Post publication router
 publicationRouter.post(
-  "/about-info",
+  '/about-info',
   checkAdminAuth,
   publicationCorsImage,
   uploadPublicationCtrl
@@ -47,19 +44,19 @@ publicationRouter.post(
 
 // Update publication router
 publicationRouter.patch(
-  "/about-info/:id",
+  '/about-info/:id',
   checkAdminAuth,
   publicationCorsImage,
   updatePublicationCtrl
 );
 // Get all publication router
-publicationRouter.get("/about-info", cacheMiddleware, getPublicationCtrl);
+publicationRouter.get('/about-info', getPublicationCtrl);
 // Get single publication router
-publicationRouter.get("/about-info/:id", cacheMiddleware, getPublicationCtrl);
+publicationRouter.get('/about-info/:id', getPublicationCtrl);
 
 // Delete specific publication router
 publicationRouter.delete(
-  "/about-info/:id",
+  '/about-info/:id',
   checkAdminAuth,
   deletePublicationCtrl
 );

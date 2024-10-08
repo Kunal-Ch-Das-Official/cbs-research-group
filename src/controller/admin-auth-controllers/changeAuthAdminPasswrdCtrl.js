@@ -23,8 +23,8 @@
  * the integrity of the authentication system.
  */
 
-const bcrypt = require("bcrypt");
-const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
+const bcrypt = require('bcrypt');
+const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
 
 const changeAuthAdminPasswordCtrl = async (req, res) => {
   const { adminUserPassword, adminUserPassword_confirmation } = req.body;
@@ -32,7 +32,7 @@ const changeAuthAdminPasswordCtrl = async (req, res) => {
     if (adminUserPassword && adminUserPassword_confirmation) {
       if (adminUserPassword !== adminUserPassword_confirmation) {
         return res.status(400).json({
-          issue: "Bad Request!",
+          issue: 'Bad Request!',
           details: "Password and confirm password dosen't match",
         });
       } else {
@@ -48,25 +48,25 @@ const changeAuthAdminPasswordCtrl = async (req, res) => {
         );
         if (!newPassword) {
           return res.status(501).json({
-            issue: "Not implemented!",
-            details: "Something went wrong, please try again later.",
+            issue: 'Not implemented!',
+            details: 'Something went wrong, please try again later.',
           });
         } else {
           return res.status(200).json({
-            details: "Password has been successfully updated.",
+            details: 'Password has been successfully updated.',
           });
         }
       }
     } else {
       return res.status(400).json({
-        error: "Bad Request!",
-        message: "All fields are required.",
+        error: 'Bad Request!',
+        message: 'All fields are required.',
       });
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to change the password due to some technical problem.",
+      details: 'Unable to change the password due to some technical problem.',
     });
   }
 };

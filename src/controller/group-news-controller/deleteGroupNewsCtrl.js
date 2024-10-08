@@ -20,10 +20,7 @@
  * be updated or removed as needed.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const groupNewsModel = require("../../models/group-news-model/groupNewsModel");
+const groupNewsModel = require('../../models/group-news-model/groupNewsModel');
 
 const deleteGroupNewsCtrl = async (req, res) => {
   const { id } = req.params;
@@ -31,25 +28,19 @@ const deleteGroupNewsCtrl = async (req, res) => {
     const getPrevGroupNews = await groupNewsModel.findById(id);
     if (!getPrevGroupNews) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     } else {
       const deleteReqGroupNews = await groupNewsModel.findByIdAndDelete(id);
       if (!deleteReqGroupNews) {
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news/groups`
-        );
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news/groups/${id}`
-        );
         return res.status(200).json({
-          details: "Requested resources has been successfully removed!",
+          details: 'Requested resources has been successfully removed!',
         });
       }
     }
@@ -57,7 +48,7 @@ const deleteGroupNewsCtrl = async (req, res) => {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to delete requested resources due to some technical problem.",
+        'Unable to delete requested resources due to some technical problem.',
     });
   }
 };

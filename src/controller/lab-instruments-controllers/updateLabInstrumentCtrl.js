@@ -21,12 +21,9 @@
  * in the database, which supports effective data management and reporting.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
-const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
-const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
+const labInstrumentModel = require('../../models/lab-instruments-model/labInstrumentModel');
+const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const customSingleUploader = require('../../utils/cloudinary-single-uploader/customSingleUploader');
 
 const updateLabInstrumentCtrl = async (req, res) => {
   const { id } = req.params;
@@ -38,8 +35,8 @@ const updateLabInstrumentCtrl = async (req, res) => {
     const getPreviousInstrumentInfo = await labInstrumentModel.findById(id);
     if (!getPreviousInstrumentInfo) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     }
 
@@ -51,7 +48,7 @@ const updateLabInstrumentCtrl = async (req, res) => {
 
     if (req.file) {
       const { storedDataAccessUrl, storedDataAccessId } =
-        await customSingleUploader(filePath, "lab_instruments_image");
+        await customSingleUploader(filePath, 'lab_instruments_image');
       newInstrumentImage = storedDataAccessUrl;
       newInstrumentImgCloudId = storedDataAccessId;
 
@@ -79,25 +76,19 @@ const updateLabInstrumentCtrl = async (req, res) => {
 
     if (!updateInstrumentInfo) {
       return res.status(501).json({
-        issue: "Not implemented!",
-        details: "Something went wrong, please try again later.",
+        issue: 'Not implemented!',
+        details: 'Something went wrong, please try again later.',
       });
     } else {
-      clearCache(
-        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments`
-      );
-      clearCache(
-        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments/${id}`
-      );
       return res.status(200).json({
-        details: "Requested resources has been successfully updated!",
+        details: 'Requested resources has been successfully updated!',
       });
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to update requested resources due to some technical problem.",
+        'Unable to update requested resources due to some technical problem.',
     });
   }
 };

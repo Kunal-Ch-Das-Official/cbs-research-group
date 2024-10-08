@@ -21,10 +21,7 @@
  * deletion of contact info records.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const contactFormModel = require("../../models/contact-form-model/contactFormModel");
+const contactFormModel = require('../../models/contact-form-model/contactFormModel');
 
 const deleteContactInfoCtrl = async (req, res) => {
   const { id } = req.params;
@@ -32,25 +29,19 @@ const deleteContactInfoCtrl = async (req, res) => {
     const getRequiredContactInfo = await contactFormModel.findById(id);
     if (!getRequiredContactInfo) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     } else {
       const deleteReqContactInfo = await contactFormModel.findByIdAndDelete(id);
       if (!deleteReqContactInfo) {
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us/information`
-        );
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us/information/${id}`
-        );
         return res.status(200).json({
-          details: "Requested resources has been successfully removed!",
+          details: 'Requested resources has been successfully removed!',
         });
       }
     }
@@ -58,7 +49,7 @@ const deleteContactInfoCtrl = async (req, res) => {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to delete requested resources due to some technical problem.",
+        'Unable to delete requested resources due to some technical problem.',
     });
   }
 };

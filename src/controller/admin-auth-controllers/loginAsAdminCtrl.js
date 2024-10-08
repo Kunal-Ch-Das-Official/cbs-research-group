@@ -21,10 +21,10 @@
  * secure authentication and session management as part of the login process.
  */
 
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { jwtSecretKey } = require("../../config/envConfig");
-const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { jwtSecretKey } = require('../../config/envConfig');
+const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
 
 const loginAsAdminCtrl = async (req, res) => {
   // Collect authenticated emails and password from request body
@@ -33,13 +33,13 @@ const loginAsAdminCtrl = async (req, res) => {
     // Check if not email or password filled then block of code
     if (adminUserEmail && adminUserPassword) {
       const isAdmin = await authAdminUserModel.findOne({
-        adminUserEmail: adminUserEmail,
+        adminUserEmail,
       });
       // If email not exist then run this block of code
       if (!isAdmin) {
         return res.status(401).json({
-          issue: " Unauthorized Admin!",
-          details: "You are not authorized admin.",
+          issue: ' Unauthorized Admin!',
+          details: 'You are not authorized admin.',
         });
         // If email exist then run this block of code
       } else {
@@ -55,16 +55,16 @@ const loginAsAdminCtrl = async (req, res) => {
         ) {
           // Get the email admin email id for sign new login token
           const authenticateAdmin = await authAdminUserModel.findOne({
-            adminUserEmail: adminUserEmail,
+            adminUserEmail,
           });
           // Generate json web token
           const token = jwt.sign(
             { adminId: authenticateAdmin._id },
             jwtSecretKey,
-            { expiresIn: "1d" }
+            { expiresIn: '1d' }
           );
           return res.status(200).json({
-            message: "Login successful!",
+            message: 'Login successful!',
             details:
               "Welcome to CBS Research Group's administrative dashboard.",
             authentication_sign: token,
@@ -72,7 +72,7 @@ const loginAsAdminCtrl = async (req, res) => {
           // Check if email and password are not match then run this block of code
         } else {
           return res.status(401).json({
-            issue: "Authentication failed!",
+            issue: 'Authentication failed!',
             details: "Email or password dosen't match",
           });
         }
@@ -81,15 +81,15 @@ const loginAsAdminCtrl = async (req, res) => {
     } else {
       // Check is the email exist on database or not
       return res.status(400).json({
-        issue: "Bad Request!",
-        details: "Email and password required.",
+        issue: 'Bad Request!',
+        details: 'Email and password required.',
       });
     }
     // If there are any error in this code then this will executed
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to proceed login process due to some technical problem.",
+      details: 'Unable to proceed login process due to some technical problem.',
     });
   }
 };

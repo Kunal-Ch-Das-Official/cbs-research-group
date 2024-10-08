@@ -16,8 +16,8 @@
  * deleting project records, ensuring effective management of project information.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 const ProjectSchema = new Schema(
   {
@@ -41,5 +41,5 @@ const ProjectSchema = new Schema(
   { timestamps: true }
 );
 
-const projectModel = mongoose.model("project-info", ProjectSchema);
+const projectModel = mongoose.model('project-info', ProjectSchema);
 module.exports = projectModel;

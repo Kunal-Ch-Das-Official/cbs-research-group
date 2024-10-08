@@ -16,8 +16,8 @@
  * alumni records, facilitating efficient management of alumni information.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 // Custom validator function to check for exactly 10 digits
 const validatePhoneNumber = function (phone) {
@@ -48,7 +48,7 @@ const DoctorateAlumniShema = new Schema(
       required: true,
       validate: {
         validator: validatePhoneNumber,
-        message: "Phone number must be exactly 10 digits.",
+        message: 'Phone number must be exactly 10 digits.',
       },
     },
     mscDoneFrom: {
@@ -83,7 +83,7 @@ const DoctorateAlumniShema = new Schema(
 );
 
 const doctorateAlumniModel = mongoose.model(
-  "doctorate-alumni-info",
+  'doctorate-alumni-info',
   DoctorateAlumniShema
 );
 module.exports = doctorateAlumniModel;

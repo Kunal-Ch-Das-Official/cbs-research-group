@@ -23,7 +23,7 @@
  * provided to clients as requested.
  */
 
-const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
+const doctorateAlumniModel = require('../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel');
 
 const getDoctorateAlumniCtrl = async (req, res) => {
   const { id } = req.params;
@@ -32,16 +32,16 @@ const getDoctorateAlumniCtrl = async (req, res) => {
       const getSingleAlumniInfo = await doctorateAlumniModel.findById(id);
       if (!getSingleAlumniInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getSingleAlumniInfo);
+        return res.status(200).json(getSingleAlumniInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
-        details: "Unable to find the resources due to some technical problem.",
+        details: 'Unable to find the resources due to some technical problem.',
       });
     }
   } else {
@@ -49,16 +49,16 @@ const getDoctorateAlumniCtrl = async (req, res) => {
       const getAllDoctorateAlumniInfo = await doctorateAlumniModel.find();
       if (!getAllDoctorateAlumniInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not available.",
+          issue: 'Not found!',
+          details: 'Requested resources are not available.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllDoctorateAlumniInfo);
+        return res.status(200).json(getAllDoctorateAlumniInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
-        details: "Unable to find the resources due to some technical problem.",
+        details: 'Unable to find the resources due to some technical problem.',
       });
     }
   }

@@ -22,7 +22,7 @@
  * projects stored in the database.
  */
 
-const projectModel = require("../../models/projects-model/projectModel");
+const projectModel = require('../../models/projects-model/projectModel');
 
 const getProjectsCtrl = async (req, res) => {
   const { id } = req.params;
@@ -31,17 +31,17 @@ const getProjectsCtrl = async (req, res) => {
       const getRequestedProject = await projectModel.findById(id);
       if (!getRequestedProject) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getRequestedProject);
+        return res.status(200).json(getRequestedProject);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   } else {
@@ -49,17 +49,17 @@ const getProjectsCtrl = async (req, res) => {
       const getAllProjects = await projectModel.find();
       if (!getAllProjects) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllProjects);
+        return res.status(200).json(getAllProjects);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   }

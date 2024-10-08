@@ -22,10 +22,10 @@
  * It ensures that password resets are handled securely and efficiently.
  */
 
-const { jwtSecretKey } = require("../../config/envConfig");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
+const { jwtSecretKey } = require('../../config/envConfig');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
 
 const resetForgottenPassword = async (req, res) => {
   const { adminUserPassword, adminUserPassword_confirmation } = req.body;
@@ -34,7 +34,7 @@ const resetForgottenPassword = async (req, res) => {
     const corespondingAdmin = await authAdminUserModel.findById(id);
     if (!corespondingAdmin) {
       return res.status(404).json({
-        issue: "Invalid Admin!",
+        issue: 'Invalid Admin!',
         details:
           "Requested email id dose'nt exist, please provide a correct email.",
       });
@@ -44,8 +44,8 @@ const resetForgottenPassword = async (req, res) => {
       if (adminUserPassword && adminUserPassword_confirmation) {
         if (adminUserPassword !== adminUserPassword_confirmation) {
           return res.status(400).json({
-            issue: "Bad Request!",
-            details: "Password and confirm password are not same.",
+            issue: 'Bad Request!',
+            details: 'Password and confirm password are not same.',
           });
         } else {
           // Encrypt given password
@@ -61,26 +61,26 @@ const resetForgottenPassword = async (req, res) => {
           );
           if (!updatePassword) {
             return res.status(501).json({
-              issue: "Not implemented!",
-              details: "Something went wrong, please try again later.",
+              issue: 'Not implemented!',
+              details: 'Something went wrong, please try again later.',
             });
           } else {
             return res.status(200).json({
-              details: "Password has been updated successfully!",
+              details: 'Password has been updated successfully!',
             });
           }
         }
       } else {
         return res.status(400).json({
-          issue: "Bad Request!",
-          details: "All fields are required.",
+          issue: 'Bad Request!',
+          details: 'All fields are required.',
         });
       }
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to perform the task due to some technical problem.",
+      details: 'Unable to perform the task due to some technical problem.',
     });
   }
 };

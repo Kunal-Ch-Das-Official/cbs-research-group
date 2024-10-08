@@ -16,8 +16,8 @@
  * award records, ensuring efficient management of award information.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 const PersonalAwardSchema = new Schema(
   {
@@ -42,7 +42,7 @@ const PersonalAwardSchema = new Schema(
 );
 
 const personalAwardsModel = mongoose.model(
-  "personal-award",
+  'personal-award',
   PersonalAwardSchema
 );
 

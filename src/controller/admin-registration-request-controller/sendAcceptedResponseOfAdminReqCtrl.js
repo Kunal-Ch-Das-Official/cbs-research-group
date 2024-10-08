@@ -26,9 +26,10 @@
  * status.
  */
 
-const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
-const sendAdminRegistrationSuccessMail = require("../../utils/nodemailer-mail-sender/sendAdminRegistrationSuccessMail");
+const adminRegistrationRequestMessageModel = require('../../models/admin-registration-request-model/adminRegisterRequestModel');
+const sendAdminRegistrationSuccessMail = require('../../utils/nodemailer-mail-sender/sendAdminRegistrationSuccessMail');
 
+// eslint-disable-next-line consistent-return
 const sendAcceptedResponseOfAdminRequestUserCtrl = async (req, res) => {
   const { id } = req.params;
   const { loginId, loginPassword } = req.body;
@@ -36,8 +37,8 @@ const sendAcceptedResponseOfAdminRequestUserCtrl = async (req, res) => {
     const getUserInfo = await adminRegistrationRequestMessageModel.findById(id);
     if (!getUserInfo) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found..",
+        issue: 'Not found!',
+        details: 'Requested resources are not found..',
       });
     } else {
       const { reqUserName, reqUserEmail } = getUserInfo;
@@ -52,7 +53,7 @@ const sendAcceptedResponseOfAdminRequestUserCtrl = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to perform this task due to some technical problem.",
+      details: 'Unable to perform this task due to some technical problem.',
     });
   }
 };

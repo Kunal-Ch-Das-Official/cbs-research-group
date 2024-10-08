@@ -20,12 +20,9 @@
  * publication information is accurately stored and available for retrieval.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const publicationModel = require("../../models/publication-model/publicationModel");
-const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
-const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
+const publicationModel = require('../../models/publication-model/publicationModel');
+const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const customSingleUploader = require('../../utils/cloudinary-single-uploader/customSingleUploader');
 
 const uploadPublicationCtrl = async (req, res) => {
   const { title, contributer, aboutPublication, publishedDate, pdfLink } =
@@ -41,8 +38,8 @@ const uploadPublicationCtrl = async (req, res) => {
   try {
     if (!req.body && !req.files) {
       return res.status(400).json({
-        issue: "Bad Request!",
-        details: "All fields are required.",
+        issue: 'Bad Request!',
+        details: 'All fields are required.',
       });
     } else {
       if (
@@ -59,7 +56,7 @@ const uploadPublicationCtrl = async (req, res) => {
         for (const path of publicationImages) {
           try {
             const { storedDataAccessUrl, storedDataAccessId } =
-              await customSingleUploader(path, "publication_image");
+              await customSingleUploader(path, 'publication_image');
 
             allRequiredImage.push({
               secureUrl: storedDataAccessUrl,
@@ -68,7 +65,7 @@ const uploadPublicationCtrl = async (req, res) => {
           } catch (error) {
             return res.status(500).json({
               issue: error.message,
-              details: "cloudinary error occured.",
+              details: 'cloudinary error occured.',
             });
           }
         }
@@ -92,21 +89,18 @@ const uploadPublicationCtrl = async (req, res) => {
             customSingleDestroyer(pubId.publicId);
           });
           return res.status(501).json({
-            issue: "Not implemented!",
-            details: "Something went wrong, please try again later.",
+            issue: 'Not implemented!',
+            details: 'Something went wrong, please try again later.',
           });
         } else {
-          clearCache(
-            "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
-          );
           return res.status(201).json({
-            details: "Requested resources has been successfully uploaded!",
+            details: 'Requested resources has been successfully uploaded!',
           });
         }
       } else {
         return res.status(400).json({
-          issue: "Bad Request!",
-          details: "All fields are required.",
+          issue: 'Bad Request!',
+          details: 'All fields are required.',
         });
       }
     }
@@ -118,7 +112,7 @@ const uploadPublicationCtrl = async (req, res) => {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to upload requested resources due to some technical problem.",
+        'Unable to upload requested resources due to some technical problem.',
     });
   }
 };

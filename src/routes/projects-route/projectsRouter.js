@@ -16,31 +16,28 @@
  * and routed to the appropriate handlers or services.
  */
 
-const express = require("express");
-const uploadProjectCtrl = require("../../controller/project-controllers/uploadProjectCtrl");
-const updateProjectCtrl = require("../../controller/project-controllers/updateProjectCtrl");
-const deleteProjectCtrl = require("../../controller/project-controllers/deleteProjectCtrl");
-const getProjectsCtrl = require("../../controller/project-controllers/getProjectsCtrl");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const express = require('express');
+const uploadProjectCtrl = require('../../controller/project-controllers/uploadProjectCtrl');
+const updateProjectCtrl = require('../../controller/project-controllers/updateProjectCtrl');
+const deleteProjectCtrl = require('../../controller/project-controllers/deleteProjectCtrl');
+const getProjectsCtrl = require('../../controller/project-controllers/getProjectsCtrl');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const projectsRouter = express.Router();
 
 // Post project router
-projectsRouter.post("/projects", checkAdminAuth, uploadProjectCtrl);
+projectsRouter.post('/projects', checkAdminAuth, uploadProjectCtrl);
 
 // Update project router
-projectsRouter.patch("/projects/:id", checkAdminAuth, updateProjectCtrl);
+projectsRouter.patch('/projects/:id', checkAdminAuth, updateProjectCtrl);
 
 // Get all project router
-projectsRouter.get("/projects", cacheMiddleware, getProjectsCtrl);
+projectsRouter.get('/projects', getProjectsCtrl);
 
 // Get single project router
-projectsRouter.get("/projects/:id", cacheMiddleware, getProjectsCtrl);
+projectsRouter.get('/projects/:id', getProjectsCtrl);
 
 // Delete specific project router
-projectsRouter.delete("/projects/:id", checkAdminAuth, deleteProjectCtrl);
+projectsRouter.delete('/projects/:id', checkAdminAuth, deleteProjectCtrl);
 
 module.exports = projectsRouter;

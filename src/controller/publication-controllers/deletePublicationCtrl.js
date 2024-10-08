@@ -21,11 +21,8 @@
  * It ensures that only the targeted publication is removed based on client requests.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const publicationModel = require("../../models/publication-model/publicationModel");
-const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
+const publicationModel = require('../../models/publication-model/publicationModel');
+const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
 
 const deletePublicationCtrl = async (req, res) => {
   const { id } = req.params;
@@ -33,8 +30,8 @@ const deletePublicationCtrl = async (req, res) => {
     const getRequiredPublication = await publicationModel.findById(id);
     if (!getRequiredPublication) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     } else {
       const {
@@ -54,18 +51,12 @@ const deletePublicationCtrl = async (req, res) => {
         await publicationModel.findByIdAndDelete(id);
       if (!deleteRequestedPublication) {
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
-        );
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info/${req.params.id}`
-        );
         return res.status(200).json({
-          details: "Requested resources has been successfully removed.",
+          details: 'Requested resources has been successfully removed.',
         });
       }
     }
@@ -73,7 +64,7 @@ const deletePublicationCtrl = async (req, res) => {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to removed requested resources due to some technical problem.",
+        'Unable to removed requested resources due to some technical problem.',
     });
   }
 };

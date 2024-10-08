@@ -16,8 +16,8 @@
  * contact form records, facilitating efficient management of user inquiries.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 // Custom validator function to check for exactly 10 digits
 const validatePhoneNumber = function (phone) {
@@ -41,7 +41,7 @@ const ContactUserSchema = new Schema(
       required: true,
       validate: {
         validator: validatePhoneNumber,
-        message: "Phone number must be exactly 10 digits.",
+        message: 'Phone number must be exactly 10 digits.',
       },
     },
     desireCourse: {
@@ -60,7 +60,7 @@ const ContactUserSchema = new Schema(
 );
 
 const contactFormModel = mongoose.model(
-  "received-contact-info",
+  'received-contact-info',
   ContactUserSchema
 );
 module.exports = contactFormModel;

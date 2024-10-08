@@ -26,9 +26,10 @@
  * and any necessary follow-up.
  */
 
-const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
-const sendAdminRegistrationDeniedMail = require("../../utils/nodemailer-mail-sender/sendAdminRegistrationDeniedMail");
+const adminRegistrationRequestMessageModel = require('../../models/admin-registration-request-model/adminRegisterRequestModel');
+const sendAdminRegistrationDeniedMail = require('../../utils/nodemailer-mail-sender/sendAdminRegistrationDeniedMail');
 
+// eslint-disable-next-line consistent-return
 const sendDeniedResponseOfAdminRequestUserCtrl = async (req, res) => {
   const { id } = req.params;
   // const { reason } = req.body;
@@ -38,8 +39,8 @@ const sendDeniedResponseOfAdminRequestUserCtrl = async (req, res) => {
       await adminRegistrationRequestMessageModel.findById(id);
     if (!getRequestedUser) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     } else {
       const { reqUserName, reqUserEmail } = getRequestedUser;
@@ -48,7 +49,7 @@ const sendDeniedResponseOfAdminRequestUserCtrl = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to perform this task due to some technical problem.",
+      details: 'Unable to perform this task due to some technical problem.',
     });
   }
 };

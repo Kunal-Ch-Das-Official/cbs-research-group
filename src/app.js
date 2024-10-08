@@ -15,23 +15,24 @@
  * routed to the corresponding route handlers or modules.
  */
 
-const express = require("express");
-const { json } = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const mastersAlumniRouter = require("./routes/masters-alumni-route/mastersAlumniRouter");
-const doctorateAlumniRouter = require("./routes/doctorate-alumni-route/doctorateAlumniRouter");
-const phdMembersRouter = require("./routes/phd-members-route/phdMemberRouter");
-const mscMembersRouter = require("./routes/msc-members-route/mscMembersRouter");
-const groupNewsRouter = require("./routes/group-news-route/groupNewsRouter");
-const personalAwardsRouter = require("./routes/personal-awards-route/personalAwardsRouter");
-const teamAwardsRouter = require("./routes/team-awards-route/teamAwardsRouters");
-const labInstrumentsRouter = require("./routes/lab-instruments-route/labInstrumentsRouter");
-const contactFormRouter = require("./routes/contact-us-route/contactUsRouter");
-const projectsRouter = require("./routes/projects-route/projectsRouter");
-const admiAuthenticationRouter = require("./routes/admin-auth-route/admiAuthenticationRouter");
-const adminRegistrationReqRouter = require("./routes/admin-registration-request-route/asAdminRegisterReqRouter");
-const publicationRouter = require("./routes/publication-route/publicationRouter");
+const express = require('express');
+const { json } = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const mastersAlumniRouter = require('./routes/masters-alumni-route/mastersAlumniRouter');
+const doctorateAlumniRouter = require('./routes/doctorate-alumni-route/doctorateAlumniRouter');
+const phdMembersRouter = require('./routes/phd-members-route/phdMemberRouter');
+const mscMembersRouter = require('./routes/msc-members-route/mscMembersRouter');
+const groupNewsRouter = require('./routes/group-news-route/groupNewsRouter');
+const personalAwardsRouter = require('./routes/personal-awards-route/personalAwardsRouter');
+const teamAwardsRouter = require('./routes/team-awards-route/teamAwardsRouters');
+const labInstrumentsRouter = require('./routes/lab-instruments-route/labInstrumentsRouter');
+const contactFormRouter = require('./routes/contact-us-route/contactUsRouter');
+const projectsRouter = require('./routes/projects-route/projectsRouter');
+const admiAuthenticationRouter = require('./routes/admin-auth-route/admiAuthenticationRouter');
+const adminRegistrationReqRouter = require('./routes/admin-registration-request-route/asAdminRegisterReqRouter');
+const publicationRouter = require('./routes/publication-route/publicationRouter');
+const dashBoardRouter = require('./routes/dashboard-route/dashBoardRouter');
 
 // Create App //
 const app = express();
@@ -43,92 +44,97 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Handle base routes //
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json({
-    message: "Welcome to (CBS-Research-Group) Server",
-    owner: "Dr.Chinmoy Bhattacharya",
+    message: 'Welcome to (CBS-Research-Group) Server',
+    owner: 'Dr.Chinmoy Bhattacharya',
     details:
-      "This is the server of cbs-research-group(chemistry-research-lab). It is located in Howrah, Shibpur, Kolkata(West-Bengal, India)",
-    admin: "admindashboard.chinmoybhattacharyaelectrochemistry.com",
-    main: "chinmoybhattacharyaelectrochemistry.com",
-    route: "Home",
+      'This is the server of cbs-research-group(chemistry-research-lab). It is located in Howrah, Shibpur, Kolkata(West-Bengal, India)',
+    admin: 'admindashboard.chinmoybhattacharyaelectrochemistry.com',
+    main: 'chinmoybhattacharyaelectrochemistry.com',
+    route: 'Home',
   });
 });
 
+app.use(
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/admin-portal',
+  dashBoardRouter
+);
+
 // Register Admin Authentication Endpoint
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-admin',
   admiAuthenticationRouter
 );
 
 // Register be admin request Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request',
   adminRegistrationReqRouter
 );
 
 // Register Contact Form Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/contact-us',
   contactFormRouter
 );
 
 // Register Doctorate Alumni Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate',
   doctorateAlumniRouter
 );
 
 // Register Group News Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/latest-news',
   groupNewsRouter
 );
 
 // Register Lab Instruments Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities',
   labInstrumentsRouter
 );
 
 // Register Masters Alumni Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters',
   mastersAlumniRouter
 );
 
 // Register MSC Members Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/msc',
   mscMembersRouter
 );
 
 // Register PHD Members Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd',
   phdMembersRouter
 );
 
 // Register Personal Awards Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal',
   personalAwardsRouter
 );
 
 // Register Projects Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs',
   projectsRouter
 );
 // Register Team Awards Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/team',
   teamAwardsRouter
 );
 
 // Register Publication Endpoints
 app.use(
-  "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication",
+  '/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication',
   publicationRouter
 );
 

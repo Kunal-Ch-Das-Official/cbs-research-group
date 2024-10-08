@@ -17,13 +17,14 @@
  * proceed.
  */
 
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 const {
   mainEmailHostProtocol,
   mainEmailPort,
   mainEmailHostUser,
   mainEmailHostPassword,
-} = require("../../config/envConfig");
+} = require('../../config/envConfig');
+const envConfig = require('../../config/envConfig');
 
 const sendAdminRegistrationSuccessMail = async (
   sendTo,
@@ -31,12 +32,11 @@ const sendAdminRegistrationSuccessMail = async (
   loginId,
   loginPassword,
   response
+  // eslint-disable-next-line consistent-return
 ) => {
-  const CBSLogo =
-    "https://res.cloudinary.com/dmgs52isy/image/upload/v1724431697/email-assets/pdz67r83witpewa82owg.png";
-  const emailIllustration =
-    "https://res.cloudinary.com/dmgs52isy/image/upload/v1724435282/email-assets/rhje0fzumnwilzqwjqy7.png";
-  const loginLink = "https://www.kunalchandradas.tech";
+  const CBSLogo = envConfig.researchGroupLogo;
+  const emailIllustration = envConfig.emailIllustration;
+  const loginLink = envConfig.loginLink;
   try {
     const transporter = nodemailer.createTransport({
       host: mainEmailHostProtocol,
@@ -50,7 +50,7 @@ const sendAdminRegistrationSuccessMail = async (
     const mailOptions = {
       from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: "Welcome to CBS Research Group - Your Admin Login Details",
+      subject: 'Welcome to CBS Research Group - Your Admin Login Details',
       html: `
     <style>
 	* {
@@ -548,10 +548,10 @@ const sendAdminRegistrationSuccessMail = async (
                                       your password after logging in for the
                                       first time.<br /><br />If you have any
                                       questions or need assistance, feel free to
-                                      reach out to us. 
+                                      reach out to us. 
                                     </p>
                                     <p style="margin: 0; margin-bottom: 16px">
-                                       
+                                       
                                     </p>
                                     <p style="margin: 0">
                                       Welcome aboard!<br />
@@ -634,7 +634,7 @@ const sendAdminRegistrationSuccessMail = async (
                                 font-size: 1px;
                               "
                             >
-                               
+                              
                             </div>
                           </td>
                         </tr>
@@ -746,14 +746,14 @@ const sendAdminRegistrationSuccessMail = async (
         return response.status(500).json({
           issue: error.message,
           details:
-            "Unable to send this mail due to some technical problem. Please try again later.",
+            'Unable to send this mail due to some technical problem. Please try again later.',
           alert:
-            "If the issue not resolve autometically then contact to your tech support team.",
+            'If the issue not resolve autometically then contact to your tech support team.',
         });
       } else {
         transporter.close();
         return response.status(200).json({
-          message: "Email has been sended successfully.",
+          message: 'Email has been sended successfully.',
           sending_id: info.messageId,
           notification: `The mail has been successfully send to this:${sendTo} account.`,
         });
@@ -762,9 +762,9 @@ const sendAdminRegistrationSuccessMail = async (
   } catch (error) {
     return response.status(500).json({
       issue: error.message,
-      details: "Unable to perform this task due to some technical problem.",
+      details: 'Unable to perform this task due to some technical problem.',
       message:
-        "Please try again later, or if the issue not resolve autometically then contact with your tech support team.",
+        'Please try again later, or if the issue not resolve autometically then contact with your tech support team.',
     });
   }
 };

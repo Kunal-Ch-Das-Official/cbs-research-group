@@ -23,10 +23,10 @@
  * system.
  */
 
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { jwtSecretKey } = require("../../config/envConfig");
-const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { jwtSecretKey } = require('../../config/envConfig');
+const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
 
 const registerAsAdminCtrl = async (req, res) => {
   try {
@@ -41,13 +41,13 @@ const registerAsAdminCtrl = async (req, res) => {
 
     // Check is users email already exist or not
     const adminUser = await authAdminUserModel.findOne({
-      adminUserEmail: adminUserEmail,
+      adminUserEmail,
     });
     // If user exist the run this block of code
     if (adminUser) {
       return res.status(409).json({
-        issue: "Confilct!",
-        details: "Requested user with this email id already exists.",
+        issue: 'Confilct!',
+        details: 'Requested user with this email id already exists.',
       });
       // If not exist run this block of code
     } else {
@@ -66,10 +66,10 @@ const registerAsAdminCtrl = async (req, res) => {
           const hashPassword = await bcrypt.hash(adminUserPassword, salt);
           // Store all the given data to database
           const authPassUser = new authAdminUserModel({
-            adminUserName: adminUserName,
-            adminUserEmail: adminUserEmail,
+            adminUserName,
+            adminUserEmail,
             adminUserPassword: hashPassword,
-            termsAndConditions: termsAndConditions,
+            termsAndConditions,
           });
 
           // Save the given data
@@ -77,22 +77,22 @@ const registerAsAdminCtrl = async (req, res) => {
           // If not been saved send this response
           if (!saveAsNewAdmin) {
             return res.status(501).json({
-              issue: "Not implemented!",
-              details: "Something went wrong, please try again later.",
+              issue: 'Not implemented!',
+              details: 'Something went wrong, please try again later.',
             });
             // If been saved send this response
           } else {
             const savedAdmin = await authAdminUserModel.findOne({
-              adminUserEmail: adminUserEmail,
+              adminUserEmail,
             });
             // Generate json web token
             const token = jwt.sign({ adminId: savedAdmin._id }, jwtSecretKey, {
-              expiresIn: "1d",
+              expiresIn: '1d',
             });
             return res.status(201).json({
-              message: "Registration successful!",
+              message: 'Registration successful!',
               details:
-                "Congratulations now you become admin user of CBS Research Group !",
+                'Congratulations now you become admin user of CBS Research Group !',
               authenticated_admin_token: token,
             });
           }
@@ -100,15 +100,15 @@ const registerAsAdminCtrl = async (req, res) => {
           //If Password and confirmation password dose not match then send this response
         } else {
           return res.status(400).json({
-            issue: "Bad Request!",
+            issue: 'Bad Request!',
             details: "Password and confirmation password dosen't match.",
           });
         }
         // If user did'nt fiiled all the required fields then send this response
       } else {
         return res.status(400).json({
-          issue: "Bad Request!",
-          details: "All fields are required.",
+          issue: 'Bad Request!',
+          details: 'All fields are required.',
         });
       }
     }
@@ -116,7 +116,7 @@ const registerAsAdminCtrl = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to process due to some technical problem.",
+      details: 'Unable to process due to some technical problem.',
     });
   }
 };

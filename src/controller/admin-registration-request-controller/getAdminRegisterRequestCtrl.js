@@ -21,7 +21,7 @@
  * review and process user requests to become admins.
  */
 
-const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
+const adminRegistrationRequestMessageModel = require('../../models/admin-registration-request-model/adminRegisterRequestModel');
 const getAdminRegisterRequestCtrl = async (req, res) => {
   const { id } = req.params;
 
@@ -31,28 +31,28 @@ const getAdminRegisterRequestCtrl = async (req, res) => {
         await adminRegistrationRequestMessageModel.findById(id);
       if (!getSingleRequestInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Please check the details, and try it again.",
+          issue: 'Not found!',
+          details: 'Please check the details, and try it again.',
         });
       } else {
-        return res.status(200).sendCachedData(getSingleRequestInfo);
+        return res.status(200).json(getSingleRequestInfo);
       }
     } else {
       const getAllRequestInfo =
         await adminRegistrationRequestMessageModel.find();
       if (!getAllRequestInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not available.",
+          issue: 'Not found!',
+          details: 'Requested resources are not available.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllRequestInfo);
+        return res.status(200).json(getAllRequestInfo);
       }
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to perform this task due to some technical problem.",
+      details: 'Unable to perform this task due to some technical problem.',
     });
   }
 };

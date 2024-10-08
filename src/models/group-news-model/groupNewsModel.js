@@ -16,8 +16,8 @@
  * news records, ensuring efficient management of group news information.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 const GroupNewsSchema = new Schema(
   {
@@ -37,5 +37,5 @@ const GroupNewsSchema = new Schema(
 );
 
 // latest group news model. model name is (latest-group-new) cause it will be latest-group-news after creation
-const groupNewsModel = mongoose.model("latest-group-new", GroupNewsSchema);
+const groupNewsModel = mongoose.model('latest-group-new', GroupNewsSchema);
 module.exports = groupNewsModel;

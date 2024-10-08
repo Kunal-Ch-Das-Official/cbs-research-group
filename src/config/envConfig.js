@@ -11,7 +11,7 @@
  * throughout the application to access environment-specific variables.
  **********************************************************************/
 
-require("dotenv").config();
+require('dotenv').config();
 
 // Creting custom environment for server //
 const environment = {
@@ -34,6 +34,14 @@ const environment = {
   supportEmailPort: process.env.SUPPORT_EMAIL_PORT,
   supportEmailHostUser: process.env.SUPPORT_EMAIL_HOST_USER,
   supportEmailHostPassword: process.env.SUPPORT_EMAIL_HOST_PASSWORD,
+
+  // Email Static Asstes
+  researchGroupLogo: process.env.CBS_LOGO,
+  mailTemplateHeader: process.env.RESET_PASSWORD_EMAIL_HEADER,
+  mailTemplateBody: process.env.RESET_PASSWORD_EMAIL_BODY,
+  mailTemplateFooter: process.env.RESET_PASSWORD_EMAIL_FOOTER,
+  emailIllustration: process.env.BE_ADMIN_REQUEST_ILLUSTRATION,
+  loginLink: process.env.LOGIN_LINK,
 };
 
 const envConfig = Object.freeze(environment);

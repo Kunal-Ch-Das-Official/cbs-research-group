@@ -22,7 +22,7 @@
  * applications that need access to lab instrument data.
  */
 
-const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
+const labInstrumentModel = require('../../models/lab-instruments-model/labInstrumentModel');
 
 const getLabInstrumentsCtrl = async (req, res) => {
   const { id } = req.params;
@@ -31,17 +31,17 @@ const getLabInstrumentsCtrl = async (req, res) => {
       const getSingleInstrumentInfo = await labInstrumentModel.findById(id);
       if (!getSingleInstrumentInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getSingleInstrumentInfo);
+        return res.status(200).json(getSingleInstrumentInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   } else {
@@ -49,17 +49,17 @@ const getLabInstrumentsCtrl = async (req, res) => {
       const getAllInstrumentsInfo = await labInstrumentModel.find();
       if (!getAllInstrumentsInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllInstrumentsInfo);
+        return res.status(200).json(getAllInstrumentsInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   }

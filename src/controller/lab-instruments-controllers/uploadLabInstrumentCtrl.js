@@ -22,12 +22,9 @@
  * and up-to-date records in the system.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const labInstrumentModel = require("../../models/lab-instruments-model/labInstrumentModel");
-const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
-const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
+const labInstrumentModel = require('../../models/lab-instruments-model/labInstrumentModel');
+const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const customSingleUploader = require('../../utils/cloudinary-single-uploader/customSingleUploader');
 
 // Details: Role of this controller is to upload single lab instrument info to the data base.
 const uploadLabInstrumentCtrl = async (req, res) => {
@@ -38,23 +35,23 @@ const uploadLabInstrumentCtrl = async (req, res) => {
 
   if (!req.body || !req.file) {
     return res.status(400).json({
-      issue: "Bad Request!",
-      details: "All fields are required.",
+      issue: 'Bad Request!',
+      details: 'All fields are required.',
     });
   } else {
     try {
       if (req.file) {
         filePath = req.file.buffer;
         const { storedDataAccessUrl, storedDataAccessId } =
-          await customSingleUploader(filePath, "lab_instruments_image");
+          await customSingleUploader(filePath, 'lab_instruments_image');
         labInstrumentImageUrl = storedDataAccessUrl;
         labInstrumentImgPublicId = storedDataAccessId;
       }
       const labInstrumentsInfo = new labInstrumentModel({
-        instrumentName: instrumentName,
+        instrumentName,
         instrumentImage: labInstrumentImageUrl,
         instrumentImagePublicId: labInstrumentImgPublicId,
-        description: description,
+        description,
       });
 
       const uploadedData = await labInstrumentsInfo.save();
@@ -63,15 +60,12 @@ const uploadLabInstrumentCtrl = async (req, res) => {
           (await customSingleDestroyer(labInstrumentImgPublicId));
 
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/facilities/lab-instruments`
-        );
         return res.status(201).json({
-          details: "Requested resources has been successfully uploaded!",
+          details: 'Requested resources has been successfully uploaded!',
         });
       }
     } catch (error) {
@@ -80,7 +74,7 @@ const uploadLabInstrumentCtrl = async (req, res) => {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to upload requested resources due to some technical problem.",
+          'Unable to upload requested resources due to some technical problem.',
       });
     }
   }

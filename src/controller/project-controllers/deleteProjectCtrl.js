@@ -22,10 +22,7 @@
  * accurate project records and responding to client needs.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const projectModel = require("../../models/projects-model/projectModel");
+const projectModel = require('../../models/projects-model/projectModel');
 
 const deleteProjectCtrl = async (req, res) => {
   const { id } = req.params;
@@ -33,25 +30,19 @@ const deleteProjectCtrl = async (req, res) => {
     const getPrevProject = await projectModel.findById(id);
     if (!getPrevProject) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     } else {
       const deleteReqProject = await projectModel.findByIdAndDelete(id);
       if (!deleteReqProject) {
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs/projects`
-        );
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/cbs-labs/projects/${id}`
-        );
         return res.status(200).json({
-          details: "Requested resources has been successfully removed!",
+          details: 'Requested resources has been successfully removed!',
         });
       }
     }
@@ -59,7 +50,7 @@ const deleteProjectCtrl = async (req, res) => {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to delete requested resources due to some technical problem.",
+        'Unable to delete requested resources due to some technical problem.',
     });
   }
 };

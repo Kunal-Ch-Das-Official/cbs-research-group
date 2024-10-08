@@ -22,12 +22,9 @@
  * within the system.
  */
 
-const {
-  clearCache,
-} = require("../../../middlewares/cache-middleware/cacheMiddleware");
-const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
-const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
-const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
+const phdMemberModel = require('../../../models/members-model/phd-member-model/phdMemberModel');
+const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const customSingleUploader = require('../../../utils/cloudinary-single-uploader/customSingleUploader');
 
 const uploadPhdMemberCtrl = async (req, res) => {
   let profileImageUrl;
@@ -46,15 +43,15 @@ const uploadPhdMemberCtrl = async (req, res) => {
   } = req.body;
   if (!req.body || !req.file) {
     return res.status(400).json({
-      issue: "Bad Request!",
-      details: "All fields are required.",
+      issue: 'Bad Request!',
+      details: 'All fields are required.',
     });
   } else {
     try {
       if (req.file) {
         filePath = req.file.buffer;
         const { storedDataAccessUrl, storedDataAccessId } =
-          await customSingleUploader(filePath, "phd_members_image");
+          await customSingleUploader(filePath, 'phd_members_image');
         profileImageUrl = storedDataAccessUrl;
         profileImgPublicId = storedDataAccessId;
       }
@@ -77,16 +74,12 @@ const uploadPhdMemberCtrl = async (req, res) => {
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
 
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/phd/members`
-        );
-
         return res.status(201).json({
-          details: "Requested resources has been successfully uploaded!",
+          details: 'Requested resources has been successfully uploaded!',
         });
       }
     } catch (error) {
@@ -94,7 +87,7 @@ const uploadPhdMemberCtrl = async (req, res) => {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to upload requested resources due to some technical problem.",
+          'Unable to upload requested resources due to some technical problem.',
       });
     }
   }

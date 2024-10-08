@@ -14,14 +14,14 @@
  * data and optionally any configuration settings needed for the upload.
  */
 
-const cloudinaryConfig = require("../../config/cloudinaryConfig");
-const streamifier = require("streamifier");
+const cloudinaryConfig = require('../../config/cloudinaryConfig');
+const streamifier = require('streamifier');
 
 const customSingleUploader = async (fileBuffer, folderName) => {
   try {
     return new Promise((resolve, reject) => {
       const uploadStream = cloudinaryConfig.uploader.upload_stream(
-        { folder: folderName, resource_type: "auto" },
+        { folder: folderName, resource_type: 'auto' },
         (error, result) => {
           if (error) {
             reject(error);
@@ -39,8 +39,8 @@ const customSingleUploader = async (fileBuffer, folderName) => {
   } catch (error) {
     console.log({
       status: 500,
-      issue: "Cloudinary uploader error!",
-      issueOrigin: "Custom single uploader.",
+      issue: 'Cloudinary uploader error!',
+      issueOrigin: 'Custom single uploader.',
       message: error.message,
     });
     return null;

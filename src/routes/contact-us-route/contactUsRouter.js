@@ -16,47 +16,34 @@
  * effective communication with users.
  */
 
-const express = require("express");
-const uploadContactInfoCtrl = require("../../controller/contact-form-controllers/uploadContactInfoCtrl");
-const deleteContactInfoCtrl = require("../../controller/contact-form-controllers/deleteContactInfoCtrl");
-const getContactInfoCtrl = require("../../controller/contact-form-controllers/getContactInfoCtrl");
-const sendContactPersonResponseCtrl = require("../../controller/contact-form-controllers/sendContactPersonResponseCtrl");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const express = require('express');
+const uploadContactInfoCtrl = require('../../controller/contact-form-controllers/uploadContactInfoCtrl');
+const deleteContactInfoCtrl = require('../../controller/contact-form-controllers/deleteContactInfoCtrl');
+const getContactInfoCtrl = require('../../controller/contact-form-controllers/getContactInfoCtrl');
+const sendContactPersonResponseCtrl = require('../../controller/contact-form-controllers/sendContactPersonResponseCtrl');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const contactFormRouter = express.Router();
 
 // Post contact form router
-contactFormRouter.post("/information", uploadContactInfoCtrl);
+contactFormRouter.post('/information', uploadContactInfoCtrl);
 
 // Send coresponding email response of contact query router
 contactFormRouter.post(
-  "/response-mail/:id",
+  '/response-mail/:id',
   checkAdminAuth,
   sendContactPersonResponseCtrl
 );
 
 // Get all contact information router
-contactFormRouter.get(
-  "/information",
-  checkAdminAuth,
-  cacheMiddleware,
-  getContactInfoCtrl
-);
+contactFormRouter.get('/information', checkAdminAuth, getContactInfoCtrl);
 
 // Get single contact information router
-contactFormRouter.get(
-  "/information/:id",
-  checkAdminAuth,
-  cacheMiddleware,
-  getContactInfoCtrl
-);
+contactFormRouter.get('/information/:id', checkAdminAuth, getContactInfoCtrl);
 
 // Delete specific contact message router
 contactFormRouter.delete(
-  "/information/:id",
+  '/information/:id',
   checkAdminAuth,
   deleteContactInfoCtrl
 );

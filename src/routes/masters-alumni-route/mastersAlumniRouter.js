@@ -16,49 +16,42 @@
  * processed and routed to the appropriate handlers or services.
  */
 
-const express = require("express");
-const uploadMastersAlumniCtrl = require("../../controller/alumni-controllers/masters-alumni-controller/uploadMastersAlumniCtrl");
-const updateMastersAlumniCtrl = require("../../controller/alumni-controllers/masters-alumni-controller/updateMastersAlumniCtrl");
-const getMastersAlumniCtrl = require("../../controller/alumni-controllers/masters-alumni-controller/getMastersAlumniCtrl");
-const deleteMastersAlumniCtrl = require("../../controller/alumni-controllers/masters-alumni-controller/deleteMastersAlumniCtrl");
-const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const express = require('express');
+const uploadMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/uploadMastersAlumniCtrl');
+const updateMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/updateMastersAlumniCtrl');
+const getMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/getMastersAlumniCtrl');
+const deleteMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/deleteMastersAlumniCtrl');
+const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 // Use Express As Router //
 const mastersAlumniRouter = express.Router();
 
 // Post new master alumni data router
 mastersAlumniRouter.post(
-  "/alumni-data",
+  '/alumni-data',
   checkAdminAuth,
-  multerLocalFileUploader.single("profilePicture"),
+  multerLocalFileUploader.single('profilePicture'),
   uploadMastersAlumniCtrl
 );
 
 // Update master alumni data router
 mastersAlumniRouter.patch(
-  "/alumni-data/:id",
+  '/alumni-data/:id',
   checkAdminAuth,
-  multerLocalFileUploader.single("profilePicture"),
+  multerLocalFileUploader.single('profilePicture'),
   updateMastersAlumniCtrl
 );
 
 // Get all master alumni data router
-mastersAlumniRouter.get("/alumni-data", cacheMiddleware, getMastersAlumniCtrl);
+mastersAlumniRouter.get('/alumni-data', getMastersAlumniCtrl);
 
 // Get single master alumni data router
-mastersAlumniRouter.get(
-  "/alumni-data/:id",
-  cacheMiddleware,
-  getMastersAlumniCtrl
-);
+mastersAlumniRouter.get('/alumni-data/:id', getMastersAlumniCtrl);
 
 // Delete specific master alumni data router
 mastersAlumniRouter.delete(
-  "/alumni-data/:id",
+  '/alumni-data/:id',
   checkAdminAuth,
   deleteMastersAlumniCtrl
 );

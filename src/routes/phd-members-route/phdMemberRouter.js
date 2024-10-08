@@ -16,42 +16,39 @@
  * processed and routed to the appropriate handlers or services.
  */
 
-const express = require("express");
-const uploadPhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/uploadPhdMemberCtrl");
-const updatePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/updatePhdMemberCtrl");
-const getPhdMembersCtrl = require("../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl");
-const deletePhdMemberCtrl = require("../../controller/member-controllers/phd-members-controller/deletePhdMemberCtrl");
-const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const express = require('express');
+const uploadPhdMemberCtrl = require('../../controller/member-controllers/phd-members-controller/uploadPhdMemberCtrl');
+const updatePhdMemberCtrl = require('../../controller/member-controllers/phd-members-controller/updatePhdMemberCtrl');
+const getPhdMembersCtrl = require('../../controller/member-controllers/phd-members-controller/getPhdMembersCtrl');
+const deletePhdMemberCtrl = require('../../controller/member-controllers/phd-members-controller/deletePhdMemberCtrl');
+const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const phdMembersRouter = express.Router();
 
 // Post phd members info router
 phdMembersRouter.post(
-  "/members",
+  '/members',
   checkAdminAuth,
-  multerLocalFileUploader.single("profilePicture"),
+  multerLocalFileUploader.single('profilePicture'),
   uploadPhdMemberCtrl
 );
 
 // Update phd members info router
 phdMembersRouter.patch(
-  "/members/:id",
+  '/members/:id',
   checkAdminAuth,
-  multerLocalFileUploader.single("profilePicture"),
+  multerLocalFileUploader.single('profilePicture'),
   updatePhdMemberCtrl
 );
 
 // Get all phd members info router
-phdMembersRouter.get("/members", cacheMiddleware, getPhdMembersCtrl);
+phdMembersRouter.get('/members', getPhdMembersCtrl);
 
 // Get individual phd members info router
-phdMembersRouter.get("/members/:id", cacheMiddleware, getPhdMembersCtrl);
+phdMembersRouter.get('/members/:id', getPhdMembersCtrl);
 
 // Delete specific phd members info router
-phdMembersRouter.delete("/members/:id", checkAdminAuth, deletePhdMemberCtrl);
+phdMembersRouter.delete('/members/:id', checkAdminAuth, deletePhdMemberCtrl);
 
 module.exports = phdMembersRouter;

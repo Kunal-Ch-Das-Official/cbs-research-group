@@ -16,7 +16,7 @@
  * request records, facilitating the management of admin user applications.
  */
 
-const { Schema, default: mongoose } = require("mongoose");
+const { Schema, default: mongoose } = require('mongoose');
 
 const AdminRegisterMessageSchema = new Schema(
   {
@@ -43,7 +43,7 @@ const AdminRegisterMessageSchema = new Schema(
 );
 
 const adminRegistrationRequestMessageModel = mongoose.model(
-  "admin-registration-request",
+  'admin-registration-request',
   AdminRegisterMessageSchema
 );
 module.exports = adminRegistrationRequestMessageModel;

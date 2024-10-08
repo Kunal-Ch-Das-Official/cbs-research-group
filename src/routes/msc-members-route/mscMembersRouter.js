@@ -16,41 +16,38 @@
  * processed and routed to the appropriate handlers or services.
  */
 
-const express = require("express");
-const uploadMscMemberCtrl = require("../../controller/member-controllers/msc-members-controller/uploadMscMemberCtrl");
-const updateMscMemberCtrl = require("../../controller/member-controllers/msc-members-controller/updateMscMemberCtrl");
-const getMscMembersCtrl = require("../../controller/member-controllers/msc-members-controller/getMscMembersCtrl");
-const deleteMscMemberCtrl = require("../../controller/member-controllers/msc-members-controller/deleteMscMemberCtrl");
-const multerLocalFileUploader = require("../../middlewares/multer-localfile-uploader/multerLocalFileUploader");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const express = require('express');
+const uploadMscMemberCtrl = require('../../controller/member-controllers/msc-members-controller/uploadMscMemberCtrl');
+const updateMscMemberCtrl = require('../../controller/member-controllers/msc-members-controller/updateMscMemberCtrl');
+const getMscMembersCtrl = require('../../controller/member-controllers/msc-members-controller/getMscMembersCtrl');
+const deleteMscMemberCtrl = require('../../controller/member-controllers/msc-members-controller/deleteMscMemberCtrl');
+const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const mscMembersRouter = express.Router();
 
 // Post new msc members information router
 mscMembersRouter.post(
-  "/members",
+  '/members',
   checkAdminAuth,
-  multerLocalFileUploader.single("profilePicture"),
+  multerLocalFileUploader.single('profilePicture'),
   uploadMscMemberCtrl
 );
 //Update msc members information router
 mscMembersRouter.patch(
-  "/members/:id",
+  '/members/:id',
   checkAdminAuth,
-  multerLocalFileUploader.single("profilePicture"),
+  multerLocalFileUploader.single('profilePicture'),
   updateMscMemberCtrl
 );
 
 // Get all msc members information router
-mscMembersRouter.get("/members", cacheMiddleware, getMscMembersCtrl);
+mscMembersRouter.get('/members', getMscMembersCtrl);
 
 // Get single msc members information router
-mscMembersRouter.get("/members/:id", cacheMiddleware, getMscMembersCtrl);
+mscMembersRouter.get('/members/:id', getMscMembersCtrl);
 
 // Delete specific msc members information router
-mscMembersRouter.delete("/members/:id", checkAdminAuth, deleteMscMemberCtrl);
+mscMembersRouter.delete('/members/:id', checkAdminAuth, deleteMscMemberCtrl);
 
 module.exports = mscMembersRouter;

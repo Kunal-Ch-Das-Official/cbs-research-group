@@ -21,7 +21,7 @@
  * team awards information as requested.
  */
 
-const teamAwardsModel = require("../../../models/awards-model/team-awards-model/teamAwardsModel");
+const teamAwardsModel = require('../../../models/awards-model/team-awards-model/teamAwardsModel');
 
 const getTeamAwardsCtrl = async (req, res) => {
   const { id } = req.params;
@@ -31,17 +31,17 @@ const getTeamAwardsCtrl = async (req, res) => {
       const getRequestedTeamAward = await teamAwardsModel.findById(id);
       if (!getRequestedTeamAward) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getRequestedTeamAward);
+        return res.status(200).json(getRequestedTeamAward);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   } else {
@@ -49,17 +49,17 @@ const getTeamAwardsCtrl = async (req, res) => {
       const getAllTeamAwards = await teamAwardsModel.find();
       if (!getAllTeamAwards) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllTeamAwards);
+        return res.status(200).json(getAllTeamAwards);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   }

@@ -23,11 +23,8 @@
  * processed and stored in the system.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const adminRegistrationRequestMessageModel = require("../../models/admin-registration-request-model/adminRegisterRequestModel");
-const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
+const adminRegistrationRequestMessageModel = require('../../models/admin-registration-request-model/adminRegisterRequestModel');
+const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
 
 const postRegisterAsAdminRequestCtrl = async (req, res) => {
   const { reqUserName, reqUserEmail, message, termsAndConditions } = req.body;
@@ -38,41 +35,38 @@ const postRegisterAsAdminRequestCtrl = async (req, res) => {
       });
       if (getCurrentAdminInfo) {
         return res.status(400).json({
-          issue: "Bad Request!",
-          details: "Admin user already exist with this email id.",
+          issue: 'Bad Request!',
+          details: 'Admin user already exist with this email id.',
         });
       } else {
         const storeRequest = new adminRegistrationRequestMessageModel({
-          reqUserName: reqUserName,
-          reqUserEmail: reqUserEmail,
-          message: message,
-          termsAndConditions: termsAndConditions,
+          reqUserName,
+          reqUserEmail,
+          message,
+          termsAndConditions,
         });
         const saveDetails = await storeRequest.save();
         if (!saveDetails) {
           return res.status(501).json({
-            issue: "Not implemented!",
-            details: "Something went wrong, please try again later.",
+            issue: 'Not implemented!',
+            details: 'Something went wrong, please try again later.',
           });
         } else {
-          clearCache(
-            `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/register-request/admin`
-          );
           return res.status(201).json({
-            details: "Request has been send successfully.",
+            details: 'Request has been send successfully.',
           });
         }
       }
     } else {
       return res.status(400).json({
-        issue: "Bad Request!",
-        message: "All fields are require.",
+        issue: 'Bad Request!',
+        message: 'All fields are require.',
       });
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to send the request due to some technical problem.",
+      details: 'Unable to send the request due to some technical problem.',
     });
   }
 };

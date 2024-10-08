@@ -21,7 +21,7 @@
  * or any other functionality that requires full MSC members' information.
  */
 
-const mscMemberModel = require("../../../models/members-model/msc-member-model/mscMemberModel");
+const mscMemberModel = require('../../../models/members-model/msc-member-model/mscMemberModel');
 
 const getMscMembersCtrl = async (req, res) => {
   const { id } = req.params;
@@ -30,17 +30,17 @@ const getMscMembersCtrl = async (req, res) => {
       const getSingleMscMemberInfo = await mscMemberModel.findById(id);
       if (!getSingleMscMemberInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getSingleMscMemberInfo);
+        return res.status(200).json(getSingleMscMemberInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   } else {
@@ -48,17 +48,17 @@ const getMscMembersCtrl = async (req, res) => {
       const getAllMscMembersInfo = await mscMemberModel.find();
       if (!getAllMscMembersInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllMscMembersInfo);
+        return res.status(200).json(getAllMscMembersInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   }

@@ -16,7 +16,7 @@
  * admin user records, and includes methods for authentication and role management.
  */
 
-const { Schema, default: mongoose } = require("mongoose");
+const { Schema, default: mongoose } = require('mongoose');
 
 const AuthAdminSchema = new Schema(
   {
@@ -45,7 +45,7 @@ const AuthAdminSchema = new Schema(
 );
 
 const authAdminUserModel = mongoose.model(
-  "authenticate-admin",
+  'authenticate-admin',
   AuthAdminSchema
 );
 module.exports = authAdminUserModel;

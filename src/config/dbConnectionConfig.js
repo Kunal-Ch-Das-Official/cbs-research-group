@@ -23,22 +23,22 @@
  */
 
 // Import required modules
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 // Database connection string (ensure it's secure and configurable via environment variables)
-const { dataBaseConnectionString } = require("./envConfig");
+const { dataBaseConnectionString } = require('./envConfig');
 
 // Function to connect to the database
 const dbConnectionConfig = async () => {
   try {
-    mongoose.connection.on("connected", () => {
-      console.log("Database connected successfully");
+    mongoose.connection.on('connected', () => {
+      console.log('Database connected successfully');
     });
-    mongoose.connection.on("error", (err) => {
-      console.log("Error occured in database system", err);
+    mongoose.connection.on('error', (err) => {
+      console.log('Error occured in database system', err);
     });
     await mongoose.connect(dataBaseConnectionString, {});
   } catch (error) {
-    console.log("Sorry we are unable to connecet to database", error);
+    console.log('Sorry we are unable to connecet to database', error);
     process.exit(1); // Exit process with failure
   }
 };

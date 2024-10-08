@@ -21,17 +21,14 @@
  * added to the system.
  */
 
-const {
-  clearCache,
-} = require("../../../middlewares/cache-middleware/cacheMiddleware");
-const personalAwardsModel = require("../../../models/awards-model/personal-awards-model/personalAwardsModel");
+const personalAwardsModel = require('../../../models/awards-model/personal-awards-model/personalAwardsModel');
 
 const uploadPersonalAwardsCtrl = async (req, res) => {
   const { awardTitle, recivedFor, recivedDate } = req.body;
   if (!req.body) {
     return res.status(400).json({
-      issue: "Bad Request!",
-      details: "All fields are required.",
+      issue: 'Bad Request!',
+      details: 'All fields are required.',
     });
   } else {
     try {
@@ -43,22 +40,19 @@ const uploadPersonalAwardsCtrl = async (req, res) => {
       const uploadDetails = personalAward.save();
       if (!uploadDetails) {
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/personal/awards"
-        );
         return res.status(201).json({
-          details: "Requested resources has been successfully uploaded!",
+          details: 'Requested resources has been successfully uploaded!',
         });
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to upload requested resources due to some technical problem.",
+          'Unable to upload requested resources due to some technical problem.',
       });
     }
   }

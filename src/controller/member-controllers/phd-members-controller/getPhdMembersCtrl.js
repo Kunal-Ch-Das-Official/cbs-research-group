@@ -22,7 +22,7 @@
  * purposes as requested by users.
  */
 
-const phdMemberModel = require("../../../models/members-model/phd-member-model/phdMemberModel");
+const phdMemberModel = require('../../../models/members-model/phd-member-model/phdMemberModel');
 
 const getPhdMembersCtrl = async (req, res) => {
   const { id } = req.params;
@@ -31,17 +31,17 @@ const getPhdMembersCtrl = async (req, res) => {
       const getSinglePhdMemberInfo = await phdMemberModel.findById(id);
       if (!getSinglePhdMemberInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getSinglePhdMemberInfo);
+        return res.status(200).json(getSinglePhdMemberInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   } else {
@@ -49,17 +49,17 @@ const getPhdMembersCtrl = async (req, res) => {
       const getAllPhdMembersInfo = await phdMemberModel.find();
       if (!getAllPhdMembersInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllPhdMembersInfo);
+        return res.status(200).json(getAllPhdMembersInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   }

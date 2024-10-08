@@ -15,21 +15,21 @@
  * image from the cloud storage.
  */
 
-const cloudinaryConfig = require("../../config/cloudinaryConfig");
+const cloudinaryConfig = require('../../config/cloudinaryConfig');
 
 const customSingleDestroyer = async (destroyerPublicId) => {
   try {
     await cloudinaryConfig.uploader.destroy(destroyerPublicId).then(() => {
       console.log({
-        message: "Requested file has been removed from cloudinary!",
-        messageOrigin: "custom single destroyer.",
+        message: 'Requested file has been removed from cloudinary!',
+        messageOrigin: 'custom single destroyer.',
       });
     });
   } catch (error) {
     console.error({
       issue: error.message,
-      details: "Unable to destroy requested resources!",
-      issueOrigin: "custom single destroyer.",
+      details: 'Unable to destroy requested resources!',
+      issueOrigin: 'custom single destroyer.',
     });
   }
 };

@@ -16,55 +16,50 @@
  * and directed to the appropriate administrative authority for processing.
  */
 
-const express = require("express");
-const postRegisterAsAdminRequestCtrl = require("../../controller/admin-registration-request-controller/postRegisterAsAdminRequestCtrl");
-const sendAcceptedResponseOfAdminRequestUserCtrl = require("../../controller/admin-registration-request-controller/sendAcceptedResponseOfAdminReqCtrl");
-const sendDeniedResponseOfAdminRequestUserCtrl = require("../../controller/admin-registration-request-controller/sendDeniedResponseOfAdminRequestUserCtrl");
-const deleteAdminRegisterRequestMessage = require("../../controller/admin-registration-request-controller/deleteAdminRegisterRequestCtrl");
-const getAdminRegisterRequestCtrl = require("../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl");
-const checkAdminAuth = require("../../middlewares/auth-middleware/authAdminMiddleware");
-const {
-  cacheMiddleware,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
+const express = require('express');
+const postRegisterAsAdminRequestCtrl = require('../../controller/admin-registration-request-controller/postRegisterAsAdminRequestCtrl');
+const sendAcceptedResponseOfAdminRequestUserCtrl = require('../../controller/admin-registration-request-controller/sendAcceptedResponseOfAdminReqCtrl');
+const sendDeniedResponseOfAdminRequestUserCtrl = require('../../controller/admin-registration-request-controller/sendDeniedResponseOfAdminRequestUserCtrl');
+const deleteAdminRegisterRequestMessage = require('../../controller/admin-registration-request-controller/deleteAdminRegisterRequestCtrl');
+const getAdminRegisterRequestCtrl = require('../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl');
+const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const adminRegistrationReqRouter = express.Router();
 
-adminRegistrationReqRouter.post("/admin", postRegisterAsAdminRequestCtrl); // Post desire to be admin form router
+adminRegistrationReqRouter.post('/admin', postRegisterAsAdminRequestCtrl); // Post desire to be admin form router
 
 // Admin request accept email router
 adminRegistrationReqRouter.post(
-  "/admin-accept/:id",
+  '/admin-accept/:id',
   checkAdminAuth,
   sendAcceptedResponseOfAdminRequestUserCtrl
 );
 
 // Admin request rejected router
 adminRegistrationReqRouter.post(
-  "/admin-denied/:id",
+  '/admin-denied/:id',
   checkAdminAuth,
   sendDeniedResponseOfAdminRequestUserCtrl
 );
 
 // Delete request to be admin message router
 adminRegistrationReqRouter.delete(
-  "/admin/:id",
+  '/admin/:id',
   checkAdminAuth,
   deleteAdminRegisterRequestMessage
 );
 
 // Get single desire to be admin request message router
 adminRegistrationReqRouter.get(
-  "/admin/:id",
+  '/admin/:id',
   checkAdminAuth,
-  cacheMiddleware,
   getAdminRegisterRequestCtrl
 );
 
 // Get all desire to be admin request message router
 adminRegistrationReqRouter.get(
-  "/admin",
+  '/admin',
   checkAdminAuth,
-  cacheMiddleware,
   getAdminRegisterRequestCtrl
 );
 

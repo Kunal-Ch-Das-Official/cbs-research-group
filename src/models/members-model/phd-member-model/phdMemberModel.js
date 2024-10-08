@@ -17,8 +17,8 @@
  * information.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
 // Custom validator function to check for exactly 10 digits
 const validatePhoneNumber = function (phone) {
@@ -50,7 +50,7 @@ const PhdMemberSchema = new Schema(
       required: true,
       validate: {
         validator: validatePhoneNumber,
-        message: "Phone number must be exactly 10 digits.",
+        message: 'Phone number must be exactly 10 digits.',
       },
     },
     mscDoneFrom: {
@@ -83,6 +83,6 @@ const PhdMemberSchema = new Schema(
   { timestamps: true }
 );
 
-const phdMemberModel = mongoose.model("phd-member-info", PhdMemberSchema);
+const phdMemberModel = mongoose.model('phd-member-info', PhdMemberSchema);
 
 module.exports = phdMemberModel;

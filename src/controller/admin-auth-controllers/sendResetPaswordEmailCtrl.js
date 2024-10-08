@@ -23,38 +23,39 @@
  * to reset their passwords securely.
  */
 
-const { jwtSecretKey, clientSideUrl } = require("../../config/envConfig");
+const { jwtSecretKey, clientSideUrl } = require('../../config/envConfig');
 
-const jwt = require("jsonwebtoken");
-const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
-const sendPasswordResetEmail = require("../../utils/nodemailer-mail-sender/resetMailSendingHandler");
+const jwt = require('jsonwebtoken');
+const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
+const sendPasswordResetEmail = require('../../utils/nodemailer-mail-sender/resetMailSendingHandler');
 
+// eslint-disable-next-line consistent-return
 const sendResetPasswordEmailCtrl = async (req, res) => {
   const { adminUserEmail } = req.body;
   try {
     if (!adminUserEmail) {
       return res.status(400).json({
-        issue: "Bad Request!",
-        details: "Email Id is required.",
+        issue: 'Bad Request!',
+        details: 'Email Id is required.',
       });
     } else {
       const requestedEmail = await authAdminUserModel.findOne({
-        adminUserEmail: adminUserEmail,
+        adminUserEmail,
       });
       if (!requestedEmail) {
         return res.status(404).json({
-          issue: "Admin user not exist!",
-          details: "Please provide a valid admin user id.",
+          issue: 'Admin user not exist!',
+          details: 'Please provide a valid admin user id.',
         });
       } else {
         const secret = requestedEmail._id + jwtSecretKey;
         // Generate json web token
         const token = jwt.sign({ adminId: requestedEmail._id }, secret, {
-          expiresIn: "5m",
+          expiresIn: '5m',
         });
 
         // Send password reset url to admin user's email id
-        let link = `${clientSideUrl}/reset-password/${requestedEmail._id}/${token}`;
+        const link = `${clientSideUrl}/reset-password/${requestedEmail._id}/${token}`;
 
         await sendPasswordResetEmail(
           requestedEmail.adminUserEmail,
@@ -67,7 +68,7 @@ const sendResetPasswordEmailCtrl = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to perform the task due to some technical problem.",
+      details: 'Unable to perform the task due to some technical problem.',
     });
   }
 };

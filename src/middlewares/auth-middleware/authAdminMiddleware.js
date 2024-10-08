@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /**
  * JWT Validation Middleware
  * Project: CBS-Research-Group-Backend
@@ -16,36 +17,36 @@
  * to proceed; otherwise, an error response is returned.
  */
 
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-const { jwtSecretKey } = require("../../config/envConfig");
-const authAdminUserModel = require("../../models/auth-admin-model/authAdminUserModel");
+const { jwtSecretKey } = require('../../config/envConfig');
+const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
 
 const checkAdminAuth = async (req, res, next) => {
   let token;
   const { authorization } = req.headers;
-  if (authorization && authorization.startsWith("Bearer")) {
+  if (authorization && authorization.startsWith('Bearer')) {
     try {
-      token = authorization.split(" ")[1];
+      token = authorization.split(' ')[1];
       // Verify token
       const { adminId } = jwt.verify(token, jwtSecretKey);
       // Get user from token
 
       req.adminUserName = await authAdminUserModel
         .findById(adminId)
-        .select("-adminUserPassword");
+        .select('-adminUserPassword');
       next();
     } catch (error) {
-      return res.status(500).json({
+      return res.status(401).json({
         issue: error.message,
-        details: "Authorization failed.",
+        details: 'Authorization failed.',
       });
     }
   }
   if (!token) {
     return res.status(401).json({
-      issue: "Unauthoraized admin user!",
-      details: "Admin authorization token invalid.",
+      issue: 'Unauthoraized admin user!',
+      details: 'Admin authorization token invalid.',
     });
   }
 };

@@ -15,27 +15,25 @@
  * email with the necessary information to reset their passwords.
  */
 
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 const {
   supportEmailHostProtocol,
   supportEmailPort,
   supportEmailHostUser,
   supportEmailHostPassword,
-} = require("../../config/envConfig");
+} = require('../../config/envConfig');
+const envConfig = require('../../config/envConfig');
 const sendPasswordResetEmail = async (
   sendTo,
   userName,
   corespondingLink,
   response
+  // eslint-disable-next-line consistent-return
 ) => {
-  const animatedHeader =
-    "https://res.cloudinary.com/dmgs52isy/image/upload/v1724431747/email-assets/wmr55mj9bqw8kwztjbxv.gif";
-  const mailBackground =
-    "https://res.cloudinary.com/dmgs52isy/image/upload/v1724431747/email-assets/jhama4gudp3ww3oarkpz.png";
-  const mailBottom =
-    "https://res.cloudinary.com/dmgs52isy/image/upload/v1724431748/email-assets/g1bpwqh7cujsh5jkm7pt.png";
-  const CBSLogo =
-    "https://res.cloudinary.com/dmgs52isy/image/upload/v1724431697/email-assets/pdz67r83witpewa82owg.png";
+  const animatedHeader = envConfig.mailTemplateHeader;
+  const mailBackground = envConfig.mailTemplateBody;
+  const mailBottom = envConfig.mailTemplateFooter;
+  const CBSLogo = envConfig.researchGroupLogo;
 
   try {
     const transporter = nodemailer.createTransport({
@@ -50,7 +48,7 @@ const sendPasswordResetEmail = async (
     const mailOptions = {
       from: supportEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: " CBS Research Group - Admin User Password Reset Request",
+      subject: ' CBS Research Group - Admin User Password Reset Request',
       html: `
 
    <style>
@@ -888,22 +886,22 @@ const sendPasswordResetEmail = async (
         return response.status(500).json({
           issue: error.message,
           details:
-            "Unable to send this mail due to technical problem, please try again later",
+            'Unable to send this mail due to technical problem, please try again later',
         });
       } else {
         return response.status(200).json({
-          message: "Email has been send successfully",
+          message: 'Email has been send successfully',
           resetLink: corespondingLink,
-          notification: `Password reset link has been sended to this:${sendTo} email account.`,
+          notification: `Password reset link has been sended to this:${sendTo} email account.${info}`,
         });
       }
     });
   } catch (error) {
     return response.status(500).json({
       issue: error.message,
-      details: "Unable to perform this task due to some technical problem.",
+      details: 'Unable to perform this task due to some technical problem.',
       message:
-        "Please try again later, or if the issue not resolve autometically then contact with your tech support team.",
+        'Please try again later, or if the issue not resolve autometically then contact with your tech support team.',
     });
   }
 };

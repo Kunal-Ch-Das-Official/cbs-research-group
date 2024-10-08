@@ -19,7 +19,7 @@
  * when they request it. It ensures that only authorized admins can access the contact info.
  */
 
-const contactFormModel = require("../../models/contact-form-model/contactFormModel");
+const contactFormModel = require('../../models/contact-form-model/contactFormModel');
 
 const getContactInfoCtrl = async (req, res) => {
   const { id } = req.params;
@@ -28,17 +28,17 @@ const getContactInfoCtrl = async (req, res) => {
       const getRequestedContactInfo = await contactFormModel.findById(id);
       if (!getRequestedContactInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getRequestedContactInfo);
+        return res.status(200).json(getRequestedContactInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   } else {
@@ -46,17 +46,17 @@ const getContactInfoCtrl = async (req, res) => {
       const getAllRequestedContactInfo = await contactFormModel.find();
       if (!getAllRequestedContactInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllRequestedContactInfo);
+        return res.status(200).json(getAllRequestedContactInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   }

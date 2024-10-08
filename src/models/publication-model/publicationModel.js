@@ -17,10 +17,10 @@
  * information.
  */
 
-const mongoose = require("mongoose");
-const { Schema } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require('mongoose');
 
-const PublicationSchema = Schema(
+const PublicationSchema = new Schema(
   {
     title: {
       type: String,
@@ -73,5 +73,6 @@ const PublicationSchema = Schema(
   { timestamps: true }
 );
 
-const publicationModel = mongoose.model("publication-info", PublicationSchema);
+const publicationModel = mongoose.model('publication-info', PublicationSchema);
+
 module.exports = publicationModel;

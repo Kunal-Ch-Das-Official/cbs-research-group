@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /**
  * Send Response Mail To Contact Person From Admin Operations Handler
  * Project: CBS-Research-Group-Backend
@@ -20,8 +21,8 @@
  * and follow-up on contact form inquiries.
  */
 
-const contactFormModel = require("../../models/contact-form-model/contactFormModel");
-const contactResponseSendCtrl = require("../../utils/nodemailer-mail-sender/contactResponseSendCtrl");
+const contactFormModel = require('../../models/contact-form-model/contactFormModel');
+const contactResponseSendCtrl = require('../../utils/nodemailer-mail-sender/contactResponseSendCtrl');
 
 const sendContactPersonResponseCtrl = async (req, res) => {
   const { id } = req.params;
@@ -31,8 +32,8 @@ const sendContactPersonResponseCtrl = async (req, res) => {
     const getContactPerson = await contactFormModel.findById(id);
     if (!getContactPerson) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     } else {
       const { emailId, userName } = getContactPerson;
@@ -41,7 +42,7 @@ const sendContactPersonResponseCtrl = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
-      details: "Unable to send this email due to some technical problem.",
+      details: 'Unable to send this email due to some technical problem.',
     });
   }
 };

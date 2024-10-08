@@ -20,25 +20,23 @@
  * publication information remains up-to-date and reflects the most recent changes.
  */
 
-const {
-  clearCache,
-} = require("../../middlewares/cache-middleware/cacheMiddleware");
-const publicationModel = require("../../models/publication-model/publicationModel");
-const customSingleDestroyer = require("../../utils/cloudinary-single-destroyer/customSingleDestroyer");
-const customSingleUploader = require("../../utils/cloudinary-single-uploader/customSingleUploader");
+const publicationModel = require('../../models/publication-model/publicationModel');
+const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const customSingleUploader = require('../../utils/cloudinary-single-uploader/customSingleUploader');
 
 const updatePublicationCtrl = async (req, res) => {
   try {
     const updateFields = {};
 
     // Helper function to handle file updates
+    // eslint-disable-next-line consistent-return
     const handleFileUpdate = async (field, req) => {
       if (req.files && req.files[field] === undefined) {
         const findField = await publicationModel.findById(req.params.id);
         if (!findField) {
           return res.status(404).json({
-            issue: "Not found!",
-            details: "Requested resources are not found.",
+            issue: 'Not found!',
+            details: 'Requested resources are not found.',
           });
         }
         updateFields[field] = findField[field];
@@ -48,7 +46,7 @@ const updatePublicationCtrl = async (req, res) => {
         await customSingleDestroyer(getFieldInfo[`${field}PublicId`]);
         const uploadNewImg = await customSingleUploader(
           req.files[field][0].buffer,
-          "publication_image"
+          'publication_image'
         );
         updateFields[field] = uploadNewImg.storedDataAccessUrl;
         updateFields[`${field}PublicId`] = uploadNewImg.storedDataAccessId;
@@ -56,22 +54,22 @@ const updatePublicationCtrl = async (req, res) => {
     };
 
     // Handle the updates for each file field
-    await handleFileUpdate("publicationThumbnail", req);
-    await handleFileUpdate("firstOverview", req);
-    await handleFileUpdate("secondOverview", req);
+    await handleFileUpdate('publicationThumbnail', req);
+    await handleFileUpdate('firstOverview', req);
+    await handleFileUpdate('secondOverview', req);
 
     // Update the rest of the fields from req.body if not empty
     const findPublication = await publicationModel.findById(req.params.id);
     if (!findPublication) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     }
 
     Object.keys(req.body).forEach((key) => {
       updateFields[key] =
-        req.body[key] === "" ? findPublication[key] : req.body[key];
+        req.body[key] === '' ? findPublication[key] : req.body[key];
     });
 
     // Update the publication with the collected fields
@@ -83,25 +81,19 @@ const updatePublicationCtrl = async (req, res) => {
 
     if (!updatedPublication) {
       return res.status(501).json({
-        issue: "Not implemented!",
-        details: "Something went wrong, please try again later.",
+        issue: 'Not implemented!',
+        details: 'Something went wrong, please try again later.',
       });
     } else {
-      clearCache(
-        "/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info"
-      );
-      clearCache(
-        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/publication/about-info/${req.params.id}`
-      );
       return res.status(200).json({
-        details: "Requested resources has been updated successfully!",
+        details: 'Requested resources has been updated successfully!',
       });
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to update requested resources due to some technical problem.",
+        'Unable to update requested resources due to some technical problem.',
     });
   }
 };

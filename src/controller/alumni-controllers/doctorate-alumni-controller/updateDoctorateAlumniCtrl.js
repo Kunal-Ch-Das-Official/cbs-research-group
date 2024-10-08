@@ -23,12 +23,9 @@
  * modified as needed.
  */
 
-const {
-  clearCache,
-} = require("../../../middlewares/cache-middleware/cacheMiddleware");
-const doctorateAlumniModel = require("../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel");
-const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
-const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
+const doctorateAlumniModel = require('../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel');
+const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
+const customSingleUploader = require('../../../utils/cloudinary-single-uploader/customSingleUploader');
 
 const updateDoctorateAlumniCtrl = async (req, res) => {
   const { id } = req.params;
@@ -50,8 +47,8 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
     const getPreviousAlumniInfo = await doctorateAlumniModel.findById(id);
     if (!getPreviousAlumniInfo) {
       return res.status(404).json({
-        issue: "Not found!",
-        details: "Requested resources are not found.",
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
       });
     }
 
@@ -70,7 +67,7 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
 
     if (req.file) {
       const { storedDataAccessUrl, storedDataAccessId } =
-        await customSingleUploader(filePath, "doctorate_alumni_image");
+        await customSingleUploader(filePath, 'doctorate_alumni_image');
 
       newAlumniImage = storedDataAccessUrl;
       newCloudPublicId = storedDataAccessId;
@@ -106,25 +103,19 @@ const updateDoctorateAlumniCtrl = async (req, res) => {
 
     if (!updateAlumniInfo) {
       return res.status(501).json({
-        issue: "Not implemented!",
-        details: "Something went wrong, please try again later.",
+        issue: 'Not implemented!',
+        details: 'Something went wrong, please try again later.',
       });
     } else {
-      clearCache(
-        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate/alumni-data/${id}`
-      );
-      clearCache(
-        `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/doctorate/alumni-data`
-      );
       return res.status(200).json({
-        details: "Requested resources has been successfully updated!",
+        details: 'Requested resources has been successfully updated!',
       });
     }
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
       details:
-        "Unable to update the requested resources due to some technical problem.",
+        'Unable to update the requested resources due to some technical problem.',
     });
   }
 };

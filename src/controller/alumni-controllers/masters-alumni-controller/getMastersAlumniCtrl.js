@@ -23,7 +23,7 @@
  * provided to clients as requested.
  */
 
-const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
+const mastersAlumniModel = require('../../../models/alumni-model/masters-alumni-model/mastersAlumniModel');
 
 const getMastersAlumniCtrl = async (req, res) => {
   const { id } = req.params;
@@ -32,17 +32,17 @@ const getMastersAlumniCtrl = async (req, res) => {
       const getSingleMastersAlumniInfo = await mastersAlumniModel.findById(id);
       if (!getSingleMastersAlumniInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getSingleMastersAlumniInfo);
+        return res.status(200).json(getSingleMastersAlumniInfo);
       }
     } catch (error) {
-      return res.status(500).sendCachedData({
+      return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem.",
+          'Unable to find requested resources due to some technical problem.',
       });
     }
   } else {
@@ -50,17 +50,17 @@ const getMastersAlumniCtrl = async (req, res) => {
       const getAllMastersAlumniInfo = await mastersAlumniModel.find();
       if (!getAllMastersAlumniInfo) {
         return res.status(404).json({
-          issue: "Not found!",
-          details: "Requested resources are not found.",
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
         });
       } else {
-        return res.status(200).sendCachedData(getAllMastersAlumniInfo);
+        return res.status(200).json(getAllMastersAlumniInfo);
       }
     } catch (error) {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to find requested resources due to some technical problem",
+          'Unable to find requested resources due to some technical problem',
       });
     }
   }

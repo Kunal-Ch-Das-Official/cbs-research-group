@@ -23,12 +23,9 @@
  * added to the system as required.
  */
 
-const mastersAlumniModel = require("../../../models/alumni-model/masters-alumni-model/mastersAlumniModel");
-const customSingleUploader = require("../../../utils/cloudinary-single-uploader/customSingleUploader");
-const customSingleDestroyer = require("../../../utils/cloudinary-single-destroyer/customSingleDestroyer");
-const {
-  clearCache,
-} = require("../../../middlewares/cache-middleware/cacheMiddleware");
+const mastersAlumniModel = require('../../../models/alumni-model/masters-alumni-model/mastersAlumniModel');
+const customSingleUploader = require('../../../utils/cloudinary-single-uploader/customSingleUploader');
+const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
 
 const uploadMastersAlumniCtrl = async (req, res) => {
   let profileImageUrl;
@@ -47,15 +44,15 @@ const uploadMastersAlumniCtrl = async (req, res) => {
 
   if (!req.body || !req.file) {
     return res.status(400).json({
-      issue: "Bad request!",
-      details: "All fields are required.",
+      issue: 'Bad request!',
+      details: 'All fields are required.',
     });
   } else {
     try {
       if (req.file) {
         filePath = req.file.buffer;
         const { storedDataAccessUrl, storedDataAccessId } =
-          await customSingleUploader(filePath, "masters_alumni_image");
+          await customSingleUploader(filePath, 'masters_alumni_image');
         profileImageUrl = storedDataAccessUrl;
         profileImgPublicId = storedDataAccessId;
       }
@@ -77,15 +74,12 @@ const uploadMastersAlumniCtrl = async (req, res) => {
         profileImgPublicId && (await customSingleDestroyer(profileImgPublicId));
 
         return res.status(501).json({
-          issue: "Not implemented!",
-          details: "Something went wrong, please try again later.",
+          issue: 'Not implemented!',
+          details: 'Something went wrong, please try again later.',
         });
       } else {
-        clearCache(
-          `/iiest-shibpur/chemistry-department/cbs-research-groups/v1/masters/alumni-data`
-        );
         return res.status(201).json({
-          details: "Requested resources has been successfully uploaded!",
+          details: 'Requested resources has been successfully uploaded!',
         });
       }
     } catch (error) {
@@ -93,7 +87,7 @@ const uploadMastersAlumniCtrl = async (req, res) => {
       return res.status(500).json({
         issue: error.message,
         details:
-          "Unable to upload requested resources due to some technical problem.",
+          'Unable to upload requested resources due to some technical problem.',
       });
     }
   }
