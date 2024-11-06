@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 15/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This router manages all routes related to master's alumni for the
  * CBS Research Group. It defines endpoints for handling master alumni
@@ -19,9 +19,7 @@
 const express = require('express');
 const uploadMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/uploadMastersAlumniCtrl');
 const updateMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/updateMastersAlumniCtrl');
-const {
-  getMastersAlumniCtrl,
-} = require('../../controller/alumni-controllers/masters-alumni-controller/getMastersAlumniCtrl');
+const getMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/getMastersAlumniCtrl');
 const deleteMastersAlumniCtrl = require('../../controller/alumni-controllers/masters-alumni-controller/deleteMastersAlumniCtrl');
 const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');

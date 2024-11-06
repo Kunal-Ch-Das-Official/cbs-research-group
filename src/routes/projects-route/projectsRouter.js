@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This router manages all routes related to projects for the
  * CBS Research Group. It defines endpoints for handling project data,
@@ -20,9 +20,7 @@ const express = require('express');
 const uploadProjectCtrl = require('../../controller/project-controllers/uploadProjectCtrl');
 const updateProjectCtrl = require('../../controller/project-controllers/updateProjectCtrl');
 const deleteProjectCtrl = require('../../controller/project-controllers/deleteProjectCtrl');
-const {
-  getProjectsCtrl,
-} = require('../../controller/project-controllers/getProjectsCtrl');
+const getProjectsCtrl = require('../../controller/project-controllers/getProjectsCtrl');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const projectsRouter = express.Router();

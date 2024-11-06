@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 20/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This function handles sending reset password emails to users who have
  * requested to reset their passwords. It manages the process of composing
@@ -21,8 +21,12 @@ const {
   supportEmailPort,
   supportEmailHostUser,
   supportEmailHostPassword,
+  mailTemplateHeader,
+  mailTemplateBody,
+  mailTemplateFooter,
+  researchGroupLogo,
 } = require('../../config/envConfig');
-const envConfig = require('../../config/envConfig');
+
 const sendPasswordResetEmail = async (
   sendTo,
   userName,
@@ -30,10 +34,10 @@ const sendPasswordResetEmail = async (
   response
   // eslint-disable-next-line consistent-return
 ) => {
-  const animatedHeader = envConfig.mailTemplateHeader;
-  const mailBackground = envConfig.mailTemplateBody;
-  const mailBottom = envConfig.mailTemplateFooter;
-  const CBSLogo = envConfig.researchGroupLogo;
+  const animatedHeader = mailTemplateHeader;
+  const mailBackground = mailTemplateBody;
+  const mailBottom = mailTemplateFooter;
+  const CBSLogo = researchGroupLogo;
 
   try {
     const transporter = nodemailer.createTransport({
@@ -48,7 +52,7 @@ const sendPasswordResetEmail = async (
     const mailOptions = {
       from: supportEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: ' CBS Research Group - Reset Your Login Credentials.',
+      subject: ' CBS Research Group - Admin User Password Reset Request',
       html: `
 
    <style>

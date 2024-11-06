@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 15/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of uploading individual records of
  * doctorate alumni to the database. It manages the insertion of new alumni
@@ -27,8 +27,6 @@
 const doctorateAlumniModel = require('../../../models/alumni-model/doctorate-alumni-model/doctorateAlumniModel');
 const customSingleDestroyer = require('../../../utils/cloudinary-single-destroyer/customSingleDestroyer');
 const customSingleUploader = require('../../../utils/cloudinary-single-uploader/customSingleUploader');
-const { dashboardCache } = require('../../dashboard-controllers/getAllData');
-const { doctorateAlumniCache } = require('./getDoctorateAlumniCtrl');
 
 const uploadDoctorateAlumniCtrl = async (req, res) => {
   let profileImageUrl;
@@ -84,9 +82,6 @@ const uploadDoctorateAlumniCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
-        doctorateAlumniCache.del('single_doctorate_alumni');
-        doctorateAlumniCache.del('all_doctorate_alumni');
-        dashboardCache.del('aggregated_data');
         return res.status(201).json({
           details:
             'Doctorate alumni informations has been successfully uploaded!',

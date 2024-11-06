@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of uploading new lab instrument data to
  * the database. It is responsible for receiving and processing requests to
@@ -25,8 +25,6 @@
 const labInstrumentModel = require('../../models/lab-instruments-model/labInstrumentModel');
 const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
 const customSingleUploader = require('../../utils/cloudinary-single-uploader/customSingleUploader');
-const { dashboardCache } = require('../dashboard-controllers/getAllData');
-const { labInstrumentCache } = require('./getLabInstrumentsCtrl');
 
 // Details: Role of this controller is to upload single lab instrument info to the data base.
 const uploadLabInstrumentCtrl = async (req, res) => {
@@ -66,9 +64,6 @@ const uploadLabInstrumentCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
-        labInstrumentCache.del('single_lab_instrument');
-        labInstrumentCache.del('all_lab_instrument');
-        dashboardCache.del('aggregated_data');
         return res.status(201).json({
           details: 'Requested resources has been successfully uploaded!',
         });

@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 30/09/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This router handles aggregated GET requests for various data within the
  * CBS Research Group. It defines the endpoints for managing dashboard
@@ -19,9 +19,7 @@
  */
 
 const express = require('express');
-const {
-  getAllData,
-} = require('../../controller/dashboard-controllers/getAllData');
+const getAllData = require('../../controller/dashboard-controllers/getAllData');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const dashBoardRouter = express.Router();

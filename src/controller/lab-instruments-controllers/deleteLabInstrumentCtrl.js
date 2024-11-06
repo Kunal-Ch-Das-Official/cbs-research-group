@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 17/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the deletion of a specific lab instrument entry from the database
  * based on a request from the client.
@@ -22,8 +22,6 @@
 
 const labInstrumentModel = require('../../models/lab-instruments-model/labInstrumentModel');
 const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
-const { dashboardCache } = require('../dashboard-controllers/getAllData');
-const { labInstrumentCache } = require('./getLabInstrumentsCtrl');
 
 const deleteLabInstrumentCtrl = async (req, res) => {
   const { id } = req.params;
@@ -47,9 +45,6 @@ const deleteLabInstrumentCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
-        labInstrumentCache.del('single_lab_instrument');
-        labInstrumentCache.del('all_lab_instrument');
-        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully removed!',
         });

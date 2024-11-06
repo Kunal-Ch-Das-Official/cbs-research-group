@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 16/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of retrieving and sending all records
  * of master alumni to the client upon request. It manages the provision of
@@ -24,64 +24,46 @@
  */
 
 const mastersAlumniModel = require('../../../models/alumni-model/masters-alumni-model/mastersAlumniModel');
-const NodeCache = require('node-cache');
-const masterAlumniCache = new NodeCache();
 
 const getMastersAlumniCtrl = async (req, res) => {
   const { id } = req.params;
-
-  try {
-    if (id) {
-      // Check if master alumni is in cache
-      const cachedSingleMscAlumni = masterAlumniCache.get(
-        'single_master_alumni'
-      );
-      if (cachedSingleMscAlumni) {
-        return res.status(200).json(cachedSingleMscAlumni);
+  if (id) {
+    try {
+      const getSingleMastersAlumniInfo = await mastersAlumniModel.findById(id);
+      if (!getSingleMastersAlumniInfo) {
+        return res.status(404).json({
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
+        });
       } else {
-        const getSingleMastersAlumniInfo = await mastersAlumniModel.findById(
-          id
-        );
-        if (!getSingleMastersAlumniInfo) {
-          return res.status(404).json({
-            issue: 'Not found!',
-            details: 'Requested resources are not found.',
-          });
-        } else {
-          // Cache the retrieved master alumni
-          masterAlumniCache.set(
-            'single_master_alumni',
-            getSingleMastersAlumniInfo
-          );
-          return res.status(200).json(getSingleMastersAlumniInfo);
-        }
+        return res.status(200).json(getSingleMastersAlumniInfo);
       }
-    } else {
-      // Check if master alumni is in cache
-      const allCachedMscAlumni = masterAlumniCache.get('all_master_alumni');
-      if (allCachedMscAlumni) {
-        return res.status(200).json(allCachedMscAlumni);
-      } else {
-        const getAllMastersAlumniInfo = await mastersAlumniModel.find();
-        if (!getAllMastersAlumniInfo) {
-          return res.status(404).json({
-            issue: 'Not found!',
-            details: 'Requested resources are not found.',
-          });
-        } else {
-          // Cache the retrieved master alumni
-          masterAlumniCache.set('all_master_alumni', getAllMastersAlumniInfo);
-          return res.status(200).json(getAllMastersAlumniInfo);
-        }
-      }
+    } catch (error) {
+      return res.status(500).json({
+        issue: error.message,
+        details:
+          'Unable to find requested resources due to some technical problem.',
+      });
     }
-  } catch (error) {
-    return res.status(500).json({
-      issue: error.message,
-      details:
-        'Unable to find requested resources due to some technical problem',
-    });
+  } else {
+    try {
+      const getAllMastersAlumniInfo = await mastersAlumniModel.find();
+      if (!getAllMastersAlumniInfo) {
+        return res.status(404).json({
+          issue: 'Not found!',
+          details: 'Requested resources are not found.',
+        });
+      } else {
+        return res.status(200).json(getAllMastersAlumniInfo);
+      }
+    } catch (error) {
+      return res.status(500).json({
+        issue: error.message,
+        details:
+          'Unable to find requested resources due to some technical problem',
+      });
+    }
   }
 };
 
-module.exports = { getMastersAlumniCtrl, masterAlumniCache };
+module.exports = getMastersAlumniCtrl;

@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of deleting specific personal awards
  * records from the database based on client requests. It manages the removal
@@ -22,8 +22,6 @@
  */
 
 const personalAwardsModel = require('../../../models/awards-model/personal-awards-model/personalAwardsModel');
-const { dashboardCache } = require('../../dashboard-controllers/getAllData');
-const { personalAwardCache } = require('./getPersonalAwardsCtrl');
 
 const deletePersonalAwardsCtrl = async (req, res) => {
   const { id } = req.params;
@@ -44,9 +42,6 @@ const deletePersonalAwardsCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
-        personalAwardCache.del('single_personal_award');
-        personalAwardCache.del('all_personal_award');
-        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully removed!',
         });

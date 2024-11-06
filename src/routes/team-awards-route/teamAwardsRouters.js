@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This router manages all routes related to team awards for the
  * CBS Research Group. It defines endpoints for handling team awards
@@ -20,9 +20,7 @@ const express = require('express');
 const uploadTeamAwardCtrl = require('../../controller/awards-controllers/team-awards-controller/uploadTeamAwardCtrl');
 const updateTeamAwardCtrl = require('../../controller/awards-controllers/team-awards-controller/updateTeamAwardCtrl');
 const deleteTeamAwardCtrl = require('../../controller/awards-controllers/team-awards-controller/deleteTeamAwardCtrl');
-const {
-  getTeamAwardsCtrl,
-} = require('../../controller/awards-controllers/team-awards-controller/getTeamAwardsCtrl');
+const getTeamAwardsCtrl = require('../../controller/awards-controllers/team-awards-controller/getTeamAwardsCtrl');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const teamAwardsRouter = express.Router();

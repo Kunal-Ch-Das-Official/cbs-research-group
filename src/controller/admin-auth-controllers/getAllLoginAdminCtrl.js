@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 01/10/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of retrieving and sending all logged in
  * admin user information to the client based on user requests. It provides a
@@ -22,30 +22,17 @@
  */
 
 const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
-const NodeCache = require('node-cache');
-const allLoggedInUserDataCache = new NodeCache();
 
 const getAllLoginAdminCtrl = async (req, res) => {
   try {
-    const allCachedLoggedInUsers = allLoggedInUserDataCache.get(
-      'all_logged_in_admin'
-    );
-    if (allCachedLoggedInUsers) {
-      return res.status(200).json(allCachedLoggedInUsers);
+    const getAllLoginAdminUser = await authAdminUserModel.find();
+    if (!getAllLoginAdminUser) {
+      return res.status(404).json({
+        issue: 'Not found!',
+        details: 'Requested resources are not found.',
+      });
     } else {
-      const getAllLoginAdminUser = await authAdminUserModel.find();
-      if (!getAllLoginAdminUser) {
-        return res.status(404).json({
-          issue: 'Not found!',
-          details: 'Requested resources are not found.',
-        });
-      } else {
-        allLoggedInUserDataCache.set(
-          'all_logged_in_admin',
-          getAllLoginAdminUser
-        );
-        return res.status(200).json(getAllLoginAdminUser);
-      }
+      return res.status(200).json(getAllLoginAdminUser);
     }
   } catch (error) {
     return res.status(500).json({
@@ -55,4 +42,4 @@ const getAllLoginAdminCtrl = async (req, res) => {
     });
   }
 };
-module.exports = { getAllLoginAdminCtrl, allLoggedInUserDataCache };
+module.exports = getAllLoginAdminCtrl;

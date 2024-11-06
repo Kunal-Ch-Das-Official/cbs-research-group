@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 22/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This function handles sending a response email to individuals whose
  * requests to become users of the CBS Research Group have been accepted.
@@ -23,14 +23,10 @@ const {
   mainEmailPort,
   mainEmailHostUser,
   mainEmailHostPassword,
+  researchGroupLogo,
+  emailIllustration,
+  loginLink,
 } = require('../../config/envConfig');
-const envConfig = require('../../config/envConfig');
-const {
-  adminAccessReqCache,
-} = require('../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl');
-const {
-  dashboardCache,
-} = require('../../controller/dashboard-controllers/getAllData');
 
 const sendAdminRegistrationSuccessMail = async (
   sendTo,
@@ -40,9 +36,9 @@ const sendAdminRegistrationSuccessMail = async (
   response
   // eslint-disable-next-line consistent-return
 ) => {
-  const CBSLogo = envConfig.researchGroupLogo;
-  const emailIllustration = envConfig.emailIllustration;
-  const loginLink = envConfig.loginLink;
+  const CBSLogo = researchGroupLogo;
+  const cbsEmailIllustration = emailIllustration;
+  const newLoginLink = loginLink;
   try {
     const transporter = nodemailer.createTransport({
       host: mainEmailHostProtocol,
@@ -56,8 +52,7 @@ const sendAdminRegistrationSuccessMail = async (
     const mailOptions = {
       from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject:
-        'Welcome to CBS Research Group - Your Login Credentials | CBS Research Group Admin Console.',
+      subject: 'Welcome to CBS Research Group - Your Admin Login Details',
       html: `
     <style>
 	* {
@@ -377,7 +372,7 @@ const sendAdminRegistrationSuccessMail = async (
                                       <img
                                         alt="An open email illustration"
                                         height="auto"
-                                        src="${emailIllustration}"
+                                        src="${cbsEmailIllustration}"
                                         style="
                                           display: block;
                                           height: auto;
@@ -493,7 +488,7 @@ const sendAdminRegistrationSuccessMail = async (
                                       class="tinyMce-placeholder"
                                       style="word-break: break-word"
                                       >Dear ${userName}, We have confirmed your
-                                      registration request!</span
+                                      registration for Admin Position at CBS Research Group!</span
                                     >
                                   </h1>
                                 </td>
@@ -536,23 +531,23 @@ const sendAdminRegistrationSuccessMail = async (
                                   >
                                     <p style="margin: 0; margin-bottom: 16px">
                                       We are pleased to inform you that your
-                                      request to become an admin on CBS Research
-                                      Group has been approved. Below are your
+                                    request to get admin position at CBS Research Group has been approved. Below are your
                                       login credentials:
                                     </p>
                                     <p style="margin: 0; margin-bottom: 16px">
                                       <strong>Login ID:</strong>
                                       ${loginId}.<br />
-                                      <strong>Password:</strong>${loginPassword}
+                                      <strong>Password:</strong>
+                                      ${loginPassword}
                                     </p>
                                     <p style="margin: 0; margin-bottom: 16px">
                                       You can log in to the admin dashboard by
                                       clicking the following link:
-                                      <a href="${loginLink}">Login Link</a
+                                      <a href="${newLoginLink}">Login Link</a
                                       ><br /><br />Please make sure to keep your
                                       credentials secure and do not share them
                                       with anyone. We recommend that you change
-                                      your password after logging in for the
+                                      your password after loggin for the
                                       first time.<br /><br />If you have any
                                       questions or need assistance, feel free to
                                       reach out to us. 
@@ -759,9 +754,6 @@ const sendAdminRegistrationSuccessMail = async (
         });
       } else {
         transporter.close();
-        adminAccessReqCache.del('single_request');
-        adminAccessReqCache.del('all_request');
-        dashboardCache.del('aggregated_data');
         return response.status(200).json({
           message: 'Email has been sended successfully.',
           sending_id: info.messageId,

@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 21/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of submitting a registration request
  * for users who wish to become admin users of CBS Research Group. It
@@ -25,8 +25,6 @@
 
 const adminRegistrationRequestMessageModel = require('../../models/admin-registration-request-model/adminRegisterRequestModel');
 const authAdminUserModel = require('../../models/auth-admin-model/authAdminUserModel');
-const { dashboardCache } = require('../dashboard-controllers/getAllData');
-const { adminAccessReqCache } = require('./getAdminRegisterRequestCtrl');
 
 const postRegisterAsAdminRequestCtrl = async (req, res) => {
   const { reqUserName, reqUserEmail, message, termsAndConditions } = req.body;
@@ -54,9 +52,6 @@ const postRegisterAsAdminRequestCtrl = async (req, res) => {
             details: 'Something went wrong, please try again later.',
           });
         } else {
-          adminAccessReqCache.del('single_request');
-          adminAccessReqCache.del('all_request');
-          dashboardCache.del('aggregated_data');
           return res.status(201).json({
             details: 'Request has been send successfully.',
           });

@@ -47,7 +47,3 @@ If you experience or witness any behavior that violates this Code of Conduct, pl
 ## Acknowledgment
 
 By participating in this project, you agree to adhere to this Code of Conduct and contribute to a positive and respectful environment.
-
-## Attribution
-
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/), version 2.0, available at https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.

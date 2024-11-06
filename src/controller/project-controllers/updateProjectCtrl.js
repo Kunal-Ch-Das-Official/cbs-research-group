@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 18/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller is responsible for updating existing project information in the
  * database. It processes requests to modify project details, ensuring that the
@@ -22,8 +22,6 @@
  */
 
 const projectModel = require('../../models/projects-model/projectModel');
-const { dashboardCache } = require('../dashboard-controllers/getAllData');
-const { projectsCache } = require('./getProjectsCtrl');
 
 const updateProjectCtrl = async (req, res) => {
   const { id } = req.params;
@@ -61,9 +59,6 @@ const updateProjectCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
-        projectsCache.del('single_project');
-        projectsCache.del('all_project');
-        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully updated!',
         });

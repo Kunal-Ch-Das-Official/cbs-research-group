@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 22/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This function handles sending a response email to individuals whose
  * requests to become users of the CBS Research Group have been rejected.
@@ -22,19 +22,14 @@ const {
   mainEmailPort,
   mainEmailHostUser,
   mainEmailHostPassword,
+  researchGroupLogo,
+  emailIllustration,
 } = require('../../config/envConfig');
-const envConfig = require('../../config/envConfig');
-const {
-  adminAccessReqCache,
-} = require('../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl');
-const {
-  dashboardCache,
-} = require('../../controller/dashboard-controllers/getAllData');
 
 // eslint-disable-next-line consistent-return
 const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
-  const CBSLogo = envConfig.researchGroupLogo;
-  const emailIllustration = envConfig.emailIllustration;
+  const CBSLogo = researchGroupLogo;
+  const newEmailIllustration = emailIllustration;
   try {
     const transporter = nodemailer.createTransport({
       host: mainEmailHostProtocol,
@@ -48,7 +43,7 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
     const mailOptions = {
       from: mainEmailHostUser, // Sender address
       to: sendTo, // List of receivers
-      subject: 'Administrative Access Requests Rejected - CBS Research Group ',
+      subject: 'Request to Get Admin Position Rejected - CBS Research Group ',
       html: `
         <style>
       * {
@@ -473,7 +468,7 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
                                       <img
                                         alt="An open email illustration"
                                         height="auto"
-                                        src="${emailIllustration}"
+                                        src="${newEmailIllustration}"
                                         style="
                                           display: block;
                                           height: auto;
@@ -841,9 +836,6 @@ const sendAdminRegistrationDeniedMail = async (sendTo, userName, response) => {
             'If the issue not resolve autometically then contact to your tech support team.',
         });
       } else {
-        adminAccessReqCache.del('single_request');
-        adminAccessReqCache.del('all_request');
-        dashboardCache.del('aggregated_data');
         return response.status(200).json({
           message: 'Email has been sended successfully.',
           sending_id: info.messageId,

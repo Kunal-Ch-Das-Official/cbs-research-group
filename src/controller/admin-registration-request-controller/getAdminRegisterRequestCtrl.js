@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 22/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of retrieving and viewing requests
  * from users who wish to become admin users of CBS Research Group. It
@@ -22,50 +22,31 @@
  */
 
 const adminRegistrationRequestMessageModel = require('../../models/admin-registration-request-model/adminRegisterRequestModel');
-const NodeCache = require('node-cache');
-const adminAccessReqCache = new NodeCache();
-
 const getAdminRegisterRequestCtrl = async (req, res) => {
   const { id } = req.params;
 
   try {
     if (id) {
-      // Check if request is in cache
-      const cachedSingleAdminAccessReq =
-        adminAccessReqCache.get('single_request');
-      if (cachedSingleAdminAccessReq) {
-        return res.status(200).json(cachedSingleAdminAccessReq);
+      const getSingleRequestInfo =
+        await adminRegistrationRequestMessageModel.findById(id);
+      if (!getSingleRequestInfo) {
+        return res.status(404).json({
+          issue: 'Not found!',
+          details: 'Please check the details, and try it again.',
+        });
       } else {
-        const getSingleRequestInfo =
-          await adminRegistrationRequestMessageModel.findById(id);
-        if (!getSingleRequestInfo) {
-          return res.status(404).json({
-            issue: 'Not found!',
-            details: 'Please check the details, and try it again.',
-          });
-        } else {
-          // Cache the retrieved publication
-          adminAccessReqCache.set('single_request', getSingleRequestInfo);
-          return res.status(200).json(getSingleRequestInfo);
-        }
+        return res.status(200).json(getSingleRequestInfo);
       }
     } else {
-      // Check if request is in cache
-      const allCachedAdminAccessReq = adminAccessReqCache.get('all_request');
-      if (allCachedAdminAccessReq) {
-        return res.status(200).json(allCachedAdminAccessReq);
+      const getAllRequestInfo =
+        await adminRegistrationRequestMessageModel.find();
+      if (!getAllRequestInfo) {
+        return res.status(404).json({
+          issue: 'Not found!',
+          details: 'Requested resources are not available.',
+        });
       } else {
-        const getAllRequestInfo =
-          await adminRegistrationRequestMessageModel.find();
-        if (!getAllRequestInfo) {
-          return res.status(404).json({
-            issue: 'Not found!',
-            details: 'Requested resources are not available.',
-          });
-        } else {
-          adminAccessReqCache.set('all_request', getAllRequestInfo);
-          return res.status(200).json(getAllRequestInfo);
-        }
+        return res.status(200).json(getAllRequestInfo);
       }
     }
   } catch (error) {
@@ -75,4 +56,4 @@ const getAdminRegisterRequestCtrl = async (req, res) => {
     });
   }
 };
-module.exports = { getAdminRegisterRequestCtrl, adminAccessReqCache };
+module.exports = getAdminRegisterRequestCtrl;

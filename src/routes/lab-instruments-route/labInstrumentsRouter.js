@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This router manages all routes related to lab instruments for the
  * CBS Research Group. It defines endpoints for handling lab instrument
@@ -20,9 +20,7 @@ const express = require('express');
 const uploadLabInstrumentCtrl = require('../../controller/lab-instruments-controllers/uploadLabInstrumentCtrl');
 const updateLabInstrumentCtrl = require('../../controller/lab-instruments-controllers/updateLabInstrumentCtrl');
 const deleteLabInstrumentCtrl = require('../../controller/lab-instruments-controllers/deleteLabInstrumentCtrl');
-const {
-  getLabInstrumentsCtrl,
-} = require('../../controller/lab-instruments-controllers/getLabInstrumentsCtrl');
+const getLabInstrumentsCtrl = require('../../controller/lab-instruments-controllers/getLabInstrumentsCtrl');
 const multerLocalFileUploader = require('../../middlewares/multer-localfile-uploader/multerLocalFileUploader');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 

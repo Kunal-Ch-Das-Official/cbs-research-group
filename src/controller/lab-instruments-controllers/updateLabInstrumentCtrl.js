@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller is responsible for updating existing lab instrument information in
  * the database. It handles requests to modify data related to lab instruments, ensuring
@@ -24,8 +24,6 @@
 const labInstrumentModel = require('../../models/lab-instruments-model/labInstrumentModel');
 const customSingleDestroyer = require('../../utils/cloudinary-single-destroyer/customSingleDestroyer');
 const customSingleUploader = require('../../utils/cloudinary-single-uploader/customSingleUploader');
-const { dashboardCache } = require('../dashboard-controllers/getAllData');
-const { labInstrumentCache } = require('./getLabInstrumentsCtrl');
 
 const updateLabInstrumentCtrl = async (req, res) => {
   const { id } = req.params;
@@ -82,9 +80,6 @@ const updateLabInstrumentCtrl = async (req, res) => {
         details: 'Something went wrong, please try again later.',
       });
     } else {
-      labInstrumentCache.del('single_lab_instrument');
-      labInstrumentCache.del('all_lab_instrument');
-      dashboardCache.del('aggregated_data');
       return res.status(200).json({
         details: 'Requested resources has been successfully updated!',
       });

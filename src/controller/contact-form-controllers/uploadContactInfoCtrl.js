@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of posting contact form details to the database.
  *
@@ -19,8 +19,6 @@
  */
 
 const contactFormModel = require('../../models/contact-form-model/contactFormModel');
-const { dashboardCache } = require('../dashboard-controllers/getAllData');
-const { contactApplicationCache } = require('./getContactInfoCtrl');
 
 const uploadContactInfoCtrl = async (req, res) => {
   const { userName, emailId, phoneNumber, desireCourse, message } = req.body;
@@ -45,9 +43,6 @@ const uploadContactInfoCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
-        contactApplicationCache.del('single_contact_application');
-        contactApplicationCache.del('all_contact_application');
-        dashboardCache.del('aggregated_data');
         return res.status(201).json({
           details: 'Requested resources has been successfully uploaded!',
         });

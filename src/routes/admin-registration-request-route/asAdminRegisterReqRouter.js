@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This router handles all requests related to admin registration
  * within the CBS Research Group. It manages the endpoints for processing
@@ -21,9 +21,7 @@ const postRegisterAsAdminRequestCtrl = require('../../controller/admin-registrat
 const sendAcceptedResponseOfAdminRequestUserCtrl = require('../../controller/admin-registration-request-controller/sendAcceptedResponseOfAdminReqCtrl');
 const sendDeniedResponseOfAdminRequestUserCtrl = require('../../controller/admin-registration-request-controller/sendDeniedResponseOfAdminRequestUserCtrl');
 const deleteAdminRegisterRequestMessage = require('../../controller/admin-registration-request-controller/deleteAdminRegisterRequestCtrl');
-const {
-  getAdminRegisterRequestCtrl,
-} = require('../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl');
+const getAdminRegisterRequestCtrl = require('../../controller/admin-registration-request-controller/getAdminRegisterRequestCtrl');
 const checkAdminAuth = require('../../middlewares/auth-middleware/authAdminMiddleware');
 
 const adminRegistrationReqRouter = express.Router();

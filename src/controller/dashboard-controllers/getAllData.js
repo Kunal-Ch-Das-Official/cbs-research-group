@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 30/09/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles requests to retrieve aggregated data for the dashboard,
  * including group news, and sends the relevant data to the client.
@@ -35,133 +35,124 @@ const mscMemberModel = require('../../models/members-model/msc-member-model/mscM
 const phdMemberModel = require('../../models/members-model/phd-member-model/phdMemberModel');
 const projectModel = require('../../models/projects-model/projectModel');
 const publicationModel = require('../../models/publication-model/publicationModel');
-const NodeCache = require('node-cache');
-const dashboardCache = new NodeCache();
 
 const getAllData = async (req, res) => {
   const aggregatedData = [];
   try {
-    // Check if lab Instrument is in cache
-    const cachedDashboardData = dashboardCache.get('aggregated_data');
-    if (cachedDashboardData) {
-      return res.status(200).json(cachedDashboardData);
-    } else {
-      // 1. ALL LOGGED IN ADMIN REQUEST
-      const getAllAuthAdmin = await authAdminUserModel.find();
-      if (getAllAuthAdmin) {
-        const authAdmin = {
-          auth_admin: getAllAuthAdmin,
-        };
-        aggregatedData.push(authAdmin);
-      }
-
-      // 2. ALL BECOME ADMIN REGISTRATION REQUEST
-      const getAllAdminReG_ReqInfo =
-        await adminRegistrationRequestMessageModel.find();
-      if (getAllAdminReG_ReqInfo) {
-        const beAdminReq = {
-          be_admin_req: getAllAdminReG_ReqInfo,
-        };
-        aggregatedData.push(beAdminReq);
-      }
-
-      // 3. ALL DOCTORATE ALUMNI REQUEST
-      const getAllDoctorateAlumniInfo = await doctorateAlumniModel.find();
-      if (getAllDoctorateAlumniInfo) {
-        const doctorateAlumni = {
-          doc_alumni: getAllDoctorateAlumniInfo,
-        };
-        aggregatedData.push(doctorateAlumni);
-      }
-
-      // 4. ALL MASTERS ALUMNI REQUEST
-      const getAllMastersAlumniInfo = await mastersAlumniModel.find();
-      const mastersAlumni = {
-        mas_alumni: getAllMastersAlumniInfo,
+    // 1. ALL LOGGED IN ADMIN REQUEST
+    const getAllAuthAdmin = await authAdminUserModel.find();
+    if (getAllAuthAdmin) {
+      const authAdmin = {
+        auth_admin: getAllAuthAdmin,
       };
-      if (getAllMastersAlumniInfo) {
-        aggregatedData.push(mastersAlumni);
-      }
-
-      // 5. ALL PERSONAL AWARDS REQUEST
-      const getAllPersonalAwards = await personalAwardsModel.find();
-      if (getAllPersonalAwards) {
-        const personalAwards = {
-          personal_awards: getAllPersonalAwards,
-        };
-        aggregatedData.push(personalAwards);
-      }
-
-      // 6. ALL TEAM AWARDS REQUEST
-      const getAllTeamAwards = await teamAwardsModel.find();
-      if (getAllTeamAwards) {
-        const teamAwards = {
-          team_awards: getAllTeamAwards,
-        };
-        aggregatedData.push(teamAwards);
-      }
-
-      // 7. ALL CONTACT APPLICATION REQUEST
-      const getAllRequestedContactInfo = await contactFormModel.find();
-      if (getAllRequestedContactInfo) {
-        const contactApplication = {
-          contact_application: getAllRequestedContactInfo,
-        };
-        aggregatedData.push(contactApplication);
-      }
-      // 8. ALL GROUP NEWs REQUEST
-      const getAllGroupNews = await groupNewsModel.find();
-      if (getAllGroupNews) {
-        const groupNews = {
-          group_news: getAllGroupNews,
-        };
-        aggregatedData.push(groupNews);
-      }
-      // 9. ALL LAB INSTRUMENTS REQUEST
-      const getAllInstrumentsInfo = await labInstrumentModel.find();
-      if (getAllInstrumentsInfo) {
-        const labInstruments = {
-          lab_instruments: getAllInstrumentsInfo,
-        };
-        aggregatedData.push(labInstruments);
-      }
-
-      // 10. ALL MSC MEMBERS REQUEST
-      const getAllMscMembersInfo = await mscMemberModel.find();
-      if (getAllMscMembersInfo) {
-        const mscMembers = {
-          msc_members: getAllMscMembersInfo,
-        };
-        aggregatedData.push(mscMembers);
-      }
-      // 11. ALL PHD MEMBERS REQUEST
-      const getAllPhdMembersInfo = await phdMemberModel.find();
-      if (getAllPhdMembersInfo) {
-        const phdMembers = {
-          phd_members: getAllPhdMembersInfo,
-        };
-        aggregatedData.push(phdMembers);
-      }
-      // 12. ALL PROJECTS REQUEST
-      const getAllProjects = await projectModel.find();
-      if (getAllProjects) {
-        const projects = {
-          projects: getAllProjects,
-        };
-        aggregatedData.push(projects);
-      }
-      // 13. ALL PUBLICATIONS REQUEST
-      const getAllPublication = await publicationModel.find();
-      if (getAllPublication) {
-        const publications = {
-          publication: getAllPublication,
-        };
-        aggregatedData.push(publications);
-      }
-
-      dashboardCache.set('aggregated_data', aggregatedData);
-      return res.status(200).json(aggregatedData);
+      aggregatedData.push(authAdmin);
     }
+
+    // 2. ALL BECOME ADMIN REGISTRATION REQUEST
+    const getAllAdminReG_ReqInfo =
+      await adminRegistrationRequestMessageModel.find();
+    if (getAllAdminReG_ReqInfo) {
+      const beAdminReq = {
+        be_admin_req: getAllAdminReG_ReqInfo,
+      };
+      aggregatedData.push(beAdminReq);
+    }
+
+    // 3. ALL DOCTORATE ALUMNI REQUEST
+    const getAllDoctorateAlumniInfo = await doctorateAlumniModel.find();
+    if (getAllDoctorateAlumniInfo) {
+      const doctorateAlumni = {
+        doc_alumni: getAllDoctorateAlumniInfo,
+      };
+      aggregatedData.push(doctorateAlumni);
+    }
+
+    // 4. ALL MASTERS ALUMNI REQUEST
+    const getAllMastersAlumniInfo = await mastersAlumniModel.find();
+    const mastersAlumni = {
+      mas_alumni: getAllMastersAlumniInfo,
+    };
+    if (getAllMastersAlumniInfo) {
+      aggregatedData.push(mastersAlumni);
+    }
+
+    // 5. ALL PERSONAL AWARDS REQUEST
+    const getAllPersonalAwards = await personalAwardsModel.find();
+    if (getAllPersonalAwards) {
+      const personalAwards = {
+        personal_awards: getAllPersonalAwards,
+      };
+      aggregatedData.push(personalAwards);
+    }
+
+    // 6. ALL TEAM AWARDS REQUEST
+    const getAllTeamAwards = await teamAwardsModel.find();
+    if (getAllTeamAwards) {
+      const teamAwards = {
+        team_awards: getAllTeamAwards,
+      };
+      aggregatedData.push(teamAwards);
+    }
+
+    // 7. ALL CONTACT APPLICATION REQUEST
+    const getAllRequestedContactInfo = await contactFormModel.find();
+    if (getAllRequestedContactInfo) {
+      const contactApplication = {
+        contact_application: getAllRequestedContactInfo,
+      };
+      aggregatedData.push(contactApplication);
+    }
+    // 8. ALL GROUP NEWs REQUEST
+    const getAllGroupNews = await groupNewsModel.find();
+    if (getAllGroupNews) {
+      const groupNews = {
+        group_news: getAllGroupNews,
+      };
+      aggregatedData.push(groupNews);
+    }
+    // 9. ALL LAB INSTRUMENTS REQUEST
+    const getAllInstrumentsInfo = await labInstrumentModel.find();
+    if (getAllInstrumentsInfo) {
+      const labInstruments = {
+        lab_instruments: getAllInstrumentsInfo,
+      };
+      aggregatedData.push(labInstruments);
+    }
+
+    // 10. ALL MSC MEMBERS REQUEST
+    const getAllMscMembersInfo = await mscMemberModel.find();
+    if (getAllMscMembersInfo) {
+      const mscMembers = {
+        msc_members: getAllMscMembersInfo,
+      };
+      aggregatedData.push(mscMembers);
+    }
+    // 11. ALL PHD MEMBERS REQUEST
+    const getAllPhdMembersInfo = await phdMemberModel.find();
+    if (getAllPhdMembersInfo) {
+      const phdMembers = {
+        phd_members: getAllPhdMembersInfo,
+      };
+      aggregatedData.push(phdMembers);
+    }
+    // 12. ALL PROJECTS REQUEST
+    const getAllProjects = await projectModel.find();
+    if (getAllProjects) {
+      const projects = {
+        projects: getAllProjects,
+      };
+      aggregatedData.push(projects);
+    }
+    // 13. ALL PUBLICATIONS REQUEST
+    const getAllPublication = await publicationModel.find();
+    if (getAllPublication) {
+      const publications = {
+        publication: getAllPublication,
+      };
+      aggregatedData.push(publications);
+    }
+
+    return res.status(200).json(aggregatedData);
   } catch (error) {
     return res.status(500).json({
       issue: error.message,
@@ -169,4 +160,4 @@ const getAllData = async (req, res) => {
     });
   }
 };
-module.exports = { getAllData, dashboardCache };
+module.exports = getAllData;

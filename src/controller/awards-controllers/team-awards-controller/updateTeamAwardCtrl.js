@@ -3,7 +3,7 @@
  * Project: CBS-Research-Group-Backend
  * Author: Kunal Chandra Das
  * Date: 19/08/2024
- * Last update: 08/10/2024
+ *
  * Description:
  * This controller handles the process of updating existing team awards
  * records in the database. It allows for modifications to be made to
@@ -23,8 +23,6 @@
  */
 
 const teamAwardsModel = require('../../../models/awards-model/team-awards-model/teamAwardsModel');
-const { dashboardCache } = require('../../dashboard-controllers/getAllData');
-const { teamAwardCache } = require('./getTeamAwardsCtrl');
 
 const updateTeamAwardCtrl = async (req, res) => {
   const { id } = req.params;
@@ -60,9 +58,6 @@ const updateTeamAwardCtrl = async (req, res) => {
           details: 'Something went wrong, please try again later.',
         });
       } else {
-        teamAwardCache.del('single_team_award');
-        teamAwardCache.del('all_team_award');
-        dashboardCache.del('aggregated_data');
         return res.status(200).json({
           details: 'Requested resources has been successfully updated!',
         });
